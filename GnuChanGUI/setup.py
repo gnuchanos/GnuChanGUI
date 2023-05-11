@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="GnuChanGUI",
-    version="0.1",
+    version="0.2.1",
     author="archkubi",
     author_email="gnuchanos@gmail.com",
     description="pysimplegui base gui for beginner",

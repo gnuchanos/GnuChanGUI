@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
-import os
-import subprocess
+import os, subprocess
 
 
 # python -m PySimpleGUI.PySimpleGUI upgrad
