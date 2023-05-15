@@ -1,5 +1,7 @@
-import GnuChanGUI as gc
+from GnuChanGUI import *
 import os, subprocess
+
+
 
 def get_filtered_programs():
     program_list = os.listdir('/usr/bin')
@@ -14,14 +16,21 @@ def get_filtered_programs():
                     {"name": "steam", "info": "More Games"},
                     {"name": "lutris", "info": "Game Software"},
                     {"name": "protontricks", "info": "Proton Settings"},
-                    {"name": "lxappearance", "info": "System Theme"}]
+                    {"name": "lxappearance", "info": "System Theme"},
+                    {"name": "obs", "info": "open brodcast software"},
+                    {"name": "vlc", "info": "media player"},
+                    {"name": "protonup-qt", "info": "proton for steam"},
+                    {"name": "nemo", "info": "file manager"},
+                    {"name": "winetricks", "info": "wine settings"},
+                    ]
 
     filtered_list = [program["name"] + " : " + program["info"] for program in programList if program["name"] in program_list]
     return filtered_list
 
 def main():
-    default = gc.GnuChanGUI(Title="GnuChan Program Runner", Size=(650,600), resizable=True)
+    default = GnuChanGUI(Title="GnuChan Program Runner", Size=(650,600), resizable=True)
     default.Theme()
+
 
     logWindow = [
         [default.GText(title="you must select program bro!", font="Sans, 20", position="center", xStretch=True)],
@@ -42,14 +51,13 @@ def main():
 
     while True:
         event, GetValues = default.window.read()
-        if event in 'Exit':
+        if event == WIN_CLOSED:
             break
 
         if event == "RUN":
             try:
                 selected_program = GetValues['-LIST-'][0].split(':')[0]
                 subprocess.Popen(selected_program, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                default.window.close()
                 break
             except IndexError:
                 default.window["logWarning"].update(visible=True)
@@ -60,8 +68,6 @@ def main():
                 default.window["logWarning"].update(visible=True)
             else:
                 subprocess.Popen(software, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                print(software)
-                default.window.close()
                 break
             
         if event == "Close Warning":
