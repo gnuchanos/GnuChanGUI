@@ -11,8 +11,12 @@ def main():
     gnuchanProgramList = [" gRunner : Simple Dmenu Like Program", 
                           " gCalculator : Simple Calculator A+B=C", 
                           " gTimer : Simple Timer Program"]
+    
+    gMenu = [["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+             ["System", ["Exit"]]]
 
     layout = [
+        [default.GMenuForTheme(winMenu=gMenu, font="Sans, 16")],
         [default.GText(title="This is Simple Program Runner", font=defaultFont, position="center", xStretch=True)],
         [default.GListBox(list=list(gnuchanProgramList), font=defaultFont, xStretch=True, yStretch=True, value="prunner", position="center", noScroolBar=True)],
         [default.GButton("Run", xStretch=True, font=defaultFont)]
@@ -38,3 +42,10 @@ def main():
     default.window.close()
 if __name__ == "__main__":
     main()
+
+
+
+"""
+xdsl numarası
+
+"""

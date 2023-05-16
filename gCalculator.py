@@ -50,10 +50,11 @@ def main():
          default.GButton("CLEAR", xStretch=True, yStretch=True,  font=defaultFont)],
     ]
 
-    gMenu = [["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]]]
+    gMenu = [["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+             ["System", ["Exit"]]]
 
     layout = [
-        [default.GMenu(winMenu=gMenu)],
+        [default.GMenuForTheme(winMenu=gMenu, font="Sans, 16")],
         [default.GColumn(winColumn=topWin, xStretch=True)],
         [default.GColumn(winColumn=middleWin1, xStretch=True, yStretch=True)]
     ]
@@ -64,6 +65,8 @@ def main():
     while True:
         event, GetValues = default.window.read()
         if event == WIN_CLOSED:
+            break
+        if event == "Exit":
             break
 
         if event in numbers and mathEndNow == False:

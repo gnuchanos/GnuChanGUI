@@ -96,8 +96,8 @@ class GnuChanGUI:
         window_layout = [ [GTabGroup(tabgroup_layout, key="tabgroup")] ]
     """
 
-    def GMenu(self, winMenu=None, tcolor=None, bcolor=None):
-        return Menu(menu_definition=winMenu, background_color=bcolor, text_color=tcolor)
+    def GMenu(self, winMenu=None, tcolor=None, bcolor=None, font="Sans, 20"):
+        return Menu(menu_definition=winMenu, background_color=bcolor, text_color=tcolor, font=font)
     """
     menu_def = [
         ['&File', ['&Open', '&Save', '---', '&Close']],
@@ -105,6 +105,11 @@ class GnuChanGUI:
             ]
     layout = [[GMenu(menu_def)]]
     """
+
+
+    def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
+        return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
+
 
 # All Widgets
     # text widget
@@ -119,6 +124,16 @@ class GnuChanGUI:
         return Button(title, font=font, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, 
                          border_width=border)
 
+    # image
+    def GImage(self, image=None, value=None, EmptySpace=(None, None), visible=True, size=[None, None]):
+        return Image(filename=image, key=value, pad=EmptySpace, visible=visible, size=size)
+    
+    # listbox widget
+    def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
+                 xStretch=False, yStretch=False, tColor=None, bColor=None):
+        return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
+                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bColor)
+
     # input widget
     def GInput (self, InText="", font="Sans, 20", value=None, size=(None, None), focus=True, position="left", visible=True, PwChars=False, readonly=False, 
                 xStretch=False, yStretch=False, EmptySpace=(None), tcolor=None, bcolor=None, border=None):
@@ -129,17 +144,8 @@ class GnuChanGUI:
     def GMultiline (self, InText="", font=None, value=None, size=(None, None), visible=True, position="left", 
                     xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
         return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
-                            expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border)
-
-
-    # image
-    def GImage(self, image=None, value=None, EmptySpace=(None, None), visible=True, size=[None, None]):
-        return Image(filename=image, key=value, pad=EmptySpace, visible=visible, size=size)
-    # listbox widget
-    def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
-                 xStretch=False, yStretch=False, tColor=None, bColor=None):
-        return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
-                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bColor)
+                            expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
+                            autoscroll=True)
 
 
 
@@ -155,8 +161,6 @@ class GnuChanGUI:
                 if GetValues[color]:
                     default.window['str'].update(color)
     """
-
-
 
     # selections
     def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False):
