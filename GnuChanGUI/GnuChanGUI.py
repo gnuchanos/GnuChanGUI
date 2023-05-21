@@ -22,6 +22,27 @@ import os, subprocess
 # password_char -> PwChars
 
 
+class GColors:
+    def __init__(self, colors=1) -> None:
+        self.colors = colors
+
+    def gnuChanColors(self):
+        gnuChanColors = ["#9d4edd", "#240046", "#3c096c", "#5a189a"]
+        return gnuChanColors[self.colors-1]
+    def purples(self):
+        purples = ["#10011f", "#220242", "#340463", "#440582", "#5608a3", "#6a0cc7", "#7a10e3", "#8812fc"]
+        return purples[self.colors-1]
+    def blues(self):
+        blues = ["#02011c", "#04023d", "#080469", "#0b068f", "#0d07a8", "#130cc4", "#130be0", "#1108fc"]
+        return blues[self.colors-1]
+    def greens(self):
+        greens = ["#013001", "#035703", "#057a05", "#069606", "#09ba09", "#0dd10d", "#0ee60e", "#05fa05"]
+        return greens[self.colors-1]
+"""
+GColors(colors=5).blues()
+"""
+
+
 class GnuChanGUI:
     def __init__(self, Title="Defaul Title", Size=(None, None), resizable=False, finalize=True) -> None:
         self.size = Size
@@ -42,19 +63,21 @@ class GnuChanGUI:
 
 
     # Create Window
-    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=None):
+    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=['System', ['exit']]):
         self.window = Window(self.title, layout=mainWindow, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
                                 finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True) 
     """
     menu = ['file', ['open', 'save', 'exit']] ---> right_click_menu = menu
     """
+    def GTitleBar(self, title="Window Title", icon=None, font="Sans, 12", tcolor=None, bcolor=None):
+        return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)
 
 
     def GLog(self, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, visible=True):
         return Output(key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=None, background_color=None, visible=visible)
 
 
-# note class.window["str"].update(values["test"])
+# note class.window["str"].update(GetValues["test"])
 # event, GetValues = default.window.read(timeout=60) # ı use GetValues --> value --> key
 
 
@@ -106,7 +129,6 @@ class GnuChanGUI:
     layout = [[GMenu(menu_def)]]
     """
 
-
     def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
         return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
 
@@ -146,8 +168,6 @@ class GnuChanGUI:
         return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
                             expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
                             autoscroll=True)
-
-
 
     # cheack mark
     def GCheack(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
@@ -189,9 +209,6 @@ class GnuChanGUI:
     """
     # [sg.Output(size=(40, 10), key="-OUTPUT-")]
 
-
-
-# Ekstra
     def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
             return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
     """
@@ -213,6 +230,11 @@ class GnuChanGUI:
         return VSeparator()
     def GMessage(self, message=None, wmTitle="default Window", font="Sans, 15", tcolor=None, bcolor=None):
         return popup(message, title=wmTitle, font=font, text_color=tcolor, background_color=bcolor)
+    
+
+
+
+# Ekstra
     def GMusic(self, SounFile=None, play=False):
         if os.path.isfile(SounFile):
             if play == True:
@@ -227,3 +249,23 @@ class GnuChanGUI:
                     os.system('killall mpg123')
         else:
             print("Hata: {} dosyası bulunamadı!".format(SounFile))
+
+
+# for multiLine Open/Save As 
+    def Open(self, value=None, filepath=None):
+            filename = popup_get_file('Select a file to open', no_window=True)
+            if filepath != None:
+                self.window[filepath].update(filename)
+            if filename:
+                with open(filename, 'r') as file:
+                    content = file.read()
+                    self.window[value].update(content)
+
+    def SaveAs(self, getValue=None, value=None, filepath=None):
+            filename = popup_get_file('Select a file to save', save_as=True, no_window=True)
+            if filepath != None:
+                self.window[filepath].update(filename)
+            if filename:
+                with open(filename, 'w') as file:
+                    content = getValue[value]
+                    file.write(content)

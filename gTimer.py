@@ -48,9 +48,10 @@ def main():
         event, GetValues = default.window.read(timeout=24)
         if event == WIN_CLOSED:
             break
-        
         if event == "Exit":
             break
+
+
 
         if event == "Start":
             timerStart = True

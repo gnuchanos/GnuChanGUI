@@ -3,14 +3,15 @@ import subprocess
 
 
 def main():
-    default = GnuChanGUI(Title="GnuChan Program Runner", Size=(610,600), resizable=False)
+    default = GnuChanGUI(Title="GnuChan Program Runner", Size=(610,600), resizable=True)
     default.Theme()
 
     defaultFont = "Sans, 20"
 
     gnuchanProgramList = [" gRunner : Simple Dmenu Like Program", 
                           " gCalculator : Simple Calculator A+B=C", 
-                          " gTimer : Simple Timer Program"]
+                          " gTimer : Simple Timer Program",
+                          " gTextEditor : Simple Text Editor"]
     
     gMenu = [["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
              ["System", ["Exit"]]]
@@ -18,6 +19,7 @@ def main():
     layout = [
         [default.GMenuForTheme(winMenu=gMenu, font="Sans, 16")],
         [default.GText(title="This is Simple Program Runner", font=defaultFont, position="center", xStretch=True)],
+        [default.GText(title="", font=defaultFont, xStretch=True)],
         [default.GListBox(list=list(gnuchanProgramList), font=defaultFont, xStretch=True, yStretch=True, value="prunner", position="center", noScroolBar=True)],
         [default.GButton("Run", xStretch=True, font=defaultFont)]
     ]
@@ -29,7 +31,8 @@ def main():
         event, GetValues = default.window.read()
         if event == WIN_CLOSED:
             break
-        
+        if event == "Exit":
+            break
 
         oldVar = str(GetValues["prunner"])[2:]
         newVar = oldVar.split(":")[0].strip()
