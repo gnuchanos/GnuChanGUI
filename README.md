@@ -1,7 +1,31 @@
 # GnuChanGUI
 <p> Please note that this is a library based on the PySimpleGUI library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and constantly improving myself. </p>
 
+important note
+```
+# python -m PySimpleGUI.PySimpleGUI upgrad
+# position | left - center - right
 
+# font -> font
+# visible -> visible
+# readonly -> readonly and  disabled -> readonly
+# no_scrollbar -> noScroolBar
+# group_id -> groupID
+# default_value -> defaultValue
+
+# expand_x --> xStretch
+# justification -> position
+# text_color -> tColor
+# background_color -> bColor
+# border_width -> border
+# image_filename -> bImage
+# password_char -> PwChars
+
+# note class.window["str"].update(GetValues["test"])
+# event, GetValues = default.window.read(timeout=60) # ı use GetValues --> value --> key
+
+
+```
 
 example code
 
@@ -38,3 +62,12 @@ if __name__ == "__main__":
     main()
 
 ```
+
+
+
+
+small example for widgets
+
+ ```
+ not finish yet
+ ```
