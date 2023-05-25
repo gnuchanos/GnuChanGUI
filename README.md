@@ -9,38 +9,32 @@ example code
 
 from GnuChanGUI import *
 
+
 def main():
-    default = GnuChanGUI(Title="GnuChan Simple Visual Novel Beta", Size=(510,600))
+    default = GnuChanGUI(Title="GnuChan Program Runner", Size=(950,600), resizable=True)
     default.Theme()
+    defaultFont = "Sans, 15"
+
+
+    gMenu = [
+        ["Log File", ["Open Text File", "Save Text File"]],
+        ["System", ["Exit"]]
+    ]
 
     layout = [
-        [default.GText("test", value="text", font="Sans, 20", xStretch=True, position="center")],
-        [default.GButton("button", font="Sans, 20", xStretch=True)]
+        [default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+        
     ]
 
     default.GWindow(mainWindow=layout)
 
     while True:
-        event, GetValues = default.window.read()
-        if event in (default.WINDOW_CLOSED, 'Exit'):
+        event, GetValues = default.window.read(timeout=24)
+        if event == WIN_CLOSED or event == "Exit":
             break
-        
-        if event == "button":
-            default.window["text"].update("uwu")
-
-
     default.window.close()
+
 if __name__ == "__main__":
     main()
 
-```
-
-<p> You can also see the code samples on my GitHub page as an extra.</p>
-
-```
-install from source
-git clone https://github.com/gnuchanos/GnuChanGUI
-cd GnuChanGUI
-python setup.py install
-python setup.py build
 ```
