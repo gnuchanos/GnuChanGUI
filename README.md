@@ -3,7 +3,7 @@
 
 important note
 ```
-# python -m PySimpleGUI.PySimpleGUI upgrad
+# python -m PySimpleGUI.PySimpleGUI upgrade
 # position | left - center - right
 
 # font -> font
@@ -14,6 +14,7 @@ important note
 # default_value -> defaultValue
 
 # expand_x --> xStretch
+# expand_y --> yStretch
 # justification -> position
 # text_color -> tColor
 # background_color -> bColor
@@ -21,6 +22,7 @@ important note
 # image_filename -> bImage
 # password_char -> PwChars
 
+#         update widget value |   take widget value
 # note class.window["str"].update(GetValues["test"])
 # event, GetValues = default.window.read(timeout=60) # ı use GetValues --> value --> key
 
