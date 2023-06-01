@@ -11,7 +11,10 @@ def main():
     gnuchanProgramList = [" gRunner : Simple Dmenu Like Program", 
                           " gCalculator : Simple Calculator A+B=C", 
                           " gTimer : Simple Timer Program",
-                          " gTextEditor : Simple Text Editor"]
+                          " gTextEditor : Simple Text Editor",
+                          " gMusicPlayer : Simple Music Player",
+                          " gYTMV_Download : Youtube Music and Video Download",
+                          " gTerminal : Simple Terminal Emulator"]
     
     gMenu = [["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
              ["System", ["Exit"]]]
@@ -39,7 +42,8 @@ def main():
 
 
         if event == "Run":
-            subprocess.Popen(f"python {newVar}" + ".py", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            pyName = f"{newVar}.py"
+            subprocess.Popen(f"python   ~/.config/qtile/gnuchanPrograms/{pyName}", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             break
 
     default.window.close()

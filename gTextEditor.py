@@ -15,22 +15,27 @@ def main():
 
     layout = [
         [default.GMenuForTheme(winMenu=gMenu, font="Sans, 16")],
-        [default.GMultiline(font=defaultFont, value="textFile", focus=True, xStretch=True, yStretch=True, border=0)],
+        [default.GMultiline(font=default.font, value="textFile", focus=True, xStretch=True, yStretch=True, border=0)],
         [default.GText(value="filepath", font=defaultFont, xStretch=True, position="center")]]
 
     default.GWindow(mainWindow=layout)
 
+    default.GMultilineSpaceFixer(value="textFile")
+    
 
     while True:
         event, GetValues = default.window.read(timeout=24)
         if event == WIN_CLOSED or event == "Exit":
             break
-        if event == "Open Text File":
-            default.Open(value="textFile", filepath="filepath")
-        elif event == "Save Text File":
-            default.SaveAs(getValue=GetValues, value="textFile", filepath="filepath")
 
-    default.window.close()
+        xfile = FileSave(value="textFile", filepath="filepath", getValue=GetValues, window=default.window)
+        if event == "Open Text File":
+            xfile.Open
+        elif event == "Save Text File":
+            xfile.SaveAs
+        
+
+
 
 
     default.window.close()

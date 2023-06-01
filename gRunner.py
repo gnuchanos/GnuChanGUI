@@ -27,7 +27,7 @@ def get_filtered_programs():
     filtered_list = [program["name"] + " : " + program["info"] for program in programList if program["name"] in program_list]
     return filtered_list
 
-def main():
+def gRunner():
     default = GnuChanGUI(Title="GnuChan Program Runner", Size=(650,600), resizable=True)
     default.Theme()
 
@@ -37,17 +37,20 @@ def main():
         [default.GButton(title="Close Warning", font="Sans, 20", xStretch=True)]
     ]
 
-    layout = [[default.GText("|  SELECT PROGRAM |", font="Sans, 20", position="center", xStretch=True)],
-              [default.GListBox(list=get_filtered_programs(), value='-LIST-', font="Sans, 20", position="center", xStretch=True, yStretch=True, noScroolBar=True)],
-              [default.hsep()],
-              [default.GText("Input:> ", font="Sans, 20"),
+    layout = [
+            
+            [default.GText("|  SELECT PROGRAM |", font="Sans, 20", position="center", xStretch=True)],
+
+            [default.GText("Input:> ", font="Sans, 20"),
                default.GInput(font="Sans, 20", value="runSoft", size=(30,1), xStretch=True)],
-              [default.GButton("RUN Input", value="runInput", font="sans, 20", xStretch=True),
-               default.GButton('RUN', value="RUN", font="Sans, 20", xStretch=True)],
-              [default.GColumn(winColumn=logWindow, value="logWarning", xStretch=True, visible=False)]]
+
+            [default.GListBox(list=get_filtered_programs(), value='-LIST-', font="Sans, 20", position="center", xStretch=True, yStretch=True, noScroolBar=True)],
+            [default.GButton('RUN', value="RUN", font="Sans, 20", xStretch=True)],
+            [default.GColumn(winColumn=logWindow, value="logWarning", xStretch=True, visible=False)]]
 
     default.GWindow(mainWindow=layout)
     default.GListBoxFixer(value="-LIST-", border=0)
+    default.GKey(GetValues="runSoft")
 
     while True:
         event, GetValues = default.window.read()
@@ -62,7 +65,7 @@ def main():
             except IndexError:
                 default.window["logWarning"].update(visible=True)
 
-        if event == "runInput":
+        if event == "runSoft" + "_Enter":
             software = GetValues["runSoft"]
             if software == "":
                 default.window["logWarning"].update(visible=True)
@@ -75,5 +78,7 @@ def main():
 
 
     default.window.close()
+
+
 if __name__ == "__main__":
-    main()
+    gRunner()
