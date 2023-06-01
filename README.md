@@ -2,7 +2,7 @@
 <p> Please note that this is a library based on the PySimpleGUI library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and constantly improving myself. </p>
  
 important note
-"""
+```
 python -m PySimpleGUI.PySimpleGUI upgrade
 position | left - center - right
 
@@ -21,10 +21,10 @@ background_color -> bColor
 border_width -> border
 image_filename -> bImage
 password_char -> PwChars
-"""
+```
 
 
-"""
+```
 event, GetValues = default.window.read(timeout=60)
 
 event ---> everythings is event like button click, keyboard, input, multiline,
@@ -42,7 +42,7 @@ if gc.event == "Button":
 
 window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
 window["button"].update(gc.window["text"].get())   --> text name change button name
-"""
+```
 
 example code
 
