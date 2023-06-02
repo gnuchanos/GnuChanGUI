@@ -103,8 +103,150 @@ gc.window.close()
 
 
 
-small example for widgets
+example 1 simple Timer
+ ```
+from GnuChanGUI import *
 
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GText(value="text", font=gc.font, xStretch=True, position="center")],
+    [gc.GButton("Start Timer", font=gc.font, xStretch=True),
+     gc.GButton("Stop Timer", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+second = 0
+timerStart = False
+
+
+def GQ():
+    global second, timerStart
+
+    if gc.event == "Start Timer":
+        timerStart = True
+    elif gc.event == "Stop Timer":
+        timerStart = False
+
+    if timerStart == True:
+        second += 1 * gc.dt
+        gc.window["text"].update(str(second))
+    else:
+        pass
+        
+gc.update(GUpdate=GQ)
+gc.window.close()
  ```
- not finish yet
- ```
+
+example 2 basic input change text (press button or press enter)
+```
+from GnuChanGUI import *
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GText(value="text", font=gc.font, xStretch=True, position="center")],
+    [gc.GInput(value="textInput", font=gc.font, xStretch=True)],
+    [gc.GButton("change text", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+def inputEnter():
+    gc.window["text"].update(gc.GetValues["textInput"])
+
+def GQ():
+    if gc.event == "change text":
+        gc.window["text"].update(gc.GetValues["textInput"])
+    
+    gc.GKey(Action=inputEnter, GetValues="textInput", key1="Return")
+
+
+    
+gc.update(GUpdate=GQ)
+gc.window.close()
+```
+
+
+example 2 basic listbox
+```
+from GnuChanGUI import *
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+
+testList = []
+
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GListBox(list=testList, value="glist", font=gc.font, xStretch=True, yStretch=True, noScroolBar=True)],
+    [gc.GButton("Add List", value="addList", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+gc.GListBoxFixer(border=0, value="glist")
+def GQ():
+    if gc.event == "addList":
+        for i in range(1, 10):
+            testList.append(i)
+        gc.window["glist"].update(testList)
+    
+gc.update(GUpdate=GQ)
+gc.window.close()
+```
+
+
+example 2 basic multiline random number 
+```
+from GnuChanGUI import *
+import random
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+
+testList = ""
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GMultiline(value="glist", font=gc.font, xStretch=True, yStretch=True, noScroolBar=True)],
+    [gc.GButton("Add List", value="addList", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+def GQ():
+    global testList
+    if gc.event == "addList":
+        testList += str(random.randint(0, 50)) + "\n"
+        gc.window["glist"].update(testList)
+    
+gc.update(GUpdate=GQ)
+gc.window.close()
+
+```
