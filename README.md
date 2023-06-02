@@ -443,5 +443,53 @@ gc.window.close()
 
 ```
 
+selections examples
+```
+from GnuChanGUI import *
 
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    
+    [gc.GButton("value button", font=gc.font, xStretch=True)],
+
+    [gc.GSelection(values=[1,2,3,4,5], value="GSelection", defaultValue=1, font=gc.font, xStretch=True)],
+    
+    [gc.GIncreaseSelection(startValue=1, rangeValue=[1,2,3,4,5], value="GIncreaseSelection", font=gc.font, xStretch=True)],
+    
+    [gc.GSlider(direction="v", font=gc.font, range=(1,100), defaultValue=1, value="GSlider1"),
+     gc.GSlider(direction="h", font=gc.font, range=(1,100), defaultValue=1, value="GSlider2")],
+    
+    [gc.GProgressBar(direction="h", MaxValue=100, value="health"),
+     gc.GProgressBar(direction="v", MaxValue=100, value="stamina")],
+]
+
+gc.GWindow(mainWindow=layout)
+gc.GSelectionFixer(value="GSelection")
+
+def GQ():
+    if gc.event == "value button":
+        if gc.GetValues["GSelection"]:
+            print(gc.GetValues["GSelection"])
+        if gc.GetValues["GIncreaseSelection"]:
+            print(gc.GetValues["GIncreaseSelection"])
+
+
+        if gc.GetValues["GSlider1"]:
+            gc.window["health"].update(gc.GetValues["GSlider1"])
+        if gc.GetValues["GSlider2"]:
+            gc.window["stamina"].update(gc.GetValues["GSlider2"])
+   
+
+gc.update(GUpdate=GQ)
+gc.window.close()
+
+```
 
