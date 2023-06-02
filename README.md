@@ -81,8 +81,99 @@ gc.window.close()
 ```
 
 
+little examples
+```
+GFrame example
+    test1 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+             [default.GText("test", xStretch=True, position="center")]]
+    test2 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+             [default.GText("test", xStretch=True, position="center")]]
+    test3 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+             [default.GText("test", xStretch=True, position="center")]]
+    test4 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+             [default.GText("test", xStretch=True, position="center")]]
+
+    layout = [
+        [default.GFrame(winLayout=test1, value="test1", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
+         default.GFrame(winLayout=test2, value="test2", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())],
+        [default.GFrame(winLayout=test3, value="test3", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
+         default.GFrame(winLayout=test4, value="test4", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())]]
+
+    default.GWindow(mainWindow=layout)
+   
+   
+   
+   GColumn example 
+    TopLayer = [[default.GText(title="Top Layer", position="center", font="Sans, 20", bColor=GColors(colors=1).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+    MiddleLeftLayer = [[default.GText(title="Middle Left", position="center", font="Sans, 20",bColor=GColors(colors=1).greens(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+    MiddleRightLayer = [[default.GText(title="Middle Right", position="center", font="Sans, 20", bColor=GColors(colors=1).purples(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+    BottomLayer = [[default.GText(title="Bottom Layer", position="center", font="Sans, 20", bColor=GColors(colors=5).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+
+    layout = [
+        [default.GColumn(TopLayer, xStretch=True, yStretch=True)],
+        [default.GColumn(MiddleLeftLayer, xStretch=True, yStretch=True), 
+         default.GColumn(MiddleRightLayer, xStretch=True, yStretch=True)],
+        [default.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
 
 
+
+tab and GTabGroup example
+    tab1 = [[default.GText(title="tab1", font=defaultFont, bColor="black", xStretch=True)]]
+    tab2 = [[default.GText(title="tab2", font=defaultFont, bColor="black", xStretch=True)]]
+    layout = [
+        [default.GTabGroup( TabGroupLayout=[[
+            default.GTab(title="tab1", TabLayout=tab1),
+            default.GTab(title="tab2", TabLayout=tab2),
+            
+            ]] )]
+    ],
+    
+    
+click event for button
+    if gc.event == "button name or value": click event
+        gc.window["text"].update(gc.GetValues["textInput"])
+  
+
+image change
+if gc.event == "imgButton":
+        gc.window["img"].update("logo2.png")
+
+
+glistbox
+if gc.event == "addList":
+        for i in range(1, 10):
+            testList.append(i)
+        gc.window["glist"].update(testList)
+
+ginput event 
+if gc.event == "change text": # change text is button
+        gc.window["text"].update(gc.GetValues["textInput"]) #text input value
+   
+
+checkbox example
+if gc.event == "checkbox":
+        if gc.GetValues["hl1"]:
+            print("half life 1")
+        if gc.GetValues["hl2"]:
+            print("half life 2")
+        if gc.GetValues["hl3"]:
+            print("half life 3 ?????")
+            
+Radio example groupID=hlGames <-- this is important
+    if gc.event in ["hl1", "hl2", "hl3"]:
+        if gc.event == "hl1":
+            gc.window["hlGame"].update("can you play half life 1 before ?")
+        elif gc.event == "hl2":
+            gc.window["hlGame"].update("half life 2 good game")
+        elif gc.event == "hl3":
+            gc.window["hlGame"].update("there is no half life 3 :(")
+```
+
+
+
+
+
+full script examples
 example 1 simple Timer
  ```
 from GnuChanGUI import *
@@ -233,7 +324,7 @@ gc.window.close()
 
 
 
-example 4 basic GCheack example
+example 5 basic GCheack example
 ```
 from GnuChanGUI import *
 import random
@@ -279,7 +370,7 @@ gc.window.close()
 
 
 
-example 5 basic GRadio example
+example 6 basic GRadio example
 ```
 from GnuChanGUI import *
 import random
@@ -319,3 +410,38 @@ def GQ():
 gc.update(GUpdate=GQ)
 gc.window.close()
 ````
+
+example 7 simple image change example
+```
+from GnuChanGUI import *
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.Push, gc.GImage(image="logo1.png", value="img"), gc.Push],
+    [gc.GButton("change image", value="imgButton", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+def inputEnter():
+    gc.window["img"].update("logo2.png")
+
+def GQ():
+    if gc.event == "imgButton":
+        gc.window["img"].update("logo2.png")
+    
+gc.update(GUpdate=GQ)
+gc.window.close()
+
+```
+
+
+
