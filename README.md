@@ -183,7 +183,7 @@ gc.window.close()
 ```
 
 
-example 2 basic listbox
+example 3 basic listbox
 ```
 from GnuChanGUI import *
 
@@ -217,7 +217,7 @@ gc.window.close()
 ```
 
 
-example 2 basic multiline random number 
+example 4 basic multiline random number 
 ```
 from GnuChanGUI import *
 import random
@@ -250,3 +250,92 @@ gc.update(GUpdate=GQ)
 gc.window.close()
 
 ```
+
+
+
+example 4 basic GCheack example
+```
+from GnuChanGUI import *
+import random
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+
+testList = ""
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GText(value="hlGame", font=gc.font, xStretch=True, position="center")],
+    [gc.GCheack(title="Dead island", value="game1", font=gc.font),
+     gc.GCheack(title="Half Life 2", value="game2", font=gc.font),
+     gc.GCheack(title="Summerset Saga", value="game3", font=gc.font)],
+    [gc.GButton("show checkbox", value="checkbox", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+def GQ():
+    global testList
+    if gc.event == "checkbox":
+        if gc.GetValues["game1"]:
+            print("Dead Island - Good Game")
+        if gc.GetValues["game2"]:
+            print("Half Life 2 - is COOL GAME")
+        if gc.GetValues["gam3"]:
+            print("SummerSet Saga is game")
+            
+
+
+gc.update(GUpdate=GQ)
+gc.window.close()
+````
+
+
+
+
+
+example 5 basic GRadio example
+```
+from GnuChanGUI import *
+import random
+
+gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
+gc.Theme()
+
+gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]]
+]
+
+
+testList = ""
+layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    [gc.GText(value="hlGame", font=gc.font, xStretch=True)],
+    [gc.GRadio(title="half life 1", groupID="halflife", value="hl1", font=gc.font),
+     gc.GRadio(title="half life 2", groupID="halflife", value="hl2", font=gc.font),
+     gc.GRadio(title="half life 3", groupID="halflife", value="hl3", font=gc.font)],
+    [gc.GButton("Add List", value="addList", font=gc.font, xStretch=True)],
+]
+
+gc.GWindow(mainWindow=layout)
+
+def GQ():
+    global testList
+    if gc.event in ["hl1", "hl2", "hl3"]:
+        if gc.event == "hl1":
+            gc.window["hlGame"].update("can you play half life 1 before ?")
+        elif gc.event == "hl2":
+            gc.window["hlGame"].update("half life 2 good game")
+        elif gc.event == "hl3":
+            gc.window["hlGame"].update("there is no half life 3 :(")
+
+
+gc.update(GUpdate=GQ)
+gc.window.close()
+````
