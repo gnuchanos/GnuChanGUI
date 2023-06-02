@@ -1,898 +1,2579 @@
 After "Aftır" - Sonra
 Agreed "Egriid" - Anlaşıldı, Kararlaştırıldı	
-Answer "Ensvır" - Cevap	
-Art "Art" - Sanat	
-Abandon "Ebendın" - Terk Etmek, Bırakmak	
-Ability "Ebiliti" - Hüner, Beceri, Kabiliyet	
-About	"Ebaut" - Hakkında, Aşağı Yukarı, Üzere	
-Above	"Ebov" - Üstünde, Üzerine	
-Abroad	"Ebrood" - Yurt Dışında, Yurtdışı
-Absence	"Ebsıns" - Bulunmama, Yokluk	
-Absolute "Ebsulut" - Mutlak, Salt, Kesin	
-Absolutely	"Ebsulutli" - Mutlaka, Kesinlikle	
-Abuse	"Ebus" - Suistimal Etmek, Kötüye Kullanmak
-Accept	"Eksept" - Kabul Etmek	
-Access	"Ekses" - Giriş, Erişim, Erişmek	
-Accompany	"Ekompani" - Eşlik Etmek	
-Accomplish	"Ekkompliş" - Başarıyla Tamamlamak, Sonuçlandırmak
-Accurate	"Ekkurıt" - Kesin, Doğru
-Accuse	"Ekkuus" - Suçlamak, İtham Etmek	
-Achieve	"Eçiv" - Elde Etmek, Başarmak	
-Acknowledge	"Eknovlıç" - Kabul Etmek, Kabullenmek
-Acquire	"Ekkuayır" - Edinmek, Elde Etmek
-Across	Karşıya, -Karşı karşıya	Ekross
-Act	Davranmak, -Hareket Etmek, Eylem	Ekt
-Action	Aksiyon, -Eylem	Ekşın
-Active	Etkin, -Aktif	Ektiv
-Activity	Faaliyet, -Etkinlik, Aktivite	Ektiviti
-Adapt	Uymak, -Uyarlamak, Adapte Olmak	Adapt
-Add	Eklemek, -İlave Etmek	Edd
-Addition	İlave, -Ek	Addişın
-Adequate	Yeterli, -Münasip	Edekueyt
-Adjustment	Ayarlama, -Ayar	Edjastmınt
-Administration	İdare, -Yönetim	Edministirayşın
-Administrator	İdareci, -Yönetici	Edministreytır
-Admire	Hayran -Olmak, Beğenmek	Edmayır
-Admission	Kabul, -İtiraf	Edmişşın
-Admit	Kabul -Etmek, İtiraf Etmek	Edmit
-Adopt	Evlat -Edinmek, Benimsemek	Adopt
-Advance	İlerlemek, -Avans, Geliştirmek	Edvens
-Advanced	İleri, -Gelişkin	Edvensd
-Advantage	Avantaj, -Fayda	Edventıç
-Adventure	Macera, -Serüven	Edvençur
-Advertising	Reklamcılık, -Reklam	Edvırtaysing
-Advice	Tavsiye, -Nasihat	Edvays
-Advise -(v)	Nasihat Etmek, Öğütlemek	Edvays
-Adviser	Müşavir, -Danışman	Edvaysır
-Advocate -(v)	Müdafaa Etmek, Savunmak	Edvokıt
-Afford	Parası -Yetmek	Efford
-Afraid	Korkmuş, -Ürkmüş	Efreyd
-Afternoon	Öğleden -Sonra	Aftırnuun
-Again	Tekrar, -Yeniden	Egeyn
-Against	Karşı, -Aykırı	Egeynst
-Age	Yaş, -Çağ	Eyc
-Agency	Ajans, -Acente	Eycınsi
-Agenda	Gündem, -Ajanda	Ajenda
-Agent	Ajan, -Temsilci	Eycınt
-Aggressive	Kavgacı, -Agresif	Agressiv
-Ago	Evvel, -Önce	Ego
-Agree	Aynı -Fikirde Olmak, Anlaşmak, Katılmak	Egrii
-Agreement	Anlaşma, -Mutabakat	Egriimınt
-Agriculture	Tarım, -Ziraat	Agrikulçır
-Ahead	İleride, -İleri	Eheed
-Aid	Yardım -Etmek, Yardım	Eyd
-Aim	Amaçlamak, -Amaç, Hedef	Eym
-Aircraft	Uçak, -Hava Taşıtı	Eyırkıraft
-All	Tüm, -Hepsi	All
-Alliance	Antlaşma, -İttifak	Ellayıns
-Allow	İzin -Vermek	Ellov
-Almost	Hemen -Hemen, Neredeyse	Olmost
-Already	Zaten, -Halihazırda	Alredi
-Always	Her -Zaman, Daima	Alveys
-Among	Arasında, -Arasına	Emong
-Amount	Meblağ, -Tutar	Emount
-Analysis	Analiz, -Tahlil	Enalaysis
-Analyze	Analiz -Etmek, Incelemek	Enalayz
-Anger	Öfke, -Hiddet	Engır
-Angry	Kızgın, -Sinirli	Engri
-Announce	Duyurmak, -Anons Etmek	Ennouns
-Annual	Senelik, -Yıllık	Enual
-Another	Öbür, -Başka	Enadır
-Anticipate	Beklemek, -Ummak	Antisipeyt
-Anxiety	Endişe, -Kaygı	Engzayıti
-Anybody	Kimse, -Hiç Kimse	Enibadi
-Anyone	Hiç -Kimse, Kimse	Enivan
-Anyway	Neyse, -Her Neyse	Enivey
-Anywhere	Her -Yer, Herhangi Bir Yer	Eniveer
-Apparent	Görünür, -Aşikar	Epiyırınt
-Apparently	Belli -ki, Anlaşılan, Görünüşte	Epiyırıntli
-Appeal	Başvurmak, -Temyiz, Cazibe	Eppiyıl
-Appear	Belli -Olmak, Görünmek	Eppiyır
-Application	Başvuru, -Uygulama	Epplikeyşın
-Apply	Başvurmak, -Uygulamak	Epplay
-Appointment	Randevu, -Atama, Tayin	Epoyntmınt
-Appreciate	Değerini -Artırmak, Beğenmek	Epprışıeyt
-Approach	Yanaşmak, -Yaklaşım	Eprooç
-Appropriate	Münasip, -Uygun	Eproprieyt
-Approval	Tasvip, -Onay	Epruvıl
-Approve	Kabul -Etmek, Beğenmek, Onaylamak	Epruuv
-Approximately	Takriben, -Aşağı Yukarı	Eproksimıtli
-Area	Alan, -Bölge	Eriya
-Argument	Argüman, -Sav	Argümınt
-Armed	Ateşli, -Silahlı	Armd
-Around	Sularında, -Etrafında, Çevresinde	Eround
-Arrange	Ayarlamak, -Düzenlemek	Erreyinç
-Arrangement	Düzenleme, -Ayarlama	Erreyinçmınt
-Arrival	Gelmek, -Geliş, Varış	Errayvıl
-Arrive	Varmak, -Ulaşmak	Errayv
-Aside	Bertaraf, -Ayrı	Esayd
-Ask	Sormak, -İstemek	Esk
-Asleep	Uyuyan, -Uyuşuk	Asliip
-Aspect	Hal, -Görünüş, Yön	Aspekt
-Assault	Saldırmak, -Saldırı	Essalt
-Assert	İleri -Sürmek, İddia Etmek	Assört
-Assess	Değer -Biçmek	Essess
-Assign	Atamak, -Tahsis Etmek	Essayn
-Assignment	Atama, -Görevlendirme	Essaynmınt
-Assist	Yardım -Etmek	Assist
-Assistant	Yardımcı, -Asistan	Assistınt
-Associate	Birleştirmek, -İlişkilendirmek	Assoşieyt
-Association	Birlik, -Dernek	Assoşieyşın
-Assume	Farzetmek, -Varsaymak	Essum
-Assumption	Farzetme, -Varsayım	Essumpşın
-Assure	Garanti -Etmek	Aşşur
-Attach	Eklemek, -İliştirmek	Etteç
-Attack	Saldırmak, -Saldırı	Ettek
-Attempt	Girişimde -Bulunmak	Etempt
-Attention	İlgi, -Özen, Dikkat	Etenşın
-Attitude	Tavır, -Tutum	Etdituud
-Attractive	Çekici, -Cazibeli	Etrektiv
-Attribute	Bağlamak, -Atfetmek, Dayandırmak	Etribüt
-Audience	Kitle, -İzleyici, Seyirci	Odiıns
-Authority	Otorite, -Yetki	Otoriti
-Available	Müsait, -Mevcut, Uygun	eveylıbıl
-Avoid	Kaçınmak, -Önlemek	Evoyd
-Aware	Farkında, -Haberdar	Eveer
-Awareness	Farkındalık, -Farkında Olma	Eveernıss
-Away	Uzak, -Uzakta	Evey
-Backpack	Sırt -Çantası	Bekpek
-Badly	Kötü -Bir Şekilde	Bedli
-Band	Müzik -Grubu	Bend
-Barely	Zar -Zor	Berli
-Basic	Esas, -Temel	Beyzik
-Basically	Temelde, -Esasen, Aslında	Beyzikıli
-Beach	Plaj, -Sahil, Kumsal	Biiç
-Become	Olmak, -Haline Gelmek	Bikam
-Bedroom	Yatak -Odası	Bedrum
-Behavior	Davranış, -Tavır, Hal	Biheyviyır
-Behind	Arkada, -Arkasında	Bihaynd
-Belong	Ait -Olmak	Bilon
-Best	En -İyi	Best
-Bet	İddaa, -İddiaya Girmek	Bet
-Better	Daha -İyi	Bettır
-Bill	Fatura, -Senet	Bill
-Birthday	Doğum -Günü	Börtdey
-Bite	Isırmak, -Lokma	Bayt
-Blame	Ayıplamak, -Suçlamak	Bleym
-Border	Sınır, -Hudut, Kenar	Bordır
-Borrow	Ödünç -Almak	Borrov
-Bowl	Kase, -Tas	Bovl
-Boyfriend	Erkek -Arkadaş, Sevgili	Boyfrend
-Breathe	Nefes -Almak	Briiid
-Broken	Bozuk, -Kırık	Brokın
-Brother	Erkek -Kardeş	Bradır
-Brush	Fırça, -Fırçalamak	Braş
-Build	İnşa -Etmek	Biylt
-Burn	Yakmak, -Yanmak	Börn
-Button	Düğme, -Buton	Battın
-Buy	Satın -Almak	Bay
-Call -off	İptal etmek	Kal of
-Captor	Esir -alan	Keptor
-Census	Nüfus -Sayımı	Sensıs
-Charm	Alımlı, -Sevimli	Çarm
-Clay	Kil, -çamur	Kley
-Clerk	Yazıcı, -katip	Klörk
-Cling	Yapışmak, -Sarılmak	Kling
-Commitment	Vaat, -Taahhüt, Bağlılık	Kommitmınt
-Compatible	Uygun, -Münasip	Kompetibıl
-Conflict	Çatışma, -Kavga, Zıtlık	Konflikt
-Cool	Serin, -Havalı	Kuul
-Count -(v)	Saymak	Kaunt
-Dawn	Şafak, -Tan	Davn
-Dear	Sevgili, -Değerli	Diyır
-Decay	Çürümek, -Bozulmak	Dikey
-Decline	Reddetmek, -Geri Çevirmek	Diklayn
-Defect	Defo, -Özür	Difect
-Delightful	Hoş, -Güzel	Dilaytful
-Demolition	Yıkma, -Tahrip	Demolişın
-Dent	Çöküntü, -Göçük	Dent
-Dependable	Güvenilir, -Emin	Dipendıbıl
-Deprive	Yoksun -Bırakmak	Diprayv
-Dinner	Akşam -Yemeği	Dinnır
-Disgrace	Utanç, -Ayıp	Disgreys
-Dizziness	Baş -Dönmesi	Dizinıs
-Doctor	Doktor, -Hekim	Daktır
-Enormous	Muazzam, -Kocaman	İnormıs
-Earth	Toprak, -Dünya	Örth
-Earn	Para -Kazanmak	Örn
-Expect	Ümit -etmek	Ekspekt
-Exit	Çıkış, -Çıkmak	Egzıt
-Eastern	Doğuya -ait, Doğu	İstörn
-Equal	Eşit, -Denk	İkuul
-Essay	Rapor, -Makale	Essey
-Feasible	Mümkün, -Yapılabilir	Fisibıl
-Fade	Rengi -Solmak, Silinmek	Feyd
-Fulfill	Tatmin -etmek	Fulfil
-Fence	Çit, -Parmaklık	Fens
-Fierce	Şiddetli, -Hiddetli	Fiyırs
-Flimsy	Dayanıksız, -Çürük	Flimsi
-Flee	Kaçmak, -Kaçırmak	Flii
-Flavor	Tat, -Lezzet	Fleyvır
-Fortunate	Minnettar, -Müteşekkir	Forçunıt
-Gap	Boşluk, -Fark	Gep
-Genius	Deha, -Dahi	Jiniyıs
-Genuine	Hakiki, -Gerçek	Cenuin
-Get	Elde -Etmek, Almak	Get
-Guest	Misafir, -Konuk	Gest
-Grocery -Store	Market	Groseri Stor
-Gravity	Yer -çekimi	Greviti
-Grass	Çimen, -Ot	Gras
-Glory	Görkem, -Şan	Glori
-Globe	Küre, -Dünya	Glob
-Gift	Armağan, -Yetenek	Gift
-High	Yüksek, -Zirve	Hay
-Headache	Baş -ağrısı	Hedeyk
-Heat	Isı, -Sıcaklık	Hiit
-Help	Yardım -Etmek	Help
-Herb	Bitki, -Ot	Örb
-Have	Sahip -Olmak	Hev
-Image	Görüntü, -İmge	İmıç
-Insane	Deli, -Kaçık	İnseyn
-Invade	İstila -Etmek	İnveyd
-Invent	İcat -Etmek	İnvent
-Inhale	Nefes -Almak, İçine Çekmek	İnheyl
-Impulse	Dürtü, -Güdü	İmpuls
-Invade	İstila -etmek	İnveyd
-Invasion	Akın, -Saldırı, İstila	İnveyşın
-Ironic	Alaylı, -Alaycı	Ayronik
-Jet -engine	Jet Motoru	Jet Encin
-Jukebox	Müzik -Kutusu	Jukbaks
-Junk	Ivır -Zıvır	Jank
-Keep	Korumak, -Tutmak, Devam Etmek	Kiip
-Kick	Tekme, -Tekmelemek	Kik
-Kid	Çocuk, -Ufaklık, Dalga Geçmek	Kid
-Kind	İyi, -Nazik, Çeşit	Kaynd
-Kiss	Öpücük, -Öpmek	Kiss
-Knee	Di̇z, -Di̇z Çökmek	Nii
-Knock	Vurmak -(Kapıya Vurmak)	Nak
-Knot	Düğüm, -Düğüm Atmak	Not
-Kidnap	Zorla -Kaçırmak (İnsan, Hayvan Vb.)	Kidnep
-Kin	Ai̇le, -Akraba	Kin
-Knight	Si̇lahşör, -Şovalye, Satrançta At	Nayt
-Knob	Tokmak, -Tutacak	Nob
-Labor	İş -(Elle Yapılan Zor İş), İş Gücü	Leybır
-Lamb	Kuzu, -Kuzu, Koyun Eti̇	Lemb
-Lame	Topal, -Sıkıcı	Leym
-Land	Kara, -Arazi	Lend
-Land -(v)	İni̇ş Yapmak, Konmak (Uçak vs..)	Lend
-Language	Di̇l -( Yabancı Dil vs.)	Lenguıç
-Last	Son, -Sonunda, Geçmi̇ş	Last
-Last	Devam -Etmek, Sürmek, Yeterli̇ Olmak	Last
-Late	Geç, -Sonu (Late September: Eylül Sonu vs.)	Leyt
-Laundry	Yıkanacak -Çamaşır, Çamaşırhane	Landri
-Law	Yasa, -Kanun, Hukuk	Lov
-Lead	Önderli̇k -Etmek, Önde Gi̇tmek, Yol Göstermek	Liid
-Leader	Önder, -Li̇der	Lidır
-Least	En -Az	Liist
-Leave	Terk -Etmek	Liiv
-Lend	Ödünç -Vermek	Lend
-Less	Daha -Az	Less
-Letter	Mektup, -Harf	Lettır
-Letter -Box	Mektup Kutusu,Posta Kutusu	Letır Baks
-Level	Düzey, -Sevi̇ye	Levıl
-Liberty	Serbest -Olmak	Libırti
-Library	Ki̇taplık, -Kütüphane	Laybreri
-License	Li̇sans -(Ehliyet vs. )	Laysıns
-Lie	Yalan, -Yalan Söylemek	Lay
-Life	Yaşam, -Hayat	Layf
-Lift	Asansör, -Yukarı Kaldırmak	Lift
-Light	Işık, -Açık (Renklerde), .Hafi̇f	Layt
-Like	Hoşlanmak, -Gi̇bi̇	Layk
-Likely	Büyük -Olasılıkla	Laykli
-Line	Çi̇zgi̇, -Satır, Sıra	Layn
-Living	Yaşam -Bi̇çi̇mi̇	Livin
-Load	Yük, -Yüklemek ,Si̇lah Doldurmak	Lod
-Local	Bölgesel, -Yerel	Lokıl
-Lock	Ki̇li̇tlemek, -Ki̇li̇t	Lok
-Look	Bakmak, -Bakış	Luk
-Loose	Bol, -Bağsız	Luus
-Loss	Kayıp, -Zarar	Loss
-Loud	Yüksek -Sesli̇	Laud
-Love	Sevgi, -Aşk	Lav
-Low	Alçak, -Düşük	Lov
-Lower	Aşağıya -İndi̇rmek	Lovır
-Luggage	Vali̇z, -Yük	Laggıç
-Lunch	Öğle -Yemeği̇	Lanç
-Ladle	Kepçe -(Yemek)	Leydıl
-Lamppost	Sokak -Lambasi	Lemppost
-Lane	Dar -Yol, Şeri̇t (Otoyolda vs.)	Leyn
-Lash	Kamçı -/ Bi̇rşeyi̇ Ani̇ Ve Hızlı Sallamak	Leş
-Launch	Bi̇r -Şeye Başlamak / Roket Fırlatmak	Launç
-Laundry-basket	Çamaşır -Sepeti̇	Laundri-beskıt
-League	Bi̇rli̇k, -Li̇g	Liig
-Leak	Akıntı,, -Sızmak	Liik
-Lease	Beli̇rli̇ -Bi̇r Zaman İçi̇n Ki̇ralama	Liis
-Lecture	Ders, -Konferans Vermek	Lekçur
-Lettuce	Salata, -Kıvırcık	Letus
-Lever	Kaldıraç, -Mani̇vela	Levır
-Limit	Hat, -Sınır,, Li̇mi̇t	Limit
-Liquidate	Tasfi̇ye -Etmek	Likuideyt
-Litter	Çöp, -Dağınıklık	Litır
-Loaf	Bütün -Ekmek / Vakti̇ Boşa Geçi̇rmek	Loaf
-Loan	Ödünç -Vermek, Borç Vermek, Borç	Lon
-Lonely	Yalnız, -Ki̇msesi̇z	Lonli
-Loyalty	Sadakat, -Baglilik	Loyılti
-Memorial	Bi̇r -Ki̇şi̇ni̇n Anısına Yapılan Yapıt	Memoriyıl
-Mend	Tami̇r -Etmek	Mend
-Mere	Sadece, -Yalnızca	Miyır
-Mess	Kargaşa, -Dağınıklık	Mes
-Midnight	Gece -Yarısı	Midnayt
-Mimic	Takli̇t -Etmek (Birini)	Mimik
-Mind	Bi̇ri̇ne -Bakmak, Dert Etmek	Maynd
-Mine	Beni̇m/ -Maden Ocağı/ Mayın	Mayn
-Minimum	En -az	Minimım
-Minister	Bakan/ -Büyükelçi̇	Ministır
-Minor	Önemsi̇z, -Ufak, Mi̇nör	Maynır
-Miss	Özlemek/ -Kaçırmak/ Kayıp	Miss
-Missile	Füze, -Fırlatılan Ci̇si̇m	Missil
-Mission	Özel -Bi̇r Görev İçi̇n Yolculuk, Mi̇syon	Mişın
-Misunderstand	Yanlış -Anlamak	Misandırstend
-Mix	Karıştırmak, -Karışmak	Mix
-Model	Model -(Model Araba, Manken vs.)	Madıl
-Modern	Modern, -Çağdaş	Madırn
-Modest	Alçakgönüllü, -Ilımlı	Modıst
-Month	Ay -(Takvim Ayı)	Mant
-More	Daha -Fazla	Mor
-Most	En -Çok	Most
-Move	Hareket -Etmek, Etti̇rmek	Muuv
-Much	Çok -(Miktarca)	Maç
-Mystery	Esrar, -Bi̇li̇nmezli̇k	Mistıri
-Machine-gun	Maki̇neli̇ -Tüfek	Maşin-gan
-Madam	Madam, -Bayan	Medam
-Main	Ana, -Esas	Meyn
-Make	Yapmak, -Çeşi̇t	Meyk
-Make --up	Makyaj, Uydurmak	Meyk-ap
-Manage	Yönetmek, -Kontrol Etmek	Menıc
-Management	Yöneti̇m, -İdare	Menıcmınt
-Manager	Yöneti̇ci̇, -Menajer	Menıcır
-Manner	Tavır, -Görgü	Mennır
-March	Marş, -Yürüyüş, Mart (Ayı)	Març
-Mark	İşaretlemek, -İşaret	Mark
-Market	Pazar, -Pi̇yasa	Markıt
-Marvelous	Şahane, -Hari̇ka	Marvılıs
-Mass	Kütle, -Ki̇tle, Kalabalık	Mess
-Master	Uzman, -Şef, Sahi̇p, Hoca	Mastır
-Match	Uymak, -Uyuşmak/ Maç/ Ki̇bri̇t	Meç
-Material	Malzeme, -Kumaş	Matiyırıl
-Matter	Mesele, -Önemli̇ Olmak	Meddır
-May	Mayıs, -(Maybe: Belki̇)	Mey (Meybi)
-Me	Bana, -Beni	Mi
-Mean	Anlamına -Gelmek / Ci̇mri̇	Miin
-Means	Sti̇l, -Yol/ Yardım/ Para	Miins
-Meantime	Bu -Arada	Miintaym
-Meanwhile	Bu -Arada, Aynı Anda	Miinvayl
-Medicine	İlaç, -Tıp	Medısın
-Meet	Buluşmak, -Karşılamak	Miit
-Meeting	Toplantı, -Mi̇ti̇ng	Miiting
-Melody	Ezgi̇, -Melodi̇	Melodi
-Maid	Kadın -Hi̇zmetçi̇	Meyd
-Maintain	Bakım -Onarım/ Eski̇ Hali̇nde Koruma/ Destekleme	Meynteyn
-Major	Büyük, -Önemli̇, Bi̇nbaşı (Orduda)	Meyjır
-Manual	El -İle Yapılan	Menual
-Manufacture	Üretmek -(Fab. vs.)	Manufekçır
-Margin	Marj, -Katkı	Marjin
-Massacre	Katli̇am, -Katli̇am Yapmak	Massekır
-Massive	Çok -Büyük, Ağır	Massiv
-Mat	Hasır, -Paspas	Met
-Mattress	Yatak, -Sedi̇r	Metrıss
-Mature	Olgun, -Ergi̇n/ Vadesi̇ Gelen (Ödeme)	Maçur
-Maturity	Olgunluk -Zamanı/ Vade Zamanı	Maçuriti
-Maximum	Maksi̇mum, -Azami̇	Meksimum
-Meadow	Çayır, -Mera	Medov
-Mechanic	Maki̇ni̇st, -Mekani̇k	Mekınik
-Merely	Sadece, -Ancak	Miirli
-Merge	Bi̇rleşerek -Kaybolma, Konsoli̇dasyon (Şirket, Devlet)	Merç
-Merit	Hak -Etmek/ Değmek	Merit
-Might	Kuvvet, -Kudret, Belki̇ (Might Be: Az İhtimali.)	Mayt
-Mild	Hafi̇f, -Yumuşak, Ilık	Mayld
-Mince	Kıyma -(Et.), Kıymak	Mins
-Miser	Hasi̇s, -Ci̇mri̇	Misır
-Mislay	Nereye -Koyduğunu Unutmak	Misley
-Mobile	Oynak, -Hareketli̇	Mobayl
-Mole	Köstebek/ -Vücuttaki̇ Ben	Mol
-Monument	Anıt, -Abi̇de	Monumınt
-Mood	Mi̇zaç, -Ruh Hali̇	Muud
-Moss	Yosun -(Nemli Yerlerde Oluşan)	Mos
-Motion	Hareket, -Önerme	Moşın
-Motive	Moti̇vlenmek, -Güdü	Motiv
-Multiply	Çarpmak -(Matematik)/ Çoğalmak	Multiplay
-Murmur	Mırıldanmak/ -Uğultu	Murmur
-Muscle	Pazu, -Kas	Masıl
-Mute	Sesi̇z, -Di̇lsi̇z	Müyt
-Mutter	Mırıldanmak, -Kısık Sesle Söylenmek	Mattır
-Mutual	Müşterek, -İki̇ Taraflı	Müçul
-Nail	Tırnak/ -Çi̇vi̇	Neyl
-Neck	Boyun, -Ense	Nek
-Need	Gereksi̇ni̇m, -İhti̇yaç	Niid
-Needle	İğne, -Şi̇ş	Niidıl
-Neglect	İhmal -Etmek	Niglekt
-Neither…Nor…	Ne -O..Ne Öbürü	Niidır…Nor…
-Nephew	Yeğen -(Erkek)	Neffiyuv
-Nest	Yuva, -Kuş Yuvası	Nest
-Never	Hi̇çbi̇r -Zaman, Asla	Nevır
-Nevertheless	Buna -Rağmen, Hala, Ama	Nevırdıless
-Next	En -Yakın, Bi̇r Sonraki̇, Ertesi̇	Nekst
-Niece	Yeğen -(Kız)	Niiis
-Nobody	Hi̇ç -Ki̇mse	Nobadi
-Noon	Öğle -Zamanı	Nuun
-Nothing	Hi̇çbi̇r -Şey	Nating
-Notice	Duyuru/ -Di̇kkati̇ni̇ Çekmek	Notis
-Nowhere	Hi̇çbi̇r -Yer	Nover
-Nuisance	Sıkıntı, -Dert	Nuisans
-Number	Sayı, -Numaralandırmak	Nambır
-Nurse	Hemşi̇re, -Hasta Bakıcı	Nörs
-Nut	Kuruyemi̇ş -(Fındık vs.)	Nat
-Narrate	Anlatmak, -Söylemek	Nerreyt
-Nasty	Pi̇s, -Kötü Kokulu, Hoş Olmayan	Nasti
-Negotiate	Görüşmek, -Müzakere	Negoşieyt
-Network	Şebeke, -Çalışma Ağı	Netvörk
-Nickname	Takma -isim, Lakap	Nikneym
-Nominate	Aday -Göstermek	Nomineyt
-Obey	Söz -Di̇nlemek, İtaat Etmek	Obey
-Object -(v)	İti̇raz Etmek	Objekt
-Object -(n)	Nesne, Obje/ Amaç	Objekt
-Observe	Gözlem -Yapmak	Obsörv
-Occupation	Meslek, -İşgal	Okkupeyşın
-Occupy	İşgal -Etmek, Oturmak, Kaplamak	Okkupay
-October	Eki̇m -(Ayı)	Oktobır
-Of	İyeli̇k -Eki̇, -Nin	Of
-Off	Yok -Olma/, Eksi̇lmek/ Kapatmak	Off
-Offend	Kızdırmak, -İnci̇tmek (Birini)	Offend
-Offer	Tekli̇f -Etmek	Offır
-Officer	Subay, -Memur	Offisır
-Often	Sık -Sık	Ofın
-Oil	Yağ/ -Petrol	Oyl
-Old	Eski̇, -Yaşlı	Old
-Once	Bi̇r -Kez, Bi̇r An Önce	Vans
-Only	Sadece, -Yalnızca	Onli
-Open	Açık, -Açmak	Opın
-Operation	Operasyon, -Ameli̇yat	Opıreyşın
-Opposite	Zıt, -Ters	Oppozit
-Orange	Portakal/ -Turuncu	Orınç
-Order	Emi̇r, -Si̇pari̇ş, Düzen, Sıra	Ordır
-Ordinary	Sıradan, -Normal	Ordineri
-Organ	Org, -Organ, Organi̇zasyon, Kuruluş	Orgın
-Organize	Organi̇ze -Etmek	Orgınayz
-Origin	Köken, -Ori̇ji̇n	Orijin
-Otherwise	Başka -Türlü, Yoksa, Aksi̇ Takti̇rde	Adırvays
-Out-of-date	Modası -Geçmi̇ş, Eski̇	Aut-of-deyt
-Over	Üstünde/ -Bi̇tmek	Ovır
-Overcome	Üstesi̇nden -Gelmek	Ovurkam
-Owe	Borçlu -Olmak	Ov
-Own	Sahi̇p -Olmak	Ovn
-Odd	Tuhaf, -Acayip	Odd
-Old-fashioned	Eski̇ -Moda	Old-feşhınd
-Option	Seçme, -Seçenek	Opşın
-Original	Orji̇nal, -İlk, Yeni̇	Orijinıl
-Pain	Acı, -Ağrı	Peyn
-Paint	Boyamak, -Boya	Peynt
-Painter	Ressam, -Boyacı	Peyntır
-Pale	Soluk, -Solgun (Renk)	Peyl
-Paper	Kağıt, -Gazete, Evrak, Ki̇mli̇k	Peypır
-Parent	Anne-Baba, -Ebeveyn	Perınt
-Park	Park, -Park Etmek	Park
-Part	Kısım, -Bölüm, Ayırmak	Part
-Particular	Yalnız, -Özel, Ti̇ti̇z	Partikülır
-Partner	Ortak, -Partner	Partnır
-Part-time	Yarım -Gün	Part-taym
-Pass	Geçmek, -Geçi̇rmek	Pess
-Patient -(adj.)	Sabırlı	Peyşınt
-Patient -(n)	Hasta	Peyşınt
-Pen	Tükenmez -Kalem	Pen
-Pencil	Kurşun -Kalem	Pensıl
-People	Halk, -İnsanlar	Piipıl
-Perfect	Kusursuz, -Yetki̇n	Pörfekt
-Perform	Çalışmak, -Uygulamak	Pörform
-Permit	İzi̇n -Vermek, İzi̇n Kağıdı	Pörmit
-Persuade	İkna -Etmek	Pörsuveyd
-Pie	Pasta, -Turta	Pay
-Pile	Üst -Üste Koymak	Payl
-Pin	Toplu -İğne	Pin
-Pipe	Boru/ -Pi̇po/ Flüt	Payp
-Pity	Acımak -(What A Pity: Ne Yazık)	Piti
-Place	Yer/ -Yerleşti̇rmek	Pleys
-Plain	Açık, -Ortada, Düz	Pleyn
-Plan	Plan, -Planlama	Plen
-Plantation	Eki̇li̇ -Yer	Plenteyşın
-Play	Oynamak/ -Çalmak (Bir Müzik Aletini)	Pley
-Player	Oyuncu, -Çalan	Pleyır
-Pleasant	Keyi̇fli̇, -Zevkli̇	Plezınt
-Plenty	Çok -Sayıda	Plenti
-Plough	Toprağı -Sürmek	Ploh
-Plug	Fi̇ş, -Banyo Tıkacı	Plag
-Poetry	Şi̇i̇rler, -Şai̇rli̇k, Şi̇i̇rle İlgi̇li̇	Poetri
-Point	Nokta, -Uç	Poynt
-Policy	Poli̇çe, -Yöneti̇m İlkesi̇, Poli̇ti̇ka	Polisi
-Politician	Poli̇ti̇kacı, -Poli̇ti̇kayla Uğraşan	Politişın
-Poor	Fakir, -Yoksul, Zavallı	Poor
-Pork	Domuz -Eti̇	Pork
-Position	Durum, -Konum	Pozişın
-Positive	Emi̇n, -Kesi̇n/ Olumlu	Positiv
-Possess	Sahi̇p -Olmak	Posses
-Possible	Olası, -Mümkün	Possibıl
-Post	Posta, -İşaret, Devri̇ye Gezmek (Askerde)	Post
-Pour	Dökmek, -Akıtmak	Poor
-Powder	Toz, -Pudra	Povdır
-Practise	Alıştırma -Yapmak	Prektis
-Pray	Dua -Etmek	Prey
-Preach	Vaaz -Vermek	Priiç
-Predict	Tahmi̇n -Etmek	Predikt
-Prefer	Yeğlemek, -Terci̇h Etmek	Preför
-Present	Burada, -Mevcut, Şi̇mdi̇ki̇, Armağan	Presınt
-Press	Baskı, -Ütüleme, Basin	Press
-Press	Baskı -Yapmak, Basmak	Press
-Pressure	Basınç, -Baskı	Pıreşşur
-Pretend	Gi̇bi̇ -Gözükmek, Takli̇t Yapmak	Pretend
-Pretty	Sevi̇mli̇, -Oldukça	Pretti
-Pride	Onur, -Gurur	Prayd
-Principal	En -Önemli̇, Prensi̇p, Ana Para (Borçta)	Pırinsipıl
-Print	Basmak -(Harfler vs.), İz	Pıritn
-Prisoner	Mahkum, -Esi̇r	Prisınır
-Problem	Sorun, -Problem	Prablım
-Promise	Söz -Vermek	Pıromis
-Pronounce	Telaffuz -Etmek	Pıranauns
-Proper	Uygun, -Doğru	Pıropır
-Property	Mal, -Mülk (Bir Kişinin Sahip Olduğu), Eşya	Pıropeti
-Proposal	Plan, -Öneri̇	Pırposıl
-Propose	Planını -Açıklamak, Evli̇li̇k Tekli̇f Etmek	Purpos
-Provide	Sağlamak, -Tedari̇k Etmek	Pırovayd
-Pub	Pab, -Bi̇rahane	Pab
-Public	Halk -(Public Sector: Devlet Sektörü )	Pablik
-Publish	Basım -(Bir Yayını)	Pabliş
-Pullover	Kazak/ -Arabayı Durdurmak, Kenara Çekmek	Pullovır
-Punch	Delmek/ -Yumruklamak	Panç
-Pupil	Öğrenci̇/ -Gözbebeği̇	Püypil
-Puppy	Genç -Köpek	Pppi
-Purchase	Satın -Almak	Pörçıs
-Puzzle	Bulmaca, -Problem	Pazzıl
-Packed	Kalabalık, -Bi̇r Sürü İnsan	Pakd
-Palm	Avuç/ -Palmiye Ağacı	Polm
-Pants	Don/ -Pantolon	Pents
-Parade	Resmi̇ -Geçi̇t	Parayde
-Participate	Başkalarıyla -Bi̇rli̇kte Çalışma, Oynama, Katılma	Partisipeyt
-Passive	Pasi̇f, -Eylemsi̇z	Passiv
-Pasta	Makarna -(Hamurdan Yapılan Şeyler)	Pasta
-Paste	Beyaz -Tutkal, Macun, Hamur	Peyst
-Pastime	Hoş -İyi̇ Zaman	Pesttaym
-Path	Pati̇ka, -Küçük Yol	Pet
-Patron	Destekleyi̇ci̇ -Ki̇şi̇, Devamlı Müşteri̇	Peytron
-Pause	Mola, -Ara	Pauz
-Paw	Hayvan -Pençesi̇	Pov
-Peak	Zi̇rve, -Tepe	Piik
-Peanut	Yer -Fıstığı	Pinat
-Peasant	Çi̇ftçi̇, -Köylü Kesi̇m	Pezınt
-Pedestrian	Yaya -Gi̇den	Pedestıriyın
-Peel	Kabuk -Soymak (Meyve)	Piıl
-Pension	Emekli̇ -Maaşı	Penşın
-Peril	Büyük -Tehli̇ke	Peril
-Period	Çağ, -Devi̇r/ Adet (Hali)	Periyod
-Permanent	Devamlı, -Sürekli̇	Permınınt
-Persist	Devam -Etmek	Persist
-Petrol -Station	Benzi̇nci̇	Petrol Steyşın
-Picket	Grev -Gözcüsü, Fabri̇ka Önünde Bekleme	Pikıt
-Pillowcase	Yastık -Kılıfı	Pillovkeys
-Pincers	Kerpeten, -Kıskaç (Yengeç vs.)	Pinsırs
-Pinch	Çi̇mdi̇klemek, -Sıkıştırmak (Kapıya Vb.)	Pinç
-Pity	Acımak -(What A Pity : Ne Yazık)	Piti
-Platform	Platform/ -Yüksekçe Yer, Kürsü/ Peron	Pılatform
-Playground	Oyun -Sahası	Pleygıround
-Plum	Eri̇k/ -Bonbon şekeri	Pılam
-Plumber	Musluk -Tami̇rci̇si̇	Pılambır
-Pole	Kutup, -Di̇rek, Kazık	Poyl
-Porter	Hamal, -Kapıcı	Portır
-Postage	Posta -Ücreti̇	Postej
-Precious	Kıymetli̇, -Çok Sevi̇len	Pıreşıs
-Precisely	Kesi̇nli̇kle, -Tam Manasıyla	Pıreysli
-Preserve	Korumak, -Konserve Yapmak	Perserv
-Primarily	Ana -Olarak	Pıraymerili
-Primary	Önceleri̇, -Eski̇den/ Ana, İlk Okul	Praymeri
-Primitive	İlkel/ -Basi̇t/ Modası Geçmi̇ş	Pirimitiv
-Promote	İlerleme, -Terfi̇ Etme, Tanıtım (Ürün vs.Satış İçin)	Pırmot
-Propeller	İleri̇ye -Yürüten Şey, Vapur, Uçak Pervanesi̇	Pıropellır
-Prosecute	Kavuşturmak, -Dava Açmak, Suçlamak	Proseküt
-Provoke	Kışkırtmak, -Kızdırmaya Neden Olmak	Pırovok
-Publicity	İlan, -Reklam, Yayımlama	Pablisiti
-Pull -Up	Aracı Durdurmak	Pull Ap
-Pulse	Nabız, -Vuruş	Puls
-Punctual	Tam -Zamanında	Pankçual
-Pure	Saf, -Temi̇z	Pür
-Purse	Küçük -El Çantası	Pörs
-Quality	Ni̇teli̇k, -Kali̇te	Kualiti
-Quarrel	Tartışmak, -Atışmak	Kuarrıl
-Question	Soru/ -Sormak	Kuesçın
-Queue	Sıra, -Kuyruk	Kü
-Quiet	Sessi̇z, -Saki̇n, Huzurlu	Kuayıt
-Quite	Hemen -Hemen, Yaklaşık Olarak	Kuayıt
-Quiz	Küçük -Test	Kuiz
-Qualified	Ehli̇yetli̇, -Kali̇fi̇ye	Kualifayd
-Quota	Kota, -Kontenjan	Kota
-Quote	Aktarma, -Söyleme	Kuot
-Race	Yarış, -Yarışmak	Reys
-Railway	Tren -Yolu	Reyılvey
-Raise	Yükseltmek, -Zam Yapmak, Yeti̇şti̇rmek	Reyz
-Range	Aralık, -Alan	Renc
-Rank	Sıra, -Rütbe, Sosyal Sınıf	Renk
-Rapid	Çabuk, -Hızlı	Rapid
-Rate	Hız, -Oran	Reyt
-Rather	Epey, -Çok Deği̇l	Radır
-Raw	Ham, -Çi̇ğ	Rav
-Razor	Ustura, -Traş Maki̇nesi̇	Reyzır
-Realize	Fark -Etmek	Realayz
-Reason	Neden, -Akil	Risın
-Receive	Almak, -Karşılamak	Resiiv
-Recent	Yakın -Zamanda Olan	Risınt
-Reception	Resmi̇ -Davet, Resepsi̇yon	Resepşın
-Recommend	Tavsi̇ye -Etmek	Rekommend
-Record	Kayıt, -Plak, Rekor	Rikord
-Recover	İyi̇leşmek, -(Kaybedilen Bir Şeyi) Bulmak	Rikovır
-Red	Kırmızı, -Kızıl	Red
-Refugee	Tehli̇keden -Kaçan, Kazazede	Refyucii
-Regard	Di̇kkat, -Düşünce, Bakmak, İnanmak	Regard
-Regret	Üzgün -Olmak, Pi̇şman Olmak	Rigret
-Regular	Düzenli̇, -Olağan	Regulır
-Reject	Kabul -Etmemek	Rijeckt
-Relation	İli̇şki̇, -Akrabalık	Rileyşın
-Relationship	İli̇şki̇, -İleti̇şi̇m	Relaşınşip
-Relative	Akraba, -Göreceli̇	Relativ
-Relax	Rahatlamak, -Gevşemek	Relaks
-Release	Serbest -Bırakmak, Gevşetmek	Reliis
-Remain	Geri̇ye -Kalmak, Yeri̇nde Durmak	Rimeyn
-Remark	Beli̇rtmek, -Açıklama	Rimark
-Remarkable	Di̇kkate -Değer	Rimerkabıl
-Remember	Unutmamak, -Anımsamak	Rimember
-Repay	Geri̇ -Ödemek	Ripey
-Replace	Yeni̇den -Yerleşti̇rmek	Repleys
-Reply	Yanıtlamak, -Yanıt	Replay
-Report	Rapor, -Rapor Etmek	Riport
-Represent	Temsi̇l -Etmek	Ripresent
-Request	Ri̇ca -Etmek, Ri̇ca	Rikuest
-Reserve	Rezerv, -Rezervasyon Yaptırmak	Reserv
-Resign	İsti̇fa -Etmek	Resayn
-Resist	Karşı -Koymak	Resist
-Respect	Saygı -Duymak	Rispekt
-Rest	Geri̇ye -Kalan	Rest
-Restaurant	Restoran, -Lokanta	Restorant
-Retire	Emekli̇ -Olmak	Ritayır
-Return	Geri̇ -Dönmek	Ritörn
-Revenge	Öç -Almak, İnti̇kam	Rivenc
-Ribbon	Kurdele, -Şeri̇t	Ribbın
-Ride	Ata -Binmek, Bi̇si̇klete Bi̇nmek	Rayd
-Ridiculous	Gülünç, -Saçma	Ridikulus
-Right	Hak, -Doğru, Hakli,. Sağ Taraf	Rayt
-Ring	Yüzük, -Halka	Ring
-Ring	Çalmak -(Zil Çalması), Telefon Etmek	Ring
-Ripe	Olgun, -Ham Deği̇l	Rayp
-Roast	Rosto, -Fırında Pi̇şi̇rmek	Rost
-Rob	Soygun -Yapmak	Rob
-Rock	Kaya, -Sallanmak	Rak
-Rope	Halat, -İp	Rop
-Rose	Gül, -Pembe	Ros
-Row	Sıra, -Gürültü	Rov
-Row -(v)	Kürek Çekmek	Rov
-Royal	Krali̇yete -Ai̇t	Royıl
-Rub	Sürmek, -Sürtmek, Ovmak	Rab
-Rubbish	Çöp, -Saçma	Rabbiş
-Rule	Yönetmek, -Kural	Rul
-Ruler	Kural -Koyucu, Yöneti̇ci̇, Cetvel	Rulır
-Run	Koşmak, -Çalıştırmak (Fabrika, Şirket vs.)	Ran
-Runaway	Kaçak, -Kontrol Dışı (Runaway Increase In Prices)	Ranavey
-Rush	Çabuk -Davranmak	Raş
-Railing	Bahce -Parmaklıkları	Reyling
-Ram	Koç, -Vurmak, Toslamak	Rem
-Rash	Hızlı, -Acele, Çi̇l	Reş
-Rear	Yeti̇şti̇rmek -(İnsan, Kuş, Bitki), Arka, Arka Taraf	Riır
-Recession	Duraklama, -Geri̇leme, Ekonomi̇de Durgunluk	Riseşın
-Recipe	Yemek -Tari̇fi̇	Resipi
-Reconcile	Uzlaşma, -Anlaşma Yapmak	Rekonsayıl
-Referendum	Referandum, -Halk Oylamasi	Referandım
-Refreshments	Sandvi̇ç, -Tost, İçecek (Gar, İstasyon Gibi Yerlerde)	Rifreşmınts
-Register	Kütük, -Si̇ci̇l, Kayıt, (Register Post: Taahhütlü Mektup)	Recistır
-Regulation	Yönetmeli̇k, -Yasa	Reguleyşın
-Relate	Anlatmak, -Nakletmek (Formal Tell)	Rileyt
-Relevant	Bağıntılı, -Konuyla İli̇şki̇li̇	Relıvınt
-Resent	Hoşlanmamak, -Kızmak	Risent
-Reside	Oturmak, -İkamet Etmek	Risayd
-Resident	Bölgede -Yaşayan, Oturan	Residınt
-Respond	Cevap -Vermek	Rispond
-Restore	Geri̇ -Verme, Yeni̇den Kullanıma Açma	Ristor
-Reverse	Ters, -Arka	Rivers
-Revise	Tekrar -Gözden Geçi̇ri̇p Düzeltmek	Rİvays
-Rubber	Silgi, -lastik	Rabbır
-Rug	Küçük -Halı, Ki̇li̇m	Rag
-Ruin	Harabe, -Yıkım Mahvetme	Ruin
-Sail	Yelken -Açmak	Seyıl
-Scientist	Bilim -Adamı	Saytinst
-Serve	Hizmet -Etmek	Sörv
-She	O -(Kadın)	Şi
-Should	Zorunda -Olmak	Süld
-Since	-den -Beri	Sins
-Sing	Şarkı -Söylemek	Sing
-Sister	Kız -Kardeş	Sistır
-Something	Bir -Şey	Samting
-Son	Erkek -Çocuk	San
-Space	Uzay, -Boşluk	Sıpeys
-Stand	Ayakta -Durmak	Sıtend
-Stood	Ayakta -Durmuş	Sıtuud
-Suffix	Son -Ek	Safiks
-Suggested	Tavsiye -Edilmiş	Sacestıd
-Suppose	Tahmin -Yürütmek	Sıppos
-Sweet	Tatlı, -Sevimli	Sıviit
-Syllabus	Ders -Programı	Sillabus
-Take -(v)	Almak	Teyk
-Test -(v)	Denemek	Test
-They	Onlar -(İnsan)	Dey
-Though	-e -Rağmen	Dou
-Took	Almak -(Geçmiş Zaman)	Tuuk
-Toward	-e -Doğru	Tıvord
-Uncle	Dayı, -Amca	Ankıl
-Under	Altta, -Alta	Andır
-Underclothes	İç -Çamaşırı	Andırkılotes
-Uniform	Üni̇forma, -Tek Ti̇p	Yuniform
-Union	Sendi̇ka, -Bi̇rleşme	Yuniyon
-Universe	Kainat, -alem	Yunivers
-Unlikely	Az -İhti̇malle	Anlaykli
-Unlock	Ki̇li̇di̇ -Açmak	Anlok
-Until	Kadar -(Belli Bir Zamana Kadar)	Antil
-Upstairs	Üst -Kat, Yukarısı	Apsıteirs
-Up -to date	Bugüne Kadar	Ap to deyt
-Upward	Yukarıya -Doğru	Apvard
-Urge	Dürtme, -(Israr Ederek ) Yaptırma ,Zorlamak	Örc
-Use	Kullanım/ -Fonksi̇yon	Yus
-Use -(v)	Kullanmak	Yus
-Undergo	Katlanmak, -Çekmek, Bi̇r Olayın Olması	Andırgo
-Underline	Yazının, -Keli̇meni̇n Altını Çi̇zmek	Andırlayn
-Unfair	Adi̇l -Olmayan	Anfeyır
-Unit	Bi̇ri̇m, -1-9 Arasındaki̇ Sayılar	Yunit
-Up -To You	Sana Kalmış, Nasıl İstersen (It is Up To You)	Ap To Yu
-Upside-down	Tepetaklak, -Ters Dönmek	Apsayd-davn
-Urban	Şehi̇rsel, -Kente Ai̇t (Urban Life : Şehirsel Yaşam)	Arbın
-Vain	Gereksi̇z, -Boşuna	Veyn
-Variety	Fark, -Çeşi̇tli̇li̇k, Çeşi̇t	Varayeti
-Various	Deği̇şi̇k, -Çeşi̇tli̇	Veriyous
-Vehicle	Taşıt -Aracı (Kamyon, Tır , Araba V.B )	Viyakıl
-Very	Çok, -Tam	Veri
-Veto	Veto, -Veto Etmek	Vito
-Victim	Kurban, -Kazazede	Viktım
-Victory	Utku, -Zafer, Yengi̇	Viktori
-View	Görünüm, -Manzara	Viyüv
-Violent	Kaba -Kuvvet Kullanan, Şi̇ddet	Vaylınt
-Vision	Görüş, -İmge	Vijın
-Visit	Zi̇yaret -Etmek	Visit
-Visitor	Zi̇yaretçi̇, -Konuk	Visitır
-Vocabulary	Keli̇me -Dağarcığı	Vokabulari
-Vote	Oy -Vermek, Oy	Vot
-Voyage	Deni̇z -Yolculuğu	Voyec
-Vulgar	Kaba, -İlkel	Valgır
-Vacuum -Cleaner	Elektri̇k Süpürgesi̇	Vakuum Kılinır
-Vicious -Circle	Kısır Döngü	Vişıs Saykıl
-Victimize	Kurban -Etmek (Grubun Suçunu Bir Kişiye Yüklemek.)	Viktimayz
-Vital	Çok -Önemli̇	Vaytıl
-Vowel	Sesli̇ -Harf (A,E,I) Gibi	Vavıl
-Vulnerable	Zayıf, -Korumasız	Valnırıbıl
-Was	Olmak -(Geçmiş)	Vas
-Went	Gitmek -(Geçmiş)	Vent
-Were	Olmak -(Çoğul, Geçmiş)	Vör
-When?	Ne -Zaman?	Ven
-Wife	Eş -(Kadın)	Vayf
-Wonder	Merak -Etmek	Vandır
-Xenophobia	Yabancı -Düşmanlığı	Zenofobia
-Zip -Code	Posta Kodu	Zip Kod
-Zodiac	Zodyak, -burçlar	Zodiyak
-Zoo	Hayvanat -Bahçesi	Zuu
-Age	Yaş, -Çağ	Eyc
-Ask	Sormak, -İstemek	Esk
-Awe	Huşu, -Korku	Av
-Bin	Çöp -kutusu	Bin
-Boy	Erkek -çocuk	Boy
-Buy	Satın -almak	Bay
-Fix	Tamir -etmek	Fiks
-Gym	Spor -salonu	Cim
-Him	Onu -(Erkek)	Him
-His	Onun -(Erkek)	His
-Ill	Hasta -olmak	İl
-Let	İzin -vermek	Let
-Lie	Yalan -söylemek	Lay
-Nod	Başını -sallamak	Nad
-Old	Yaşlı, -Eski	Old
-Owe	Borçlu -olmak	Ov
-Pen	Dolma -kalem	Pen
-Pet	Evcil -hayvan	Pet
-Pin	Toplu -iğne	Pin
-She	O -(Kadın)	Şi
-Son	Erkek -evlat	San
-Toe	Ayak -parmağı	To
-Zoo	Hayvanat -bahçesi	Zuu
-Best	En -iyi	Best
-Both	İkisi -de	Both
-Cook	Yemek -pişirmek	Kuuk
-Deny	İnkar -etmek	Dinay
-Each	Her -biri	İç
-Fall -(v)	Düşünmek	Foll
-Flat	Apartman -dairesi	Fılet
-Girl	Kız -çocuk	Görl
-Hate	Nefret -etmek	Heyt
-Have	Sahip -olmak	Hev
-Help	Yardım -etmek	Help
-Host	Ev -sahibi	Host
-Hurt	Can -yakmak	Hört
-Kick	Tekme -atmak	Kik
-Lead	Öncülük -etmek	Liid
-Like -(v)	Sevmek	Layk
-Look -(v)	Bakmak	Lak
-Love	Aşk, -Sevgi	Lav
-Mean	Anlamına -gelmek	Miin
-Mood	Ruh -hali	Muud
-Move	Hareket -etmek	Muuv
-Need	İhtiyacı -olmak	Niid
-Once	Bir -zamanlar	Vans
-Palm	Avuç -içi	Palm
-Pick	Toplamak, -Seçmek	Pik
-Play -(v)	Oynamak	Pıley
-Rent -(v)	Kiralamak	Rent
-Save -(v)	Kaydetmek	Seyv
-Suit	Takım -elbise	Suit
-Till	-e -kadar	Till
-Tiny	Çok -küçük	Teyni
-Vary	Farklılık -göstermek	Veyri
-Warm	Ilık, -sıcak	Varm
-When	Ne -zaman	Ven
-Wife	Eş -(Kadın)	Vayf
-Admit	İtiraf -etmek	Edmit
-Adopt	Evlat -edinmek, benimsemek	Edopt
-Allow	İzin -vermek	Alov
-Apply	Başvurmak, -uygulamak	Epılay
-Alive	Hayatta, -Canlı	Elayv
-Build	Kurmak, -İnşa etmek	Build
-Claim	İstek, -İddia	Kıleym
-Cross	Çarpı, -haç	Kıros
-Cause -(v)	Sebep olmak	Kaus
-Check -(v)	Kontrol etmek	Çek
-Claim -(v)	İddia etmek, talep etmek	Kıleym
-Clean -(v)	Temizlemek	Kıliin
-Clear	Açık, -belirgin	Kıliir
-Close -(v)	Kapatmak	Kılos
-Doubt -(v)	Şüphe etmek	Daubt
-Dream	Hayal, -rüya	Dırim
-Earth	Toprak, -Dünya	Örth
-Event	Olay, -etkinlik	İvent
-Enjoy	Tadını -çıkarmak	İncoy
-Exist	Var -olmak	Egzist
-Fight -(v)	Dövüşmek	Fayt
-Force -(v)	Zorlamak	Fors
-Fault	Suç, -hata	Folt
-Guess -(v)	Tahmin etmek	Gess
-Judge	Hakim, -Yargıç	Ca
-Judge -(v)	Yargılamak	Cac
-Laugh -(v)	Gülmek	Lauf
-Limit -(v)	Sınırlamak	Limit
-Lunch	Öğle -yemeği	Lanç
-Light	Açık, -hafif	Layt
-Minor	Reşit -olmayan kimse	Maynır
-March	Mart -(Ay)	Març
-Noise	Gürültü, -Ses	Noiyz
-Order	Düzen, -Sıra, Sipariş	Ordır
-Offer	Teklif -etmek	Ofır
-Order	Sipariş -etmek	Ordır
-Phase	Evre, -aşama	Feys
-Place -(v)	Yerleştirmek	Pleys
-Press -(v)	Basmak	Pıres
-Plain	Yalın, -süssüz	Pıleyn
-Right	Haklı, -sağ	Rayt
-Route	Rota, -güzergah	Rout
-Raise -(v)	Yetiştirmek, yükseltmek, büyütmek	Reyz
-Reach -(v)	Ulaşmak	Riiç
-Relax -(v)	Rahatlamak	Rilaks
-Serve	Hizmet -etmek	Serv
-Share -(v)	Paylaşmak	Şeyr
-Sleep -(v)	Uyumak	Sıliip
-Start -(v)	Başlamak	Sıtart
-Space	Boşluk, -Uzay	Sıpeys
-State	Devlet, -Eyalet, Durum	Sıteyt
-Still	Hala, -yine de, ama	Sıtil
-Tight	Dar, -sıkı	Tayt
-Trust -(v)	Güvenmek	Tırast
-Visit -(v)	Ziyaret etmek	Visit
-Uncle	Amca, -dayı	Ankıl
-Waste	İsraf, -atık	Veyst
-Watch -(v)	İzlemek	Vaç
-Worry	Endişe -etmek	Vorri
+Answer "Ensvır" - Cevap
+Art - Sanat
+Abandon "Ebendın" - Terk Etmek, Bırakmak
+Ability "Ebiliti" - Hüner, Beceri, Kabiliyet
+About "Ebaut" - Hakkında, Aşağı Yukarı, Üzere
+Above - Üstünde, Üzerine "Ebov"
+Abroad - Yurt Dışında, Yurtdışı	"Ebrood"
+Absence - Bulunmama, Yokluk	"Ebsıns"
+Absolute - Mutlak, Salt, Kesin	"Ebsulut"
+Absolutely - Mutlaka, Kesinlikle "Ebsulutli"
+Abuse - Suistimal Etmek, Kötüye Kullanmak "Ebus"
+Accept - Kabul Etmek "Eksept"
+Access - Giriş, Erişim, Erişmek	"Ekses"
+Accident - Kaza	"Eksidınt"
+Accompany - Eşlik Etmek	"Ekompani"
+Accomplish - Başarıyla Tamamlamak, Sonuçlandırmak "Ekkompliş"
+Account - Hesap	"Ekkaunt"
+Accurate - Kesin, Doğru	"Ekkurıt"
+Accuse - Suçlamak, İtham Etmek "Ekkuus"
+Achieve - Elde Etmek, Başarmak "Eçiv"
+Achievement - Başarı "Eçivmınt"
+Acknowledge - Kabul Etmek, Kabullenmek	Eknovlıç
+Acquire - Edinmek, Elde Etmek	Ekkuayır
+Across - Karşıya, Karşı karşıya	Ekross
+Act - Davranmak, Hareket Etmek, Eylem	Ekt
+Action - Aksiyon, Eylem	Ekşın
+Active - Etkin, Aktif	Ektiv
+Activity - Faaliyet, Etkinlik, Aktivite	Ektiviti
+Actual - Gerçek	Akşual
+Actually - Aslında	Akşulliy
+Adapt - Uymak, Uyarlamak, Adapte Olmak	Adapt
+Add - Eklemek, İlave Etmek	Edd
+Addition - İlave, Ek	Addişın
+Adequate - Yeterli, Münasip	Edekueyt
+Adjust - Ayarlamak	Edjast
+Adjustment - Ayarlama, Ayar	Edjastmınt
+Administration - İdare, Yönetim	Edministirayşın
+Administrator - İdareci, Yönetici	Edministreytır
+Admire - Hayran Olmak, Beğenmek	Edmayır
+Admiration - Hayranlık	Edmirayşın
+Admission - Kabul, İtiraf	Edmişşın
+Admit - Kabul Etmek, İtiraf Etmek	Edmit
+Adolescent - Ergen	Adolesen
+Adopt - Evlat Edinmek, Benimsemek	Adopt
+Adult - Yetişkin	Edult
+Advance - İlerlemek, Avans, Geliştirmek	Edvens
+Advanced - İleri, Gelişkin	Edvensd
+Advantage - Avantaj, Fayda	Edventıç
+Adventure - Macera, Serüven	Edvençur
+Advertising - Reklamcılık, Reklam	Edvırtaysing
+Advice - Tavsiye, Nasihat	Edvays
+Advise - Nasihat Etmek, Öğütlemek	Edvays
+Adviser - Müşavir, Danışman	Edvaysır
+Advocate - Müdafaa Etmek, Savunmak	Edvokıt
+Affect - Etkilemek	Affekt
+Afford - Parası Yetmek	Efford
+Afraid - Korkmuş, Ürkmüş	Efreyd
+Afternoon - Öğleden Sonra	Aftırnuun
+Again - Tekrar, Yeniden	Egeyn
+Against - Karşı, Aykırı	Egeynst
+Age - Yaş, Çağ	Eyc
+Agency - Ajans, Acente	Eycınsi
+Agenda - Gündem, Ajanda	Ajenda
+Agent - Ajan, Temsilci	Eycınt
+Aggressive - Kavgacı, Agresif	Agressiv
+Ago - Evvel, Önce	Ego
+Agree - Aynı Fikirde Olmak, Anlaşmak, Katılmak	Egrii
+Agreement - Anlaşma, Mutabakat	Egriimınt
+Agriculture - Tarım, Ziraat	Agrikulçır
+Ahead - İleride, İleri	Eheed
+Aid - Yardım Etmek, Yardım	Eyd
+Aim - Amaçlamak, Amaç, Hedef	Eym
+Aircraft - Uçak, Hava Taşıtı	Eyırkıraft
+Airline - Havayolu	Eyırlayn
+Airport - Havalimanı	Eyırport
+Alcohol - Alkol	Alkohöl
+Alive - Canlı	Elayv
+All - Tüm, Hepsi	All
+Alliance - Antlaşma, İttifak	Ellayıns
+Allow - İzin Vermek	Ellov
+Ally - Müttefik	Ellay
+Almost - Hemen Hemen, Neredeyse	"Olmost"
+Alone - Yalnız	"Elon"
+Along - Boyunca "Elong"
+Already - Zaten, Halihazırda	Alredi
+Also - Ayrıca	Olso
+Alternative - Alternatif	Altörnativ
+Although - Rağmen	Oldoh
+Always - Her Zaman, Daima	Alveys
+Amazing - Şaşırtıcı	Emeyzing
+Among - Arasında, Arasına	Emong
+Amount - Meblağ, Tutar	Emount
+Analysis - Analiz, Tahlil	Enalaysis
+Analyze - Analiz Etmek, Incelemek	Enalayz
+Ancient - Antik	Enşınt
+And - Ve	End
+Anger - Öfke, Hiddet	Engır
+Angle - Açı	Engıl
+Angry - Kızgın, Sinirli	Engri
+Animal - Hayvan	Enimal
+Anniversary - Yıldönümü	Enivörsari
+Announce - Duyurmak, Anons Etmek	Ennouns
+Annual - Senelik, Yıllık	Enual
+Another - Öbür, Başka	Enadır
+Anticipate - Beklemek, Ummak	Antisipeyt
+Anxiety - Endişe, Kaygı	Engzayıti
+Anybody - Kimse, Hiç Kimse	Enibadi
+Anymore - Artık	Enimoor
+Anyone - Hiç Kimse, Kimse	Enivan
+Anyway - Neyse, Her Neyse	Enivey
+Anywhere - Her Yer, Herhangi Bir Yer	Eniveer
+Apart - Ayrı	Epart
+Apartment - Daire	Apartmınt
+Apparent - Görünür, Aşikar	Epiyırınt
+Apparently - Belli ki, Anlaşılan, Görünüşte	Epiyırıntli
+Appeal - Başvurmak, Temyiz, Cazibe	Eppiyıl
+Appear - Belli Olmak, Görünmek	Eppiyır
+Appearance - Görünüş	Eppirıns
+Apple - Elma	Eppıl
+Application - Başvuru, Uygulama	Epplikeyşın
+Apply - Başvurmak, Uygulamak	Epplay
+Appoint - Atamak	Epoynt
+Appointment - Randevu, Atama, Tayin	Epoyntmınt
+Appreciate - Değerini Artırmak, Beğenmek	Epprışıeyt
+Approach - Yanaşmak, Yaklaşım	Eprooç
+Appropriate - Münasip, Uygun	Eproprieyt
+Approval - Tasvip, Onay	Epruvıl
+Approve - Kabul Etmek, Beğenmek, Onaylamak	Epruuv
+Approximately - Takriben, Aşağı Yukarı	Eproksimıtli
+Architect - Mimar	Arkitekt
+Area - Alan, Bölge	Eriya
+Argue - Tartışmak	Argü
+Argument - Argüman, Sav	Argümınt
+Arm - Kol	Arm
+Armed - Ateşli, Silahlı	Armd
+Army - Ordu	Armi
+Around - Sularında, Etrafında, Çevresinde	Eround
+Arrange - Ayarlamak, Düzenlemek	Erreyinç
+Arrangement - Düzenleme, Ayarlama	Erreyinçmınt
+Arrest - Tutuklamak	Errest
+Arrival - Gelmek, Geliş, Varış	Errayvıl
+Arrive - Varmak, Ulaşmak	Errayv
+Article - Makale	Artikıl
+Aside - Bertaraf, Ayrı	Esayd
+Ask - Sormak, İstemek	Esk
+Asleep - Uyuyan, Uyuşuk	Asliip
+Aspect - Hal, Görünüş, Yön	Aspekt
+Assault	Saldırmak, Saldırı	Essalt
+Assert - İleri Sürmek, İddia Etmek	Assört
+Assess - Değer Biçmek	Essess
+Assessment - Değerlendirme	Essesmınt
+Asset - Varlık	Asset
+Assign - Atamak, Tahsis Etmek	Essayn
+Assignment - Atama, Görevlendirme	Essaynmınt
+Assist - Yardım Etmek	Assist
+Assistance - Yardım	Assistıns
+Assistant - Yardımcı, Asistan	Assistınt
+Associate - Birleştirmek, İlişkilendirmek	Assoşieyt
+Association - Birlik, Dernek	Assoşieyşın
+Assume - Farzetmek, Varsaymak	Essum
+Assumption - Farzetme, Varsayım	Essumpşın
+Assure - Garanti Etmek	Aşşur
+Atmosphere - Atmosfer	Atmosfiyır
+Attach - Eklemek, İliştirmek	Etteç
+Attack - Saldırmak, Saldırı	Ettek
+Attempt - Girişimde Bulunmak	Etempt
+Attend - Katılmak	Etend
+Attention - İlgi, Özen, Dikkat	Etenşın
+Attitude - Tavır, Tutum	Etdituud
+Attorney - Avukat	Attörni
+Attract - Cezbetmek	Etrekt
+Attractive - Çekici, Cazibeli	Etrektiv
+Attribute - Bağlamak, Atfetmek, Dayandırmak	Etribüt
+Audience - Kitle, İzleyici, Seyirci	Odiıns
+Author - Yazar	Outır
+Authority - Otorite, Yetki	Otoriti
+Available - Müsait, Mevcut, Uygun	eveylıbıl
+Average - Ortalama	Evrıç
+Avoid - Kaçınmak, Önlemek	Evoyd
+Award - Ödül	Evord
+Aware - Farkında, Haberdar	Eveer
+Awareness - Farkındalık, Farkında Olma	Eveernıss
+Away - Uzak, Uzakta	Evey
+Awful - Berbat	Avful
+Baby - Bebek	Beybi
+Back - Arka	Bek
+Backpack - Sırt Çantası	Bekpek
+Bad	Kötü - Bed
+Badly - Kötü Bir Şekilde	Bedli
+Bag - Çanta	Beg
+Bake - Pişirmek	Beyk
+Balance - Denge	Belıns
+Bald - Kel	Bold
+Ball - Top	Bol
+Band - Müzik Grubu	Bend
+Bank - Banka	Benk
+Barely - Zar Zor	Berli
+Basic - Esas, Temel	Beyzik
+Basically - Temelde, Esasen, Aslında	Beyzikıli
+Basket - Sepet	Beskıt
+Bathroom - Banyo	Bethruum
+Battery - Pil	Bettıri
+Battle - Savaş	Bettıl
+Beach - Plaj, Sahil, Kumsal	Biiç
+Bean - Fasulye	Biin
+Bear - Ayı	Beer
+Beautiful - Güzel	Biyutiful
+Beauty - Güzellik	Biyuti
+Because - Çünkü	Bikaz
+Become - Olmak, Haline Gelmek	Bikam
+Bed - Yatak	Bed
+Bedroom - Yatak Odası	Bedrum
+Beer - Bira	Biyır
+Before - Önce	Bifor
+Begin - Başlamak	Bigin
+Beginning - Başlangıç	Biginnin
+Behavior - Davranış, Tavır, Hal	Biheyviyır
+Behind - Arkada, Arkasında	Bihaynd
+Belief - İnanç	Bilif
+Believe - İnanmak	Biliv
+Belong - Ait Olmak	Bilon
+Below - Aşağısında	Bilov
+Belt - Kemer	Belt
+Benefit - Fayda	Benefit
+Best - En İyi	Best
+Bet - İddaa, İddiaya Girmek	Bet
+Better - Daha İyi	Bettır
+Between - Arasında	Bitviin
+Big - Büyük	Big
+Bill - Fatura, Senet	Bill
+Bird - Kuş	Börd
+Birth - Doğum	Bört
+Birthday - Doğum Günü	Börtdey
+Bite - Isırmak, Lokma	Bayt
+Blame - Ayıplamak, Suçlamak	Bleym
+Blanket - Battaniye	Blenkıt
+Blind - Kör	Blaynd
+Blood - Kan	Blad
+Blue - Mavi	Blu
+Body - Vücut	Badi
+Book - Kitap	Buk
+Border - Sınır, Hudut, Kenar	Bordır
+Borrow - Ödünç Almak	Borrov
+Boss - Patron	Bos
+Bottle - Şişe	Badıl
+Bowl - Kase, Tas	Bovl
+Box	Kutu - Boks
+Boyfriend - Erkek Arkadaş, Sevgili	Boyfrend
+Brain - Beyin	Breyn
+Brand - Marka	Brend
+Bread - Ekmek	Bred
+Break - Kırmak	Breyk
+Breakfast - Kahvaltı	Brekfıst
+Breast - Göğüs	Brest
+Breathe - Nefes Almak	Briiid
+Bridge - Köprü	Briç
+Bright - Parlak	Brayt
+Broken - Bozuk, Kırık	Brokın
+Brother - Erkek Kardeş	Bradır
+Brown - Kahverengi	Bravn
+Brush - Fırça, Fırçalamak	Braş
+Budget - Bütçe	Bacıt
+Build - İnşa Etmek	Biylt
+Building - Bina	Biyıldıng
+Bullet - Mermi	Bulıt
+Burn - Yakmak, Yanmak	Börn
+Bus	Otobüs - Bas
+Business - Iş	Bisinız
+Busy - Meşgul	Büzi
+Button - Düğme, Buton	Battın
+Buy - Satın Almak	Bay
+Buyer - Alıcı	Bayır
+Cabbage - Lahana	Kebıç
+Cage - Kafes	Keyc
+Call off - İptal etmek	Kal of
+Captive - Esir	Keptiv
+Captor - Esir alan	Keptor
+Carpet - Halı	Karpıt
+Car - Araba	Kar
+Cat - Kedi	Ket
+Castle - Kale	Kesıl
+Cave - Mağara	Keyv
+Census - Nüfus Sayımı	Sensıs
+Charm - Alımlı, Sevimli	Çarm
+Chair - Sandalye	Çeyır
+Chin - Çene	Çin
+Child - Çocuk	Çayld
+Clash - Anlaşmazlık	Kleş
+Clay - Kil, çamur	Kley
+Clerk - Yazıcı, katip	Klörk
+Cliff - Uçurum	Klif
+Cling - Yapışmak, Sarılmak	Kling
+Cloud - Bulut	Klaud
+Cloudy - Bulutlu	Klaudi
+Clue - İpucu	Klu
+Cold - Nezle	Kold
+Collide - Çarpışmak	Kolayd
+Combat - Dövüş	Kombet
+Comment - Yorum	Komment
+Commitment - Vaat, Taahhüt, Bağlılık	Kommitmınt
+Compatible - Uygun, Münasip	Kompetibıl
+Compliant - İtaatkar	Komplayınt
+Conflict - Çatışma, Kavga, Zıtlık	Konflikt
+Cool - Serin, Havalı	Kuul
+Cow - İnek	Kav
+Count - Saymak	Kaunt
+Crow - Karga	Krov
+Create - Yaratmak	Krieyt
+Creative - Yaratıcı	Krieytiv
+Creation - Yaratık	Krieyşın
+Cute - Sevimli	Küyut
+Daring - Cesur	Dering
+Dawn - Şafak, Tan	Davn
+Deaf - Sağır	Def
+Dear - Sevgili, Değerli	Diyır
+Decay - Çürümek, Bozulmak	Dikey
+Decline - Reddetmek, Geri Çevirmek	Diklayn
+Defect - Defo, Özür	Difect
+Deletion - Silmek	Dilişın
+Delightful - Hoş, Güzel	Dilaytful
+Delusion - Aldatma	Deluşın
+Demolition - Yıkma, Tahrip	Demolişın
+Dent - Çöküntü, Göçük	Dent
+Dependable - Güvenilir, Emin	Dipendıbıl
+Deportation - Sürgün	Deporteyşın
+Deprive - Yoksun Bırakmak Diprayv
+Desperately - Umutsuzca	Despırıtli
+Destiny - Kader	Destini
+Dilemma - İkilem	Dilemma
+Dinner - Akşam Yemeği	Dinnır
+Disgrace - Utanç, Ayıp	Disgreys
+Disrupt - Bozmak	Disrapt
+Divorce - Boşanma	Divors
+Dizziness - Baş Dönmesi	Dizinıs
+Doctor - Doktor, Hekim	Daktır
+Dog - Köpek	Dog
+Drawing - Çizim	Droving
+Dream - Hayal	Drim
+Edit - Düzenlemek	Edit
+Economy - Ekonomi	Ekonomi
+Enormous - Muazzam, Kocaman	İnormıs
+Ear - Kulak	İyır
+Earth - Toprak, Dünya	Örth
+Earing - Küpe	İyıring
+Earn - Para Kazanmak	Örn
+Except - Haricinde	Eksept
+Expect - Ümit etmek	Ekspekt
+Exile - Sürgün	Egzayıl
+Exit - Çıkış, Çıkmak	Egzıt
+Eastern - Doğuya ait, Doğu	İstörn
+Effective - Etkili	Efektiv
+Efficient - Verimli	Efişınt
+Emergency - Acil	İmörcınsi
+Elephant - Fil	Elefınt
+Emotion - Duygu	İmoşın
+Entertain - Eğlendirmek	Entırteyn
+Equal - Eşit, Denk	İkuul
+Essay - Rapor, Makale	Essey
+Eye - Göz	Ay
+Eyelash - Kirpik	Ayleş
+Favorable - Olumlu	Feyvırıbıl
+Fish - Balık	Fiş
+Fire - Ateş	Fayır
+Frosh - Kurba	Froş
+Fall - Düşmek	Foll
+Feasible - Mümkün, Yapılabilir	Fisibıl
+Fabric - Kumaş	Febrik
+Fugitive - Kaçak	Fujitiv
+Facilitate - Kolaylaştırmak	Fesilieyt
+Fade - Rengi Solmak, Silinmek	Feyd
+Fun - Eğlence	Fan
+Fur - Kürk	Für
+Fulfill - Tatmin etmek	Fulfil
+Fence - Çit, Parmaklık	Fens
+Fertile - Bereketli	Förtayıl
+Fever - Ateş	Fivır
+Faint - Bayılmak	Feynt
+Flu	Grip - Flu
+Fierce - Şiddetli, Hiddetli	Fiyırs
+Finger - Parmak	Fingır
+Flimsy - Dayanıksız, Çürük	Flimsi
+Flee - Kaçmak, Kaçırmak	Flii
+Flavor - Tat, Lezzet	Fleyvır
+Flat - Daire	Flet
+Flaw - Kusur	Flov
+Flawless - Kusursuz	Flovlıs
+Fortunate - Minnettar, Müteşekkir	Forçunıt
+Gain - Kazanmak	Geyn
+Gap - Boşluk, Fark	Gep
+Generous - Cömert	Jenırıs
+Genius - Deha, Dahi	Jiniyıs
+Genuine - Hakiki, Gerçek	Cenuin
+Get - Elde Etmek, Almak	Get
+Guest - Misafir, Konuk	Gest
+Guard - Korumak	Gard
+Grow - Büyümek	Grov
+Groom - Damat	Gruum
+Grocery - Store	Market	Groseri Stor
+Gravity - Yer çekimi	Greviti
+Grateful - Minnettar	Greytful
+Grass - Çimen, Ot	Gras
+Glove - Eldiven	Glov
+Glory - Görkem, Şan	Glori
+Globe - Küre, Dünya	Glob
+Glow - Parıltı	Glov
+Glad - Memnun	Gled
+God - Tanrı	God
+Good - İyi	Guud
+Give - Vermek	Giv
+Gift - Armağan, Yetenek	Gift
+Ghost - Hayalet	Gost
+Hair - Saç	Heyır
+Honey - Bal	Hani
+Honor - Onur	Anır
+Half - Yarım	Half
+High - Yüksek, Zirve	Hay
+Hammer - Çekiç	Hemır
+Hand - El	Hend
+Handy - Kullanışlı	Hendi
+Handsome - Yakışıklı	Hendsım
+Hang - Asmak	Heng
+Happy - Mutlu	Heppi
+Harbor - Liman	Harbır
+Hat - Şapka	Het
+Hate - Nefret	Heyt
+Hear - Duymak	Hiyır
+Head - Baş	Hed
+Headache - Baş ağrısı	Hedeyk
+Heat - Isı, Sıcaklık	Hiit
+Hello - Merhaba	Hello
+Help - Yardım Etmek	Help
+Herb - Bitki, Ot	Örb
+Here - Burada	Hiyır
+Howl - Uluma	Hovl
+Hawk - Şahin	Havk
+Health - Sağlık	Helt
+Hit - Vurmak	Hit
+Hill - Tepe	Hill
+Have - Sahip Olmak	Hev
+Information - Bilgi	İnformeyşın
+Inform - Bilgilendirmek	İnform
+Injured - Yaralı	İnjurd
+Image - Görüntü, İmge	İmıç
+Impossible - İmkansız	İmpossibıl
+Insane - Deli, Kaçık	İnseyn
+Incorrect - Yanlış	İnkorrekt
+Invade - İstila Etmek	İnveyd
+Introduction - Giriş	İntrodakşın
+Iron - Demir	Ayrın
+Invent - İcat Etmek	İnvent
+Invisible - Görünmez	İnvizibıl
+Inhale - Nefes Almak, İçine Çekmek	İnheyl
+Inheritance - Miras	İnheritıns
+Innovation - Yenilik	İnoveyşın
+Inquisitive - Meraklı	İnkuisitiv
+Insect - Böcek	İnsekt
+Impulse - Dürtü, Güdü	İmpuls
+Inception - Başlangıç	İnsepşın
+Invade - İstila etmek	İnveyd
+Invention - İcat	İnvenşın
+Invasion - Akın, Saldırı, İstila	İnveyşın
+Invincible - Yenilmez	İnvinsibıl
+Involved - Karmaşık	İnvolvd
+Ironic - Alaylı, Alaycı	Ayronik
+Intelligent - Zeki	İntellicınt
+Jacket - Ceket	Jekıt
+Jacuzzi - Jakuzi	Jakuzi
+Jam - Reçel	Jem
+Jar - Kavanoz	Jar
+Jeans - Kot	Jiins
+Jeep - Jip	Jiip
+Jet - Jet Jet
+Jet engine - Jet Motoru	Jet Encin
+Jewelry - Takı	Jüvülri
+Jogging - Koşmak	Jogging
+Jukebox - Müzik Kutusu	Jukbaks
+Junk - Ivır Zıvır	Jank
+Keep - Korumak, Tutmak, Devam Etmek	Kiip
+Key - Anahtar	Kiy
+Kick - Tekme, Tekmelemek	Kik
+Kid - Çocuk, Ufaklık, Dalga Geçmek	Kid
+Kill - Öldürmek	Kil
+Kind - İyi, Nazik, Çeşit	Kaynd
+King - Kral	King
+Kingdom - Krallik	Kingdım
+Kiss - Öpücük, Öpmek	Kiss
+Kitchen - Mutfak	Kiçın
+Knee - Di̇z, Di̇z Çökmek	Nii
+Knife - Bıçak	Nayf
+Knock - Vurmak (Kapıya Vurmak)	Nak
+Knot - Düğüm, Düğüm Atmak	Not
+Know - Bi̇lmek	Nov
+Knowledge - Bi̇lgi̇	Novlıç
+Kidnap - Zorla Kaçırmak (İnsan, Hayvan Vb.)	Kidnep
+Kidney - Böbrek	Kidni
+Kin - Ai̇le, Akraba	Kin
+Knight - Si̇lahşör, Şovalye, Satrançta At	Nayt
+Knob - Tokmak, Tutacak	Nob
+Labor - İş (Elle Yapılan Zor İş), İş Gücü	Leybır
+Lack - Eksi̇kli̇k	Lek
+Ladder - Merdi̇ven	Ledır
+Lady - Hanımefendi̇	Leydi
+Lake - Göl	Leyk
+Lamb - Kuzu, Kuzu, Koyun Eti̇	Lemb
+Lame - Topal, Sıkıcı	Leym
+Lamp - Lamba	Lemp
+Land - Kara, Arazi	Lend
+Land - İni̇ş Yapmak, Konmak (Uçak vs..)	Lend
+Language - Di̇l ( Yabancı Dil vs.)	Lenguıç
+Large - Geni̇ş	Larç
+Last - Son, Sonunda, Geçmi̇ş	Last
+Last - Devam Etmek, Sürmek, Yeterli̇ Olmak	Last
+Late - Geç, Sonu (Late September: Eylül Sonu vs.)	Leyt
+Laugh - Gülmek	Laf
+Laundry - Yıkanacak Çamaşır, Çamaşırhane	Landri
+Law - Yasa, Kanun, Hukuk	Lov
+Lawyer - Avukat	Lovyır
+Lay - Yatmak	Ley
+Lazy - Tembel	Leyzi
+Legal - Yasal	Ligıl
+Lead - Önderli̇k Etmek, Önde Gi̇tmek, Yol Göstermek	Liid
+Leader - Önder, Li̇der	Lidır
+Leadership - Önderli̇k	Lidırşip
+Leaf - Yaprak	Liif
+Lean - Yaslanmak	Liin
+Learn - Öğrenmek	Lörn
+Least - En Az	Liist
+Leather - Deri̇	Ledır
+Leave - Terk Etmek	Liiv
+Left - Sol	Left
+Leg - Bacak	Leg
+Legacy - Mi̇ras	Legasi
+Lemon - Li̇mon	Lemın
+Lend - Ödünç Vermek	Lend
+Lens - Lens	Lens
+Less - Daha Az	Less
+Lesson - Ders	Lessın
+Let - Bırakmak Let
+Letter - Mektup, Harf	Lettır
+Letter - Box	Mektup Kutusu,Posta Kutusu	Letır Baks
+Level - Düzey, Sevi̇ye	Levıl
+Liberal - Li̇beral	Libral
+Liberty - Serbest Olmak	Libırti
+Library - Ki̇taplık, Kütüphane	Laybreri
+License - Li̇sans (Ehliyet vs. )	Laysıns
+Lie - Yalan, Yalan Söylemek	Lay
+Lie - Yatmak	Lay
+Life - Yaşam, Hayat	Layf
+Lift - Asansör, Yukarı Kaldırmak	Lift
+Light - Işık, Açık (Renklerde), .Hafi̇f	Layt
+Like - Hoşlanmak, Gi̇bi̇	Layk
+Likely - Büyük Olasılıkla	Laykli
+Line - Çi̇zgi̇, Satır, Sıra	Layn
+Link - Bi̇rleşti̇rmek	Link
+Lip - Dudak	Lip
+Liquid - Sıvı	Likuid
+List - Li̇ste	List
+Listen - Di̇nlemek	Lisın
+Little - Küçük	Litıl
+Live - Canli	Liv
+Live - Yaşamak	Liv
+Life - Hayat	Layf
+Living - Yaşam Bi̇çi̇mi̇	Livin
+Load - Yük, Yüklemek ,Si̇lah Doldurmak	Lod
+Local - Bölgesel, Yerel	Lokıl
+Lock - Ki̇li̇tlemek, Ki̇li̇t	Lok
+Long - Uzun	Long
+Look - Bakmak, Bakış	Luk
+Loose - Bol, Bağsız	Luus
+Lose - Kaybetmek	Luus
+Loss - Kayıp, Zarar	Loss
+Lot - Mülk	Lat
+Loud - Yüksek Sesli̇	Laud
+Love - Sevgi, Aşk	Lav
+Lovely - Sevi̇mli̇	Lavli
+Low - Alçak, Düşük	Lov
+Lower - Aşağıya İndi̇rmek	Lovır
+Luck - Şans	Lak
+Lucky - Şanslı	Laki
+Luggage - Vali̇z, Yük	Laggıç
+Lunch - Öğle Yemeği̇	Lanç
+Lung - Akci̇ğer	Lang
+Luxury - Lüks	Lakjıri
+Label - Eti̇ket	Leybıl
+Laboratory - Laboratuvar	Leboratori
+Ladle - Kepçe (Yemek)	Leydıl
+Lamppost - Sokak Lambasi	Lemppost
+Lampshade - Abajur	Lempşeyd
+Lane - Dar Yol, Şeri̇t (Otoyolda vs.)	Leyn
+Lash - Kamçı / Bi̇rşeyi̇ Ani̇ Ve Hızlı Sallamak	Leş
+Launch - Bi̇r Şeye Başlamak / Roket Fırlatmak	Launç
+Laundry - basket	Çamaşır Sepeti̇	Laundri-beskıt
+League - Bi̇rli̇k, Li̇g	Liig
+Leak - Akıntı,, Sızmak	Liik
+Lease - Beli̇rli̇ Bi̇r Zaman İçi̇n Ki̇ralama	Liis
+Lecture - Ders, Konferans Vermek	Lekçur
+Length - Uzunluk	Lengt
+Lettuce - Salata, Kıvırcık	Letus
+Lever - Kaldıraç, Mani̇vela	Levır
+Liar - Yalancı	Layır
+Lick - Yalamak	Lik
+Lid - Kapak	Lid
+Lighter - Çakmak	Laytır
+Limit - Hat, Sınır,, Li̇mi̇t	Limit
+Liquidate - Tasfi̇ye Etmek	Likuideyt
+Literature - Edebi̇yat	Litıriçur
+Litter - Çöp, Dağınıklık	Litır
+Liver - Karaci̇ğer	Livır
+Loaf - Bütün Ekmek / Vakti̇ Boşa Geçi̇rmek	Loaf
+Loan - Ödünç Vermek, Borç Vermek, Borç	Lon
+Lobster - Istakoz	Labstır
+Locate - Kurmak,Yerleşti̇rmek	Lokeyt
+Lonely - Yalnız, Ki̇msesi̇z	Lonli
+Lorry - Kamyon	Lorri
+Loyal - Sadık	Loyıl
+Loyalty - Sadakat, Baglilik	Loyılti
+Memorial - Bi̇r Ki̇şi̇ni̇n Anısına Yapılan Yapıt	Memoriyıl
+Memorize - Ezberlemek	Memorayz
+Memory - Hafiza	Memori
+Men - Adamlar	Men
+Mend - Tami̇r Etmek	Mend
+Mental - Zi̇hi̇nsel	Mentıl
+Mention - Bahsetmek	Menşın
+Merchant - Tüccar	Merçınt
+Mercy - Merhamet	Mörsi
+Mere - Sadece, Yalnızca	Miyır
+Merry - Mutlu	Meri
+Mess - Kargaşa, Dağınıklık	Mes
+Message - Mesaj	Mesıç
+Meter - Ölçek	Mitır
+Method - Metot	Metıd
+Meter - Metre	Mitır
+Mice - Fareler	Mays
+Middle - Orta	Midıl
+Midnight - Gece Yarısı	Midnayt
+Military - Askeri̇	Militıri
+Milk - Süt	Milk
+Mill - Deği̇rmen	Mil
+Mimic - Takli̇t Etmek (Birini)	Mimik
+Mind - Akıl	Maynd
+Mind - Bi̇ri̇ne Bakmak, Dert Etmek	Maynd
+Mine - Beni̇m/ Maden Ocağı/ Mayın	Mayn
+Minimum - En az	Minimım
+Minister - Bakan/ Büyükelçi̇	Ministır
+Minor - Önemsi̇z, Ufak, Mi̇nör	Maynır
+Minority - Azınlık	Maynoriti
+Minus - Eksi̇	Maynıs
+Minute - Daki̇ka	Minüt
+Mirror - Ayna	Mirrır
+Miss - Özlemek/ Kaçırmak/ Kayıp	Miss
+Miss - Kadın	Miss
+Missile - Füze, Fırlatılan Ci̇si̇m	Missil
+Mission - Özel Bi̇r Görev İçi̇n Yolculuk, Mi̇syon	Mişın
+Mistake - Hata	Misteyk
+Misunderstand - Yanlış Anlamak	Misandırstend
+Mix - Karıştırmak, Karışmak	Mix
+Model - Model (Model Araba, Manken vs.)	Madıl
+Moderate - Ilımlı	Madırıt
+Modern - Modern, Çağdaş	Madırn
+Modest - Alçakgönüllü, Ilımlı	Modıst
+Moment - An	Momınt
+Monday - Pazartesi̇	Mandey
+Money - Para	Mani
+Monkey - Maymun	Manki
+Month - Ay (Takvim Ayı)	Mant
+Moon - Ay	Muun
+More - Daha Fazla	Mor
+Morning - Sabah	Mornin
+Mosque - Cami̇	Mosk
+Most - En Çok	Most
+Mother - Anne	Madır
+Motor - Motor	Motır
+Mountain - Dağ	Mauntın
+Mouse - Fare	Mause
+Mouth - Ağız	Mauth
+Move - Hareket Etmek, Etti̇rmek	Muuv
+Movement - Hareket	Muvmınt
+Much - Çok (Miktarca)	Maç
+Mud - Çamur	Mad
+Murder - Ci̇nayet	Mördır
+Music - Müzi̇k	Myuzik
+Must - Zorunluluk	Mast
+My - Beni̇m	May
+Mystery - Esrar, Bi̇li̇nmezli̇k	Mistıri
+Machine - Maki̇ne	Maşin
+Machine - gun	Maki̇neli̇ Tüfek	Maşin-gan
+Mad - Deli̇	Med
+Madam - Madam, Bayan	Medam
+Magic - Büyü	Mecik
+Mail - Posta	Meyıl
+Main - Ana, Esas	Meyn
+Make - Yapmak, Çeşi̇t	Meyk
+Make - up	Makyaj, Uydurmak	Meyk-ap
+Male - Erkek	Meyl
+Man - Adam	Men
+Manage - Yönetmek, Kontrol Etmek	Menıc
+Management - Yöneti̇m, İdare	Menıcmınt
+Manager - Yöneti̇ci̇, Menajer	Menıcır
+Manner - Tavır, Görgü	Mennır
+Many - Bi̇rçok	Meni
+Map - Hari̇ta	Mep
+March - Marş, Yürüyüş, Mart (Ayı)	Març
+Mark - İşaretlemek, İşaret	Mark
+Market - Pazar, Pi̇yasa	Markıt
+Marry - Evlenmek	Merri
+Marvelous - Şahane, Hari̇ka	Marvılıs
+Mask - Maske	Mesk
+Mass - Kütle, Ki̇tle, Kalabalık	Mess
+Master - Uzman, Şef, Sahi̇p, Hoca	Mastır
+Match - Uymak, Uyuşmak/ Maç/ Ki̇bri̇t	Meç
+Material - Malzeme, Kumaş	Matiyırıl
+Matter - Mesele, Önemli̇ Olmak	Meddır
+May - Mayıs, (Maybe: Belki̇)	Mey (Meybi)
+Me - Bana, Beni	Mi
+Meal - Yemek	Miyıl
+Mean - Anlamına Gelmek / Ci̇mri̇	Miin
+Mean - Ortalama	Miin
+Meaning - Anlam	Miining
+Means - Sti̇l, Yol/ Yardım/ Para	Miins
+Meantime - Bu Arada	Miintaym
+Meanwhile - Bu Arada, Aynı Anda	Miinvayl
+Measure - Ölçü	Mejır
+Meat - Et	Miit
+Mechanic - Mekani̇k	Mekanik
+Medal - Madalya	Medıl
+Medicine - İlaç, Tıp	Medısın
+Meet - Buluşmak, Karşılamak	Miit
+Meeting - Toplantı, Mi̇ti̇ng	Miiting
+Melody - Ezgi̇, Melodi̇	Melodi
+Melon - Kavun	Melın
+Melt - Eri̇mek	Melt
+Member - Üye	Membır
+Memorable - Unutulmayacak	Memorıbıl
+Memorandum - Not	Memorandum
+Magazine - Magazi̇n	Megazin
+Magnet - Mıknatıs	Megnıt
+Magnificent - hti̇şam	Megnifisınt
+Magnifying - glass	Büyüteç	Megnifaying-glass
+Maid - Kadın Hi̇zmetçi̇	Meyd
+Maintain - Bakım Onarım/ Eski̇ Hali̇nde Koruma/ Destekleme	Meynteyn
+Major - Büyük, Önemli̇, Bi̇nbaşı (Orduda)	Meyjır
+Majority - Çoğunluk	Majoriti
+Maniac - Manyak	Meniak
+Manual - El İle Yapılan	Menual
+Manufacture - Üretmek (Fab. vs.)	Manufekçır
+Margin - Marj, Katkı	Marjin
+Marmalade - Marmelat	Marmaleyd
+Massacre - Katli̇am, Katli̇am Yapmak	Massekır
+Massive - Çok Büyük, Ağır	Massiv
+Mat - Hasır, Paspas	Met
+Mate - Arkadaş	Meyt
+Mathematics - Matemati̇k	Mathemetiks
+Mattress - Yatak, Sedi̇r	Metrıss
+Mature - Olgun, Ergi̇n/ Vadesi̇ Gelen (Ödeme)	Maçur
+Maturity - Olgunluk Zamanı/ Vade Zamanı	Maçuriti
+Maximum - Maksi̇mum, Azami̇	Meksimum
+Meadow - Çayır, Mera	Medov
+Mechanic - Maki̇ni̇st, Mekani̇k	Mekınik
+Medical - Tıbbi	Medikıl
+Merely - Sadece, Ancak	Miirli
+Merge - Bi̇rleşerek Kaybolma, Konsoli̇dasyon (Şirket, Devlet)	Merç
+Merit - Hak Etmek/ Değmek	Merit
+Might - Kuvvet, Kudret, Belki̇ (Might Be: Az İhtimali.)	Mayt
+Microphone - Mi̇krofon	Maykrofon
+Mild - Hafi̇f, Yumuşak, Ilık	Mayld
+Millet - Dari	Millıt
+Millionaire - Mi̇lyoner	Millyiner
+Mince - Kıyma (Et.), Kıymak	Mins
+Miracle - Muci̇ze	Mirıkıl
+Miser - Hasi̇s, Ci̇mri̇	Misır
+Miserable - Sefi̇l	Misırıbıl
+Misery - Sefalet	Misıri
+Mislay - Nereye Koyduğunu Unutmak	Misley
+Mobile - Oynak, Hareketli̇	Mobayl
+Moisture - Nem	Moysçur
+Mole - Köstebek/ Vücuttaki̇ Ben	Mol
+Monument - Anıt, Abi̇de	Monumınt
+Mood - Mi̇zaç, Ruh Hali̇	Muud
+Moral - Ahlak	Morel
+Morale - Moral	Morel
+Mortgage - İpotek	Mortgıç
+Mosquito - Si̇vri̇si̇nek	Moskito
+Moss - Yosun (Nemli Yerlerde Oluşan)	Mos
+Motion - Hareket, Önerme	Moşın
+Motive - Moti̇vlenmek, Güdü	Motiv
+Mud-guard - Çamurluk	Mad-gard
+Multiply - Çarpmak (Matematik)/ Çoğalmak	Multiplay
+Murmur - Mırıldanmak/ Uğultu	Murmur
+Muscle - Pazu, Kas	Masıl
+Museum - Müze	Müziyum
+Mushroom - Mantar	Maşruum
+Muslim - Müslüman	Maslim
+Mustard - Hardal	Mastırd
+Mute - Sesi̇z, Di̇lsi̇z	Müyt
+Mutter - Mırıldanmak, Kısık Sesle Söylenmek	Mattır
+Mutual - Müşterek, İki̇ Taraflı	Müçul
+Nail - Tırnak/ Çi̇vi̇	Neyl
+Name - İsi̇m	Neym
+Narrow - Dar	Nerrov
+Nation - Ulus	Neyşın
+National - Ulusal	Neyşınıl
+Native - Yerli̇	Neytiv
+Natural - Doğal	Neturıl
+Nature - Doğa	Neyçur
+Near - Yakın	Niyır
+Necessary - Gerekli̇	Nesessari
+Necessity - Gerekli̇li̇k	Nessesiti
+Neck - Boyun, Ense	Nek
+Necklace - Kolye	Neklıs
+Need - Gereksi̇ni̇m, İhti̇yaç	Niid
+Needle - İğne, Şi̇ş	Niidıl
+Neglect - İhmal Etmek	Niglekt
+Neighbour - Komşu	Neybır
+Neither - Hi̇çbi̇ri̇	Niidır
+Neither…Nor… - Ne O..Ne Öbürü	Niidır…Nor…
+Nephew - Yeğen (Erkek)	Neffiyuv
+Nerve - Sinir	Nörv
+Nervous - Gergin	Nörvıs
+Nest - Yuva, Kuş Yuvası	Nest
+Net - Ağ	Net
+Never - Hi̇çbi̇r Zaman, Asla	Nevır
+Nevertheless - Buna Rağmen, Hala, Ama	Nevırdıless
+New - Yeni̇	Nüv
+News - Haber	Nüvs
+Newspaper - Gazete	Nüvspeypır
+Next - En Yakın, Bi̇r Sonraki̇, Ertesi̇	Nekst
+Nice - Hoş	Nays
+Niece - Yeğen (Kız)	Niiis
+Night - Gece	Nayt
+No - Hayır	No
+Noble - Soylu	Nobıl
+Nobody - Hi̇ç Ki̇mse	Nobadi
+Noise - Gürültü	Noys
+None - Hi̇çbi̇ri̇si̇	Nan
+Noon - Öğle Zamanı	Nuun
+Normal - Normal	Normıl
+North - Kuzey	Nort
+Nose - Burun	Nos
+Not - Deği̇l	Nat
+Nothing - Hi̇çbi̇r Şey	Nating
+Notice - Di̇kkati̇ni̇ Çekmek	Notis
+November - Kasım	Novembır
+Now - Şi̇mdi̇	Nav
+Nowadays - Bugünlerde	Navadeys
+Nowhere - Hi̇çbi̇r Yer	Nover
+Nuisance - Sıkıntı, Dert	Nuisans
+Number - Sayı, Numaralandırmak	Nambır
+Nurse - Hemşi̇re, Hasta Bakıcı	Nörs
+Nut - Kuruyemi̇ş (Fındık vs.)	Nat
+Napkin - Peçete	Nepkin
+Narrate - Anlatmak, Söylemek	Nerreyt
+Nasty - Pi̇s, Kötü Kokulu, Hoş Olmayan	Nasti
+Naughty - Yaramaz	Nouhti
+Negotiate - Görüşmek, Müzakere	Negoşieyt
+Network - Şebeke, Çalışma Ağı	Netvörk
+Nickname - Takma isim, Lakap	Nikneym
+Nightmare - Kabus	Naytmer
+Nominate - Aday Göstermek	Nomineyt
+Nonsense - Saçmalık	Nasens
+Novel - Roman	Novıl
+Nude - Çıplak	Nüyd
+Oak - Meşe	Oğk
+Obey - Söz Di̇nlemek, İtaat Etmek	Obey
+Object - İti̇raz Etmek	Objekt
+Object - Nesne, Obje/ Amaç	Objekt
+Observation - Gözlem	Obvırseyşın
+Observe - Gözlem Yapmak	Obsörv
+Obvious - Aşi̇kar	Obviyus
+Occupation - Meslek, İşgal	Okkupeyşın
+Occupy - İşgal Etmek, Oturmak, Kaplamak	Okkupay
+Ocean - Okyanus	Oşın
+October - Eki̇m (Ayı)	Oktobır
+Of - İyeli̇k Eki̇, -Nin	Of
+Off - Yok Olma/, Eksi̇lmek/ Kapatmak	Off
+Offend - Kızdırmak, İnci̇tmek (Birini)	Offend
+Offer - Tekli̇f Etmek	Offır
+Office - Ofi̇s	Offis
+Officer - Subay, Memur	Offisır
+Official - Resmi̇	Offişıl
+Often - Sık Sık	Ofın
+Oil - Yağ/ Petrol	Oyl
+Old - Eski̇, Yaşlı	Old
+On - Üzeri̇nde	On
+Once - Bi̇r Kez, Bi̇r An Önce	Vans
+One - Bi̇r	Van
+Only - Sadece, Yalnızca	Onli
+Open - Açık, Açmak	Opın
+Operate - Çalışmak	Opıreyt
+Operation - Operasyon, Ameli̇yat	Opıreyşın
+Operator - Operatör	Opereytır
+Opinion - Düşünce	Opiniyın
+Opportunity - Fırsat	Oppurtuniti
+Opposite - Zıt, Ters	Oppozit
+Optimist - İyi̇mser	Optimist
+Or - Veya	Or
+Orange - Portakal/ Turuncu	Orınç
+Order - Emi̇r, Si̇pari̇ş, Düzen, Sıra	Ordır
+Ordinary - Sıradan, Normal	Ordineri
+Organ - Org, Organ, Organi̇zasyon, Kuruluş	Orgın
+Organize - Organi̇ze Etmek	Orgınayz
+Origin - Köken, Ori̇ji̇n	Orijin
+Other - Di̇ğer	Adır
+Otherwise - Başka Türlü, Yoksa, Aksi̇ Takti̇rde	Adırvays
+Our - Bi̇zi̇m	Aur
+Out - Dışarı	Aut
+Out-of-date - Modası Geçmi̇ş, Eski̇	Aut-of-deyt
+Outside - Dışarı	Autsayd
+Oven - Fırın	Ovın
+Over - Üstünde/ Bi̇tmek	Ovır
+Overcome - Üstesi̇nden Gelmek	Ovurkam
+Owe - Borçlu Olmak	Ov
+Own - Sahi̇p Olmak	Ovn
+Owner - Sahi̇p	Ovnır
+Ox - Boğa	Oks
+Occur - Olmak	Okkür
+Odd - Tuhaf, Acayip	Odd
+Old-fashioned - Eski̇ Moda	Old-feşhınd
+Onion - Soğan	Anyın
+Option - Seçme, Seçenek	Opşın
+Oral - Sözlü	Orıl
+Orbit - Yörünge	Orbit
+Original - Orji̇nal, İlk, Yeni̇	Orijinıl
+Owl - Baykuş	Ovl
+Oxygen - Oksi̇jen	Aksijın
+Oyster - İsti̇ri̇dye	Oystır
+Pack - Paketlemek	Pek
+Packet - Paket	Pekıt
+Page - Sayfa	Peyj
+Pain - Acı, Ağrı	Peyn
+Painful - Ağrılı	Peynful
+Paint - Boyamak, Boya	Peynt
+Painter - Ressam, Boyacı	Peyntır
+Pair - Çi̇ft	Peer
+Palace - Saray	Pelıs
+Pale - Soluk, Solgun (Renk)	Peyl
+Pan - Tava	Pen
+Panic - Pani̇k	Penik
+Paper - Kağıt, Gazete, Evrak, Ki̇mli̇k	Peypır
+Paradise - Cennet	Peradayz
+Paragraph - Paragraf	Peragref
+Parcel - Parça	Parsel
+Parent - Anne-Baba, Ebeveyn	Perınt
+Park - Park, Park Etmek	Park
+Parliament - Parlamento	Parlament
+Parrot - Papağan Perrıt
+Part - Kısım, Bölüm, Ayırmak Part
+Particular - Yalnız, Özel, Ti̇ti̇z	Partikülır
+Partner - Ortak, Partner	Partnır
+Part - time - Yarım Gün	Part-taym
+Party - Parti̇	Partiy
+Pass - Geçmek, Geçi̇rmek	Pess
+Passage - Pasaj	Pessıc
+Passenger - Yolcu	Pessıncır
+Passport - Pasaport	Pessport
+Password - Parola	Pessvord
+Past - Geçmi̇ş	Pest
+Patience - Sabır	Peyşıns
+Patient - Sabırlı	Peyşınt
+Patient - Hasta	Peyşınt
+Pathetic - Acınası	Patetik
+Pay - Ödemek	Pey
+Payment - Ödeme	Peymınt
+Peace - Barış	Piis
+Pear - Armut	Peer
+Peculiar - Gari̇p	Pekuliar
+Pen - Tükenmez Kalem	Pen
+Penalty - Ceza	Penalti
+Pencil - Kurşun Kalem	Pensıl
+People - Halk, İnsanlar	Piipıl
+Pepper - Bi̇ber	Peppır
+Per - Her	Pör
+Perfect - Kusursuz, Yetki̇n	Pörfekt
+Perform - Çalışmak, Uygulamak	Pörform
+Performance - Performans	Pörformıns
+Perhaps - Belki̇	Pörheps
+Permission - İzi̇n	Pörmişşın
+Permit - İzi̇n Vermek, İzi̇n Kağıdı	Pörmit
+Person - Ki̇şi̇	Pörsın
+Personality - Ki̇şi̇li̇k	Pörsınaliti
+Persuade - İkna Etmek	Pörsuveyd
+Petrol - Petrol	Petrol
+Phone - Telefon	Fon
+Photo - Fotoğraf	Foto
+Piano - Pi̇yano	Piyeno
+Pick - Seçmek	Pik
+Picture - Resi̇m	Pikçur
+Pie - Pasta, Turta	Pay
+Piece - Parça	Piis
+Pig - Domuz	Pig
+Pigeon - Güverci̇n	Pijın
+Pile - Üst Üste Koymak	Payl
+Pill - Hap	Pill
+Pilot - Pi̇lot	Paylot
+Pin - Toplu İğne	Pin
+Pine - Çam	Payn
+Pineapple - Ananas	Paynepıl
+Pink - Pembe	Pink
+Pipe - Boru/ Pi̇po/ Flüt	Payp
+Pity - Acımak (What A Pity: Ne Yazık)	Piti
+Place - Yer/ Yerleşti̇rmek	Pleys
+Plain - Açık, Ortada, Düz	Pleyn
+Plan - Plan, Planlama	Plen
+Plane - Uçak	Pleyn
+Planet - Gezegen	Plenıt
+Plant - Bitki	Plent
+Plantation - Eki̇li̇ Yer	Plenteyşın
+Plate - Tabak	Pleyt
+Play - Oynamak/ Çalmak (Bir Müzik Aletini)	Pley
+Player - Oyuncu, Çalan	Pleyır
+Pleasant - Keyi̇fli̇, Zevkli̇	Plezınt
+Please - Lütfen	Pliis
+Pleasure - Zevk	Pleşur
+Plenty - Çok Sayıda	Plenti
+Plough - Toprağı Sürmek	Ploh
+Plug - Fi̇ş, Banyo Tıkacı	Plag
+Plus - Artı	Plas
+Pocket - Cep	Pakıt
+Poem - Şi̇i̇r	Pom
+Poet - Şair	Poet
+Poetry - Şi̇i̇rler, Şai̇rli̇k, Şi̇i̇rle İlgi̇li̇	Poetri
+Point - Nokta, Uç	Poynt
+Poison - Zehi̇r	Poysın
+Police - Poli̇s	Poliis
+Policy - Poli̇çe, Yöneti̇m İlkesi̇, Poli̇ti̇ka	Polisi
+Polish - Parlatmak	Poliş
+Polite - Ki̇bar	Polayt
+Political - Poli̇ti̇k	Politikıl
+Politician - Poli̇ti̇kacı, Poli̇ti̇kayla Uğraşan	Politişın
+Politics - Poli̇ti̇k	Politiks
+Pool - Havuz	Puul
+Poor - Fakir, Yoksul, Zavallı	Poor
+Population - Nüfus	Populeyşın
+Pork - Domuz Eti̇	Pork
+Port - Li̇man	Port
+Portrait - Portre	Portreyt
+Position - Durum, Konum	Pozişın
+Positive - Emi̇n, Kesi̇n/ Olumlu	Positiv
+Possess - Sahi̇p Olmak	Posses
+Possession - Sahi̇pli̇k	Posseşın
+Possibility - Olasılık	Possibiliti
+Possible - Olası, Mümkün	Possibıl
+Post - Posta, İşaret, Devri̇ye Gezmek (Askerde)	Post
+Postpone - Ertelemek	Postpon
+Pot - Tencere	Pot
+Potato - Patates	Poteyto
+Pour - Dökmek, Akıtmak	Poor
+Powder - Toz, Pudra	Povdır
+Power - Güç	Povır
+Powerful - Güçlü	Povırful
+Practical - Prati̇k	Praktikıl
+Practice - Alıştırma	Prektis
+Practise - Alıştırma Yapmak	Prektis
+Praise - Övmek	Preyz
+Pray - Dua Etmek	Prey
+Preach - Vaaz Vermek	Priiç
+Predict - Tahmi̇n Etmek	Predikt
+Prefer - Yeğlemek, Terci̇h Etmek	Preför
+Pregnant - Hami̇le	Pregnınt
+Prejudice - Önyargı	Prejudis
+Preparation - Hazirlik	Prepereyşın
+Prepare - Hazırlamak	Preper
+Presence - Varlık	Presıns
+Present - Burada, Mevcut, Şi̇mdi̇ki̇, Armağan	Presınt
+Present - Sunmak	Presınt
+President - Başkan	Presidınt
+Press - Baskı, Ütüleme, Basin	Press
+Press - Baskı Yapmak, Basmak	Press
+Pressure - Basınç, Baskı	Pıreşşur
+Pretend - Gi̇bi̇ Gözükmek, Takli̇t Yapmak	Pretend
+Pretty - Sevi̇mli̇, Oldukça	Pretti
+Prevent - Korumak	Prevent
+Previous - Önceki̇	Pıreviyus
+Price - Fi̇yat	Prays
+Pride - Onur, Gurur	Prayd
+Priest - Rahi̇p	Prayst
+Prince - Prens	Prins
+Principal - En Önemli̇, Prensi̇p, Ana Para (Borçta)	Pırinsipıl
+Print - Basmak (Harfler vs.), İz	Pıritn
+Prison - Hapi̇s	Prıisın
+Prisoner - Mahkum, Esi̇r	Prisınır
+Private - Özel	Pırayvıt
+Prize - Ödül	Pırayz
+Probable - Olası	Pırababıl
+Problem - Sorun, Problem	Prablım
+Produce - Üretmek	Prodüys
+Product - Ürün	Prodokt
+Production - Üreti̇m	Prodakşın
+Profession - Meslek	Profeşın
+Profit - Kar	Pırofit
+Programme - Program	Progrem
+Progress - Geli̇şme	Pırogress
+Promise - Söz Vermek	Pıromis
+Pronounce - Telaffuz Etmek	Pıranauns
+Proof - Kanıt	Puruuf
+Proper - Uygun, Doğru	Pıropır
+Property - Mal, Mülk (Bir Kişinin Sahip Olduğu), Eşya	Pıropeti
+Proposal - Plan, Öneri̇	Pırposıl
+Propose - Planını Açıklamak, Evli̇li̇k Tekli̇f Etmek	Purpos
+Protect - Korumak	Pırotekt
+Protest - Protesto	Pırotest
+Proud - Gururlu	Pıraud
+Prove - Kanıtlamak	Pıruv
+Provide - Sağlamak, Tedari̇k Etmek	Pırovayd
+Pub - Pab, Bi̇rahane	Pab
+Public - Halk (Public Sector: Devlet Sektörü )	Pablik
+Publish - Basım (Bir Yayını)	Pabliş
+Pull - Çekmek	Pull
+Pullover - Kazak/ Arabayı Durdurmak, Kenara Çekmek	Pullovır
+Pump - Pompa	Pamp
+Punch - Delmek/ Yumruklamak	Panç
+Punish - Cezalandırmak	Puniş
+Pupil - Öğrenci̇/ Gözbebeği̇	Püypil
+Puppet - Kukla	Ppıt
+Puppy - Genç Köpek	Pppi
+Purchase - Satın Almak	Pörçıs
+Purple - Mor	Pörpıl
+Purpose - Amaç	Purpos
+Push - İtmek	Puş
+Put - Koymak	Put
+Puzzle - Bulmaca, Problem	Pazzıl
+Pyjamas - Pi̇jama	Piyjamas
+Packed - Kalabalık, Bi̇r Sürü İnsan	Pakd
+Palm - Avuç/ Palmiye Ağacı	Polm
+Panel - Panel	Penıl
+Pants - Don/ Pantolon	Pents
+Parachute - Paraşüt	Paraşuut
+Parade - Resmi̇ Geçi̇t	Parayde
+Participate - Başkalarıyla Bi̇rli̇kte Çalışma, Oynama, Katılma	Partisipeyt
+Passive - Pasi̇f, Eylemsi̇z	Passiv
+Pasta - Makarna (Hamurdan Yapılan Şeyler)	Pasta
+Paste - Beyaz Tutkal, Macun, Hamur	Peyst
+Pastime - Hoş İyi̇ Zaman	Pesttaym
+Path - Pati̇ka, Küçük Yol	Pet
+Patrol - Devri̇ye	Patrol
+Patron - Destekleyi̇ci̇ Ki̇şi̇, Devamlı Müşteri̇	Peytron
+Pause - Mola, Ara	Pauz
+Paw - Hayvan Pençesi̇	Pov
+Pea - Bezelye	Pii
+Peach - Şeftali̇	Piiç
+Peak - Zi̇rve, Tepe	Piik
+Peanut - Yer Fıstığı	Pinat
+Pearl - İnci̇	Pörl
+Peasant - Çi̇ftçi̇, Köylü Kesi̇m	Pezınt
+Pedal - Pedal	Pedıl
+Pedestrian - Yaya Gi̇den	Pedestıriyın
+Peel - Kabuk Soymak (Meyve)	Piıl
+Penknife - Çakı	Pennayf
+Pension - Emekli̇ Maaşı	Penşın
+Perfume - Parfüm	Parfyum
+Peril - Büyük Tehli̇ke	Peril
+Period - Çağ, Devi̇r/ Adet (Hali)	Periyod
+Permanent - Devamlı, Sürekli̇	Permınınt
+Persist - Devam Etmek	Persist
+Pessimist - Kötümser	Pesimist
+Petrol - Station	Benzi̇nci̇	Petrol Steyşın
+Philosophy - Fi̇zolofi̇	Filozofi
+Physical - Fi̇zi̇ksel	Fiyzikıl
+Picket - Grev Gözcüsü, Fabri̇ka Önünde Bekleme	Pikıt
+Pickle - Turşu	Pikıl
+Pillow - Yastık	Pillov
+Pillowcase - Yastık Kılıfı	Pillovkeys
+Pincers - Kerpeten, Kıskaç (Yengeç vs.)	Pinsırs
+Pinch - Çi̇mdi̇klemek, Sıkıştırmak (Kapıya Vb.)	Pinç
+Pioneer - Öncü	Payoniir
+Pistol - Tabanca	Pistıl
+Pity - Acımak (What A Pity : Ne Yazık)	Piti
+Plastic - Plasti̇k	Pılestik
+Platform - Platform/ Yüksekçe Yer, Kürsü/ Peron	Pılatform
+Playground - Oyun Sahası	Pleygıround
+Plum - Eri̇k Bonbon şekeri	Pılam
+Plumber - Musluk Tami̇rci̇si̇	Pılambır
+Pole - Kutup, Di̇rek, Kazık	Poyl
+Porcelain - Porselen	Porseleyn
+Porter - Hamal, Kapıcı	Portır
+Postage	 - Posta Ücreti̇	Postej
+Poverty	 - Faki̇rli̇k	Pıroverti
+Precious  - Kıymetli̇, Çok Sevi̇len	Pıreşıs
+Precisely - Kesi̇nli̇kle, Tam Manasıyla	Pıreysli
+Prescription - Reçete	Perskıripşın
+Preserve - Korumak, Konserve Yapmak	Perserv
+Primarily - Ana Olarak	Pıraymerili
+Primary	- Önceleri̇, Eski̇den/ Ana, İlk Okul	Praymeri
+Primitive - İlkel/ Basi̇t/ Modası Geçmi̇ş	Pirimitiv
+Priority - Önceli̇k	Pırayoriti
+Privilege - İmti̇yaz	Pırivilic
+Process - İşlem	Pırosess
+Prohibit - Yasaklamak	PIrohibit
+Promote	- İlerleme, Terfi̇ Etme, Tanıtım (Ürün vs.Satış İçin)	Pırmot
+Promotion - Terfi̇	Pıromoşın
+Propeller - İleri̇ye Yürüten Şey, Vapur, Uçak Pervanesi̇	Pıropellır
+Proportion - Orantı	Pırporşın
+Prosecute - Kavuşturmak, Dava Açmak, Suçlamak	Proseküt
+Proverb	- Atasözü	Pırovörb
+Provocation - Kışkırtma	Pırovakeyşın
+Provoke - Kışkırtmak, Kızdırmaya Neden Olmak	Pırovok
+Publicity - İlan, Reklam, Yayımlama	Pablisiti
+Pull Up - Aracı Durdurmak	Pull Ap
+Pulse - Nabız, Vuruş	Puls
+Pumpkin - Kabak	Pampkin
+Punctual - Tam Zamanında	Pankçual
+Pure - Saf, Temi̇z	Pür
+Purse - Küçük El Çantası	Pörs
+Pyramid	- Pi̇rami̇t	Piramid
+Quality - Ni̇teli̇k, Kali̇te	Kualiti
+Quantity - Miktar	Kuantiti
+Quarrel - Tartışmak, Atışmak	Kuarrıl
+Quarter - Çeyrek	Kuartır
+Queen - Krali̇çe	Kuiin
+Question - Soru/ Sormak	Kuesçın
+Queue - Sıra, Kuyruk	Kü
+Quick - Çabuk	Kuik
+Quiet - Sessi̇z, Saki̇n, Huzurlu	Kuayıt
+Quite - Hemen Hemen, Yaklaşık Olarak	Kuayıt
+Quiz - Küçük Test	Kuiz
+Qualified - Ehli̇yetli̇, Kali̇fi̇ye	Kualifayd
+Quota - Kota, Kontenjan	Kota
+Quote - Aktarma, Söyleme	Kuot
+Rabbit - Tavşan	Rabbit
+Race - Irk	Reys
+Race - Yarış, Yarışmak	Reys
+Radiator - Radyatör	Reydiyatır
+Radio - Radyo	Reydiyo
+Rail - Ray	Reyıl
+Railway - Tren Yolu	Reyılvey
+Rain - Yağmur	Reyin
+Raincoat - Yağmurluk	Reyinkot
+Raise - Yükseltmek, Zam Yapmak, Yeti̇şti̇rmek	Reyz
+Range - Aralık, Alan	Renc
+Rank - Sıra, Rütbe, Sosyal Sınıf	Renk
+Rapid -	Çabuk, Hızlı	Rapid
+Rare - Nadi̇r	Reyr
+Rate - Hız, Oran	Reyt
+Rather - Epey, Çok Deği̇l	Radır
+Raw - Ham, Çi̇ğ	Rav
+Razor -	Ustura, Traş Maki̇nesi̇	Reyzır
+Reach -	Eri̇şmek	Riiç
+Read - Okumak	Riid
+Ready - Hazır	Redi
+Realize - Fark Etmek	Realayz
+Really - Gerçekten	Rilli
+Reason - Neden, Akil	Risın
+Reasonable - Makul	RisiınıbIL
+Recall - Anımsamak	Rikall
+Receipt	- Makbuz	Reciipt
+Receive	- Almak, Karşılamak	Resiiv
+Recent	- Yakın Zamanda Olan	Risınt
+Reception - Resmi̇ Davet, Resepsi̇yon	Resepşın
+Recognize - Tanımak	Rekognayz
+Recommend - Tavsi̇ye Etmek	Rekommend
+Record - Kayıt, Plak, Rekor	Rikord
+Recover - İyi̇leşmek, (Kaybedilen Bir Şeyi) Bulmak	Rikovır
+Red	- Kırmızı, Kızıl	Red
+Reduce	- Azaltmak	Reduys
+Reflect	- Yansıtmak	Riflekt
+Refugee	- Tehli̇keden Kaçan, Kazazede	Refyucii
+Refuse	- Reddetmek	Refus
+Regard	- Di̇kkat, Düşünce, Bakmak, İnanmak	Regard
+Regret	- Üzgün Olmak, Pi̇şman Olmak	Rigret
+Regular	- Düzenli̇, Olağan	Regulır
+Reject	- Kabul Etmemek	Rijeckt
+Relation - 	İli̇şki̇, Akrabalık	Rileyşın
+Relationship - 	İli̇şki̇, İleti̇şi̇m	Relaşınşip
+Relative - Akraba, Göreceli̇	Relativ
+Relax	- Rahatlamak, Gevşemek	Relaks
+Release	- Serbest Bırakmak, Gevşetmek	Reliis
+Relief	- Rahatlama	Reliif
+Relieve	- Uzaklaştırmak	Reliv
+Religion - Di̇n	Relicın
+Remain	- Geri̇ye Kalmak, Yeri̇nde Durmak	Rimeyn
+Remark	- Beli̇rtmek, Açıklama	Rimark
+Remarkable	- Di̇kkate Değer	Rimerkabıl
+Remember - Unutmamak, Anımsamak	Rimember
+Remind	- Anımsatmak	Rimaynd
+Remote	- Uzak	Rimot
+Remove	- Uzaklaştırmak	Rimuv
+Rent	- Ki̇ralamak	Rent
+Repair	- Onarmak	Ripair
+Repay	- Geri̇ Ödemek	Ripey
+Repeat	- Tekrarlamak	Ripiit
+Replace	- Yeni̇den Yerleşti̇rmek	Repleys
+Replacement - Yerleşti̇rme	Replaysment
+Reply	- Yanıtlamak, Yanıt	Replay
+Report	- Rapor, Rapor Etmek	Riport
+Represent - Temsi̇l Etmek	Ripresent
+Representative - Temsi̇lci̇	Representetitiv
+Republic - Cumhuri̇yet	Ripablik
+Request	- Ri̇ca Etmek, Ri̇ca	Rikuest
+Require	- Gereksi̇nmek	Rikuayır
+Rescue	- Kurtarmak	Reskue
+Reserve	- Rezerv, Rezervasyon Yaptırmak	Reserv
+Resign	- İsti̇fa Etmek	Resayn
+Resist	- Karşı Koymak	Resist
+Respect	- Saygı Duymak	Rispekt
+Respectable - Saygıdeğer	Rispektıbıl
+Responsible - Sorumlu	Rispnonsibıl
+Rest - Di̇nlenmek	Rest
+Rest - Geri̇ye Kalan	Rest
+Restaurant - Restoran, Lokanta	Restorant
+Result - Sonuç	Risolt
+Retire - Emekli̇ Olmak	Ritayır
+Return - Geri̇ Dönmek	Ritörn
+Revenge - Öç Almak, İnti̇kam	Rivenc
+Reward - Ödül	Rivard
+Rib - Kaburga	Rib
+Ribbon - Kurdele, Şeri̇t	Ribbın
+Rice - Pi̇ri̇nç	Rays
+Rich - Zengi̇n	Riç
+Ride - Ata Binmek, Bi̇si̇klete Bi̇nmek	Rayd
+Ridiculous	 - Gülünç, Saçma	Ridikulus
+Right - Hak, Doğru, Hakli,. Sağ Taraf	Rayt
+Ring - Yüzük, Halka	Ring
+Ring - Çalmak (Zil Çalması), Telefon Etmek	Ring
+Ripe - Olgun, Ham Deği̇l	Rayp
+Rise - Yükselmek	Rays
+Risk - Ri̇sk	Risk
+Risky - Ri̇skli̇	Riski
+River - Nehi̇r	River
+Road - Yol	Rod
+Roar - Kükreme	Ror
+Roast - Rosto, Fırında Pi̇şi̇rmek	Rost
+Rob	- Soygun Yapmak	Rob
+Rock - Kaya, Sallanmak	Rak
+Role - Rol	Rol
+Roll - Yuvarlanmak	Rol
+Roof - Çatı	Ruuf
+Room - Oda	Ruum
+Root - Kök	Ruut
+Rope - Halat, İp	Rop
+Rose - Gül, Pembe	Ros
+Rough - Kaba	Rouf
+Round - Yuvarlak	Raund
+Row - Sıra, Gürültü	Rov
+Row - Kürek Çekmek	Rov
+Royal - Krali̇yete Ai̇t	Royıl
+Rub	- Sürmek, Sürtmek, Ovmak	Rab
+Rubbish - Çöp, Saçma	Rabbiş
+Rude - Kaba	Rud
+Rule - Yönetmek, Kural	Rul
+Ruler - Kural Koyucu, Yöneti̇ci̇, Cetvel	Rulır
+Rumble - Gürlemek	Rambıl
+Run	- Koşmak, Çalıştırmak (Fabrika, Şirket vs.)	Ran
+Runaway	- Kaçak, Kontrol Dışı (Runaway Increase In Prices)	Ranavey
+Rush	- Çabuk Davranmak	Raş
+Racket	- Raket	Rekıt
+Radar	- Radar	Reydar
+Railing	- Bahce Parmaklıkları	Reyling
+Ram	- Koç, Vurmak, Toslamak	Rem
+Rash - Hızlı, Acele, Çi̇l	Reş
+Rat	- Sıçan	Ret
+Rear	- Yeti̇şti̇rmek (İnsan, Kuş, Bitki), Arka, Arka Taraf	Riır
+Recession - Duraklama, Geri̇leme, Ekonomi̇de Durgunluk	Riseşın
+Recipe - Yemek Tari̇fi̇	Resipi
+Recollect - Hatırlamak	Rikolekt
+Reconcile	- Uzlaşma, Anlaşma Yapmak	Rekonsayıl
+Reconciliation - Uzlaşma	Rekonsilayşın
+Referee	Hakem - Riferii
+Referendum - Referandum, Halk Oylamasi	Referandım
+Refill - Doldurmak	Rifil
+Refreshments - Sandvi̇ç, Tost, İçecek (Gar, İstasyon Gibi Yerlerde)	Rifreşmınts
+Refrigerator - Buzdolabı	Refıricıratır
+Region - Bölge	Ricın
+Register - Kütük, Si̇ci̇l, Kayıt, (Register Post: Taahhütlü Mektup)	Recistır
+Regulation - Yönetmeli̇k, Yasa	Reguleyşın
+Relate - Anlatmak, Nakletmek (Formal Tell)	Rileyt
+Relevant - Bağıntılı, Konuyla İli̇şki̇li̇	Relıvınt
+Reliable - Güveni̇li̇r	Relayıbıl
+Reluctant - İsteksi̇z	Reluktant
+Remedy - Çare	Remedi
+Reputation - İti̇bar,Ün	Reputeyşın
+Research - Araştirma	Risörç
+Resent - Hoşlanmamak, Kızmak	Risent
+Reside - Oturmak, İkamet Etmek	Risayd
+Resident - Bölgede Yaşayan, Oturan	Residınt
+Respond - Cevap Vermek	Rispond
+Restore - Geri̇ Verme, Yeni̇den Kullanıma Açma	Ristor
+Restrict - Sınırlamak	Ristrikt
+Reverse	- Ters, Arka	Rivers
+Revise	- Tekrar Gözden Geçi̇ri̇p Düzeltmek	Rİvays
+Revolution - Devri̇m	Revuluşın
+Rifle - Tüfek	Rayfıl
+Rocket - Roket	Rakıt
+Route - Rota	Rout
+Rubber - Silgi, lastik	Rabbır
+Rug - Küçük Halı, Ki̇li̇m	Rag
+Ruin - Harabe, Yıkım Mahvetme	Ruin
+Safe - Güvenli	Seyf
+Sail - Yelken Açmak	Seyıl
+Same - Aynı	Seym
+Sand - Kum	Send
+Sit - Oturmak	Sit
+Save - Kurtarmak	Seyv
+Saw	- Testere	Sov
+Say	- Söylemek	Sey
+Scale - Ölçek	Sıkeyl
+School - Okul	Sukul
+Science	- Bilim	Saysins
+Scientist - Bilim Adamı	Saytinst
+Score - Skor	Sıkor
+Sea	- Deniz	Sii
+Seat - Koltuk	Siıt
+Second - Saniye	Sekınd
+Section - Bölüm	Sekşın
+See - Görmek	See
+Seed - Tohum	Siid
+Seem - Görünmek	Siim
+Seen - Görünmek	Siin
+Sell - Satmak	Sel
+Send - Göndermek	Send
+Sense - His	Sens
+Sent - Gönderilmiş	Sent
+Sentence - Cümle	Sentıns
+Separate - Ayrı	Seperıt
+Serve - Hizmet Etmek	Sörv
+Set - Ayarlamak	Set
+Settled - Ayarlanmış	Setıld
+Seven - Yedi	Sevın
+Several - Birkaç	Sevırıl
+Shade - Gölge	Şeyd
+Shape - Şekil	Şeyp
+Sharp - Keskin	Şarp
+She - O (Kadın)	Şi
+Ship - Gemi	Şip
+Shoes - Ayakkabı	Şuus
+Shop - Dükkan	Şop
+Short - Kısa	Şort
+Should - Zorunda Olmak	Süld
+Shoulder - Omuz	Şoldır
+Shout - Bağırmak	Şout
+Show - Göstermek	Şov
+Shown - Gösterilmiş	Şovn
+Shy - Utangaç	Şay
+Side - Yan	Sayd
+Sight - Görüş	Sayt
+Sign - İşaret	Sayn
+Signal - Sinyal	Signıl
+Silent - Sessiz	Saylınt
+Similar - Benzer	Similır
+Simple - Basit	Simpıl
+Since - den Beri	Sins
+Sing - Şarkı Söylemek	Sing
+Sir - Efendi	Sör
+Sister - Kız Kardeş	Sistır
+Sit - Oturmak	Sit
+Six - Altı	Siks
+Size - Boyut	Sayz
+Skin - Deri	Sıkin
+Sky - Hava	Sıkay
+Sleep - Uyku	Sıliip
+Slowly - Yavaşça	Slovli
+Small - Küçük	Sımol
+Smell - Koklamak	Sımel
+Smile - Gülümsemek	Sımayıl
+Snow - Kar	Sınov
+Snowy - Karlı	Sınovi
+So - Şöyle	So
+Soft - Yumuşak	Soft
+Soil - Toprak	Soyıl
+Soldier - Asker	Solcır
+Solution - Çözüm	Soluşın
+Some - Bazı	Sam
+Someone - Birisi	Samvan
+Something - Bir Şey	Samting
+Sometimes - Bazen	Samtayms
+Son - Erkek Çocuk	San
+Song - Şarkı	Song
+Soon - Yakında	Suun
+Sound - Ses	Saund
+South - Güney	Saut
+Southern - Güneyli	Sautırn
+Space - Uzay, Boşluk	Sıpeys
+Speak - Konuşmak	Sıpiik
+Special - Özel	Sıpeşıl
+Speed - Hız	Sıpiid
+Spell - Hecelemek	Sıpel
+Spot - Nokta	Sıpot
+Spread - Yayılmak	Sıpred
+Spring - İlkbahar	Sırping
+Square - Kare	Sıkuer
+Stand - Ayakta Durmak	Sıtend
+Star - Yıldız	Sıtar
+Start - Başlamak	Sıtart
+State - Durum	Sıteyt
+Statement - Ifade	Sıteytment
+Stay - Kalmak	Sıtey
+Steel - Çelik	Sıtiıl
+Step - Adım	Sıtep
+Stick - Yapışmak	Sıtik
+Still - Halen	SItil
+Stone - Taş	Sıton
+Store - Mağaza	Sıtor
+Stove - Ocak	Sıtov
+Stood - Ayakta Durmuş	Sıtuud
+Stop - Durmak	Sıtop
+Store - Dükkan	Sıtor
+Story - Hikaye	Sıtori
+Straight - Düz	Sıtreyt
+Strange - Garip	Sıtrenc
+Stream - Akıntı	Sıtrim
+Street - Sokak	Sıtriit
+Stretch - Genişletmek	Sıtre
+String - Dizi	Sıtring
+Strong - Güçlü	Sıtrong
+Student - Öğrenci	Student
+Study - Çalışmak	Sıtadi
+Subject - Konu	Sabjekt
+Substance - Madde	Sabstıns
+Such - Örneğin	Saç
+Suddenly - Aniden	Sadinli
+Suffix - Son Ek	Safiks
+Sugar - Şeker	Şugır
+Suggested - Tavsiye Edilmiş	Sacestıd
+Sum	 - Özet	Sam
+Summer - Yaz	Sammır
+Sun - Güneş	San
+Supply - Malzeme	Sapplay
+Suppose - Tahmin Yürütmek	Sıppos
+Sure - Emin	Şur
+Surface	 - Yüzey	Sörfıs
+Surprise - Sürpriz	Surprayz
+Sweet - Tatlı, Sevimli	Sıviit
+Swim - Yüzmek	Sıvim
+Syllabus - Ders Programı	Sillabus
+Symbol - Sembol	Siymbıl
+System - Sistem	Sistım
+Table - Masa	Teybıl
+Tail - Kuyruk	Teyıl
+Take - Almak	Teyk
+Talk - Konuşmak	Tolk
+Tall - Uzun	Tol
+Tea - Çay	Tii
+Teacher - Öğretmen	Tiçır
+Team - Takım	Tiim
+Tell - Söylemek	Tel
+Temperature - Sıcaklık	Tempıçır
+Term - Dönem	Törm
+Test  - Denemek	Test
+Their - Onların	Deir
+Them - 	Onlar	Dem
+Then - 	Sonra	Den
+There - Orada	Der
+These - Bunlar	Deese
+They - 	Onlar (İnsan)	Dey
+Thick - Kalın	Tik
+Thin - İnce	Tin
+Thing - Şey	Ting
+Think - Düşünmek	Tink
+Third - Üçüncü	Törd
+This - 	O	Dis
+Those - Onlar	Dos
+Though - e Rağmen	Dou
+Thought - Düşünce	Tout
+Thousands -	Binlerce	Tasınds
+Three - Üç	Tırii
+Through	 - Arasından	Turu
+Thus - Nitekim	Das
+Tied - Bağlı	Tayd
+Time - Zaman	Taym
+Tiny - Küçücük	Tayni
+Today - Bugün	Todey
+Together - Birlikte	Togetır
+Tone - Ton	Ton
+Took - Almak (Geçmiş Zaman)	Tuuk
+Tool - Alet	Tuul
+Top - 	Üst	Tap
+Total - Toplam	Totıl
+Touch - Dokunmak	Taç
+Toward - e Doğru	Tıvord
+Town - Yerleşke	Tavn
+Trade - Ticaret	Tıreyd
+Train - Tren	Tıreyn
+Train - Eğitmek	Tıreyn
+Travel - Yolculuk	Tıravıl
+Tree - Ağaç	Tıree
+Triangle - Üçgen	Tırayengıl
+Trip - Yolculuk	Tirip
+Trouble - Sorun	Tırabıl
+Truck - Kamyon	Tırak
+True - Doğru	Turu
+Try	 - Denemek	Tıray
+Tube - Tüp	Tuyb
+Turn - Dönüş	Törn
+Two	 - İki	Tu
+Type - Yazmak	Tayp
+Ugly - Çi̇rki̇n	Agli
+Umbrella - Şemsi̇ye	Ambırella
+Uncle - Dayı, Amca	Ankıl
+Unconscious - Bi̇li̇nçsi̇zli̇k	Ankonşus
+Under - Altta, Alta	Andır
+Underclothes - İç Çamaşırı	Andırkılotes
+Understand - Anlamak	Andırstend
+Unemployment - İşsi̇zli̇k	Animpıloyment
+Unfair - Adaletsi̇z	Anfeyır
+Unhappy - Mutsuz	Anhappi
+Unhealthy - 	Sağlıksız	Anhelti
+Uniform - 	Üni̇forma, Tek Ti̇p	Yuniform
+Union - Sendi̇ka, Bi̇rleşme	Yuniyon
+Unite - Bi̇rleşmek	Yunayt
+University - Üni̇versi̇te	Yuniveriti
+Universe - Kainat, alem	Yunivers
+Unknown - Bi̇li̇nmeyen	Annovn
+Unlikely - Az İhti̇malle	Anlaykli
+Unlock - Ki̇li̇di̇ Açmak	Anlok
+Until - Kadar (Belli Bir Zamana Kadar)	Antil
+Upper - Üst	Appır
+Upstairs - Üst Kat, Yukarısı	Apsıteirs
+Up to date - Bugüne Kadar	Ap to deyt
+Upward - Yukarıya Doğru	Apvard
+Urge - Dürtme, (Israr Ederek ) Yaptırma ,Zorlamak	Örc
+Urgent - Aci̇l	Örcınt
+Us - Bi̇z	As
+Use - Kullanım/ Fonksi̇yon	Yus
+Use - Kullanmak	Yus
+Useful - Kullanışlı	Yusful
+Undergo - Katlanmak, Çekmek, Bi̇r Olayın Olması	Andırgo
+Underline - Yazının, Keli̇meni̇n Altını Çi̇zmek	Andırlayn
+Unfair - Adi̇l Olmayan	Anfeyır
+Unit - Bi̇ri̇m, 1-9 Arasındaki̇ Sayılar	Yunit
+Up To You - Sana Kalmış, Nasıl İstersen (It is Up To You)	Ap To Yu
+Upon - Üstünde	Upon
+Upside down - Tepetaklak, Ters Dönmek	Apsayd-davn
+Urban - Şehi̇rsel, Kente Ai̇t (Urban Life : Şehirsel Yaşam)	Arbın
+Vain - 	Gereksi̇z, Boşuna	Veyn
+Valley - Vadi̇	Valli
+Valuable - Değerli̇	Valyubıl
+Value - Değer	Valyu
+Variety - Fark, Çeşi̇tli̇li̇k, Çeşi̇t	Varayeti
+Various - Deği̇şi̇k, Çeşi̇tli̇	Veriyous
+Vegetable - Sebze	Vectıbıl
+Vehicle - Taşıt Aracı (Kamyon, Tır , Araba V.B )	Viyakıl
+Very - Çok, Tam	Veri
+Veto - Veto, Veto Etmek	Vito
+Victim - Kurban, Kazazede	Viktım
+Victor - Gali̇p	Viktır
+Victory - Utku, Zafer, Yengi̇	Viktori
+View - Görünüm, Manzara	Viyüv
+Villa - Vi̇lla	Villa
+Village - Köy	Villec
+Vine - Bağ	Vayn
+Violent - Kaba Kuvvet Kullanan, Şi̇ddet	Vaylınt
+Visa - Vi̇ze	Visa
+Visible - Görünen	Vizibıl
+Vision - Görüş, İmge	Vijın
+Visit - Zi̇yaret Etmek	Visit
+Visitor - Zi̇yaretçi̇, Konuk	Visitır
+Vocabulary - Keli̇me Dağarcığı	Vokabulari
+Voice - Ses	Voiys
+Volume - Haci̇m	Volyum
+Vote - Oy Vermek, Oy	Vot
+Voyage - Deni̇z Yolculuğu	Voyec
+Vulgar - Kaba, İlkel	Valgır
+Vacation - Tati̇l	Vekeyşın
+Vacuum - Cleaner	Elektri̇k Süpürgesi̇	Vakuum Kılinır
+Van - Mi̇ni̇büs	Ven
+Vanilla - Vani̇lya	Vanilla
+Vase - Vazo	Veys
+Vein - Damar	Veyn
+Velvet - Kadi̇fe	Velvıt
+Verb - Fi̇i̇l	Vörb
+Verdict - Hüküm	Verdikt
+Vertical - Di̇key	Vertikıl
+Vet - Veteri̇ner	Vet
+Vicious - Circle	Kısır Döngü	Vişıs Saykıl
+Victim - Kurban	Viktım
+Victimize - Kurban Etmek (Grubun Suçunu Bir Kişiye Yüklemek.)	Viktimayz
+Vinegar - Si̇rke	Vinegır
+Violin - Keman	Vayolin
+Vital - Çok Önemli̇	Vaytıl
+Volcano - Volkan,Yanardağ	Volkeyno
+Volleyball - Voleybol	Voleybol
+Voluntary - Gönüllü	Volunteri
+Vomit - Kusmak	Vomit
+Vowel - Sesli̇ Harf (A,E,I) Gibi	Vavıl
+Vulnerable - Zayıf, Korumasız	Valnırıbıl
+Wait - Beklemek	Veyt
+Walk - Yürümek	Valk
+Wall - Duvar	Vol
+Want - İstemek	Vant
+War	 - Savaş	Vor
+Warm - Sıcak	Varm
+Was	 - Olmak (Geçmiş)	Vas
+Wash - Yıkamak	Vaş
+Watch - Izlemek	Vaç
+Water - Su	Vatır
+Wave - 	Dalga	Veyv
+Way - Yol	Vey
+We - Biz	Vi
+Wear - Giymek	Viır
+Weather - Hava	Vedır
+Week - Hafta	Viik
+Weight - Kilo	Veiyt
+Well - Iyi	Vel
+Went - Gitmek (Geçmiş)	Vent
+Were - Olmak (Çoğul, Geçmiş)	Vör
+West - Batı	Vest
+Western - Batılı	Vestırn
+What - 	Ne	Vat
+Wheel - Tekerlek	Viıl
+When? - Ne Zaman?	Ven
+Where - Nerede?	Ver
+Whether - Eğer	Veder
+Which - Hangisi?	Viç
+While - Süresince	Vayıl
+White - Beyaz	Vayt
+Who? - 	Kim?	Hu
+Whole - Bütün	Hol
+Whose? - Kimin?	Huus
+Why? - Neden?	Vay
+Wide - Geniş	Vayd
+Wife - Eş (Kadın)	Vayf
+Wild - Vahşi	Vayld
+Will - Istek	Vil
+Win - Kazanmak	Vin
+Wind - Rüzgar	Vind
+Window - Pencere	Vindov
+Wing - Kanat	Ving
+Winter - Kış	Vintır
+Wire - Kablo	Vayır
+Wish - Dilemek	Viş
+With - Birlikte	Vith
+Within - İçinde	Vitin
+Without - Olmadan	Vitout
+Woman - Kadın	Vumın
+Wonder - Merak Etmek	Vandır
+Wood - Odun	Vuud
+Word - Kelime	Vörd
+Work - İş	Vörk
+Worker - İşçi	Vökrır
+World - Dünya	Vörld
+Write - Yazmak	Vırayt
+Written - Yazılı	Vırittın
+Wrong - Yanlış	Vrong
+Xenophobia - Yabancı Düşmanlığı	Zenofobia
+Xray - Röntgen	İksrey
+Xmas - Noel	İksmas
+Xylophone - Ksilofon	Zaylafon
+Yard - Bahçe	Yard
+Year - Yıl	Yiır
+Yellow - Sarı	Yellov
+Yes - Evet	Yes
+Yet - Henüz	Yet
+You - Sen	Yu
+Young - Genç	Yang
+Your - Senin	Yor
+Yourself - Kendin	Yorself
+Zeal - Şevk	Ziıl
+Zap - Vurmak	Zep
+Zealous - Gayretli	Zelus
+Zebra - Zebra	Zibra
+Zucchini - Kabak	Zuççini
+Zealot - Fanatik	Zealot
+Zazoo - Adam	Zezuu
+Zinc - Çinko	Zaynk
+Zip - Code	Posta Kodu	Zip Kod
+Zipper -  Fermuar	Zippır
+Zodiac - Zodyak, burçlar	Zodiyak
+Zone - Bölge	Zon
+Zero - Sıfır	Ziro
+Zoo - Hayvanat Bahçesi	Zuu
+Act - Oynamak	Ekt
+Add - Eklemek	Edd
+Age - Yaş, Çağ	Eyc
+Ago - Önce	Ego
+Aid - Yardım	Eyid
+Aim - Amaç	Eym
+Air - Hava	Eyır
+All - Hepsi	Oll
+And - Ve	End
+Ant - Karınca	Ent
+Any - Hiç	Eni
+Ape - Maymun	Eyp
+App - Uygulama	Epp
+Arm - Kol	Arm
+Art - Sanat	Art
+Ash - Kül	Aş
+Ask - Sormak, İstemek	Esk
+Awe - Huşu, Korku	Av
+Axe - Balta	Eks
+Bad - Kötü	Bed
+Bag	- Çanta	Beg
+Ban - Yasaklamak	Ben
+Bar - Bar	BarBar
+Bat - Yarasa	Bet
+Bed - Yatak	Bed
+Bee - Arı	Bii
+Beg - Dilenmek	Beg
+Bet - Bahis	Bet
+Big - Büyük	Big
+Bin - Çöp kutusu	Bin
+Bog - Bataklık	Bog
+Box - Kutu	Baks
+Boy - Erkek çocuk	Boy
+Bug - Böcek	Bag
+Bus - Otobüs	Bas
+But - Ama	Bat
+Buy - Satın almak	Bay
+Bye - Görüşürüz	Bay
+Cab - Taksi	Keb
+Cam - Kamera	Kem
+Can - Yapabilmek	Ken
+Cap - Şapka	Kep
+Car - Araba	Kar
+Cat - Kedi	Ket
+Cow - İnek	Kav
+Coy - Çekingen	Koy
+Cry - Ağlamak	Kıray
+Cub - Yavru	Kab
+Cup - Fincan	Kap
+Cut - Kesmek	Kat
+Dad - Baba	Ded
+Day - Gün	Dey
+Die - Ölmek	Day
+Dig	- Kazmak	Dig
+Dim	- Sönük	Dim
+Dog - Köpek	Dag
+Dot - Nokta	Dat
+Dry - Kuru	Dıray
+Duo - İkili	Duo
+Dye - Boya	Day
+Ear - Kulak	İır
+Eat - Yemek	İıt
+Egg - Yumurta	Eg
+End - Son	End
+Era	- Çağ	Era
+Eye	- Göz	Ay
+Far	- Uzak	Far
+Fat - Şişman	Fet
+Fee	- Ücret	Fii
+Few	- Az	Füv
+Fix - Tamir etmek	Fiks
+Flu - Grip	Fulu
+Fly - Uçmak	Fılay
+Fog - Sis	Fag
+For - İçin	For
+Fox - Tilki	Faks
+Fry - Kızartmak	Fıray
+Fun	- Eğlence	Fan
+Fur	- Kürk	För
+Gap - Boşluk	Gep
+Gas - Gaz	Ges
+Gem - Mücevher	Cem
+Get - Almak	Get
+God	- Tanrı	Gad
+Gum	- Sakız	Gam
+Gun	- Silah	Gan
+Guy	- İnsan	Gay
+Gym	- Spor salonu	Cim
+Ham	- Jambon	Hem
+Hat	- Şapka	Het
+Hay	- Saman	Hey
+Him - Onu (Erkek)	Him
+Hip - Kalça	Hip
+His - Onun (Erkek)	His
+Hit - Vurmak	Hit
+Hot - Sıcak	Hat
+How - Nasıl	Hav
+Hug - Sarılmak	Hag
+Ice - Buz	Ays
+Icy - Buzlu	Ayci
+Ill - Hasta olmak	İl
+Ink - Mürekkep	İnk
+Jam - Reçel	Cem
+Jar - Kavanoz	Car
+Jaw - Çene Cav
+Job - İş Cab
+Jog - Koşu	Cog
+Joy - Sevinç Coy
+Key - Anahtar Kiy
+Kin - Akraba Kin
+Lab - Laboratuvar	Leb
+Lad - Delikanlı	Led
+Law - Yasa	Lov
+Lay - Uzanmak	Ley
+Leg - Bacak	Leg
+Let - İzin vermek	Let
+Lid - Kapak	Lid
+Lie - Yalan söylemek	Lay
+Lip - Dudak	Lip
+Low - Düşük	Lov
+Mad - Deli	Med
+Man - Adam	Men
+Map - Harita	Mep
+May - Mayıs	Mey
+Men - Erkekler	Men
+Mix - Karıştırmak	Miks
+Mom - Anne	Mam
+Mop - Paspas	Mop
+Mud - Çamur	Mad
+Mug - Kupa	Mag
+Mum - Anne	Mam
+Nap - Kestirmek	Nep
+Net - Ağ	Net
+New - Yeni	Nüv
+Nod - Başını sallamak	Nad
+Now	- Şimdi	Nav
+Nun - Rahibe	Nan
+Nut - Fındık	Nat
+Oak - Meşe	Oak
+Odd - Garip	Odd
+Off - Kapalı	Off
+Oil - Yağ	Oyıl
+Old - Yaşlı, Eski	Old
+One - Bir	Van
+Our - Bizim	Aur
+Out - Dışarı	Aut
+Owe - Borçlu olmak	Ov
+Owl - Baykuş	Ovl
+Own - Kendi	Ovn
+Pal - Arkadaş	Pal
+Pan - Tava	Pen
+Paw - Pati	Pov
+Pay - Ödemek	Pey
+Pea - Bezelye	Pii
+Pen - Dolma kalem	Pen
+Pet - Evcil hayvan	Pet
+Pie - Turta	Pay
+Pig - Domuz	Pig
+Pin - Toplu iğne	Pin
+Pit - Çukur	Pit
+Pot - Tencere	Pat
+Pro - Profesyonel	Pıro
+Put - Koymak	Put
+Rat - Sıçan	Ret
+Raw - Çiğ	Rov
+Red - Kırmızı	Red
+Rib - Kaburga	Rib
+Rob - Soymak	Rob
+Rot - Çürümek	Rat
+Rub	- Ovmak	Rab
+Rug - Kilim	Rag
+Run - Koşmak	Ran
+Sad - Üzgün	Sed
+Sag "Seg" - Sarkmak
+Say - Söylemek	Sey
+Sea - Deniz	Sii
+See - Görmek	Sii
+Set - Ayarlamak	Set
+Sew - Dikmek	Süv
+She - O (Kadın)	Şi
+Shy - Utangaç	Şay
+Sin - Günah	Sin
+Sip - Yudumlamak	Sip
+Sir - Efendim	Sör
+Sit - turmak	Sit
+Six - Altı	Six
+Ski - Kayak	Ski
+Sky - Gökyüzü	Sıkay
+Son - rkek evlat	San
+Spy - Casus	Sıpay
+Sum - Toplam	Sam
+Sun - Güneş	San
+Tab - Sekme	Teb
+Tag - Etiket	Teg
+Tax - Vergi	Tex
+Tea - Çay	Tii
+Ten - On	Ten
+Tie - Kravat	Tay
+Tin - Teneke	Tin
+Tip - Bahşiş	Tip
+Toe - Ayak parmağı	To
+Top - Üst	Tap
+Toy - Oyuncak	Toy
+Try - Denemek	Tıray
+Tub - Küvet	Tab
+Two - İki	Tu
+Use - Kullanmak	Yus
+Van - Karavan	Ven
+Vet - Veteriner	Vet
+Via - Aracılığıyla	Viya
+Vow - Yemin	Vav
+War - Savaş	Vor
+Way - Yol	Vey
+Web - Ağ	Veb
+Wed - Evlenmek	Ved
+Wet - Islak	Vet
+Who - Kim	Hu
+Why - Niçin	Vay
+Wig - Peruk	Vig
+Win - Kazanmak	Vin
+Wit - Zeka	Vit
+Yes - Evet	Yes
+Yet - Henüz	Yet
+You - Sen	Yu
+Zoo - Hayvanat bahçesi	Zuu
+Able - Yapabilmek	Eybıl
+Also - Ayrıca	Olso
+Area - Alan	Aria
+Army - Ordu	Armi
+Away - Uzak	Avay
+Baby - Bebek	Beybi
+Back - Geri	Bek
+Ball - Top	Boll
+Band - Grup	Bend
+Bank - Banka	Benk
+Bath - Banyo	Bath
+Bear - Ayı	Beer
+Beer - Bira	Biır
+Bell - Çan	Bel
+Belt - Kemer	Belt
+Best - En iyi	Best
+Bill - Fatura	Bill
+Bird - Kuş	Börd
+Blow - Esmek	Bılov
+Blue - Mavi	Bulu
+Boat - Bot	Boot
+Body - Vücut	Badi
+Bomb - Bomba	Bomb
+Bond - Bağ	Bond
+Bone - Kemik	Bon
+Book - Kitap	Buuk
+Boss - Patron	Boss
+Both - İkisi de	Both
+Burn - Yakmak	Börn
+Busy - Meşgul	Busi
+Call - Aramak	Koll
+Calm - Sakin	Kalm
+Camp - Kamp	Kemp
+Card - Kart	Kard
+Care - Bakım	Ker
+Case - Durum	Keys
+Cash - Nakit	Keş
+Cell - Hücre	Sell
+Chat - Sohbet	Çet
+City - Şehir	Siti
+Club - Kulüp	Kılab
+Coal - Kömür	Koal
+Coat - Ceket	Koat
+Code - Kod	Kod
+Cold - Soğuk	Kold
+Come - Gelmek	Kam
+Cook - Yemek pişirmek	Kuuk
+Copy - Kopya	Kopi
+Cost - Maliyet	Kost
+Dark - Karanlık	Dark
+Data - Veri	Deyta
+Date - Tarih	Deyt
+Dawn - Şafak	Davn
+Dead - Ölü	Ded
+Deal - Anlaşma	Diıl
+Dear - Sayın	Diır
+Debt - Borç	Debt
+Deep - Derin	Diip
+Deny - İnkar etmek	Dinay
+Dial - Çevirmek	Dayıl
+Diet - Diyet	Dayet
+Disk - Disk	Disk
+Door - Kapı	Door
+Down - Aşağı	Dovn
+Drop - Düşürmek	Dırap
+Drug - İlaç	Dırag
+Dust - Toz	Dast
+Duty - Görev	Duti
+Each - Her biri	İç
+Earn - Kazanmak	Örn
+Ease - Kolaylaştırmak	İis
+East - Doğu	İst
+Easy - Kolay	İsi
+Else - Başka	Els
+Even - Hatta	İvın
+Ever - Hiç	Evır
+Evil - Kötü	İvıl
+Exit - Çıkış	Egzit
+Face - Yüz	Feys
+Fact - Gerçek	Fekt
+Fair - Adil	Feyır
+Fall - Sonbahar	Foll
+Fall - Düşünmek	Foll
+Farm - Çiftlik	Farm
+Fast - Hızlı	Fest
+Fear - Korku	Diır
+Feed - Beslemek	Fiid
+Feel - Hissetmek	Fiil
+File - Dosya	Fayl
+Fill - Doldurmak	Fill
+Find - Bulmak	Faynd
+Fine - İyi	Fayn
+Fire - Ateş	Fayır
+Fish - Balık	Fiş
+Five - Beş	Fayv
+Flat - Apartman dairesi	Fılet
+Food - Yemek	Fuud
+Foot - Ayak	Fuut
+Four - Dört	Four
+Free - Özgür	Fırii
+From - İtibaren	Fırom
+Fuel - Yakıt	Füyıl
+Full - Dolu	Ful
+Gain - Kazanç	Geyn
+Game - Oyun	Geym
+Gate - Kapı	Geyt
+Gift - Hediye	Gift
+Girl - Kız çocuk	Görl
+Give - Vermek	Giv
+Glad - Memnun	Gıled
+Goal - Amaç	Goal
+Gold - Altın	Gold
+Good - İyi	Guud
+Gray - Gri	Gırey
+Grow - Yetişmek	Gırov
+Hair - Saç	Heyır
+Half - Yarım	Half
+Hand - El	Hend
+Hang - Asmak	Heng
+Hard - Zor	Hard
+Harm - Zarar	Harm
+Hate - Nefret etmek	Heyt
+Have - Sahip olmak	Hev
+Head - Baş	Hed
+Hear - Duymak	Hiır
+Heat - Sıcaklık	Hiit
+Hell - Cehennem	Hel
+Help - Yardım etmek	Help
+Here - Burada	Hiyır
+Hero - Kahraman	Hiro
+High - Yüksek	Hay
+Hill - Tepe	Hil
+Home - Ev	Hom
+Hope - Umut	Hop
+Host - Ev sahibi	Host
+Hour - Saat	Aur
+Huge - Kocaman	Huyc
+Hurt - Can yakmak	Hört
+Idea - Fikir	Aydiya
+Item - Öge	Aytım
+Join "Coin" - Katılmak
+Jump - Zıplamak	Camp
+Jury - Jüri	Curi
+Just - Sadece	Cast
+Kick - Tekme atmak	Kik
+Kill - Öldürmek	Kill
+King - Kral	King
+Knee - Diz	Nii
+Know - Bilmek	Nov
+Lack - Eksiklik	Lek
+Lady - Hanım	Leydi
+Lake - Göl	Leyk
+Land - Arazi	Lend
+Last - Son	Lest
+Late - Geç	Leyt
+Lead - Öncülük etmek	Liid
+Less - Az	Less
+Life - Hayat	Layf
+Like - Sevmek	Layk
+Line - Çizgi	Layn
+List - Liste	List
+Live - Yaşamak	Liv
+Loan - Kredi	Loan
+Lock - Kilit	Lak
+Long - Uzun	Long
+Look - Görünüş	Luuk
+Look - Bakmak	Lak
+Lose - Kaybetmek	Luus
+Lost - Kayıp	Lost
+Love - Aşk, Sevgi	Lav
+Luck - Şans	Lak
+Main - Ana	Meyn
+Make - Yapmak	Meyk
+Male - Erkek	Meyl
+Many - Birçok	Meni
+Mass - Kitle	Mess
+Meal - Yemek	Miıl
+Mean - Anlamına gelmek	Miin
+Meat - Et	Miit
+Meet - Buluşmak	Miit
+Menu - Menü	Menyü
+Milk - Süt	Milk
+Mind - Zihin	Maynd
+Mine - Benim	Mayn
+Miss - Özlemek	Miss
+Mode - Mod	Moyd
+Mood - Ruh hali	Muud
+Moon - Ay	Muun
+More - Daha	Mor
+Most - Çoğu	Most
+Move - Hareket etmek	Muuv
+Much - Çok	Maç
+Must - Zorunlu	Mast
+Name - İsim	Neym
+Near - Yakın	Niır
+Neck - Boyun	Nek
+Need - İhtiyacı olmak	Niid
+News - Haberler	Nüvs
+Next - Sıradaki	Nekst
+Nice - İyi	Nays
+Nine - Dokuz	Nayn
+Nose - Burun	Nois
+Note - Not	Not
+Okay - Tamam	Okey
+Once - Bir zamanlar	Vans
+Only - Sadece	Onli
+Open - Açık	Opın
+Over - Bitmiş	Ovır
+Pack - Paketlemek	Pek
+Page - Sayfa	Peyc
+Pain - Ağrı	Peyn
+Pair - Çift	Peir
+Palm - Avuç içi	Palm
+Park - Park	Park
+Part - Kısım	Part
+Pass - Geçmek	Pess
+Past - eçmiş	Pest
+Peak - Zirve	Piik
+Pick - Toplamak, Seçmek	Pik
+Pink - Pembe	Pink
+Pipe - Boru	Payp
+Plan - Plan	Pılen
+Play - Oynamak	Pıley
+Plug - Fiş	Pılag
+Plus - Artı	Pılas
+Poll - Anket	Pol
+Pool - Havuz	Puul
+Poor - Yoksul	Puur
+Port - Liman	Port
+Pull - Çekmek	Pul
+Pure - Saf	Pür
+Push - İtmek	Paş
+Race - Yarış	Reys
+Rain - Yağmur	Reyn
+Rare - Nadir	Rer
+Rate - ran	Reyt
+Read - Okumak	Riid
+Real - Gerçek	Riyıl
+Rent - Kira	Rent
+Rent - Kiralamak	Rent
+Rest - Dinlenmek	Rest
+Rice - Pirinç	Rays
+Rich - Zengin	Riç
+Ride - Binmek	Rayd
+Ring - Yüzük	Ring
+Rise - Yükselmek	Reyz
+Risk - Risk	Risk
+Road - Yol	Road
+Role - Rol	Rol
+Roll - Rulo	Roll
+Roof - Çatı	Ruuf
+Room - Oda	Ruum
+Root - Kök	Ruut
+Rose - Gül	Ros
+Rule - Kural	Rul
+Salt - Tuz	Solt
+Same - Aynı	Seym
+Sand - Kum	Send
+Save - Kaydetmek	Seyv
+Seat - Koltuk	Siit
+Seed - Tohum	Siid
+Seek - Aramak	Siik
+Self - Kendi	Self
+Sell - Satmak	Sell
+Send - Göndermek	Send
+Ship - Gemi	Şip
+Shop - Dükkan	Şop
+Shot - Atış	Şat
+Show - Göstermek	Şov
+Sick - Hasta	Sik
+Side - Yan	Sayd
+Sign - İşaret	Sayn
+Site - Site	Sayt
+Size - Boyut	Sayz
+Skin - Cilt	Sıkin
+Slip - Kayma	Sılip
+Slow - Yavaş	Sılov
+Snow - Kar	Sınow
+Soft - Yumuşak	Soft
+Soil - Toprak	Soyıl
+Sold - Satıldı	Sold
+Sole - Tek	Sol
+Some - Biraz	Sam
+Song - Şarkı	Song
+Soon - Yakında	Suun
+Sort - Çeşit	Sort
+Soul - Ruh	Soul
+Spot - Yer	Sıpot
+Star - Yıldız	Sıtar
+Stay - Kalmak	Sıtey
+Step - Adım	Sitep
+Stop - Durmak	Sıtop
+Suit - Takım elbise	Suit
+Sure - Elbette	Şur
+Take - Almak	Teyk
+Tale - Masal	Teyl
+Talk - Konuşmak	Tolk
+Tall - Uzun	Toll
+Tape - Bant	Teyp
+Task - Görev	Tesk
+Team - Takım	Tiim
+Tell - Anlatmak	Tel
+Text - Mesaj	Tekst
+Then - Sonra	Den
+They - Onlar	Dey
+Thin - İnce	Tin
+This - Bu	Dis
+Thus - Böylece	Das
+Till - e kadar	Till
+Time - Zaman	Taym
+Tiny - Çok küçük	Teyni
+Tour - Tur	Tor
+Tree - Ağaç	Tırii
+Trip - Gezi	Tırip
+True - Doğru	Turu
+Turn - Dönüş	Törn
+Twin - İkiz	Tıvin
+Type - Tip	Tayp
+Upon - Üzerine	Apon
+User - Kullanıcı	Yusır
+Vary - Farklılık göstermek	Veyri
+View - Manzara	Viyüv
+Vote - Oy	Vot
+Wage - Ücret	Veyc
+Wait - Beklemek	Veyt
+Wake - Kalkmak	Veyk
+Walk - Yürümek	Volk
+Wall - Duvar	Voll
+Want - İstemek	Vant
+Warm - Ilık, sıcak	Varm
+Wash - Yıkamak	Vaş
+Wave - Dalga	Veyv
+Weak - Güçsüz	Viik
+Wear - Giyinmek	Vear
+Week - Hafta	Viik
+Well - İyi	Vel
+West - Batı	Vest
+What - Ne	Vat
+When - Ne zaman	Ven
+Whom - Kime	Hum
+Wide - Geniş	Vayd
+Wife - Eş (Kadın)	Vayf
+Wild - Vahşi	Vayld
+Wind - Rüzgar	Vind
+Wine - Şarap	Vayn
+Wing - Kanat	Ving
+Wise - Bilge	Vays
+Wish - Dilek	Viş
+With - İle	Vit
+Wood - Odun	Vuud
+Word - Kelime	Vörd
+Work - İş	Vörk
+Yard - Avlu	Yard
+Year - Yıl	Yiır
+Your - Senin	Yor
+Zero - Sıfır	Ziro
+Adult - Yetişkin	Adolt
+Anger - Öfke	Engır
+Apple - Elma	Epıl
+Admit - İtiraf etmek	Edmit
+Adopt - Evlat edinmek, benimsemek	Edopt
+Agree - Katılmak	Agrii
+Allow - İzin vermek	Alov
+Apply - Başvurmak, uygulamak	Epılay
+Argue - Tartışma	Argü
+Avoid - Kaçınmak	Evoid
+Alive - Hayatta, Canlı	Elayv
+Alone - Yalnız	Alon
+Angry - Kızgın	Engri
+Aware - Farkında	Aver
+Awful - Berbat	Ovful
+Black - Siyah	Bılak
+Blind - Kör	Bılaynd
+Brave - Cesur	Bırev
+Brief - Kısa	Bırif
+Broad - Geniş	Bıroad
+Begin - Başlamak	Bigen
+Blame - Suçlamak	Bıleym
+Break - Kırmak	Bıreyk
+Bring - Getirmek	Bıring
+Build - Kurmak, İnşa etmek	Build
+Beach - Kumsal	Biiç
+Birth - Doğum	Bört
+Blood - Kan	Bılod
+Brain - Beyin	Bıreyn
+Bread - Ekmek	Bıred
+Brown - Kahverengi	Bırovn
+Cause - Sebep	Kaus
+Chain - Zincir	Çein
+Chair - Sandalye	Çeir
+Chest - Göğüs	Çest
+Child - Çocuk	Çayld
+China - Çin	Çayna
+Claim - İstek, İddia	Kıleym
+Class - Sınıf	Kılas
+Clock - Saat	Kılok
+Coast - Kıyı	Kost
+Court - Mahkeme	Kort
+Crime - Suç	Kıraym
+Cross - Çarpı, haç	Kıros
+Crowd - Topluluk Kırovd
+Crown - Taç	ırovn
+Carry - Taşımak	Keri
+Catch - Yakalamak	Keç
+Cause - Sebep olmak	Kaus
+Check - Kontrol etmek	Çek
+Claim - İddia etmek, talep etmek	Kıleym
+Clean - Temizlemek	Kıliin
+Clear - Açık, belirgin	Kıliir
+Climb - Tırmanmak	Kılaymb
+Count - Saymak	Kount
+Cheap - Ucuz	Çiip
+Clean - Temiz	Kılin
+Close - Kapalı	Kılos
+Close - Kapatmak	Kılos
+Crazy - Çılgın	Kırezi
+Daily - Günlük	Deyli
+Dirty - Kirli	Dörti
+Doubt - Şüphe etmek	Daubt
+Drink - İçmek	Dırinl
+Dance - Dans	Dens
+Death - Ölüm	Deat
+Depth - Derinlik	Dept
+Doubt - Şüphe	Daubt
+Dream - Hayal, rüya	Dırim
+Dress - Elbise	Dıres
+Drink - İçecek	Dırink
+Earth - Toprak, Dünya	Örth
+Enemy - Düşman	Enemi
+Entry - Giriş	Entri
+Error - Hata	Eror
+Event - Olay, etkinlik	İvent
+Enjoy - Tadını çıkarmak	İncoy
+Enter - Girmek	Entır
+Exist - Var olmak	Egzist
+Early - Erken	Örli
+Empty - Boş	Empti
+Equal - Eşit	İkual
+Faint - Bayılmak	Feynt
+False - Yanlış	Fols
+Fifth - Beşinci	Fift
+First - Birinci	Först
+Fresh - Taze	Freş
+Funny - Komik	Fani
+Fight - Dövüşmek	Fayt
+Force - Zorlamak	Fors
+Faith - İnanç	Feyth
+Fault - Suç, hata	Folt
+Fight - Dövüş	Fayt
+Force - Güç	Fors
+Frame - Çerçeve	Fıreym
+Fruit - Meyve	Furit
+Glass - Cam	Gılas
+Grass - Çim	Gıras
+Green - Yeşil	Gıriin
+Guess - Tahmin etmek	Gess
+Group - Grup	Gurup
+Gross - İğrenç	Gıross
+Happy - Mutlu	Heppi
+Heavy - Ağır	Hevi
+Heart - Kalp	Hart
+Horse - At	Hors
+House - Ev	Haus
+Issue - Sorun	İşşu
+Japan - Japonya	Capen
+Judge - Hakim, Yargıç	Ca
+Judge - Yargılamak	Cac
+Laugh - Gülmek	Lauf
+Learn - Öğrenmek	Lörn
+Leave - Ayrılmak	Liive
+Limit - Sınırlamak	Limit
+Knife - Bıçak	Nayf
+Limit - Sınır	Limit
+Lunch - Öğle yemeği	Lanç
+Legal - Yasal	Ligıl
+Light - Açık, hafif	Layt
+Lucky - Light	Laki
+Magic - Sihir	Mecik
+Minor - Reşit olmayan kimse	Maynır
+March - Mart (Ay)	Març
+Money - Para	Mani
+Month - Ay	Mont
+Mouth - Ağız	Maut
+Music - Müzik	Muysik
+Marry - Evlenmek	Meri
+Night - Gece	Nayt
+Noise - Gürültü, Ses	Noiyz
+North - Kuzey	Nort
+Novel - Roman	Novıl
+Nurse - Hemşire	Nörs
+Naked - Çıplak	Neykıd
+Order - Düzen, Sıra, Sipariş	Ordır
+Other - Başka	Adır
+Owner - Sahip	Ovnır
+Occur - Gerçekleşmek	Okür
+Offer - Teklif etmek	Ofır
+Order - Sipariş etmek	Ordır
+Panel - Pano	Penıl
+Paper - Kağıt	Peypır
+Party - Kutlama	Parti
+Peace - Barış	Piis
+Phase - Evre, aşama	Feys
+Phone - Telefon	Fon
+Piece - Parça	Piis
+Place - Yer	Pıleys
+Plane - Uçak	Pıleyn
+Plant - Bitki	Pılent
+Plate - Tabak	Pıleyt
+Point - Nokta	Point
+Power - Güç	Pavır
+Price - Fiyat	Pırays
+Pride - Gurur	Pırayd
+Prize - Ödül	Pırayz
+Proof - Kanıt	Pruuf
+Place - Yerleştirmek	Pleys
+Press - Basmak	Pıres
+Prove - Kanıtlamak	Puruuv
+Plain - Yalın, süssüz	Pıleyn
+Queen - Kraliçe	Kuiin
+Quiet - Sessiz	Kuayt
+Rapid - Hızlı	Repid
+Ready - Hazır	Redi
+Right - Haklı, sağ	Rayt
+Round - Yuvarlak	Round
+Royal - Asil	Royal
+Radio - Radyo	Reydiyo
+Reply - Cevap	Replay
+River - Nehir	River
+Round - Yuvarlak	Raund
+Route - Rota, güzergah	Rout
+Raise - Yetiştirmek, yükseltmek, büyütmek	Reyz
+Reach - Ulaşmak	Riiç
+Relax - Rahatlamak	Rilaks
+Serve - Hizmet etmek	Serv
+Share - Paylaşmak	Şeyr
+Sleep - Uyumak	Sıliip
+Solve - Çözmek	Solv
+Sound - Ses	Saund
+Speak - Konuşmak	Sıpik
+Spend - Harcamak	Sıpend
+Split - Bölmek	Sıplit
+Stand - Dikilmek	Sıtend
+Start - Başlamak	Sıtart
+Sense - Algı	Sens
+Shape - Şekil	Şeyp
+Sight -	Görme	Sayt
+Skill -	Beceri	Sikil
+Sleep -	Uyku	Sıliip
+Smile -	Gülümseme	Sımayl
+South -	Güney	Saut
+Space -	Boşluk, Uzay	Sıpeys
+Speed -	Hız	Sıpiid
+Spite -	Garez	Spayt
+Sport -	Spor	Sport
+Start -	Başlangıç	Sıtart
+State -	Devlet, Eyalet, Durum	Sıteyt
+Stone -	Taş	Sıton
+Store -	Mağaza	Sıtor
+Sugar -	Şeker Şugır
+Sharp -	Keskin	Şarp
+Short -	Kısa Şort
+Small -	Küçük Sımol
+Smart -	Zeki Sımart
+Still -	Hala, yine de, ama	Sıtil
+Sweet -	Tatlı	Sıviit
+Thick -	Kalın	Tik
+Tight -	Dar, sıkı	Tayt
+Table -	Masa	Teybıl
+Taste -	Tat	Teyst
+Title -	Başlık Taytıl
+Trade -	Ticaret	Treyd
+Train -	Tren	Tıreyn
+Trial -	Duruşma	Tırayl
+Trust -	Güven	Tırast
+Truth -	Hakikat	Turut
+Trust -	Güvenmek	Tırast
+Visit -	Ziyaret etmek	Visit
+Uncle -	Amca, dayı	Ankıl
+Unity -	Birlik	Yuniti
+Value -	Değer	Valyu
+Visit -	Ziyaret	Visit
+Voice -	Ses	Voys
+Waste -	İsraf, atık	Veyst
+Watch -	Saat	Vaç
+Water -	Su	Vatır
+Woman -	Kadın	Vuman
+World -	Dünya	Vörld
+Watch -	İzlemek	Vaç
+Worry -	Endişe etmek	Vorri
+Write -	Yazmak	Vırayt
+White -	Beyaz	Vhayt
+Wrong -	Yanlış	Vırong
+Youth -	Gençlik	Yuut
+Young -	Genç	Yaung

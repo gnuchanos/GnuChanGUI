@@ -18,15 +18,17 @@ def main():
 
     layout = [
         [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+        [gc.GListBox(value="questionLog", font=gc.font, xStretch=True, yStretch=True, position="center", noScroolBar=True)],
         [gc.GText(value="Words", font="Sans, 25", xStretch=True, position="center")],
         [gc.GButton("1", value=randomButtonList[0], font=gc.font, xStretch=True)],
         [gc.GButton("2", value=randomButtonList[1], font=gc.font, xStretch=True)],
         [gc.GButton("3", value=randomButtonList[2], font=gc.font, xStretch=True)],
         [gc.GButton("4", value=randomButtonList[3], font=gc.font, xStretch=True)],
-        [gc.GText("", xStretch=True)],
-        [gc.GMultiline(value="answerLog", font=gc.font, xStretch=True, yStretch=True, readonly=True),
-        gc.GListBox(value="questionLog", font=gc.font, xStretch=True, yStretch=True, size=(30, None))],
         [gc.GButton("Random English Words Question", font=gc.font, xStretch=True)],
+        [gc.GText("", xStretch=True)],
+        [gc.GMultiline(value="answerLog", font=gc.font, xStretch=True, yStretch=True, readonly=True)],
+
+
 
     ]
 
@@ -34,7 +36,7 @@ def main():
 
 
     gc.GListBoxFixer(value="questionLog", border=0)
-    with open("words.txt", "r") as words:
+    with open("modified_words.txt", "r") as words:
         GWords = words.read().splitlines()
         gc.window["questionLog"].update(GWords)
 
@@ -49,17 +51,25 @@ def main():
 
         if questionFalse == True:
             with open("modified_words.txt", "r") as words:
+                #split all lines
                 randomWords = words.read().splitlines()
+                # split 2 words question and answer
                 randomWord = random.choice(randomWords).split("-")  # correct answer
                 randomAnswers = random.sample(randomWords, 3)  # wrong answers
+                # randomword is correck but randomAnwers wrong
                 randomAnswerList = [randomWord[1]] + [answer.split("-")[1] for answer in randomAnswers]
+                # take random answer
                 random.shuffle(randomAnswerList)
                 q1, q2, q3, q4 = randomAnswerList  # random shuffle answers
+
+                # answer buttons
                 gc.window[randomButtonList[0]].update(q1)
                 gc.window[randomButtonList[1]].update(q2)
                 gc.window[randomButtonList[2]].update(q3)
                 gc.window[randomButtonList[3]].update(q4)
-                questionWindow = f"Bu Soruyu Cevaplayın ->| {randomWord[0]} |"
+
+
+                questionWindow = f"answer this question ->| {randomWord[0]} |"
                 gc.window["Words"].update(questionWindow)
                 questionFalse = False
 

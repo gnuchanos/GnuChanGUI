@@ -1,5 +1,4 @@
-from GnuChanGUI import GnuChanGUI
-import time
+from GnuChanGUI import *
 
 gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
 gc.Theme()
@@ -14,17 +13,12 @@ layout = [
     [gc.GText(value="text", font=gc.font, xStretch=True, position="center")],
     [gc.GButton("Start Timer", font=gc.font, xStretch=True),
      gc.GButton("Stop Timer", font=gc.font, xStretch=True)],
-    [gc.GMultiline(value="test")]
 ]
 
 gc.GWindow(mainWindow=layout)
 
 second = 0
 timerStart = False
-
-
-gc.window["text"].bind('<Shift>', ' Shift')
-
 
 
 def GQ():
@@ -42,7 +36,5 @@ def GQ():
         pass
 
     
-
 gc.update(GUpdate=GQ)
-
 gc.window.close()
