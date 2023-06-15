@@ -59,7 +59,7 @@ class GFunc():
         self.kwargs = kwargs
 
     def __call__(self):
-        self.finished = True
+        #self.finished = True
         return self.func(*self.args, **self.kwargs)
 
 
@@ -107,6 +107,10 @@ class GnuChanGUI:
             if self.event in (WIN_CLOSED, "Exit"):
                 break
             GUpdate()
+    
+    @property
+    def close(self):
+        self.window.close()
 
     @property
     def dt(self):
@@ -149,18 +153,18 @@ class GnuChanGUI:
         return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
 
     # key press event
-    def GKey(self, GetValues=None, key1="Return", event=None, Action=GFunc(None)):
+    def GKey(self, GetValues=None, key1="Return", Action=GFunc(None)):
         if key1 == "Return":
             self.window[GetValues].bind("<Return>", "_Enter")
-            if event == GetValues + "_Enter":
+            if self.event == GetValues + "_Enter":
                 Action()
         elif key1 == "Tab":
             self.window[GetValues].bind('<Tab>', '+TAB')
-            if event == GetValues + "+TAB":
+            if self.event == GetValues + "+TAB":
                 Action()
         elif key1 == "ShiftTab":
             self.window[GetValues].bind('<Shift-Tab>', ' ShiftTab')
-            if event == GetValues + "ShiftTab":
+            if self.event == GetValues + "ShiftTab":
                 Action()
     """
         [default.GInput(value='-COMMAND-', size=(60, 1), xStretch=True)]]
@@ -246,7 +250,8 @@ class GnuChanGUI:
 
     default.GWindow(mainWindow=layout)
     """
-    
+
+
     def GColumn(self, winColumn=None, xStretch=None, yStretch=None, EmptySpace=(None, None), visible=True, value=None, bcolor=None):
         return Column(layout=winColumn, key=value, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=visible, background_color=bcolor)
     """
@@ -261,6 +266,7 @@ class GnuChanGUI:
          default.GColumn(MiddleRightLayer, xStretch=True, yStretch=True)],
         [default.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
     """
+
 
     # create Gtab and create GTap Group
     def GTab(self, title, TabLayout=None, value=None):
@@ -286,45 +292,91 @@ class GnuChanGUI:
               border=None):
         return Text(text=title, font=font, key=value, size=size, justification=position, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
                        text_color=tColor, background_color=bColor, border_width=border)
+    """
+    gc.window["text"].update()
+    """
+    
+
     # button widget
     def GButton(self, title="", bImage=None, font="Sans, 20", value=None, size=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), border=None):
         return Button(title, button_color=(bcolor, tcolor), font=font, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, 
                          border_width=border)
+    """
+    if gc.event == "button name or value": click event
+        gc.window["text"].update(gc.GetValues["textInput"])
+    """
+
     # image
     def GImage(self, image=None, value=None, EmptySpace=(None, None), visible=True, size=[None, None]):
         return Image(filename=image, key=value, pad=EmptySpace, visible=visible, size=size)  
+    """
+    if gc.event == "imgButton":
+        gc.window["img"].update("logo2.png")
+    """
+
+    
     # listbox widget
     def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
                  xStretch=False, yStretch=False, tColor=None, bColor=None):
         return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
                    no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bColor)
+    """
+    if gc.event == "addList":
+        for i in range(1, 10):
+            testList.append(i)
+        gc.window["glist"].update(testList)
+    """
+    
+
     # input widget
     def GInput (self, InText="", font="Sans, 20", value=None, size=(None, None), focus=True, position="left", visible=True, PwChars=False, readonly=False, 
                 xStretch=False, yStretch=False, EmptySpace=(None), tcolor=None, bcolor=None, border=None):
         return Input(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position,  pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
                         password_char=PwChars, visible=visible, readonly=readonly,  background_color=bcolor, text_color=tcolor, border_width=border)
+    """
+    if gc.event == "change text":
+        gc.window["text"].update(gc.GetValues["textInput"]) #text input value
+    """
+    
+
     # multiLine widget
     def GMultiline (self, InText="", font=None, value=None, size=(None, None), visible=True, position="left", 
                     xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
         return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
                             expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
                             autoscroll=True, enable_events=True)
-    
-    
+    """
+    if gc.event == "addList":
+        testList += str(random.randint(0, 50)) + "\n"
+        gc.window["glist"].update(testList)
+    """
     
     
     # cheack mark
     def GCheack(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
         return Checkbox(text=title, font=font, key=value, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
     """
-    if event in ["music", "video"]:
-        download = event
+    if gc.event == "checkbox":
+        if gc.GetValues["hl1"]:
+            print("half life 1")
+        if gc.GetValues["hl2"]:
+            print("half life 2")
+        if gc.GetValues["hl3"]:
+            print("half life 3 ?????")
     """
 
 
     def GRadio(self, title=None, font="Sans, 20", groupID=None, value=None, cEvent=True, EmptySpace=(None, None), tcolor=None, bcolor=None):
         return Radio(text=title, font=font, group_id=groupID, key=value, enable_events=cEvent, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
-
+    """
+    if gc.event in ["hl1", "hl2", "hl3"]:
+        if gc.event == "hl1":
+            gc.window["hlGame"].update("can you play half life 1 before ?")
+        elif gc.event == "hl2":
+            gc.window["hlGame"].update("half life 2 good game")
+        elif gc.event == "hl3":
+            gc.window["hlGame"].update("there is no half life 3 :(")
+    """
 
 
 
@@ -332,13 +384,29 @@ class GnuChanGUI:
     # selections
     def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False):
         return Combo(values=values, key=value, default_value=defaultValue, font=font, pad=EmptySpace, visible=visible, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, readonly=True)
+    """
+    [gc.GSelection(values=[1,2,3,4,5], value="GSelection", defaultValue=1, font=gc.font, xStretch=True)],
+    if gc.GetValues["GSelection"]:
+            print(gc.GetValues["GSelection"])
+    """
+    
     def GIncreaseSelection(self, rangeValue=None, startValue=None, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
         return Spin(values=rangeValue, initial_value=startValue, font=font, key=value, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=tcolor, background_color=bcolor, visible=Visible)
+    """
+    [gc.GIncreaseSelection(startValue=1, rangeValue=[1,2,3,4,5], value="GIncreaseSelection", font=gc.font, xStretch=True)],
+    if gc.GetValues["GIncreaseSelection"]:
+            print(gc.GetValues["GIncreaseSelection"])
+    """
+    
     def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
-        return Slider(range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible)
+        return Slider(range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible)   
     def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
         return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
-    
+    """
+    if gc.GetValues["GSlider1"]:
+            gc.window["health"].update(gc.GetValues["GSlider1"])
+                health progressbar       slider is give value
+    """
 
 
 

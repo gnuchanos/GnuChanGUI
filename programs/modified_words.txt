@@ -5,116 +5,116 @@ Art - Sanat
 Abandon "Ebendın" - Terk Etmek, Bırakmak
 Ability "Ebiliti" - Hüner, Beceri, Kabiliyet
 About "Ebaut" - Hakkında, Aşağı Yukarı, Üzere
-Above - Üstünde, Üzerine "Ebov"
-Abroad - Yurt Dışında, Yurtdışı	"Ebrood"
-Absence - Bulunmama, Yokluk	"Ebsıns"
-Absolute - Mutlak, Salt, Kesin	"Ebsulut"
-Absolutely - Mutlaka, Kesinlikle "Ebsulutli"
-Abuse - Suistimal Etmek, Kötüye Kullanmak "Ebus"
-Accept - Kabul Etmek "Eksept"
-Access - Giriş, Erişim, Erişmek	"Ekses"
-Accident - Kaza	"Eksidınt"
-Accompany - Eşlik Etmek	"Ekompani"
-Accomplish - Başarıyla Tamamlamak, Sonuçlandırmak "Ekkompliş"
-Account - Hesap	"Ekkaunt"
-Accurate - Kesin, Doğru	"Ekkurıt"
-Accuse - Suçlamak, İtham Etmek "Ekkuus"
-Achieve - Elde Etmek, Başarmak "Eçiv"
-Achievement - Başarı "Eçivmınt"
-Acknowledge - Kabul Etmek, Kabullenmek	Eknovlıç
-Acquire - Edinmek, Elde Etmek	Ekkuayır
-Across - Karşıya, Karşı karşıya	Ekross
-Act - Davranmak, Hareket Etmek, Eylem	Ekt
-Action - Aksiyon, Eylem	Ekşın
-Active - Etkin, Aktif	Ektiv
-Activity - Faaliyet, Etkinlik, Aktivite	Ektiviti
-Actual - Gerçek	Akşual
-Actually - Aslında	Akşulliy
-Adapt - Uymak, Uyarlamak, Adapte Olmak	Adapt
-Add - Eklemek, İlave Etmek	Edd
-Addition - İlave, Ek	Addişın
-Adequate - Yeterli, Münasip	Edekueyt
-Adjust - Ayarlamak	Edjast
-Adjustment - Ayarlama, Ayar	Edjastmınt
-Administration - İdare, Yönetim	Edministirayşın
-Administrator - İdareci, Yönetici	Edministreytır
-Admire - Hayran Olmak, Beğenmek	Edmayır
-Admiration - Hayranlık	Edmirayşın
-Admission - Kabul, İtiraf	Edmişşın
-Admit - Kabul Etmek, İtiraf Etmek	Edmit
-Adolescent - Ergen	Adolesen
-Adopt - Evlat Edinmek, Benimsemek	Adopt
-Adult - Yetişkin	Edult
-Advance - İlerlemek, Avans, Geliştirmek	Edvens
-Advanced - İleri, Gelişkin	Edvensd
-Advantage - Avantaj, Fayda	Edventıç
-Adventure - Macera, Serüven	Edvençur
-Advertising - Reklamcılık, Reklam	Edvırtaysing
-Advice - Tavsiye, Nasihat	Edvays
-Advise - Nasihat Etmek, Öğütlemek	Edvays
-Adviser - Müşavir, Danışman	Edvaysır
-Advocate - Müdafaa Etmek, Savunmak	Edvokıt
-Affect - Etkilemek	Affekt
-Afford - Parası Yetmek	Efford
-Afraid - Korkmuş, Ürkmüş	Efreyd
-Afternoon - Öğleden Sonra	Aftırnuun
-Again - Tekrar, Yeniden	Egeyn
-Against - Karşı, Aykırı	Egeynst
-Age - Yaş, Çağ	Eyc
-Agency - Ajans, Acente	Eycınsi
-Agenda - Gündem, Ajanda	Ajenda
-Agent - Ajan, Temsilci	Eycınt
-Aggressive - Kavgacı, Agresif	Agressiv
-Ago - Evvel, Önce	Ego
-Agree - Aynı Fikirde Olmak, Anlaşmak, Katılmak	Egrii
-Agreement - Anlaşma, Mutabakat	Egriimınt
-Agriculture - Tarım, Ziraat	Agrikulçır
-Ahead - İleride, İleri	Eheed
-Aid - Yardım Etmek, Yardım	Eyd
-Aim - Amaçlamak, Amaç, Hedef	Eym
-Aircraft - Uçak, Hava Taşıtı	Eyırkıraft
-Airline - Havayolu	Eyırlayn
-Airport - Havalimanı	Eyırport
-Alcohol - Alkol	Alkohöl
-Alive - Canlı	Elayv
-All - Tüm, Hepsi	All
-Alliance - Antlaşma, İttifak	Ellayıns
-Allow - İzin Vermek	Ellov
-Ally - Müttefik	Ellay
-Almost - Hemen Hemen, Neredeyse	"Olmost"
-Alone - Yalnız	"Elon"
-Along - Boyunca "Elong"
-Already - Zaten, Halihazırda	Alredi
-Also - Ayrıca	Olso
-Alternative - Alternatif	Altörnativ
-Although - Rağmen	Oldoh
-Always - Her Zaman, Daima	Alveys
-Amazing - Şaşırtıcı	Emeyzing
-Among - Arasında, Arasına	Emong
-Amount - Meblağ, Tutar	Emount
-Analysis - Analiz, Tahlil	Enalaysis
-Analyze - Analiz Etmek, Incelemek	Enalayz
-Ancient - Antik	Enşınt
-And - Ve	End
-Anger - Öfke, Hiddet	Engır
-Angle - Açı	Engıl
-Angry - Kızgın, Sinirli	Engri
-Animal - Hayvan	Enimal
-Anniversary - Yıldönümü	Enivörsari
-Announce - Duyurmak, Anons Etmek	Ennouns
-Annual - Senelik, Yıllık	Enual
-Another - Öbür, Başka	Enadır
-Anticipate - Beklemek, Ummak	Antisipeyt
-Anxiety - Endişe, Kaygı	Engzayıti
-Anybody - Kimse, Hiç Kimse	Enibadi
-Anymore - Artık	Enimoor
-Anyone - Hiç Kimse, Kimse	Enivan
-Anyway - Neyse, Her Neyse	Enivey
-Anywhere - Her Yer, Herhangi Bir Yer	Eniveer
-Apart - Ayrı	Epart
-Apartment - Daire	Apartmınt
-Apparent - Görünür, Aşikar	Epiyırınt
-Apparently - Belli ki, Anlaşılan, Görünüşte	Epiyırıntli
+Above "Ebov" - Üstünde, Üzerine
+Abroad "Ebrood" - Yurt Dışında, Yurtdışı
+Absence "Ebsıns" - Bulunmama, Yokluk	
+Absolute "Ebsulut" - Mutlak, Salt, Kesin	
+Absolutely "Ebsulutli" - Mutlaka, Kesinlikle 
+Abuse "Ebus" - Suistimal Etmek, Kötüye Kullanmak 
+Accept "Eksept" - Kabul Etmek 
+Access "Ekses" - Giriş, Erişim, Erişmek	
+Accident "Eksidınt" - Kaza	
+Accompany "Ekompani" - Eşlik Etmek	
+Accomplish "Ekkompliş" - Başarıyla Tamamlamak, Sonuçlandırmak 
+Account "Ekkaunt" - Hesap	
+Accurate "Ekkurıt" - Kesin, Doğru	
+Accuse "Ekkuus" - Suçlamak, İtham Etmek 
+Achieve "Eçiv" - Elde Etmek, Başarmak 
+Achievement "Eçivmınt" - Başarı 
+Acknowledge "Eknovlıç" - Kabul Etmek, Kabullenmek	
+Acquire "Ekkuayır" - Edinmek, Elde Etmek	
+Across "Ekross" - Karşıya, Karşı karşıya	
+Act "Ekt" - Davranmak, Hareket Etmek, Eylem	
+Action "Ekşın" - Aksiyon, Eylem	
+Active "Ektiv" - Etkin, Aktif	
+Activity "Ektiviti" - Faaliyet, Etkinlik, Aktivite	
+Actual "Akşual" - Gerçek	
+Actually "Akşulliy" - Aslında	
+Adapt "Adapt" - Uymak, Uyarlamak, Adapte Olmak	
+Add "Edd" - Eklemek, İlave Etmek	
+Addition "Addişın" - İlave, Ek	
+Adequate "Edekueyt" - Yeterli, Münasip	
+Adjust "Edjast" - Ayarlamak	
+Adjustment "Edjastmınt" - Ayarlama, Ayar	
+Administration "Edministirayşın" - İdare, Yönetim	
+Administrator "Edministreytır" - İdareci, Yönetici	
+Admire "Edmayır" - Hayran Olmak, Beğenmek	
+Admiration "Edmirayşın" - Hayranlık	
+Admission "Edmişşın" - Kabul, İtiraf	
+Admit "Edmit" - Kabul Etmek, İtiraf Etmek	
+Adolescent "Adolesen" - Ergen	
+Adopt "Adopt" - Evlat Edinmek, Benimsemek	
+Adult "Edult" - Yetişkin	
+Advance "Edvens" - İlerlemek, Avans, Geliştirmek	
+Advanced "Edvensd" - İleri, Gelişkin	
+Advantage "Edventıç" - Avantaj, Fayda	
+Adventure "Edvençur" - Macera, Serüven	
+Advertising "Edvırtaysing" - Reklamcılık, Reklam	
+Advice "Edvays" - Tavsiye, Nasihat	
+Advise "Edvays" - Nasihat Etmek, Öğütlemek	
+Adviser "Edvaysır" - Müşavir, Danışman	
+Advocate "Edvokıt" - Müdafaa Etmek, Savunmak	
+Affect "Affekt" - Etkilemek	
+Afford "Efford" - Parası Yetmek	
+Afraid "Efreyd" - Korkmuş, Ürkmüş	
+Afternoon "Aftırnuun" - Öğleden Sonra	
+Again "Egeyn" - Tekrar, Yeniden	
+Against "Egeynst" - Karşı, Aykırı	
+Age "Eyc" - Yaş, Çağ	
+Agency "Eycınsi" - Ajans, Acente	
+Agenda "Ajenda" - Gündem, Ajanda	
+Agent "Eycınt" - Ajan, Temsilci	
+Aggressive "Agressiv" - Kavgacı, Agresif	
+Ago "Ego" - Evvel, Önce	
+Agree "Egrii" - Aynı Fikirde Olmak, Anlaşmak, Katılmak	
+Agreement "Egriimınt" - Anlaşma, Mutabakat	
+Agriculture "Agrikulçır" - Tarım, Ziraat	
+Ahead "Eheed" - İleride, İleri	
+Aid "Eyd" - Yardım Etmek, Yardım	
+Aim "Eym" - Amaçlamak, Amaç, Hedef	
+Aircraft "Eyırkıraft" - Uçak, Hava Taşıtı	
+Airline "Eyırlayn" - Havayolu	
+Airport "Eyırport" - Havalimanı	
+Alcohol "Alkohöl" - Alkol	
+Alive "Elayv" - Canlı	
+All "All" - Tüm, Hepsi	
+Alliance "Ellayıns" - Antlaşma, İttifak	
+Allow "Ellov" - İzin Vermek	
+Ally "Ellay" - Müttefik	
+Almost "Olmost" - Hemen Hemen, Neredeyse	
+Alone "Elon" - Yalnız	
+Along "Elong" - Boyunca 
+Already "Alredi" - Zaten, Halihazırda	
+Also "Olso" - Ayrıca	
+Alternative "Altörnativ" - Alternatif	
+Although "Oldoh" - Rağmen	
+Always "Alveys" - Her Zaman, Daima	
+Amazing "Emeyzing" - Şaşırtıcı	
+Among "Emong" - Arasında, Arasına	
+Amount "Emount" - Meblağ, Tutar	
+Analysis "Enalaysis" - Analiz, Tahlil	
+Analyze "Enalayz" - Analiz Etmek, Incelemek	
+Ancient "Enşınt" - Antik	
+And "End" - Ve	
+Anger En"gır - Öfke, Hiddet	
+Angle "Engıl" - Açı	
+Angry "Engri" - Kızgın, Sinirli	
+Animal "Enimal" - Hayvan	
+Anniversary "Enivörsari" - Yıldönümü	
+Announce "Ennouns" - Duyurmak, Anons Etmek	
+Annual "Enual" - Senelik, Yıllık	
+Another "Enadır" - Öbür, Başka	
+Anticipate "Antisipeyt" - Beklemek, Ummak	
+Anxiety "Engzayıti" - Endişe, Kaygı	
+Anybody "Enibadi" - Kimse, Hiç Kimse	
+Anymore "Enimoor" - Artık	
+Anyone "Enivan" - Hiç Kimse, Kimse	
+Anyway "Enivey" - Neyse, Her Neyse	
+Anywhere "Eniveer" - Her Yer, Herhangi Bir Yer	
+Apart "Epart" - Ayrı	
+Apartment "Apartmınt" - Daire	
+Apparent "Epiyırınt" - Görünür, Aşikar	
+Apparently "Epiyırıntli" - Belli ki, Anlaşılan, Görünüşte	
 Appeal - Başvurmak, Temyiz, Cazibe	Eppiyıl
 Appear - Belli Olmak, Görünmek	Eppiyır
 Appearance - Görünüş	Eppirıns
