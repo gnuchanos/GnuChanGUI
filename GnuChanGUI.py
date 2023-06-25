@@ -1,6 +1,6 @@
 from PySimpleGUI import *
 import os, subprocess, random
-
+#pip install PySimpleGUI
 
 
 """
@@ -129,7 +129,7 @@ class GnuChanGUI:
 
 
     # Create Window
-    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=None, location=None):
+    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=None, location=(100,100)):
         self.window = Window(self.title, layout=mainWindow, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
                                 finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=location)
         return self.window
@@ -318,8 +318,11 @@ class GnuChanGUI:
     # listbox widget
     def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
                  xStretch=False, yStretch=False, tColor=None, bColor=None):
-        return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
+        glistbox =  Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, size=size, pad=EmptySpace,
                    no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bColor)
+        return glistbox
+    
+    
     """
     if gc.event == "addList":
         for i in range(1, 10):
@@ -459,7 +462,7 @@ class FileSave:
                     content = self.getValue[self.value]
                     file.write(content)
 """
-xfile = FileSave(value="MULTILINE", filepath="filepath", getValue=GetValues, window=default.window)
+xfile = FileSave(value="MULTILINE", filepath="filepath", getValue=GetValues, window=gc.window)
         if event == "Open Text File":
             xfile.Open()
         elif event == "Save Text File":
@@ -467,3 +470,34 @@ xfile = FileSave(value="MULTILINE", filepath="filepath", getValue=GetValues, win
 """
 
 
+class OpenImage:
+    def __init__(self, imagePath="", imageList="", 
+                 imageUpdate="", imageListUpdate="",
+                 window="") -> None:
+        self.imagePath = imagePath
+        self.imagelist = imageList
+
+        self.window = window
+        self.imageWindow = imageUpdate
+        self.imageListWindow = imageListUpdate
+
+        self.osdir = ""
+
+
+    @property
+    def OpenImageFolder(self):
+        self.imagePath = popup_get_folder(message="Choose Image Folder", no_window=True)
+
+        if self.imageListWindow != "":
+            self.osdir = os.listdir(self.imagePath)
+            self.window[self.imageListWindow].update(self.osdir)
+
+
+    def ChooseImage(self, getValue=[]):
+        if self.osdir != "" and getValue != "":
+            image = getValue[self.imageListWindow]
+            imageName = str(image[0])
+
+            for img in [".png", ".gif"]: # .gif not play
+                if imageName.endswith(img):
+                    self.window[self.imageWindow].update(self.imagePath + "/" + imageName)
