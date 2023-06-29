@@ -15,8 +15,8 @@ layout = [
 
 gc.GWindow(mainWindow=layout)
 
-def GQ():
+def update():
     pass
 
-gc.update(GUpdate=GQ)
+gc.update(GUpdate=update)
 gc.close
