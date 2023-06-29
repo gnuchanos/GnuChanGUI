@@ -129,9 +129,9 @@ class GnuChanGUI:
 
 
     # Create Window
-    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=None, location=(100,100)):
+    def GWindow(self, mainWindow="Default", TopMode=False, rightClickMenu=None):
         self.window = Window(self.title, layout=mainWindow, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
-                                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=location)
+                                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0))
         return self.window
     """
     window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
