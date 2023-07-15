@@ -11,6 +11,7 @@ gMenu = [
 
 layout = [
     [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
+    
 ]
 
 gc.GWindow(mainWindow=layout)

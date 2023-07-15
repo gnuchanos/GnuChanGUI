@@ -96,7 +96,7 @@ class GnuChanGUI:
         self.title = Title
         self.resizable = resizable
         self.finalize = finalize
-        self.font = "sans, 20"
+        self.font = "sans, 15"
 
         self.event = None
         self.GetValues = None
@@ -344,7 +344,7 @@ class GnuChanGUI:
                     xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
         return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
                             expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
-                            autoscroll=True, enable_events=True)
+                            autoscroll=True, enable_events=True, auto_size_text=True)
     """
     if gc.event == "addList":
         testList += str(random.randint(0, 50)) + "\n"
@@ -435,35 +435,53 @@ class FileSave:
         self.getValue = getValue
         self.window = window
 
+        self.content = None
+        self.filename = None
+
+        self.fileOpen = False
+
     @property
     def Open(self):
-            filename = popup_get_file('Select a file to open', no_window=True)
+            self.filename = popup_get_file('Select a file to open', no_window=True)
             #file path text file path
             if self.filepath != None:
-                self.window[self.filepath].update(filename)
+                self.window[self.filepath].update(self.filename)
             # open text file with popup_get_file
-            if filename:
-                with open(filename, 'r') as file:
-                    content = file.read()
-                    self.window[self.value].update(content)
-                    
+            if self.filename:
+                with open(self.filename, 'r') as file:
+                    self.content = file.read()
+                    self.window[self.value].update(self.content)
+                    self.fileOpen = True
     @property
     def SaveAs(self):
-            filename = popup_get_file('Select a file to save', save_as=True, no_window=True)
-            #file path text file path
-            if self.filepath != None:
-                self.window[self.filepath].update(filename)
-            # text save file with popup_get_file
-            if filename:
-                with open(filename, 'w') as file:
-                    content = self.getValue[self.value]
-                    file.write(content)
+        self.filename = popup_get_file('Select a file to save', save_as=True, no_window=True)
+        if self.filepath != None:
+            self.window[self.filepath].update(self.filename)
+        if self.filename:
+            self.content = self.window[self.value].get()
+            with open(self.filename, 'w') as file:
+                file.write(self.content)
+                self.fileOpen = True
+
+    @property
+    def save(self):
+        if self.fileOpen == True:
+            self.content = self.window[self.value].get()
+            with open(self.filename, 'w') as file:
+                file.write(self.content)
+
+
+
 """
-xfile = FileSave(value="MULTILINE", filepath="filepath", getValue=GetValues, window=default.window)
-        if event == "Open Text File":
-            xfile.Open()
-        elif event == "Save Text File":
-            xfile.SaveAs()
+textOpen = FileSave(getValue="multiLineText", value="multiLineText", filepath="textPath", window=gc.window)
+def update():
+    if gc.event == "Open File":
+        textOpen.Open
+    elif gc.event == "Save As":
+        textOpen.SaveAs
+    elif gc.event == "Save":
+        textOpen.save
+        print(textOpen.filepath, " | ")
 """
 
 
