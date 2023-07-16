@@ -27,29 +27,6 @@ password_char -> PwChars
 """
 
 
-"""
-```
-event, GetValues = default.window.read(timeout=60)
-
-event ---> everythings is event like button click, keyboard, input, multiline,
-key ---> Getvalues ı give you 1 example you can understan why ı change key name for GetValues
-
->gc is class name
-> input value
-[gc.GInput(value="ButtonNameChanger")],
-> I give a value to the button because if the button name changes, the button's click event won't work
-[gc.GButton("Test Button", value="Button")] 
-> write button name --> value="ButtonNameChanger" -> gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
-
-if gc.event == "Button":
-    gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
-
-window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
-window["button"].update(gc.window["text"].get())   --> text name change button name
-```
-"""
-
-
 
 # testing Func System
 class GFunc():
@@ -66,29 +43,45 @@ class GFunc():
 class GColors:
     def __init__(self, colors=0) -> None:
         self.colors = colors
+
     @property
     def gnuChanColors(self):
-        gnuChanColors = ["#9d4edd", "#240046", "#3c096c", "#5a189a"]
-        return gnuChanColors[self.colors-1]
+        try:
+            gnuChanColors = ["#9d4edd", "#240046", "#3c096c", "#5a189a"]
+            return gnuChanColors[self.colors-1]
+        except IndexError:
+            popup(f"There is no much color in here-> {len(gnuChanColors)}")
+            
     @property
     def purple(self):
-        purples = ["#10011f", "#220242", "#340463", "#440582", "#5608a3", "#6a0cc7", "#7a10e3", "#8812fc"]
-        return purples[self.colors-1]
+        try:
+            purples = ["#10011f", "#220242", "#340463", "#440582", "#5608a3", "#6a0cc7", "#7a10e3", "#8812fc"]
+            return purples[self.colors-1]
+        except IndexError:
+            popup(f"There is no much color in here-> {len(purples)}")
+        
     @property
     def blue(self):
-        blues = ["#02011c", "#04023d", "#080469", "#0b068f", "#0d07a8", "#130cc4", "#130be0", "#1108fc"]
-        return blues[self.colors-1]
+        try:
+            blues = ["#02011c", "#04023d", "#080469", "#0b068f", "#0d07a8", "#130cc4", "#130be0", "#1108fc"]
+            return blues[self.colors-1]
+        except IndexError:
+            popup(f"There is no much color in here-> {len(blues)}")
+ 
     @property
     def green(self):
-        greens = ["#013001", "#035703", "#057a05", "#069606", "#09ba09", "#0dd10d", "#0ee60e", "#05fa05"]
-        return greens[self.colors-1]
+        try:
+            greens = ["#013001", "#035703", "#057a05", "#069606", "#09ba09", "#0dd10d", "#0ee60e", "#05fa05"]
+            return greens[self.colors-1]
+        except IndexError:
+            popup(f"There is no much color in here-> {len(greens)}")
+
+class Random:
     @property
-    def gRandom(self):
+    def Color(self):
         randomColor = random.choice(["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "#FFFFFF", "#000000", "#800080", "#FFA500", "#FFC0CB", "#008080", "#FFD700", "#A52A2A", "#FF1493", "#4B0082", "#00FF7F", "#1E90FF", "#FF4500", "#FF69B4"])
         return randomColor
-"""
-GColors(colors=5).blues()
-"""
+
 
 class GnuChanGUI:
     def __init__(self, Title="Defaul Title", Size=(None, None), resizable=False, finalize=True) -> None:
@@ -96,11 +89,15 @@ class GnuChanGUI:
         self.title = Title
         self.resizable = resizable
         self.finalize = finalize
-        self.font = "sans, 15"
+
+        self.fontName = "Sans"
+        self.fontSize = 15
+        self.font = f"{self.fontName}, {self.fontSize}"
 
         self.event = None
         self.GetValues = None
     
+
     def update(self, GUpdate=GFunc(None)):
         while True:
             self.event, self.GetValues = self.window.read(timeout=60)
@@ -108,14 +105,17 @@ class GnuChanGUI:
                 break
             GUpdate()
     
+
     @property
     def close(self):
         self.window.close()
+
 
     @property
     def dt(self):
         dt = .05
         return dt
+
 
     # Theme
     def Theme(self, themeName="GnuchanTheme", text="#9d4edd", background="#240046", input="#3c096c", text_input="#9d4edd", 
@@ -159,31 +159,13 @@ class GnuChanGUI:
             if self.event == GetValues + "_Enter":
                 Action()
         elif key1 == "Tab":
-            self.window[GetValues].bind('<Tab>', '+TAB')
+            self.window[GetValues].bind("<Tab>", "+TAB")
             if self.event == GetValues + "+TAB":
                 Action()
-        elif key1 == "ShiftTab":
-            self.window[GetValues].bind('<Shift-Tab>', ' ShiftTab')
-            if self.event == GetValues + "ShiftTab":
-                Action()
     """
-        [default.GInput(value='-COMMAND-', size=(60, 1), xStretch=True)]]
-
-        def terminalAct():
-            command = GetValues['-COMMAND-']
-            output = execute_command(command)
-            #print(f"$ {command}")
-            print(output)
-            default.window["-COMMAND-"].update("")
-
-            if command == "clear":
-                default.window["log"].update("")
-    while True:
-        event, GetValues = default.window.read(timeout=24)
-        if event == WIN_CLOSED or event == "Exit":
-            break
-
-        default.GKey(GetValues="-COMMAND-", key1="Return", event=event, Action=terminalAct)
+    def sPrint():
+        return gc.window["multiLineText"].update("")
+    gc.GKey(GetValues="multiLineText",Action=sPrint,key1="Tab")
     """
 
     def GWidgetUpdate(self, GWidgetValue=None, getValue=None):
@@ -221,12 +203,21 @@ class GnuChanGUI:
         combostyle, style_name = combo.ttk_style, combo.ttk_style_name
         combostyle.configure(style_name, selectbackground=None, selectforeground=None, borderwidth=0)
     #GSelectionFixer border=0
-    def GMultilineSpaceFixer(self, value=None, ):
+    def GMultilineSpaceFixer(self, value=None):
         char = Text.char_width_in_pixels(self.font)
         tabs = (4*char, 'left', 4*char, 'left')
         multiline = self.window[value]
         multiline.Widget.configure(tabs=tabs)
     #GMultilineSpaceFixer tab space
+
+
+    # change font size real time
+    def fontSizePlus(self, windowValue=None):
+        self.fontSize += 2
+        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
+    def fontSizeMinus(self, windowValue=None):
+        self.fontSize -= 2
+        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
 
 
     # window widgets
@@ -464,7 +455,7 @@ class FileSave:
                 self.fileOpen = True
 
     @property
-    def save(self):
+    def Save(self):
         if self.fileOpen == True:
             self.content = self.window[self.value].get()
             with open(self.filename, 'w') as file:
