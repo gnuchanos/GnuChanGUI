@@ -76,6 +76,7 @@ class GColors:
         except IndexError:
             popup(f"There is no much color in here-> {len(greens)}")
 
+
 class Random:
     @property
     def Color(self):
@@ -203,12 +204,7 @@ class GnuChanGUI:
         combostyle, style_name = combo.ttk_style, combo.ttk_style_name
         combostyle.configure(style_name, selectbackground=None, selectforeground=None, borderwidth=0)
     #GSelectionFixer border=0
-    def GMultilineSpaceFixer(self, value=None):
-        char = Text.char_width_in_pixels(self.font)
-        tabs = (4*char, 'left', 4*char, 'left')
-        multiline = self.window[value]
-        multiline.Widget.configure(tabs=tabs)
-    #GMultilineSpaceFixer tab space
+
 
 
     # change font size real time
@@ -460,9 +456,6 @@ class FileSave:
             self.content = self.window[self.value].get()
             with open(self.filename, 'w') as file:
                 file.write(self.content)
-
-
-
 """
 textOpen = FileSave(getValue="multiLineText", value="multiLineText", filepath="textPath", window=gc.window)
 def update():
