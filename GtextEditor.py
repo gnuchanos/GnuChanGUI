@@ -7,7 +7,8 @@ gc.Theme()
 gMenu = [
     ["File", ["Open File", "Save As", "Save"]],
     ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
-    ["System", ["Font +", "Font -", "Exit"]] ]
+    ["Text", ["Font +", "Font -"]],
+    ["System", ["Exit"]] ]
 
 filePath = "Open File or save File"
 textEdit = [
@@ -19,7 +20,6 @@ layout = [
     [gc.GColumn(winColumn=textEdit, xStretch=True, yStretch=True)] ]
 
 gc.GWindow(mainWindow=layout)
-gc.GMultilineSpaceFixer(value="multiLineText")
 
 textOpen = FileSave(getValue="multiLineText", value="multiLineText", filepath="textPath", window=gc.window)
 
