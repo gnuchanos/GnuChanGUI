@@ -16,4 +16,3 @@ def update():
     pass
 
 gc.update(GUpdate=update)
-gc.close

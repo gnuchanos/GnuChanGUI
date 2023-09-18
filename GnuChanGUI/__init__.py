@@ -1,7 +1,9 @@
 from PySimpleGUI import *
 import random
 
-
+"""
+pip install  git+https://github.com/gnuchanos/gnuchangui
+"""
 
 """
 ```
@@ -41,40 +43,110 @@ class GFunc():
 
 
 class GColors:
-    def __init__(self, colors=0) -> None:
-        self.colors = colors
+    def __init__(self) -> None:
+        # Red Colors and Shades
+        self.red1 = "#FF0000"
+        self.red2 = "#FF4500"
+        self.red3 = "#DC143C"
+        self.red4 = "#FF6347"
+        self.red5 = "#FFA07A"
+        self.red6 = "#B22222"
+        self.red7 = "#FF0000"
+        self.red8 = "#8B0000"
 
-    @property
-    def gnuChanColors(self):
-        try:
-            gnuChanColors = ["#9d4edd", "#240046", "#3c096c", "#5a189a"]
-            return gnuChanColors[self.colors-1]
-        except IndexError:
-            popup(f"There is no much color in here-> {len(gnuChanColors)}")
-            
-    @property
-    def purple(self):
-        try:
-            purples = ["#10011f", "#220242", "#340463", "#440582", "#5608a3", "#6a0cc7", "#7a10e3", "#8812fc"]
-            return purples[self.colors-1]
-        except IndexError:
-            popup(f"There is no much color in here-> {len(purples)}")
-        
-    @property
-    def blue(self):
-        try:
-            blues = ["#02011c", "#04023d", "#080469", "#0b068f", "#0d07a8", "#130cc4", "#130be0", "#1108fc"]
-            return blues[self.colors-1]
-        except IndexError:
-            popup(f"There is no much color in here-> {len(blues)}")
- 
-    @property
-    def green(self):
-        try:
-            greens = ["#013001", "#035703", "#057a05", "#069606", "#09ba09", "#0dd10d", "#0ee60e", "#05fa05"]
-            return greens[self.colors-1]
-        except IndexError:
-            popup(f"There is no much color in here-> {len(greens)}")
+        # Green Colors and Shades
+        self.green1 = "#008000"
+        self.green2 = "#00FF00"
+        self.green3 = "#7FFF00"
+        self.green4 = "#228B22"
+        self.green5 = "#32CD32"
+        self.green6 = "#ADFF2F"
+        self.green7 = "#556B2F"
+        self.green8 = "#008B8B"
+
+        # Blue Colors and Shades
+        self.blue1 = "#0000FF"
+        self.blue2 = "#000080"
+        self.blue3 = "#87CEEB"
+        self.blue4 = "#00008B"
+        self.blue5 = "#ADD8E6"
+        self.blue6 = "#1E90FF"
+        self.blue7 = "#0000CD"
+        self.blue8 = "#191970"
+
+        # Yellow Colors and Shades
+        self.yellow1 = "#FFFF00"
+        self.yellow2 = "#FFD700"
+        self.yellow3 = "#FFA500"
+        self.yellow4 = "#FFC0CB"
+        self.yellow5 = "#FF4500"
+        self.yellow6 = "#FF6347"
+        self.yellow7 = "#FFFFE0"
+        self.yellow8 = "#FFFF66"
+
+        # Orange Colors and Shades
+        self.orange1 = "#FFA500"
+        self.orange2 = "#FF4500"
+        self.orange3 = "#FF6347"
+        self.orange4 = "#FF8C00"
+        self.orange5 = "#FF7F50"
+        self.orange6 = "#FFA07A"
+        self.orange7 = "#FFD700"
+        self.orange8 = "#FFB6C1"
+
+        # Navy Colors and Shades
+        self.navy1 = "#000080"
+        self.navy2 = "#00008B"
+        self.navy3 = "#0000CD"
+        self.navy4 = "#0000FF"
+        self.navy5 = "#000066"
+        self.navy6 = "#000044"
+        self.navy7 = "#191970"
+        self.navy8 = "#333399"
+
+        # Pink Colors and Shades
+        self.pink1 = "#FFC0CB"
+        self.pink2 = "#FF69B4"
+        self.pink3 = "#FF1493"
+        self.pink4 = "#DB7093"
+        self.pink5 = "#C71585"
+        self.pink6 = "#FFB6C1"
+        self.pink7 = "#FFC0CB"
+        self.pink8 = "#FF69B4"
+
+        # Purple Colors and Shades
+        self.purple1 = "#800080"
+        self.purple2 = "#8A2BE2"
+        self.purple3 = "#9932CC"
+        self.purple4 = "#9400D3"
+        self.purple5 = "#800080"
+        self.purple6 = "#9370DB"
+        self.purple7 = "#8A2BE2"
+        self.purple8 = "#9932CC"
+
+        # Turquoise Colors and Shades
+        self.turquoise1 = "#40E0D0"
+        self.turquoise2 = "#00CED1"
+        self.turquoise3 = "#20B2AA"
+        self.turquoise4 = "#008B8B"
+        self.turquoise5 = "#00FFFF"
+        self.turquoise6 = "#00CED1"
+        self.turquoise7 = "#20B2AA"
+        self.turquoise8 = "#008B8B"
+
+        # Gray Colors and Shades
+        self.gray1 = "#808080"
+        self.gray2 = "#A9A9A9"
+        self.gray3 = "#C0C0C0"
+        self.gray4 = "#D3D3D3"
+        self.gray5 = "#DCDCDC"
+        self.gray6 = "#F5F5F5"
+        self.gray7 = "#696969"
+        self.gray8 = "#2F4F4F"
+
+        # Black and White
+        self.black = "#000000"
+        self.white = "#FFFFFF"
 
 
 class Random:
@@ -153,6 +225,7 @@ class GnuChanGUI:
     def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
         return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
 
+
     # key press event
     def GKey(self, GetValues=None, key1="Return", Action=GFunc(None)):
         if key1 == "Return":
@@ -168,6 +241,7 @@ class GnuChanGUI:
         return gc.window["multiLineText"].update("")
     gc.GKey(GetValues="multiLineText",Action=sPrint,key1="Tab")
     """
+
 
     def GWidgetUpdate(self, GWidgetValue=None, getValue=None):
         return self.window[GWidgetValue].update(getValue)
@@ -204,7 +278,6 @@ class GnuChanGUI:
         combostyle, style_name = combo.ttk_style, combo.ttk_style_name
         combostyle.configure(style_name, selectbackground=None, selectforeground=None, borderwidth=0)
     #GSelectionFixer border=0
-
 
 
     # change font size real time
@@ -366,8 +439,6 @@ class GnuChanGUI:
     """
 
 
-
-
     # selections
     def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False):
         return Combo(values=values, key=value, default_value=defaultValue, font=font, pad=EmptySpace, visible=visible, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, readonly=True)
@@ -398,7 +469,7 @@ class GnuChanGUI:
 
 
 
-    # littile things
+    # Little things
     @property
     def Push(self):
         return Push()
@@ -421,10 +492,8 @@ class FileSave:
         self.filepath = filepath
         self.getValue = getValue
         self.window = window
-
         self.content = None
         self.filename = None
-
         self.fileOpen = False
 
     @property

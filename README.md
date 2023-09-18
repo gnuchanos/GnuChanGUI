@@ -3,7 +3,9 @@
 
 important note
 ```
-python -m PySimpleGUI.PySimpleGUI upgrade
+how you can install gnuchangui
+pip install git+https://github.com/gnuchanos/gnuchangui
+
 position | left - center - right
 
 font -> font
@@ -15,12 +17,12 @@ default_value -> defaultValue
 
 expand_x --> xStretch
 expand_y --> yStretch
-justification -> position
+justification -> position > left,center,right
 text_color -> tColor
 background_color -> bColor
-border_width -> border
+border_width -> border > border size
 image_filename -> bImage
-password_char -> PwChars
+password_char -> PwChars > 123 > ***
 ```
 
 
@@ -48,7 +50,7 @@ example code
 
 ``` 
 
-from GnuChanGUI import GnuChanGUI
+from GnuChanGUI import *
 import time
 
 gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
@@ -65,17 +67,11 @@ layout = [
 
 gc.GWindow(mainWindow=layout)
 
-
-
-
-def GQ():
+def update(): #note this is works like a loop
     pass
 
-    
-
-gc.update(GUpdate=GQ)
-
-gc.window.close()
+gc.update(GUpdate=update)
+#gc.window.close()
 
 
 ```

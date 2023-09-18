@@ -11,6 +11,7 @@ gMenu = [
     ["System", ["Exit"]] ]
 
 filePath = "Open File or save File"
+
 textEdit = [
     [gc.GMultiline(value="multiLineText", font=gc.font, xStretch=True, yStretch=True)],
     [gc.GText(title="File Path |:", font=gc.font), gc.GText(title=filePath, font=gc.font, value="textPath")] ]
@@ -45,4 +46,3 @@ def update():
 
 
 gc.update(GUpdate=update)
-gc.close
