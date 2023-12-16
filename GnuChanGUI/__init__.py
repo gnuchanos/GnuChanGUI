@@ -1,0 +1,604 @@
+from PySimpleGUI import *
+import random
+
+"""
+pip install  git+https://github.com/gnuchanos/gnuchangui
+"""
+
+"""
+python -m venv ./venv
+./venv/bin/activate 
+"""
+
+"""
+```
+python -m PySimpleGUI.PySimpleGUI upgrade
+position | left - center - right
+
+font -> font
+visible -> visible
+readonly -> readonly and  disabled -> readonly
+no_scrollbar -> noScroolBar
+group_id -> groupID
+default_value -> defaultValue
+
+expand_x --> xStretch
+expand_y --> yStretch
+justification -> position
+text_color -> tColor
+background_color -> bcolor
+border_width -> border
+image_filename -> bImage
+password_char -> PwChars
+```
+"""
+
+
+
+# testing Func System
+class GFunc():
+    def __init__(self, func, *args, **kwargs):
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+    def __call__(self):
+        self.finished = True
+        return self.func(*self.args, **self.kwargs)
+
+# more colors
+class GColors:
+    def __init__(self) -> None:
+        # Red Colors and Shades
+        self.red1 = "#FF0000"
+        self.red2 = "#FF4500"
+        self.red3 = "#DC143C"
+        self.red4 = "#FF6347"
+        self.red5 = "#FFA07A"
+        self.red6 = "#B22222"
+        self.red7 = "#FF0000"
+        self.red8 = "#8B0000"
+
+        # Green Colors and Shades
+        self.green1 = "#008000"
+        self.green2 = "#00FF00"
+        self.green3 = "#7FFF00"
+        self.green4 = "#228B22"
+        self.green5 = "#32CD32"
+        self.green6 = "#ADFF2F"
+        self.green7 = "#556B2F"
+        self.green8 = "#008B8B"
+
+        # Blue Colors and Shades
+        self.blue1 = "#0000FF"
+        self.blue2 = "#000080"
+        self.blue3 = "#87CEEB"
+        self.blue4 = "#00008B"
+        self.blue5 = "#ADD8E6"
+        self.blue6 = "#1E90FF"
+        self.blue7 = "#0000CD"
+        self.blue8 = "#191970"
+
+        # Yellow Colors and Shades
+        self.yellow1 = "#FFFF00"
+        self.yellow2 = "#FFD700"
+        self.yellow3 = "#FFA500"
+        self.yellow4 = "#FFC0CB"
+        self.yellow5 = "#FF4500"
+        self.yellow6 = "#FF6347"
+        self.yellow7 = "#FFFFE0"
+        self.yellow8 = "#FFFF66"
+
+        # Orange Colors and Shades
+        self.orange1 = "#FFA500"
+        self.orange2 = "#FF4500"
+        self.orange3 = "#FF6347"
+        self.orange4 = "#FF8C00"
+        self.orange5 = "#FF7F50"
+        self.orange6 = "#FFA07A"
+        self.orange7 = "#FFD700"
+        self.orange8 = "#FFB6C1"
+
+        # Navy Colors and Shades
+        self.navy1 = "#000080"
+        self.navy2 = "#00008B"
+        self.navy3 = "#0000CD"
+        self.navy4 = "#0000FF"
+        self.navy5 = "#000066"
+        self.navy6 = "#000044"
+        self.navy7 = "#191970"
+        self.navy8 = "#333399"
+
+        # Pink Colors and Shades
+        self.pink1 = "#FFC0CB"
+        self.pink2 = "#FF69B4"
+        self.pink3 = "#FF1493"
+        self.pink4 = "#DB7093"
+        self.pink5 = "#C71585"
+        self.pink6 = "#FFB6C1"
+        self.pink7 = "#FFC0CB"
+        self.pink8 = "#FF69B4"
+
+        # Purple Colors and Shades
+        self.purple1 = "#800080"
+        self.purple2 = "#8A2BE2"
+        self.purple3 = "#9932CC"
+        self.purple4 = "#9400D3"
+        self.purple5 = "#800080"
+        self.purple6 = "#9370DB"
+        self.purple7 = "#8A2BE2"
+        self.purple8 = "#9932CC"
+
+        # Turquoise Colors and Shades
+        self.turquoise1 = "#40E0D0"
+        self.turquoise2 = "#00CED1"
+        self.turquoise3 = "#20B2AA"
+        self.turquoise4 = "#008B8B"
+        self.turquoise5 = "#00FFFF"
+        self.turquoise6 = "#00CED1"
+        self.turquoise7 = "#20B2AA"
+        self.turquoise8 = "#008B8B"
+
+        # Gray Colors and Shades
+        self.gray1 = "#808080"
+        self.gray2 = "#A9A9A9"
+        self.gray3 = "#C0C0C0"
+        self.gray4 = "#D3D3D3"
+        self.gray5 = "#DCDCDC"
+        self.gray6 = "#F5F5F5"
+        self.gray7 = "#696969"
+        self.gray8 = "#2F4F4F"
+
+        # Black and White
+        self.black = "#000000"
+        self.white = "#FFFFFF"
+
+
+class Random:
+    @property
+    def Color(self):
+        randomColor = random.choice(["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "#FFFFFF", "#000000", "#800080", "#FFA500", "#FFC0CB", "#008080", "#FFD700", "#A52A2A", "#FF1493", "#4B0082", "#00FF7F", "#1E90FF", "#FF4500", "#FF69B4"])
+        return randomColor
+
+class GnuChanOSColor:
+    def __init__(self) -> None:
+        self.colors0 = "#150129"
+        self.colors1 = "#240046"  
+        self.colors2 = "#5a189a" 
+        self.colors3 = "#9d4edd" 
+        self.colors4 = "#c77dff"  
+        self.colors5 = "#3c096c"
+
+
+#engine
+class GnuChanGUI:
+    def __init__(self, Title="Defaul Title", Size=(None, None), resizable=False, finalize=True) -> None:
+        self.size = Size
+        self.title = Title
+        self.resizable = resizable
+        self.finalize = finalize
+
+        self.fontName = "Sans"
+        self.fontSize = 15
+        self.font = f"{self.fontName}, {self.fontSize}"
+
+        self.code = """
+
+Warning! you forget to create layout you must do like this 
+from GnuChanGUI import *
+
+def printDebug(name):
+    print(f"my name:{name}")
+
+def main():
+
+    gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=True)
+    gc.Theme()
+
+    gMenu = [
+    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
+    ["System", ["Exit"]] ]
+
+    layout = [
+    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)] ]
+    gc.GWindow(mainWindow=layout)
+
+    def update():
+        printDebug(name="GnuChanOS")
+
+    gc.update(GUpdate=update)
+
+if __name__ == "__main__":
+    main()
+"""
+        self.layout = [[self.GText(title=self.code, xStretch=True, yStretch=True, bcolor="black")]]
+
+        self.event = None
+        self.GetValues = None
+        self.closeWindow = False
+    
+
+    def update(self, GUpdate=GFunc(None)):
+        while True:
+            self.event, self.GetValues = self.window.read(timeout=60)
+            if self.event in (WIN_CLOSED, "Exit"):
+                break
+            if self.closeWindow:
+                break
+            GUpdate()
+        self.window.close() # if loop finish wnidow close
+    
+
+    @property
+    def close(self):
+        self.window.close()
+
+
+    @property
+    def dt(self):
+        dt = .05
+        return dt
+
+
+    # Theme
+    def Theme(self, themeName="GnuchanTheme", text="#9d4edd", background="#240046", input="#3c096c", text_input="#9d4edd", 
+                     scroll="#5a189a", button=('#c77dff', '#3c096c'), progress=('#c77dff', '#3c096c'), 
+                     border=0, slider_depth=0, progress_depth=0):
+        LOOK_AND_FEEL_TABLE[themeName] = {
+                                        'BACKGROUND': background, 'TEXT': text, 'INPUT': input, 'TEXT_INPUT': text_input,
+                                        'SCROLL': scroll, 'BUTTON': button, 'PROGRESS': progress, 
+                                        'BORDER': border, 'SLIDER_DEPTH': slider_depth, 'PROGRESS_DEPTH': progress_depth}
+        theme(themeName)
+
+
+    # Create Window
+    def GWindow(self, mainWindow=None, TopMode=False, rightClickMenu=None, locationX=100, locationY=100):
+        if mainWindow != None:
+            self.layout = mainWindow
+            #if mainWindow is None self.layout can warning user and self.layout is ready warning layout
+        self.window = Window(self.title, layout=self.layout, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
+                                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY))
+        self.window.finalize() # this is new for close window good way
+        return self.window
+        """
+        window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
+        """
+
+
+    def GTitleBar(self, title="Window Title", icon=None, font="Sans, 12", tcolor=None, bcolor=None):
+        return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)
+        """
+        Titlebar: Disable window resizable, I don't know why.
+        ı must ask this soon
+        """
+
+
+    # window top menu bar regular default or custom for theme
+    def GMenu(self, winMenu=None, font="Sans, 20"):
+        return Menu(menu_definition=winMenu, font=font)
+    def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
+        return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
+
+
+    # key press event
+    def GKey(self, GetValues=None, key1="Return", Action=GFunc(None)):
+        if key1 == "Return":
+            self.window[GetValues].bind("<Return>", "_Enter")
+            if self.event == GetValues + "_Enter":
+                Action()
+        elif key1 == "Tab":
+            self.window[GetValues].bind("<Tab>", "+TAB")
+            if self.event == GetValues + "+TAB":
+                Action()
+        """
+        def sPrint():
+            return gc.window["multiLineText"].update("")
+        gc.GKey(GetValues="multiLineText",Action=sPrint,key1="Tab")
+        """
+
+
+    # this is works only input not multiline
+    def GInputSelectALL(self, gInputValue):
+        self.window[gInputValue].bind("<Control-A>", " CTRL-A", propagate=False)
+        self.window[gInputValue].bind("<Control-a>", " CTRL-A", propagate=False)
+
+    def GFocus(self, GetValues=None):
+        return self.window[GetValues].set_focus() 
+        """
+        focus not Finish
+        """
+
+    def GLog(self, value=None, font="Sans, 15", size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, visible=True):
+        return Output(key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=None, background_color=None, visible=visible, 
+                      autoscroll_only_at_bottom=True)
+        """
+        I must disable the scrollbar and make it readonly.
+
+        i love this becouse this can show print() in screen
+        """
+
+
+
+    # ekstra options
+    # This setting only works under GWindow. #"this is tk"
+    def GListBoxBorderSize(self, border=0, value=None):
+        return self.window[value].Widget.configure(borderwidth=border, relief=tk.GROOVE)
+
+    def GframeBorderSizeAndColor(self, value=None, border=1, borderColor="black"):
+        return self.window[value].Widget.configure(highlightthickness=border, highlightbackground=borderColor, relief=tk.GROOVE)
+
+    def GSelectionBorderSize(self, border=0, value=None, borderColor=GColors().white, highlightcolor=GColors().red1):
+        combo = self.window[value]
+        combostyle, style_name = combo.ttk_style, combo.ttk_style_name
+        combostyle.configure(style_name, selectbackground=borderColor, selectforeground=highlightcolor, borderwidth=border)
+
+    def GMultilineTabSpace(self, gMultilineFont, gMultilineValue):
+        char = Text.char_width_in_pixels(gMultilineFont)
+        tabs = (2*char, 'left', 4*char, 'left',)
+        multiline = self.window[gMultilineValue]
+        multiline.Widget.configure(tabs=tabs)
+
+    # ALL Style Changer
+    # Font Size Changer
+    def fontSizePlus(self, windowValue=None):
+        self.fontSize += 2
+        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
+    def fontSizeMinus(self, windowValue=None):
+        self.fontSize -= 2
+        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
+    def ChangeTextColor(self, textValue, color="white"):
+        self.window[textValue].update(text_color=color)
+    def ChangeBackgroundColor(self, Value, color="black"):
+        self.window[Value].update(background_color=color)
+    def BorderSizeAndColors(self, gMultilineValue="", borderColor="white", highlightcolor="black", borderSize=0):
+        self.borderSize = borderSize
+        if self.borderSize >= 0:
+            self.window[gMultilineValue].Widget.configure(highlightbackground=borderColor, highlightcolor=highlightcolor, highlightthickness=self.borderSize)
+
+    # window widgets
+    def GFrame(self, title=None, winLayout=[[]], value=None, infoWındow=None, border=1, font="Sans, 20", size=(None, None), xStretch=False, yStretch=False, EmptySpace=(None, None), tColor=None, bcolor=None, visible=True):
+        return Frame(title=title, layout=winLayout, key=value, border_width=border, tooltip=infoWındow, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, title_color=tColor, background_color=bcolor, visible=visible)
+        """
+        test1 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [default.GText("test", xStretch=True, position="center")]]
+        test2 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [default.GText("test", xStretch=True, position="center")]]
+        test3 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [default.GText("test", xStretch=True, position="center")]]
+        test4 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [default.GText("test", xStretch=True, position="center")]]
+
+        layout = [
+            [default.GFrame(winLayout=test1, value="test1", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
+            default.GFrame(winLayout=test2, value="test2", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())],
+            [default.GFrame(winLayout=test3, value="test3", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
+            default.GFrame(winLayout=test4, value="test4", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())]]
+
+        default.GWindow(mainWindow=layout)
+        """
+
+
+    def GColumn(self, winColumn=None, size=(None, None), xStretch=None, yStretch=None, EmptySpace=(None, None), visible=True, value=None, bcolor=None):
+        return Column(layout=winColumn, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=visible, background_color=bcolor)
+        """
+        TopLayer = [[default.GText(title="Top Layer", position="center", font="Sans, 20", bColor=GColors(colors=1).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+        MiddleLeftLayer = [[default.GText(title="Middle Left", position="center", font="Sans, 20",bColor=GColors(colors=1).greens(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+        MiddleRightLayer = [[default.GText(title="Middle Right", position="center", font="Sans, 20", bColor=GColors(colors=1).purples(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+        BottomLayer = [[default.GText(title="Bottom Layer", position="center", font="Sans, 20", bColor=GColors(colors=5).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+
+        layout = [
+            [default.GColumn(TopLayer, xStretch=True, yStretch=True)],
+            [default.GColumn(MiddleLeftLayer, xStretch=True, yStretch=True), 
+            default.GColumn(MiddleRightLayer, xStretch=True, yStretch=True)],
+            [default.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
+        """
+
+
+    # create Gtab and create GTap Group
+    def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
+        return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
+
+    def GTabGroup(self, TabGroupLayout=None, value=None, font="Sans, 20",
+        bcolor=None, sbcolor=None, tbcolor=None, tcolor=None, fcolor=None, stcolor=None, size=(None, None)):
+        return TabGroup(layout=TabGroupLayout, key=value, expand_x=True, expand_y=True, size=size,
+        background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor,
+        title_color=tcolor, focus_color=fcolor, selected_title_color=stcolor, font=font, tab_border_width=0, border_width=0)
+        """
+        tab1 = [[default.GText(title="tab1", font=defaultFont, bColor="black", xStretch=True)]]
+        tab2 = [[default.GText(title="tab2", font=defaultFont, bColor="black", xStretch=True)]]
+        layout = [
+            [default.GTabGroup( TabGroupLayout=[[
+                default.GTab(title="tab1", TabLayout=tab1),
+                default.GTab(title="tab2", TabLayout=tab2),
+                
+                ]] )]
+        ],
+        """   
+
+
+# All Widgets
+    # text widget
+    def GText(self, title="", font="Sans, 20", value=None, size=(None, None), position="left", xStretch=False, yStretch=False, EmptySpace=(None), tColor=None, bcolor=None,
+              border=None):
+        return Text(text=title, font=font, key=value, size=size, justification=position, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
+                       text_color=tColor, background_color=bcolor, border_width=border)
+        """
+        gc.window["text"].update()
+        """
+    
+
+    # button widget
+    def GButton(self, title="", bImage=None, font="Sans, 20", value=None, size=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), border=None):
+        return Button(title, button_color=(bcolor, tcolor), font=font, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, 
+                         border_width=border)
+        """
+        if gc.event == "button name or value": click event
+            gc.window["text"].update(gc.GetValues["textInput"])
+        """
+
+    # image
+    def GImage(self, image=None, value=None, EmptySpace=(None, None), visible=True, size=[None, None]):
+        return Image(filename=image, key=value, pad=EmptySpace, visible=visible, size=size)  
+        """
+        if gc.event == "imgButton":
+            gc.window["img"].update("logo2.png")
+        """
+
+    
+    # listbox widget
+    def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
+                 xStretch=False, yStretch=False, tColor=None, bcolor=None):
+        return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
+                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bcolor)
+        """
+        if gc.event == "addList":
+            for i in range(1, 10):
+                testList.append(i)
+            gc.window["glist"].update(testList)
+        gc.getvalue["glist"][0]
+        """
+    
+
+    # input widget
+    def GInput (self, InText="", font="Sans, 20", value=None, size=(None, None), focus=True, position="left", visible=True, PwChars=False, readonly=False, 
+                xStretch=False, yStretch=False, EmptySpace=(None), tcolor=None, bcolor=None, border=None):
+        return Input(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position,  pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
+                        password_char=PwChars, visible=visible, readonly=readonly,  background_color=bcolor, text_color=tcolor, border_width=border)
+        """
+        if gc.event == "change text":
+            gc.window["text"].update(gc.GetValues["textInput"]) #text input value
+        """
+    
+
+    # multiLine widget
+    def GMultiline (self, InText="", font=None, value=None, size=(None, None), visible=True, position="left", enableEvent=True, WriteOnly=False, wrapLines=True,
+                    xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
+        return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
+                            expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
+                            autoscroll=True, auto_size_text=True, enable_events=enableEvent, write_only=WriteOnly, wrap_lines=wrapLines)
+        """
+        if gc.event == "addList":
+            testList += str(random.randint(0, 50)) + "\n"
+            gc.window["glist"].update(testList)
+        """
+    
+    
+    # cheack mark
+    def GCheack(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
+        return Checkbox(text=title, font=font, key=value, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
+        """
+        if gc.event == "checkbox":
+            if gc.GetValues["hl1"]:
+                print("half life 1")
+            if gc.GetValues["hl2"]:
+                print("half life 2")
+            if gc.GetValues["hl3"]:
+                print("half life 3 ?????")
+        """
+
+
+    def GRadio(self, title=None, font="Sans, 20", groupID=None, value=None, cEvent=True, EmptySpace=(None, None), tcolor=None, bcolor=None):
+        return Radio(text=title, font=font, group_id=groupID, key=value, enable_events=cEvent, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
+        """
+        if gc.event in ["hl1", "hl2", "hl3"]:
+            if gc.event == "hl1":
+                gc.window["hlGame"].update("can you play half life 1 before ?")
+            elif gc.event == "hl2":
+                gc.window["hlGame"].update("half life 2 good game")
+            elif gc.event == "hl3":
+                gc.window["hlGame"].update("there is no half life 3 :(")
+        """
+
+
+    # selections
+    def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False):
+        return Combo(values=values, key=value, default_value=defaultValue, font=font, pad=EmptySpace, visible=visible, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, readonly=True)
+        """
+        [gc.GSelection(values=[1,2,3,4,5], value="GSelection", defaultValue=1, font=gc.font, xStretch=True)],
+        if gc.GetValues["GSelection"]:
+                print(gc.GetValues["GSelection"])
+        """
+    
+    def GIncreaseSelection(self, rangeValue=None, startValue=None, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
+        return Spin(values=rangeValue, initial_value=startValue, font=font, key=value, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=tcolor, background_color=bcolor, visible=Visible)
+        """
+        [gc.GIncreaseSelection(startValue=1, rangeValue=[1,2,3,4,5], value="GIncreaseSelection", font=gc.font, xStretch=True)],
+        if gc.GetValues["GIncreaseSelection"]:
+                print(gc.GetValues["GIncreaseSelection"])
+        """
+    
+    def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
+        return Slider(range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible)   
+    def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
+        return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
+        """
+        if gc.GetValues["GSlider1"]:
+                gc.window["health"].update(gc.GetValues["GSlider1"])
+                    health progressbar       slider is give value
+        """
+
+
+
+
+    # Little things
+    @property
+    def Push(self):
+        return Push()
+    @property
+    def hsep(self):
+        return HSeparator(color="purple")
+    @property
+    def vsep(self):
+        return VSeparator(color="purple")
+    def GMessage(self, message=None, wmTitle="default Window", font="Sans, 15", tcolor=None, bcolor=None):
+        return popup(message, title=wmTitle, font=font, text_color=tcolor, background_color=bcolor)
+
+
+
+
+
+
+# for multiLine Open/Save/save as
+class FileSave:
+    def __init__(self, value=None, window=None) -> None:
+        self.value = value
+        self.window = window
+        self.content = None
+        self.filename = None
+        self.fileOpen = False
+
+    @property
+    def Open(self):
+            self.filename = popup_get_file('Select a file to open', no_window=True)
+            #file path text file path
+            # open text file with popup_get_file
+            if self.filename:
+                with open(self.filename, 'r') as file:
+                    self.content = file.read()
+                    self.window[self.value].update(self.content)
+                    self.fileOpen = True
+    @property
+    def SaveAs(self):
+        self.filename = popup_get_file('Select a file to save', save_as=True, no_window=True)
+        if self.filename:
+            self.content = self.window[self.value].get()
+            with open(self.filename, 'w') as file:
+                file.write(self.content)
+                self.fileOpen = True
+
+    @property
+    def Save(self):
+        if self.fileOpen == True:
+            self.content = self.window[self.value].get()
+            with open(self.filename, 'w') as file:
+                file.write(self.content)
+    """
+    textOpen = FileSave(value="multiLineText", window=gc.window)
+    def update():
+        if gc.event == "Open File":
+            textOpen.Open
+        elif gc.event == "Save As":
+            textOpen.SaveAs
+        elif gc.event == "Save":
+            textOpen.save
+    """
