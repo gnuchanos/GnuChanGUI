@@ -1,8 +1,0 @@
-Metadata-Version: 2.1
-Name: GnuChanGUI
-Version: 1.1.0
-Summary: pysimplegui base gui
-Author: archkubi
-Author-email: gnuchanos@email.com
-License-File: LICENSE
-Requires-Dist: PySimpleGUI

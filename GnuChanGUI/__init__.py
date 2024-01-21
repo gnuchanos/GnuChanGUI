@@ -349,16 +349,12 @@ class GnuChanGUI:
         i love this becouse this can show print() in screen
         """
 
-
     # ekstra options
     # This setting only works under GWindow. #"this is tk"
     def GListBoxBorderSize(self, border=0, value=None):
         return self.window[value].Widget.configure(borderwidth=border, relief=tk.GROOVE)
 
-    def GframeBorderSizeAndColor(self, value=None, border=1, borderColor="black"):
-        return self.window[value].Widget.configure(highlightthickness=border, highlightbackground=borderColor, relief=tk.GROOVE)
-
-    def GSelectionBorderSize(self, border=0, value=None, borderColor=GColors().white, highlightcolor=GColors().red1):
+    def GSelectionBorderSize(self, border=0, value=None, borderColor=None, highlightcolor=None):
         combo = self.window[value]
         combostyle, style_name = combo.ttk_style, combo.ttk_style_name
         combostyle.configure(style_name, selectbackground=borderColor, selectforeground=highlightcolor, borderwidth=border)
@@ -381,29 +377,33 @@ class GnuChanGUI:
         self.window[textValue].update(text_color=color)
     def ChangeBackgroundColor(self, Value, color="black"):
         self.window[Value].update(background_color=color)
-    def BorderSizeAndColors(self, gMultilineValue="", borderColor="white", highlightcolor="black", borderSize=0):
-        self.borderSize = borderSize
-        if self.borderSize >= 0:
-            self.window[gMultilineValue].Widget.configure(highlightbackground=borderColor, highlightcolor=highlightcolor, highlightthickness=self.borderSize)
 
     # window widgets
     def GFrame(self, title=None, winLayout=[[]], value=None, infoWındow=None, border=1, font="Sans, 20", size=(None, None), xStretch=False, yStretch=False, EmptySpace=(None, None), tColor=None, bcolor=None, visible=True):
         return Frame(title=title, layout=winLayout, key=value, border_width=border, tooltip=infoWındow, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, title_color=tColor, background_color=bcolor, visible=visible)
         """
-        test1 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
-                [default.GText("test", xStretch=True, position="center")]]
-        test2 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
-                [default.GText("test", xStretch=True, position="center")]]
-        test3 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
-                [default.GText("test", xStretch=True, position="center")]]
-        test4 = [[default.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
-                [default.GText("test", xStretch=True, position="center")]]
+        gMenu = [ ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]], ["System", ["Exit"]] ]
+        defaultFont = "Sans, 20"
+        c = GColors()
+
+        test1 = [[gc.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [gc.GText("test", xStretch=True, position="center")]]
+
+        test2 = [[gc.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [gc.GText("test", xStretch=True, position="center")]]
+
+        test3 = [[gc.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [gc.GText("test", xStretch=True, position="center")]]
+
+        test4 = [[gc.GMenuForTheme(winMenu=gMenu, font=defaultFont)],
+                [gc.GText("test", xStretch=True, position="center")]]
 
         layout = [
-            [default.GFrame(winLayout=test1, value="test1", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
-            default.GFrame(winLayout=test2, value="test2", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())],
-            [default.GFrame(winLayout=test3, value="test3", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues()),
-            default.GFrame(winLayout=test4, value="test4", xStretch=True, yStretch=True, bColor=GColors(colors=1).blues())]]
+                [gc.GFrame(winLayout=test1, value="test1", xStretch=True, yStretch=True, bcolor=c.blue1, border=2),
+                gc.GFrame(winLayout=test2, value="test2", xStretch=True, yStretch=True, bcolor=c.blue1, border=2)],
+
+                [gc.GFrame(winLayout=test3, value="test3", xStretch=True, yStretch=True, bcolor=c.blue1, border=2),
+                gc.GFrame(winLayout=test4, value="test4", xStretch=True, yStretch=True, bcolor=c.blue1, border=2)]]
 
         default.GWindow(mainWindow=layout)
         """
@@ -411,16 +411,23 @@ class GnuChanGUI:
     def GColumn(self, winColumn=None, size=(None, None), xStretch=None, yStretch=None, EmptySpace=(None, None), visible=True, value=None, bcolor=None):
         return Column(layout=winColumn, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=visible, background_color=bcolor)
         """
-        TopLayer = [[default.GText(title="Top Layer", position="center", font="Sans, 20", bColor=GColors(colors=1).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
-        MiddleLeftLayer = [[default.GText(title="Middle Left", position="center", font="Sans, 20",bColor=GColors(colors=1).greens(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
-        MiddleRightLayer = [[default.GText(title="Middle Right", position="center", font="Sans, 20", bColor=GColors(colors=1).purples(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
-        BottomLayer = [[default.GText(title="Bottom Layer", position="center", font="Sans, 20", bColor=GColors(colors=5).blues(), xStretch=True, yStretch=True, EmptySpace=(0,0))]]
+        TopLayer = [[gc.GText(title="Top Layer", position="center", font="Sans, 20", bcolor=c.blue1, xStretch=True, yStretch=True, 
+                            EmptySpace=(0,0))]]
+
+        MiddleLeftLayer = [[gc.GText(title="Middle Left", position="center", font="Sans, 20",bcolor=c.pink1, xStretch=True, yStretch=True, 
+                                    EmptySpace=(5,0))]]
+
+        MiddleRightLayer = [[gc.GText(title="Middle Right", position="center", font="Sans, 20", bcolor=c.purple1, xStretch=True, yStretch=True, 
+                                    EmptySpace=(0,0))]]
+
+        BottomLayer = [[gc.GText(title="Bottom Layer", position="center", font="Sans, 20", bcolor=c.pink8, xStretch=True, yStretch=True, 
+                                EmptySpace=(0,0))]]
 
         layout = [
-            [default.GColumn(TopLayer, xStretch=True, yStretch=True)],
-            [default.GColumn(MiddleLeftLayer, xStretch=True, yStretch=True), 
-            default.GColumn(MiddleRightLayer, xStretch=True, yStretch=True)],
-            [default.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
+        [gc.GColumn(TopLayer, xStretch=True, yStretch=True)],
+        [gc.GColumn(MiddleLeftLayer, xStretch=True, yStretch=True), 
+            gc.GColumn(MiddleRightLayer, xStretch=True, yStretch=True)],
+        [gc.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
         """
 
     # create Gtab and create GTap Group
@@ -430,18 +437,22 @@ class GnuChanGUI:
     def GTabGroup(self, TabGroupLayout=None, value=None, font="Sans, 20",
         bcolor=None, sbcolor=None, tbcolor=None, tcolor=None, fcolor=None, stcolor=None, size=(None, None)):
         return TabGroup(layout=TabGroupLayout, key=value, expand_x=True, expand_y=True, size=size,
-        background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor,
+        background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor, enable_events=True,
         title_color=tcolor, focus_color=fcolor, selected_title_color=stcolor, font=font, tab_border_width=0, border_width=0)
         """
-        tab1 = [[default.GText(title="tab1", font=defaultFont, bColor="black", xStretch=True)]]
-        tab2 = [[default.GText(title="tab2", font=defaultFont, bColor="black", xStretch=True)]]
-        layout = [
-            [default.GTabGroup( TabGroupLayout=[[
-                default.GTab(title="tab1", TabLayout=tab1),
-                default.GTab(title="tab2", TabLayout=tab2),
-                
-                ]] )]
-        ],
+        TabGroup Value: TabG : | tab1 value | tab2 value |
+        [gc.GTabGroup(TabGroupLayout=[
+            [gc.GTab(title="test1", TabLayout=tab1, value="tab1")],
+            [gc.GTab(title="test2", TabLayout=tab2, value="tab2")],
+        ], value="tabG")]
+
+        Active tab
+        def update():
+            new = gc.GetValues["tabG"]
+            if new == "tab1":
+                print("tab1 is goooo")
+            elif new == "tab2":
+                print("tab2 is gooo")
         """   
 
 # All Widgets
@@ -451,15 +462,16 @@ class GnuChanGUI:
         return Text(text=title, font=font, key=value, size=size, justification=position, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
                        text_color=tColor, background_color=bcolor, border_width=border)
         """
-        gc.window["text"].update()
+        gc.GText(value="text")
+        gc.window["text"].update("change text")
         """
-    
 
     # button widget
     def GButton(self, title="", bImage=None, font="Sans, 20", value=None, size=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), border=None):
         return Button(title, button_color=(bcolor, tcolor), font=font, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, 
                          border_width=border)
         """
+        gc.GButton(title="button")
         if gc.event == "button name or value": click event
             gc.window["text"].update(gc.GetValues["textInput"])
         """
@@ -478,11 +490,14 @@ class GnuChanGUI:
         return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
                    no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bcolor)
         """
+        [gc.GListBox(value="list", xStretch=True, yStretch=True)],
+
         if gc.event == "addList":
             for i in range(1, 10):
                 testList.append(i)
             gc.window["glist"].update(testList)
-        gc.getvalue["glist"][0]
+
+        gc.getvalue["glist"][0] # for select
         """
     
     # input widget
@@ -491,6 +506,8 @@ class GnuChanGUI:
         return Input(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position,  pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
                         password_char=PwChars, visible=visible, readonly=readonly,  background_color=bcolor, text_color=tcolor, border_width=border)
         """
+        [gc.GText(value="text")],
+        [gc.GInput(value="input", xStretch=True),  gc.GButton(title="Click", value="button", xStretch=True)],
         if gc.event == "change text":
             gc.window["text"].update(gc.GetValues["textInput"]) #text input value
         """
@@ -508,10 +525,16 @@ class GnuChanGUI:
         """
     
     # cheack mark
-    def GCheack(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
+    def GCheackBox(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
         return Checkbox(text=title, font=font, key=value, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
         """
-        if gc.event == "checkbox":
+        [gc.GCheackBox(title="Half Life", value="hl"),
+        gc.GCheackBox(title="Mafia", value="mf"),
+        gc.GCheackBox(title="GTA San Andreas", value="gta"),
+        gc.GCheackBox(title="Age Of Empires 2", value="age2")],
+        [gc.GButton(title="CheckBox", xStretch=True)]
+
+        if gc.event == "CheckBox":
             if gc.GetValues["hl1"]:
                 print("half life 1")
             if gc.GetValues["hl2"]:
@@ -523,6 +546,13 @@ class GnuChanGUI:
     def GRadio(self, title=None, font="Sans, 20", groupID=None, value=None, cEvent=True, EmptySpace=(None, None), tcolor=None, bcolor=None):
         return Radio(text=title, font=font, group_id=groupID, key=value, enable_events=cEvent, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
         """
+        [
+            gc.GRadio(title="Half Life 3", groupID="VALVE", value="hl3"),
+            gc.GRadio(title="Portal 3", groupID="VALVE", value="portal3"),
+            gc.GRadio(title="Left 4 Dead 3", groupID="VALVE", value="lfd3"),
+            gc.GRadio(title="Team Fortress 3", groupID="VALVE", value="tf3"),
+        ],
+
         if gc.event in ["hl1", "hl2", "hl3"]:
             if gc.event == "hl1":
                 gc.window["hlGame"].update("can you play half life 1 before ?")
@@ -554,9 +584,11 @@ class GnuChanGUI:
     def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
         return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
         """
+        [gc.GSlider(range=(0, 100), defaultValue=20, direction="h", value="slider" )],
+        [gc.GProgressBar(MaxValue=100, value="pro", direction="h")]
         if gc.GetValues["GSlider1"]:
                 gc.window["health"].update(gc.GetValues["GSlider1"])
-                    health progressbar       slider is give value
+                    health progressbar       sliderGSelectionBorderSize is give value
         """
 
 
@@ -621,3 +653,17 @@ class FileSave:
         elif gc.event == "Save":
             textOpen.save
     """
+
+
+if __name__ == "__main__":
+    gc = GnuChanGUI(Title="", Size=(300, 200), resizable=False, finalize=True)
+    Themecolors().GnuChanOS
+
+    layout = [ [gc.GText(title="test", xStretch=True, position="center")] ]
+
+    gc.GWindow(mainWindow=layout)
+
+    def update():
+        pass
+
+    gc.update(GUpdate=update)
