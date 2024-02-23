@@ -8,6 +8,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 if __name__ == "__main__":
     gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
+    gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
     layout = [ [gc.GText(value="text", xStretch=True, position="center")],
@@ -28,5 +29,10 @@ if __name__ == "__main__":
 
             listboxList.append(gc.GetValues["user_input"])
             gc.window["listbox"].update(listboxList)
+
+
+        if gc.event == "user_input":
+            print("yes")
+
 
     gc.update(GUpdate=update)

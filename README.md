@@ -2,12 +2,10 @@
 
 <p> this lgpl3+ 4.61.0.206 Unreleased version <br>
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
+this is lgpl3+ 4.61.0.206 Unreleased version and this is hobby project not for money and i don't wanto bs license window to see
+</p>
 
-this is lgpl3+ 4.61.0.206 Unreleased version and this is hobby project not for money and i don't wanto bs licance window to see
-
- </p>
-
-<p> Please note that this is a library based on the PySimpleGUI library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and constantly improving myself. </p>
+<p> Please note that this library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and i still learning! </p>
 
 important note
 ```
@@ -21,8 +19,6 @@ second install
 2: extrack zip
 3: cd gnuchangui
 4: pip install .
-
-position | left - center - right
 
 font -> font
 visible -> visible
@@ -49,11 +45,14 @@ event ---> everythings is event like button click, keyboard, input, multiline,
 key ---> Getvalues ı give you 1 example you can understan why ı change key name for GetValues
 
 >gc is class name
-> input value
-[gc.GInput(value="ButtonNameChanger")],
-> I give a value to the button because if the button name changes, the button's click event won't work
-[gc.GButton("Test Button", value="Button")] 
-> write button name --> value="ButtonNameChanger" -> gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
+
+gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
+Themecolors().GnuChanOS
+
+event -> gc.event
+window[] -> gc.window[].update()
+value[]  -> gc.getvalue[]
+key=""   -> value=""
 
 if gc.event == "Button":
     gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
@@ -67,27 +66,33 @@ example code
 ``` 
 
 from GnuChanGUI import *
-import time
 
-gc = GnuChanGUI(Title="GnuChan Program Timer", Size=(1024, 600), resizable=False)
-gc.Theme()
+if __name__ == "__main__":
+    gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
+    gc.font = "Sans, 20"
+    Themecolors().GnuChanOS
 
-gMenu = [
-    ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]],
-    ["System", ["Exit"]]
-]
+    layout = [ [gc.GText(value="text", xStretch=True, position="center")],
+               [gc.GInput(value="user_input", xStretch=True)],
+               [gc.GButton(title="change text", font="Sans, 20", xStretch=True)],
+               [gc.GListBox(value="listbox", xStretch=True, yStretch=True, position="center")]
+               ]
 
-layout = [
-    [gc.GMenuForTheme(winMenu=gMenu, font=gc.font)],
-]
+    gc.GWindow(mainWindow=layout)
 
-gc.GWindow(mainWindow=layout)
+    listboxList = []
+    def update():
+        global listboxList
 
-def update(): #note this is works like a loop
-    pass
+        if gc.event == "change text":
+            gc.window["text"].update(gc.GetValues["user_input"])
+            gc.window["user_input"].update("")
 
-gc.update(GUpdate=update)
-#gc.window.close()
+            listboxList.append(gc.GetValues["user_input"])
+            gc.window["listbox"].update(listboxList)
+
+
+    gc.update(GUpdate=update)
 
 
 ```
