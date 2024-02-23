@@ -1,4 +1,6 @@
-from PySimpleGUI import *
+from .PySimpleGUI import *
+from .PySimpleGUI import __version__
+
 import random
 import threading
 

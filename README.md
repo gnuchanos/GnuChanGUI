@@ -1,4 +1,12 @@
 # GnuChanGUI
+
+<p> this lgpl3+ 4.61.0.206 Unreleased version <br>
+fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
+
+this is lgpl3+ 4.61.0.206 Unreleased version and this is hobby project not for money and i don't wanto bs licance window to see
+
+ </p>
+
 <p> Please note that this is a library based on the PySimpleGUI library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and constantly improving myself. </p>
 
 important note
