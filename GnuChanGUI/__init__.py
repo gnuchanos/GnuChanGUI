@@ -1,5 +1,5 @@
-from .PySimpleGUI import *
-from .PySimpleGUI import __version__
+from .gcLibrary import *
+from .gcLibrary import __version__
 
 import random
 import threading
@@ -15,7 +15,8 @@ python -m venv ./venv
 
 """
 ```
-python -m PySimpleGUI.PySimpleGUI upgrade
+
+upgrade is not ready
 position | left - center - right
 
 font -> font
