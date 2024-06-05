@@ -537,6 +537,8 @@ class GnuChanGUI:
         gc.GCheackBox(title="Age Of Empires 2", value="age2")],
         [gc.GButton(title="CheckBox", xStretch=True)]
 
+        
+        # gc.event in not working with button
         if gc.event == "CheckBox":
             if gc.GetValues["hl1"]:
                 print("half life 1")
@@ -556,6 +558,7 @@ class GnuChanGUI:
             gc.GRadio(title="Team Fortress 3", groupID="VALVE", value="tf3"),
         ],
 
+        # gc.event in not working with button
         if gc.event in ["hl1", "hl2", "hl3"]:
             if gc.event == "hl1":
                 gc.window["hlGame"].update("can you play half life 1 before ?")
@@ -571,7 +574,7 @@ class GnuChanGUI:
         """
         [gc.GSelection(values=[1,2,3,4,5], value="GSelection", defaultValue=1, font=gc.font, xStretch=True)],
         if gc.GetValues["GSelection"]:
-                print(gc.GetValues["GSelection"])
+            print(gc.GetValues["GSelection"])
         """
     
     def GIncreaseSelection(self, rangeValue=None, startValue=None, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
@@ -579,7 +582,7 @@ class GnuChanGUI:
         """
         [gc.GIncreaseSelection(startValue=1, rangeValue=[1,2,3,4,5], value="GIncreaseSelection", font=gc.font, xStretch=True)],
         if gc.GetValues["GIncreaseSelection"]:
-                print(gc.GetValues["GIncreaseSelection"])
+            print(gc.GetValues["GIncreaseSelection"])
         """
     
     def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
