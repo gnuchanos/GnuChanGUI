@@ -7,16 +7,11 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 from GnuChanGUI import *
 from threading import Thread
 
-
-
-
-
 #Thread(target=DownloadVideo, args=[]).start()
 
 
-
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(750, 700), resizable=False, finalize=True)
+    gc = GnuChanGUI(Title="", Size=(350, 470), resizable=False, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
     clr = GnuChanOSColor()
@@ -28,7 +23,6 @@ if __name__ == "__main__":
     mathSymbol = ["+", "-", "*", "/"]
     mathStarter = ""
     mathEnd = 0
-
 
     window = [
         [ gc.GText(title="Let's Start Math", value="math", xStretch=True, position="center", bcolor=clr.colors0) ],
@@ -62,28 +56,6 @@ if __name__ == "__main__":
             ],
             [ gc.GButton(title="=", xStretch=True) ],
             [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
-            [ gc.GMultiline(value="console", xStretch=True, yStretch=True, readonly=True) ],
-            [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
-    ]
-
-    rightWindow = [
-        [ gc.GText(title="Let's Start Math", value="mathInput", xStretch=True, position="center", bcolor=clr.colors0) ],
-        [ gc.GInput(value="number", size=(25, None)) ],
-            [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
-        [
-            gc.GButton(title="+", value="Addition", xStretch=True, size=(2, None)), 
-            gc.GButton(title="-", value="Subtraction", xStretch=True, size=(2, None)),
-            gc.GButton(title="*", value="Multiplication", xStretch=True, size=(2, None)), 
-            gc.GButton(title="/", value="Division", xStretch=True, size=(2, None)),
-        ],
-            [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
-        [
-            gc.GButton(title="Remove", value="delete", xStretch=True),
-            gc.GButton(title="Clean", value="clearMAN", xStretch=True),
-        ],
-            [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
-        [ gc.GListBox(value="math-multi", xStretch=True, yStretch=True, noScroolBar=True) ],
-            [ gc.GText(bcolor=clr.colors0, xStretch=True) ],
     ]
 
     layout = [
@@ -92,19 +64,14 @@ if __name__ == "__main__":
             gc.GText(yStretch=True, xStretch=True),
             gc.GColumn(winColumn=window, xStretch=True, yStretch=True),
             gc.GText(yStretch=True, xStretch=True),
-            gc.GColumn(winColumn=rightWindow, xStretch=True, yStretch=True),
-            gc.GText(yStretch=True, xStretch=True),
         ],
         [ gc.GText(xStretch=True) ],
-        [ gc.GText(title="Let's Start Math", value="onlyinput", xStretch=True, position="center", bcolor=clr.colors0) ],
-        [ gc.GInput(value="only-input", xStretch=True)]
     ],
 
     gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(value="math-multi", border=0)
 
     def buttonMath():
-        global number1, number2, mathFinish, number1Typing, numbers, mathSymbol, mathEnd, mathStarter
+        global number1, number2, mathFinish, number1Typing, numbers, mathSymbol, mathEnd, mathStarter, log
 
         if not mathFinish:
             # add numbers in number1 or number2
@@ -148,20 +115,24 @@ if __name__ == "__main__":
                 mathEnd = float(number1) / float(number2)
                 gc.window["math"].update(round(mathEnd, 5))
 
-            # clean everything
-            if gc.event == "CLEAN":
-                number1 = number2 = mathStarter = ""
-                mathEnd = 0
-                gc.window["math"].update("Let's Start Math")
-                number1Typing = True; mathFinish = False
 
             # Assign The Math Result to Number1 and Keep Doing Math.
             if gc.event == "GO":
+                number1Typing = True
+                mathFinish = False
                 number1 = str(mathEnd)
-                number2 = ""
-                mathStarter = ""
+                number2 = mathStarter = ""
                 gc.window["math"].update(number1)
-                number1Typing = True; mathFinish = False
+
+
+        # clean everything
+        if gc.event == "CLEAN":
+            mathFinish = False
+            number1Typing = True
+            number1 = number2 = mathStarter = ""
+            mathEnd = 0
+            print(f"{number1} | {number2} | {mathEnd}")
+            gc.window["math"].update("Let's Start Math")
 
 
     mathNumberList = []
@@ -169,65 +140,8 @@ if __name__ == "__main__":
     mathEnd = False
     number = ""
 
-    def inputMath():
-        global mathNumberList, mathEnd, number, mathMathEnd
-        if gc.event == "Return:36":
-            try:
-                number = float(gc.GetValues["number"])
-                mathNumberList.append(number)
-                gc.window["math-multi"].update(mathNumberList)
-                gc.window["number"].update("")
-            except ValueError:
-                print("Only Numbers")
-            gc.window["onlyinput"].update(round(eval(gc.GetValues["only-input"]), 5))
-
-        if not mathEnd:
-            if len(mathNumberList) > 2:
-                if gc.event == "Addition":
-                    print("works +")
-                    for i in mathNumberList:
-                        mathMathEnd += i
-                        print(mathMathEnd, " | ")
-                        mathEnd = True
-                elif gc.event == "Subtraction":
-                    print("works -")
-                    for i in mathNumberList:
-                        mathMathEnd -= i
-                        print(mathMathEnd, " | ")
-                        mathEnd = True
-                elif gc.event == "Multiplication":
-                    print("works *")
-                    for i in mathNumberList:
-                        mathMathEnd *= i
-                        print(mathMathEnd, " | ")
-                        mathEnd = True
-                elif gc.event == "Division":
-                    print("works /")
-                    for i in mathNumberList:
-                        mathMathEnd /= i
-                        print(mathMathEnd, " | ")
-                        mathEnd = True
-
-        if gc.event == "delete":
-            print("works")
-            try:
-                select = gc.GetValues["math-multi"][0]
-                print(select)
-                mathNumberList.remove(select)
-                gc.window["math-multi"].update(mathNumberList)
-            except IndexError:
-                print("Empty Selection!")
-
-        if gc.event == "clearMAN":
-            mathNumberList = []
-            gc.window["math-multi"].update(mathNumberList)
-            gc.window["mathInput"].update("Let's Start Math")
-            gc.window["number"].update("")
-            mathEnd = False
-
     def update():
-        Thread(target=buttonMath, args=[]).start()
-        Thread(target=inputMath, args=[]).start()
+        buttonMath()
 
 
     gc.update(GUpdate=update)

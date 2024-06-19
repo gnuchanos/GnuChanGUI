@@ -56,6 +56,8 @@ if __name__ == "__main__":
         if gc.event == "Clear Timer":
             timerStart = False
             second = minute = hour = 0
+            timeLog = f"{int(hour)}:{int(minute)}:{int(second)}"    
+            gc.window["time"].update(timeLog)           
 
         if timerStart:
             if second < 60:

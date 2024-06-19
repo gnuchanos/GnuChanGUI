@@ -19,6 +19,13 @@ if __name__ == "__main__":
 
     SoftwareListActive = []
     mySoftwareList = [
+
+        # it's my bad simple programs
+        "simpleCalculator", "SimpleMusicPlayer", "SimpleTextEditor", "SimpleTimer", "SimpleVideoSoundConvert",
+        "SimpleVideoMusicDownload",
+        # it's my bad simple programs
+
+
         # for conten creators
         "kdenlive", "audacity", "shotcut", "openshot", "resolve", "pitivi",
         "blender", "obs", "simplescreenrecorder",
@@ -54,7 +61,7 @@ if __name__ == "__main__":
     middleThings = [
         [ 
             gc.GText(title="> ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
-            gc.GInput(value="input", size=(20, None), bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
+            gc.GInput(value="input", size=(17, None), bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
         [ gc.GText(title="", xStretch=True) ],
         [ gc.GListBox(value="software", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],

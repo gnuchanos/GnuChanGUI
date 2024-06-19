@@ -126,6 +126,7 @@ if __name__ == "__main__":
                     video_file = video_stream.download(output_path=output_path, filename=f"{video_title}.mp4")
                     print(f"{video_title} | Download Finish | ")
                 print("Playlist Download Finished!")
+                gc.window["yt"].update("")
         except Exception as ERR:
             print(f"{ERR} - BTW I USE ARCH LINUX")
 
@@ -157,6 +158,7 @@ if __name__ == "__main__":
                     # Remove the old MP4 file once the MP3 conversion is finished.
                     os.remove(audio_file)
                 print("Playlist Download Finished!")
+                gc.window["yt"].update("")
         except Exception as ERR:
             print(f"{ERR} - BTW I USE ARCH LINUX")
 
