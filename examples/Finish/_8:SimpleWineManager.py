@@ -38,13 +38,6 @@ if __name__ == "__main__":
 
         [   gc.GText(title="Choose Youre Wine", xStretch=True, position="center", bcolor=GColors().purple7)   ],
 
-        [
-            gc.Push,
-            gc.GRadio(groupID="wineType", value="wine", title="Wine(Stable)", bcolor=GColors().purple8),
-            gc.GRadio(groupID="wineType", value="wine-staging", title="Wine Staging(Test Version)", bcolor=GColors().purple8),
-            gc.Push,
-        ],
-
         [   
             gc.Push,
             gc.GButton(title="WineTRICKS"),
