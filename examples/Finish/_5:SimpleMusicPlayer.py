@@ -7,22 +7,18 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 from GnuChanGUI import *
 from threading import Thread
 import subprocess
-
+import pygame
 
 
 #Thread(target=DownloadVideo, args=[]).start()
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(1250, 900), resizable=True, finalize=True)
+    gc = GnuChanGUI(Title="Simple Music Player Powerad by Pygame!", Size=(1024, 655), resizable=True, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
-    menu = [
-        ["Menu", ["Close"]]
-    ]
-
+    pygame.mixer.init()
 
     Buttons = [
-        [gc.GMenuForTheme(winMenu=menu)],
         [gc.GButton(title="Add Folder", size=(12, None))],
         [gc.GButton(title="Play Music", size=(12, None))],
         [gc.GButton(title="Next Music", size=(12, None))],
@@ -36,8 +32,8 @@ if __name__ == "__main__":
 
     dir = os.path.expanduser("~")
     path = ""
-    volume = 19656
-    volume_slider = 60
+    volume = 0.5
+    volume_slider = 5
     fileList = []
     musicList = []
     musicIndex = 0
@@ -54,23 +50,23 @@ if __name__ == "__main__":
             gc.vsep,
             gc.GColumn(winColumn=Buttons, yStretch=True, bcolor=GColors().purple8, EmptySpace=(0, 0)),
             gc.vsep,
-            gc.GListBox(value="mp3", size=(75, None), font="Sans, 15", xStretch=True, yStretch=True, noScroolBar=True, bcolor=GColors().purple5, EmptySpace=(0, 0)),
+            gc.GListBox(value="mp3", size=(75, None), font="Sans, 15", xStretch=True, yStretch=True, bcolor=GColors().purple5, EmptySpace=(0, 0)),
             gc.vsep,
         ],
         [ 
             gc.GText(title="Music: ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
             gc.GText(value="musicName", xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
-        [ gc.GSlider(range=(0, 100), defaultValue=volume_slider, direction="h", value="slider", xStretch=True) ]
+        [ gc.GSlider(range=(0, 10), defaultValue=volume_slider, direction="h", value="slider", xStretch=True) ]
     ]
 
     gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(border=0, value="mp3")
+    gc.GListBoxBorderSize(windowValue="mp3", border=0)
     gc.window["input"].update("Music")
 
 
     def MusicPlay():
-        global dir, path, volume, fileList, musicList, musicIndex, musicSelect, start, volume_slider
+        global dir, path, volume, fileList, musicList, musicIndex, musicSelect, start, volume_slider, volume
         if gc.event == "Add Folder":
             try:
                 musicList = []
@@ -79,59 +75,70 @@ if __name__ == "__main__":
                 for i in fileList:
                     if i.endswith(".mp3"):
                         musicList.append(i)
+                musicList.sort()
                 gc.window["mp3"].update(musicList)
             except Exception as ERR:
                 print (f"{ERR}")
         
         if gc.event == "Play Music":
-            try: 
-                if not start:
-                    musicIndex = musicList.index(gc.GetValues["mp3"][0])
-                    musicSelect = musicList[musicIndex]
-                    music_command = f"mpg123 -f '{str(volume)}' '{path}/{musicSelect}'"
-                    play_process = subprocess.Popen(music_command, shell=True)
-                    gc.window["musicName"].update(musicSelect)
-                    start = True
-            except Exception as ERR:
-                print(f"{ERR}")
+            if not start:
+                musicIndex = musicList.index(gc.GetValues["mp3"][0])
+                musicSelect = musicList[musicIndex]
+                music_command = os.path.expanduser(f"{path}/{musicSelect}")
+                pygame.mixer.music.load(music_command)
+                pygame.mixer.music.set_volume(volume)
+                gc.window["musicName"].update(musicSelect)
+                start = True
+
+        elif gc.event == "Stop Music":
+            pygame.mixer.music.stop()
+            start = False
+
 
         elif gc.event == "Next Music":
-            if start:
+            if not start:
                 if musicIndex < len(musicList) - 1:
                     musicIndex += 1
                     musicSelect = musicList[musicIndex]
-                    music_command = f"killall mpg123 && mpg123 -f '{str(volume)}' '{path}/{musicSelect}'"
-                    play_process = subprocess.Popen(music_command, shell=True)
+                    music_command = os.path.expanduser(f"{path}/{musicSelect}")
+                    pygame.mixer.music.load(music_command)
+                    pygame.mixer.music.set_volume(volume)
                     gc.window["musicName"].update(musicSelect)
+                    start = True
 
         elif gc.event == "Previous Music":
-            if start:
+            if not start:
                 if musicIndex > 0:
                     musicIndex -= 1
                     musicSelect = musicList[musicIndex]
-                    music_command = f"killall mpg123 && mpg123 -f '{str(volume)}' '{path}/{musicSelect}'"
-                    play_process = subprocess.Popen(music_command, shell=True)
+                    music_command = os.path.expanduser(f"{path}/{musicSelect}")
+                    pygame.mixer.music.load(music_command)
+                    pygame.mixer.music.set_volume(volume)
                     gc.window["musicName"].update(musicSelect)
+                    start = True
 
-        elif gc.event == "Stop Music":
-            if start:
-                killall = subprocess.Popen(["killall", "mpg123"])
-                gc.window["musicName"].update("")
-                start = False
+        if start:
+            try:
+                if start:
+                    pygame.mixer.music.play()
+                    start = False
+            except Exception as ERR:
+                print(f"{ERR}")
 
-        if gc.event == "Close":
-            subprocess.Popen(["killall", "mpg123"])
-            gc.closeWindow = True
+
+    def volume_func():
+        global volume
+        volume_slider = int(gc.GetValues["slider"])
+        if volume_slider != 10:
+            volume = float(f"0.{volume_slider}")
+        else:
+            volume = 1
+        pygame.mixer.music.set_volume(volume)
+
 
     def update():
         Thread(target=MusicPlay, args=[]).start()
+        Thread(target=volume_func, args=[]).start()
 
-
-        volume_slider = gc.GetValues["slider"]
-
-        
-
-    if gc.window.close == True:
-        subprocess.Popen(["killall", "mpg123"])
 
     gc.update(GUpdate=update)

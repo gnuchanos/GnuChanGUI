@@ -12,7 +12,7 @@ from threading import Thread
 
 
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(700, 110), resizable=False, finalize=True)
+    gc = GnuChanGUI(Title="Simple Timer!", Size=(700, 228), resizable=False, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
@@ -23,28 +23,26 @@ if __name__ == "__main__":
     timerStart = False
 
 
+    win = [
+        [gc.GText(xStretch=True, bcolor=GnuChanOSColor().colors0)],
+        [
+            gc.GText(title=timeLog, value="time", EmptySpace=(0,0), xStretch=True, position="center", font="Sans, 60"),
+        ],
+
+        [
+            gc.GButton(title="Start Timer", xStretch=True),
+            gc.GButton(title="Stop Timer", xStretch=True),
+            gc.GButton(title="Clear Timer", xStretch=True),
+        ],
+        [gc.GText(xStretch=True, bcolor=GnuChanOSColor().colors0)],
+    ]
+
     layout = [ 
         [
-            gc.GText(title="|", EmptySpace=(0,0)),
-            gc.GText(title="-"*30, EmptySpace=(0,0)),
-            gc.GText(title="|", EmptySpace=(0,0)),
-
-            gc.GText(title=timeLog, value="time", EmptySpace=(0,0), xStretch=True, position="center"),
-
-            gc.GText(title="|", EmptySpace=(0,0)),
-            gc.GText(title="-"*30, EmptySpace=(0,0)),
-            gc.GText(title="|", EmptySpace=(0,0)),
-        ],
-
-        [
-                gc.GText(title=" | ", xStretch=True),
-            gc.GButton(title="Start Timer"),
-                gc.GText(title=" | ", xStretch=True),
-            gc.GButton(title="Stop Timer"),
-                gc.GText(title=" | ", xStretch=True),
-            gc.GButton(title="Clear Timer"),
-                gc.GText(title=" | ", xStretch=True),       
-        ],
+            gc.vsep,
+            gc.GColumn(winColumn=win, xStretch=True, yStretch=True),
+            gc.vsep,
+        ]
                ]
     
     def timerStart_func():

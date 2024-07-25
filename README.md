@@ -1,9 +1,28 @@
-# GnuChanGUI
-
 <p> this lgpl3+ 4.61.0.206 Unreleased version <br>
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 this is lgpl3+ 4.61.0.206 Unreleased version and this is hobby project not for money and i don't wanto bs license window to see
 </p>
+
+
+<p>
+
+Finish Examples <br>
+----------------------------------- <br>
+Simple Timer -> Finish <br>
+Simple Calculator -> Fimish <br>
+Simple Text Editor <br>
+
+Simple Terminal Emulator -> not finish <br>
+Simple Program Runner Like Rofi -> finish <br>
+Simple Video and Music Download from Youtube -> finish <br>
+Simple Video to Sound # convert -> finish <br>
+Simple Music Player -> finish <br>
+Simple Wine Manager -> not finish??? <br>
+
+</p>
+
+
+
 
 <p> Please note that this library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and i still learning! </p>
 
@@ -20,12 +39,14 @@ second install
 3: cd gnuchangui
 4: pip install .
 
+
 font -> font
 visible -> visible
 readonly -> readonly and  disabled -> readonly
 no_scrollbar -> noScroolBar
 group_id -> groupID
 default_value -> defaultValue
+
 
 expand_x --> xStretch
 expand_y --> yStretch

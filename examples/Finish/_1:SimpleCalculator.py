@@ -11,7 +11,7 @@ from threading import Thread
 
 
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(350, 470), resizable=False, finalize=True)
+    gc = GnuChanGUI(Title="Simple Calculator", Size=(350, 470), resizable=False, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
     clr = GnuChanOSColor()

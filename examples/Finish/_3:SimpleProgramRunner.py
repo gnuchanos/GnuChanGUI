@@ -8,23 +8,13 @@ from GnuChanGUI import *
 from threading import Thread
 
 
-
-#Thread(target=DownloadVideo, args=[]).start()
-
-
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(350, 600), resizable=False, finalize=True)
+    gc = GnuChanGUI(Title="Very Simple Program Runner Like Rofi and dmenu", Size=(350, 600), resizable=False, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
     SoftwareListActive = []
     mySoftwareList = [
-
-        # it's my bad simple programs
-        "simpleCalculator", "SimpleMusicPlayer", "SimpleTextEditor", "SimpleTimer", "SimpleVideoSoundConvert",
-        "SimpleVideoMusicDownload",
-        # it's my bad simple programs
-
 
         # for conten creators
         "kdenlive", "audacity", "shotcut", "openshot", "resolve", "pitivi",
@@ -56,7 +46,8 @@ if __name__ == "__main__":
         # Games
         "steam", "lutris", "minecraft-launcher", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2-qt", "melonDS", "snes9x", "nestopia"
         # Sanal Makineler ve Emülatörler
-        "virtualbox", "vmware-player", "gnome-boxes", "qemu" ]
+        "virtualbox", "vmware-player", "gnome-boxes", "qemu"
+    ]
 
     middleThings = [
         [ 
@@ -73,7 +64,7 @@ if __name__ == "__main__":
         [ gc.GText(xStretch=True), gc.GColumn(winColumn=middleThings, yStretch=True), gc.GText(xStretch=True) ] ]
 
     gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(value="software", border=0)
+    gc.GListBoxBorderSize(windowValue="software", border=0)
 
     def softwareListFunc():
         global SoftwareListActive, mySoftwareList
@@ -81,20 +72,23 @@ if __name__ == "__main__":
         for i in softwareList:
             if i in mySoftwareList:
                 SoftwareListActive.append(i)
+        SoftwareListActive.sort()
         gc.window["software"].update(SoftwareListActive)
     softwareListFunc()
 
+    #Thread(target=DownloadVideo, args=[]).start()
+
+
     def update():
-        global Start
         if gc.event == "Return:36":
             try:
                 commandInput = str(gc.GetValues["input"])
                 if commandInput != "" or len(commandInput) > 3:
-                    subprocess.Popen(commandInput, shell=True)
+                    os.popen(commandInput)
                     gc.closeWindow = True
                 else:
                     command = str(gc.GetValues["software"]).strip("[]")
-                    subprocess.Popen(command, shell=True)
+                    os.popen(command)
                     gc.closeWindow = True
             except Exception as Err:
                 print(f"{Err} - UwU")

@@ -1,8 +1,16 @@
-import pyautogui
-from PIL import Image
-import os, random
+import os
+import datetime, time
 
-screenshot = pyautogui.screenshot()
+# get the current date and time
+now = str(datetime.datetime.now()).split(" ")
+inDay = now[0]
+inTime = now[1][0:8].replace(":", "_")
+inDay_inTime = f"{inDay}-{inTime}"
+
 Dir = os.path.expanduser("~")
-rand = random.randrange(1, 1000)
-screenshot.save(f"{Dir}/screenshot{rand}.png")
+filePath = f"{Dir}/screenshot_{inDay_inTime}.png"
+
+_def = "ffmpeg -y -f x11grab -s 1024x768 -i :0.0 -vframes 1"
+os.popen(f"{_def} {filePath}")
+
+

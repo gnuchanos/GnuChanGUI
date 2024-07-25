@@ -1,8 +1,10 @@
 from .gcLibrary import *
 from .gcLibrary import __version__
-
+from threading import Thread
 import random
-import threading
+import math
+from PIL import Image, ImageTk
+from shapely.geometry import box
 
 """
 pip install  git+https://github.com/gnuchanos/gnuchangui
@@ -33,12 +35,18 @@ text_color -> tColor
 background_color -> bcolor
 border_width -> border
 image_filename -> bImage
-password_char -> PwChars
+password_char -> PwChars # like this 1234 showing as ****
 ReadyTheme -> more costume color theme
 ```
 """
 
+"""
+Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working with Thread(target=Create, args=[]).start(). 
+    The GUI is freezing, and you can only close the program using the task manager.
 
+
+
+"""
 
 # testing Func System
 class GFunc():
@@ -125,14 +133,24 @@ class GColors:
         self.pink8 = "#FF69B4"
 
         # Purple Colors and Shades
-        self.purple1 = "#7005fc"
-        self.purple2 = "#7005fc"
-        self.purple3 = "#7005fc"
-        self.purple4 = "#4d09a5"
-        self.purple5 = "#3c0682"
-        self.purple6 = "#33076d"
-        self.purple7 = "#220549"
-        self.purple8 = "#160230"
+        self.purple1 = "#aa66ff"
+        self.purple2 = "#790dff"
+        self.purple3 = "#680bdb"
+        self.purple4 = "#5908bd"
+        self.purple5 = "#460694"
+        self.purple6 = "#33036e"
+        self.purple7 = "#22024a"
+        self.purple8 = "#0f0121"
+
+        # this is little light purple yes have dark version
+        self.LightPurple0 = "#a359ff"
+        self.LightPurple1 = "#9652eb"
+        self.LightPurple2 = "#874ad4"
+        self.LightPurple3 = "#7843ba"
+        self.LightPurple4 = "#64389c"
+        self.LightPurple5 = "#522f80"
+        self.LightPurple6 = "#3a215c"
+        self.LightPurple7 = "#25163b"
 
         # Turquoise Colors and Shades
         self.turquoise1 = "#40E0D0"
@@ -268,7 +286,11 @@ class GnuChanGUI:
         self.event = None
         self.GetValues = None
         self.closeWindow = False
-    
+
+        # don't remove ),<--)
+        self.ImagesType = [("PNG (*.png)", "*.png"), ("JPEG (*.jpg)", "*.jpg")]
+        self.VideoTypes = [("mp4 (*.mkv)", "*.mkv"), ("mp4 (*.mp4)", "*.mp4")]
+        self.AllTypes = [("All files (*.*)", "*.*")]
 
 
     # Create Window
@@ -284,12 +306,20 @@ class GnuChanGUI:
         window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
         """
 
-    def update(self, GUpdate=GFunc(None)):
+    def update(self, GUpdate=GFunc(None), exitBEFORE=GFunc(None), timeout=100):
         while True:
-            self.event, self.GetValues = self.window.read(timeout=60)
+            self.event, self.GetValues = self.window.read(timeout=timeout)
             if self.event in (WIN_CLOSED, "Exit"):
+                try:
+                    exitBEFORE()
+                except Exception as ERR:
+                    print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
             if self.closeWindow:
+                try:
+                    exitBEFORE()
+                except Exception as ERR:
+                    print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
             GUpdate()
         self.window.close() # if loop finish wnidow close
@@ -300,7 +330,7 @@ class GnuChanGUI:
 
     @property
     def dt(self):
-        dt = .05
+        dt = 1 * 0.1
         return dt
 
     def GTitleBar(self, title="Window Title", icon=None, font="Sans, 12", tcolor=None, bcolor=None):
@@ -315,50 +345,19 @@ class GnuChanGUI:
         return Menu(menu_definition=winMenu, font=font)
     def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
         return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
-
-    # key press event
-    def GKey(self, GetValues=None, key1="Return", Action=GFunc(None)):
-        if key1 == "Return":
-            self.window[GetValues].bind("<Return>", "_Enter")
-            if self.event == GetValues + "_Enter":
-                Action()
-        elif key1 == "Tab":
-            self.window[GetValues].bind("<Tab>", "+TAB")
-            if self.event == GetValues + "+TAB":
-                Action()
-        """
-        def sPrint():
-            return gc.window["multiLineText"].update("")
-        gc.GKey(GetValues="multiLineText",Action=sPrint,key1="Tab")
-        """
-
-    # this is works only input not multiline
-    def GInputSelectALL(self, gInputValue):
-        self.window[gInputValue].bind("<Control-A>", " CTRL-A", propagate=False)
-        self.window[gInputValue].bind("<Control-a>", " CTRL-A", propagate=False)
-
     def GFocus(self, GetValues=None):
         return self.window[GetValues].set_focus() 
         """
         focus not Finish
         """
 
-    def GLog(self, value=None, font="Sans, 15", size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, visible=True):
-        return Output(key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=None, background_color=None, visible=visible, 
-                      autoscroll_only_at_bottom=True)
-        """
-        I must disable the scrollbar and make it readonly.
-
-        i love this becouse this can show print() in screen
-        """
-
     # ekstra options
-    # This setting only works under GWindow. #"this is tk"
-    def GListBoxBorderSize(self, border=0, value=None):
-        return self.window[value].Widget.configure(borderwidth=border, relief=tk.GROOVE)
+    # This setting only works under GWindow. "this is tk"
+    def GListBoxBorderSize(self, border=0, windowValue=None):
+        return self.window[windowValue].Widget.configure(borderwidth=border, relief=tk.GROOVE)
 
-    def GSelectionBorderSize(self, border=0, value=None, borderColor=None, highlightcolor=None):
-        combo = self.window[value]
+    def GSelectionBorderSize(self, border=0, windowValue=None, borderColor=None, highlightcolor=None):
+        combo = self.window[windowValue]
         combostyle, style_name = combo.ttk_style, combo.ttk_style_name
         combostyle.configure(style_name, selectbackground=borderColor, selectforeground=highlightcolor, borderwidth=border)
 
@@ -368,18 +367,34 @@ class GnuChanGUI:
         multiline = self.window[gMultilineValue]
         multiline.Widget.configure(tabs=tabs)
 
-    # ALL Style Changer
-    # Font Size Changer
-    def fontSizePlus(self, windowValue=None):
-        self.fontSize += 2
-        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
-    def fontSizeMinus(self, windowValue=None):
-        self.fontSize -= 2
-        self.window[windowValue].update(font=f"{self.fontName}, {self.fontSize}")
-    def ChangeTextColor(self, textValue, color="white"):
-        self.window[textValue].update(text_color=color)
-    def ChangeBackgroundColor(self, Value, color="black"):
-        self.window[Value].update(background_color=color)
+    def AddNewBorderWithColor(self, Value, Color, BorderSize):
+        _mw = self.window[Value].Widget
+        _mw.config(highlightbackground=Color, highlightcolor=Color, highlightthickness=BorderSize)
+
+    def FontSize_Change(self, windowValue, fontSize=20):
+        self.window[windowValue].update(font=f"{self.fontName}, {fontSize}")
+
+    def TextColor_Change(self, windowValue, color="white"):
+        self.window[windowValue].update(text_color=color)
+
+    def BackgroundColor_Change(self, windowValue, color="black"):
+        self.window[windowValue].update(background_color=color)
+
+    # this can change visible true or false but also change layer position! i don't know how to fix for now or never
+    def HideThings(self, Value, hide):
+        self.window[Value].update(visible=hide)
+        if hide:
+            self.window[Value].unhide_row()
+        else:
+            self.window[Value].hide_row()
+
+    # Experimantal
+    def GCanvas(self, value, bcolor=None, xStretch=False, yStretch=False, Visible=True, border=0, size=(None, None), EmptySpace=(None, None)):
+        return Canvas(key=value, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible, border_width=border, size=size, pad=EmptySpace)
+    """
+    This is not finish yet!
+    but you can draw someting in canvas use GCanvas Class
+    """
 
     # window widgets
     def GFrame(self, title=None, winLayout=[[]], value=None, infoWındow=None, border=1, font="Sans, 20", size=(None, None), xStretch=False, yStretch=False, EmptySpace=(None, None), tColor=None, bcolor=None, visible=True):
@@ -433,6 +448,16 @@ class GnuChanGUI:
         [gc.GColumn(BottomLayer, xStretch=True, yStretch=True)] ]
         """
 
+    # this is can grab print
+    def GLog(self, value=None, font="Sans, 15", size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, visible=True, tcolor=None, bcolor=None):
+        return Output(key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=tcolor, background_color=bcolor, visible=visible, 
+                      autoscroll_only_at_bottom=True)
+        """
+        I must disable the scrollbar and make it readonly.
+
+        i love this becouse this can show print() in screen
+        """
+
     # create Gtab and create GTap Group
     def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
         return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
@@ -460,8 +485,7 @@ class GnuChanGUI:
 
 # All Widgets
     # text widget
-    def GText(self, title="", font="Sans, 20", value=None, size=(None, None), position="left", xStretch=False, yStretch=False, EmptySpace=(None), tColor=None, bcolor=None,
-              border=None):
+    def GText(self, title="", font="Sans, 20", value=None, size=(None, None), position="left", xStretch=False, yStretch=False, EmptySpace=(None), tColor=None, bcolor=None, border=None):
         return Text(text=title, font=font, key=value, size=size, justification=position, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
                        text_color=tColor, background_color=bcolor, border_width=border)
         """
@@ -477,14 +501,6 @@ class GnuChanGUI:
         gc.GButton(title="button")
         if gc.event == "button name or value": click event
             gc.window["text"].update(gc.GetValues["textInput"])
-        """
-
-    # image
-    def GImage(self, image=None, value=None, EmptySpace=(None, None), visible=True, size=[None, None]):
-        return Image(filename=image, key=value, pad=EmptySpace, visible=visible, size=size)  
-        """
-        if gc.event == "imgButton":
-            gc.window["img"].update("logo2.png")
         """
 
     # listbox widget
@@ -531,10 +547,12 @@ class GnuChanGUI:
     def GCheackBox(self, title=None, font="Sans, 20", value=None, EmptySpace=(None, None), tcolor=None, bcolor=None):
         return Checkbox(text=title, font=font, key=value, pad=EmptySpace, text_color=tcolor, background_color=bcolor)
         """
-        [gc.GCheackBox(title="Half Life", value="hl"),
-        gc.GCheackBox(title="Mafia", value="mf"),
-        gc.GCheackBox(title="GTA San Andreas", value="gta"),
-        gc.GCheackBox(title="Age Of Empires 2", value="age2")],
+        [
+            gc.GCheackBox(title="Half Life", value="hl"),
+            gc.GCheackBox(title="Mafia", value="mf"),
+            gc.GCheackBox(title="GTA San Andreas", value="gta"),
+            gc.GCheackBox(title="Age Of Empires 2", value="age2")
+        ],
         [gc.GButton(title="CheckBox", xStretch=True)]
 
         
@@ -587,6 +605,7 @@ class GnuChanGUI:
     
     def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
         return Slider(range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible)   
+
     def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
         return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
         """
@@ -599,6 +618,12 @@ class GnuChanGUI:
 
 
     # Little things
+    def GetFilePath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=None):
+        return popup_get_file(default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title)
+    def GetFolderPath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=None):
+        return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title)
+
+    # with Property
     @property
     def Push(self):
         return Push()
@@ -612,64 +637,441 @@ class GnuChanGUI:
         return popup(message, title=wmTitle, font=font, text_color=tcolor, background_color=bcolor)
 
 
+# for canvas Object Transform and Scale
+class GVector2:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
 
 
 
-# for multiLine Open/Save/save as
-class FileSave:
-    def __init__(self, value=None, window=None) -> None:
-        self.value = value
+# this is not finish yet!
+class GCanvas:
+    def __init__(self, Window, CanvasValue) -> None:
+
+        self.GWindow = Window
+        self.Canvas = self.GWindow[CanvasValue].Widget # widget
+        self.CanvasID = self.Canvas.winfo_id()         # widget ID
+        self.DrawList = {}
+
+        self.Scene = {
+            "LOGO"     : 0,
+            "MENU"     : 1,
+            "GAMEPLAY" : 2,
+            "END"      : 3
+        }
+
+        self.Transform = "transform"
+        self.Scale = "scale"
+
+    # Get Variable
+    def OpenImage(self, ImagePath, Scale):
+        try:
+            image = Image.open(ImagePath)
+            resized_image = image.resize(size=(Scale.x, Scale.y))
+            return ImageTk.PhotoImage(resized_image)
+        except Exception as ERR:
+            print(ERR, "OpenImage Function ERR")
+
+    # Canvas Size
+    def GetCanvasScale_X(self):
+        return self.Canvas.winfo_width()
+
+    def GetCanvasScale_Y(self):
+        return self.Canvas.winfo_height()
+
+    # Clear Man or 23123123123 Gender
+    def ClearCanvas(self):
+        self.Canvas.delete('all')
+
+    # Create Object Single Draw Not For Draw() Function
+    def CreateCircle(self, Transform=GVector2(0, 0), Radius=20, OutLineColor="red", FillColor="blue"):
+        try:
+            self.Canvas.create_oval(Transform.x-Radius, Transform.y-Radius, Transform.x+Radius, Transform.y+Radius, outline=OutLineColor, fill=FillColor)
+        except Exception as ERR:
+            print(ERR, " Create Circle ERR for ")
+
+    def CreateRectangle(self, Transform=GVector2(0, 0), Scale=GVector2(20, 30), OutLineColor="red", FillColor="blue"):
+        try:
+            self.Canvas.create_rectangle(Transform.x, Transform.y, Transform.x+Scale.x, Transform.y+Scale.y, outline=OutLineColor, fill=FillColor)
+        except Exception as ERR:
+            print(ERR, " Create Rectangle ERR for ")
+
+    # StartX, StartY, EndX, EndY
+    def CreateLine(self, Transform, Scale, Color='black', width=1):
+        try:
+            self.Canvas.create_line(Transform.x, Transform.y, Transform.x+Scale, Transform.y, fill=Color, width=width)
+        except Exception as ERR:
+            print(ERR, " Create Line ERR for ")
+
+    def CreateText(self, Transform=GVector2(0, 0), Text="Default text", Color="red", Font="Sans", Size=12):
+        try:
+            self.Canvas.create_text(Transform.x, Transform.y, text=Text, fill=Color, font=(Font, Size))
+        except Exception as ERR:
+            print(ERR, " Create Text ERR for ")
+
+    
+    # only use this with OpenImage() 
+    def CreateImage(self, Transform, Image):
+        try:
+            self.Canvas.create_image(Transform.x, Transform.y, anchor='nw', image=Image)
+        except Exception as ERR:
+            print(ERR, " Create Image")
+
+    # Add New Object In DrawList
+    def AddCircleObject(self, Transform, Radius, OutLineColor, FillColor, Active=True):
+        try:
+            self.DrawList[len(self.DrawList)] = { 'c': {
+                'transform' : Transform,
+                'radius' : Radius,
+                "ocolor" : OutLineColor,
+                "fcolor" : FillColor,
+                "active" : Active
+            }}
+            return len(self.DrawList) -1
+        except Exception as ERR:
+            print(ERR, "Add Circle Object Function ERR")
+
+    def AddRectangleObject(self, Transform, Scale, OutLineColor, FillColor, Active=True):
+        try:
+            self.DrawList[len(self.DrawList)] = { 'r' : {
+                'transform' : Transform,
+                'scale' : Scale,
+                "ocolor" : OutLineColor,
+                "fcolor" : FillColor,
+                "active" : Active
+            }}
+            return len(self.DrawList) -1
+        except Exception as ERR:
+            print(ERR, "Add Rectangle Object Function ERR")
+
+    def AddLineObject(self, Transform, Scale, FillColor, width, Active=True):
+        try:
+            self.DrawList[len(self.DrawList)] = { 'l' : {
+                "transform" : Transform,
+                "scale" : Scale,
+                "fcolor" : FillColor,
+                'b'  : width,
+                "active" : Active
+            }}
+            return len(self.DrawList) -1
+        except Exception as ERR:
+            print(ERR, "Add Line Object Function ERR")
+
+    def AddTextObject(self, Transform, Text, Color, Font, Scale, Active=True):
+        try:
+            self.DrawList[len(self.DrawList)] = { "t" : {
+                'transform'     : Transform,
+                "text"          : Text,
+                "color"         : Color,
+                "font"          : Font,
+                "scale"         : Scale,
+                "active"        : Active
+            }}
+            return len(self.DrawList)
+        except Exception as ERR:
+            print(ERR, "Add Text Object Function ERR")
+
+    def AddImageObject(self, Transform, Image, Active=True, Scale=GVector2(20, 20)):
+        try:
+            self.DrawList[len(self.DrawList)] = { 'i' :{
+                "transform" : Transform,
+                "Image"     : Image,
+                "scale"     : Scale,
+                "active"    : Active
+            }}
+            return len(self.DrawList)
+        except Exception as ERR:
+            print(ERR, " Add Image Object Funstion ERR")
+
+
+    # Select Object
+    def SelectObject(self, Object=0, Parameter0=''):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            return self.DrawList[Object][_check][Parameter0]
+        except Exception as ERR:
+            print(ERR, " Select Object Function ERR")
+
+    def ReturnID(self, Object):
+        return list(self.DrawList[Object].keys())[0]
+
+    # Change Object Parameters
+    def ChangeObject(self, Object=0, Parameters='', Change=''):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            self.DrawList[Object][_check][Parameters] = Change
+        except Exception as ERR:
+            print(ERR, " Change Object Function ERR")
+
+    # move Rectangle
+    def MoveCircleX_withUpdate(self, Object, Speed, Position):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            if str(Position).startswith("l"):
+                self.DrawList[Object][_check]["transform"].x -= Speed * 0.1
+            elif str(Position).startswith("r"):
+                self.DrawList[Object][_check]["transform"].x += Speed * 0.1
+        except Exception as ERR:
+            print(ERR, "Move Circle X withUpdate Function ERR")
+
+    def MoveCircleY_withUpdate(self, Object, Speed, Position):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            if str(Position).startswith("u"):
+                self.DrawList[Object][_check]["transform"].x -= Speed * 0.1
+            elif str(Position).startswith("d"):
+                self.DrawList[Object][_check]["transform"].x += Speed * 0.1
+        except Exception as ERR:
+            print(ERR, "Move Circle Y withUpdate Function ERR")
+
+    def MoveRectangleX_withUpdate(self, Object, Speed, Position):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            if str(Position).startswith("l"):
+                self.DrawList[Object][_check]["transform"].x -= Speed * 0.1
+            elif str(Position).startswith("r"):
+                self.DrawList[Object][_check]["transform"].x += Speed * 0.1
+        except Exception as ERR:
+            print(ERR, "Move Rectangle X withUpdate Function ERR")
+
+    def MoveRectangleY_withUpdate(self, Object, Speed, Position):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            if str(Position).startswith("u"):
+                self.DrawList[Object][_check]["transform"].y -= Speed * 0.1
+            elif str(Position).startswith("d"):
+                self.DrawList[Object][_check]["transform"].y += Speed * 0.1
+        except Exception as ERR:
+            print(ERR, "Move Rectangle Y withUpdate Function ERR")
+
+    def ChangeObjectTransform(self, Object, XorY, Position):
+        try:
+            _check = list(self.DrawList[Object].keys())[0]
+            if str(XorY).startswith('x'):
+                self.DrawList[Object][_check]["transform"].x = Position
+            elif str(XorY).startswith('y'):
+                self.DrawList[Object][_check]["transform"].y = Position
+        except Exception as ERR:
+            print(ERR, "Change Object Transform Function ERR")
+
+
+    # Basic Collision Hit Control
+    def GetCircleCollision(self, Object0, Object1, radius):
+        dx = Object0.x  - Object1.x
+        dy = Object0.y  - Object1.y
+        distance = math.sqrt(dx * dx + dy * dy)
+        return distance < radius + radius
+
+    def CircleCollisionCheck(self, Object0_Transform, Object1_Transform, notHitBeforePlayerTransform):
+        _hit = self.GetCircleCollision(Object0=Object0_Transform, Object1=Object1_Transform, radius=25)
+        if _hit:
+            Object0_Transform.x = notHitBeforePlayerTransform.x
+            Object0_Transform.y = notHitBeforePlayerTransform.y
+        else:
+            notHitBeforePlayerTransform.x = Object0_Transform.x
+            notHitBeforePlayerTransform.y = Object0_Transform.y
+        return _hit
+
+    def RectangleCollisionCheck(self, Player=0, SolidObjectList=[], notHitBeforePlayerTransform=GVector2(0, 0)):
+        pTransform = self.SelectObject(Object=Player, Parameter0=self.Transform)
+        pScale = self.SelectObject(Object=Player, Parameter0=self.Scale)
+        for i in SolidObjectList:
+            _check = list(self.DrawList[int(str(i).strip("(),"))].keys())[0]
+            SolidTransform = self.DrawList[int(str(i).strip("(),"))][_check][self.Transform]
+
+            SolidScale = self.DrawList[int(str(i).strip("(),"))][_check][self.Scale]
+            player_box = box(pTransform.x, pTransform.y, pTransform.x + pScale.y, pTransform.y + pScale.y)
+            hit_box = box(SolidTransform.x, SolidTransform.y, SolidTransform.x + SolidScale.x, SolidTransform.y + SolidScale.y)
+
+            if player_box.intersects(hit_box):
+                # change wall color if hit true
+                self.ChangeObject(Object=int(str(i).strip("(),")), Parameters="fcolor", Change="red")
+                # change player position hit before place
+                self.ChangeObjectTransform(Object=Player, XorY='x', Position=notHitBeforePlayerTransform.x)
+                self.ChangeObjectTransform(Object=Player, XorY='y', Position=notHitBeforePlayerTransform.y)
+            else:
+                # if not hit change color again
+                self.ChangeObject(Object=int(str(i).strip("(),")), Parameters="fcolor", Change="yellow")
+                # if not hit record player position
+                notHitBeforePlayerTransform.x = self.SelectObject(Object=Player, Parameter0=self.Transform).x
+                notHitBeforePlayerTransform.y = self.SelectObject(Object=Player, Parameter0=self.Transform).y
+
+
+    # this must work under the update
+    def Draw(self):
+        self.ClearCanvas()
+        try:
+            for i in range(0, len(self.DrawList)):
+                _check = list(self.DrawList[i].keys())[0]
+                if self.DrawList[i][_check]["active"]:
+                    if _check == 'c':
+                        self.CreateCircle(
+                            Transform=self.DrawList[i][_check]["transform"],
+                            Radius=self.DrawList[i][_check]["radius"],
+                            FillColor=self.DrawList[i][_check]["fcolor"],
+                            OutLineColor=self.DrawList[i][_check]["ocolor"]
+                        )
+
+                    elif _check == 'r':
+                        self.CreateRectangle(
+                            Transform=self.DrawList[i][_check]["transform"],
+                            Scale=self.DrawList[i][_check]["scale"],
+                            FillColor=self.DrawList[i][_check]["fcolor"],
+                            OutLineColor=self.DrawList[i][_check]["ocolor"],
+                        )
+                    elif _check == 'l':
+                        self.CreateLine(
+                            Transform=self.DrawList[i][_check]["transform"],
+                            Scale=self.DrawList[i][_check]["scale"],
+                            Color=self.DrawList[i][_check]["fcolor"],
+                            width=self.DrawList[i][_check]["b"]
+                        )
+
+                    elif _check == 't':
+                        self.CreateText(
+                            Text=self.DrawList[i][_check]["text"],
+                            Transform=self.DrawList[i][_check]["transform"],
+                            Font=self.DrawList[i][_check]["font"],
+                            Size=self.DrawList[i][_check]["scale"],
+                            Color=self.DrawList[i][_check]["color"]
+                        )
+                    elif _check == 'i':
+                        self.CreateImage(
+                            Image=self.DrawList[i][_check]["Image"],
+                            Transform=self.DrawList[i][_check]["transform"]
+                        )
+
+        except Exception as ERR:
+            print(ERR, "This is Error")
+
+
+# This is not finished yet! And man, it's not good. It can't read two keys at the same time. This is why I make my own thing, but it's a bad way to read keyboard press events.
+class GKeyboard:
+    def __init__(self, window, event) -> None:
         self.window = window
-        self.content = None
-        self.filename = None
-        self.fileOpen = False
+        self.event = event
+        self.ReadKey = None
+        self.key = ""
+        self.ActiveKeys = []
+        self.timeout = 2
 
-    @property
-    def Open(self):
-            self.filename = popup_get_file('Select a file to open', no_window=True)
-            #file path text file path
-            # open text file with popup_get_file
-            if self.filename:
-                with open(self.filename, 'r') as file:
-                    self.content = file.read()
-                    self.window[self.value].update(self.content)
-                    self.fileOpen = True
-    @property
-    def SaveAs(self):
-        self.filename = popup_get_file('Select a file to save', save_as=True, no_window=True)
-        if self.filename:
-            self.content = self.window[self.value].get()
-            with open(self.filename, 'w') as file:
-                file.write(self.content)
-                self.fileOpen = True
+        # all keyboard keys
+        self.f1 = "F1:67"
+        self.f2 = "F2:68"
+        self.f3 = "F3:69"
+        self.f4 = "F4:70"
+        self.f5 = "F5:71"
+        self.f6 = "F6:72"
+        self.f7 = "F7:73"
+        self.f8 = "F8:74"
+        self.f9 = "F9:75"
+        self.f10 = "F10:76"
+        self.f11 = "F11:95"
+        self.f12 = "F12:96"
 
-    @property
-    def Save(self):
-        if self.fileOpen == True:
-            self.content = self.window[self.value].get()
-            with open(self.filename, 'w') as file:
-                file.write(self.content)
-    """
-    textOpen = FileSave(value="multiLineText", window=gc.window)
-    def update():
-        if gc.event == "Open File":
-            textOpen.Open
-        elif gc.event == "Save As":
-            textOpen.SaveAs
-        elif gc.event == "Save":
-            textOpen.save
-    """
+        self._1 = "1:10"
+        self._2 = "2:11"
+        self._3 = "3:12"
+        self._4 = "4:13"
+        self._5 = "5:14"
+        self._6 = "6:15"
+        self._7 = "7:16"
+        self._8 = "8:17"
+        self._9 = "9:18"
+        self._0 = "0:19"
 
+        self.q = "q:24"
+        self.w = "w:25"
+        self.e = "e:26"
+        self.r = "r:27"
+        self.t = "t:28"
+        self.y = "y:29"
+        self.u = "u:30"
+        self.o = "o:32"
+        self.p = "p:33"
+        self.a = "a:38"
+        self.s = "s:39"
+        self.d = "d:40"
+        self.f = "f:41"
+        self.g = "g:42"
+        self.h = "h:43"
+        self.j = "j:44"
+        self.k = "k:45"
+        self.l = "l:46"
+        self.z = "z:52"
+        self.x = "x:53"
+        self.c = "c:54"
+        self.v = "v:55"
+        self.b = "b:56"
+        self.n = "n:57"
+        self.m = "w:58"
+        self.i = "i:48"
 
-if __name__ == "__main__":
-    gc = GnuChanGUI(Title="", Size=(300, 200), resizable=False, finalize=True)
-    Themecolors().GnuChanOS
+        self.Super_L = "Super_L:133"
+        self.quotedbl = "quotedbl:49"
+        self.asterisk = "asterisk:20"
+        self.minus = "minus:21"
+        self.BackSpace = "BackSpace:22"
+        self.Tab = "Tab:23"
+        self.idotless = "idotless:31"
+        self.gbreve = "gbreve:34"
+        self.udiaeresis = "udiaeresis:35"
+        self.Caps_Lock = "Caps_Lock:66"
+        self.scedilla = "scedilla:47"
+        self.comma = "comma:51"
+        self.Shift_L = "Shift_L:50"
+        self.less = "less:94"
+        self.Odiaeresis = "Odiaeresis:59"
+        self.Ccedilla = "Ccedilla:60"
+        self.period = "period:61"
+        self.Shift_R = "Shift_R:62"
+        self.Control_L = "Control_L:37"
+        self.Alt_L = "Alt_L:64"
+        self.space = "space:65"
+        self.ISO_Level3_Shift = "ISO_Level3_Shift:108"
+        self.Super_R = "Super_R:134"
+        self.Menu = "Menu:135"
+        self.Control_R = "Control_R:105"
+        self.Up = "Up:111"
+        self.Left = "Left:113"
+        self.Down = "Down:116"
+        self.Right = "Right:114"
+        self.KP_Delete = "KP_Delete:91"
+        self.Delete = "Delete:119"
+        self.Insert = "Insert:118"
+        self.Home = "Home:110"
+        self.End = "End:115"
+        self.Next = "Next:117"
+        self.Prior = "Prior:112"
+        self.Return = "Return:36"
 
-    layout = [ [gc.GText(title="test", xStretch=True, position="center")] ]
+        self.KP_Insert = "KP_Insert:90"
+        self.KP_End = "KP_End:87"
+        self.KP_Down = "KP_Down:88"
+        self.KP_Next = "KP_Next:89"
+        self.KP_Enter = "KP_Enter:104"
+        self.KP_Add = "KP_Add:86"
+        self.KP_Right = "KP_Right:85"
+        self.KP_Begin = "KP_Begin:84"
+        self.KP_Left = "KP_Left:83"
+        self.KP_Home = "KP_Home:79"
+        self.KP_Up = "KP_Up:80"
+        self.KP_Prior = "KP_Prior:81"
+        self.KP_Subtract = "KP_Subtract:82"
+        self.KP_Multiply = "KP_Multiply:63"
+        self.KP_Divide = "KP_Divide:106"
+        self.Num_Lock = "Num_Lock:77"
 
-    gc.GWindow(mainWindow=layout)
+    def SingleKeyPressCheck(self, key):
+        if self.event == key:
+            return True
+        else:
+            return False
 
-    def update():
-        pass
-
-    gc.update(GUpdate=update)
+    def Clean(self):
+        if self.timeout > 0:
+            self.timeout -= 1 * 0.1
+        else:
+            self.timeout = 2
+            self.ActiveKeys.clear()
