@@ -5,33 +5,29 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 
 from GnuChanGUI import *
-from threading import Thread
-
-
 #Thread(target=DownloadVideo, args=[]).start()
 
-if __name__ == "__main__":
-    gc = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
-    gc.font = "Sans, 20"
-    Themecolors().GnuChanOS
 
-    layout = [ 
-        [   gc.GMultiline(value="out", xStretch=True, yStretch=True, font="Sans, 20")   ],
-        [   gc.GInput(value="in", xStretch=True, font="Sans, 20")   ]
-    ]
+class DefaultExample:
+    def __init__(self) -> None:
+        self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
+        Themecolors().GnuChanOS
 
-    gc.GWindow(mainWindow=layout)
+        self.text = ""
 
-    def PrintThis():
-        print("Works!")
+        self.Layout = [
+            
+        ]
 
-    def update():
-        gd = GKeyboard(window=gc.window, event=gc.event)
+        self.GC.GWindow(mainWindow=self.Layout)
+        self.KYB = GKeyboard(window=self.GC)
+        self.GC.update(GUpdate=self.Update, exitBEFORE=self.BeforeExit)
 
-        control = gd.SingleKeyPressCheck(gd.Return)
-        if control:PrintThis()
-
-    def beforeExit():
+    def Update(self):
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=beforeExit, timeout=1)
+    def BeforeExit(self):
+        print("Exit")
+
+if __name__ == "__main__":
+    gc = DefaultExample()

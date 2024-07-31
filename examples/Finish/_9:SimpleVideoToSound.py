@@ -82,10 +82,8 @@ if __name__ == "__main__":
 
             StartConvert = False
                     
-                   
-
-    def beforeExit():
+    def BeforeExit():
         pass
 
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
 
-    gc.update(GUpdate=update, exitBEFORE=beforeExit)

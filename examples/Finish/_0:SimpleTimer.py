@@ -74,4 +74,8 @@ if __name__ == "__main__":
     def update():
         timerStart_func()
 
-    gc.update(GUpdate=update)
+    def BeforeExit():
+        pass
+
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+

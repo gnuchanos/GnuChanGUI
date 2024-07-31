@@ -143,5 +143,8 @@ if __name__ == "__main__":
     def update():
         buttonMath()
 
+    def BeforeExit():
+        pass
 
-    gc.update(GUpdate=update)
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+

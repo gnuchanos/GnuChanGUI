@@ -1,1 +1,0 @@
-gamelist = ['/home/archkubi/Games/winePrefix/redalert2']

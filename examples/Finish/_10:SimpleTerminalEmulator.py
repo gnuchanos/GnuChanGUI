@@ -61,9 +61,11 @@ if __name__ == "__main__":
     _command = _parameters = _path0 = _path1 = 0
     def update():
         global cc
-        cc.ReadKeyboard(ReadEvent=gc.event)
 
-        cc.DoFocusMulti(FirstKey=cc.Alt_L, SecondKey=cc.Return, doThing=_PrintThis0, ActiveObjectValue="in")
-        cc.DoFocusMulti(FirstKey=cc.Alt_L, SecondKey=cc.Control_L, doThing=_PrintThis1, ActiveObjectValue="in")
 
-    gc.update(GUpdate=update)
+
+    def BeforeExit():
+        pass
+
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+

@@ -242,4 +242,8 @@ if __name__ == "__main__":
             gc.window["output"].update(_output)
             gc.window["input"].update("")
 
-    gc.update(GUpdate=update)
+    def BeforeExit():
+        pass
+
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+

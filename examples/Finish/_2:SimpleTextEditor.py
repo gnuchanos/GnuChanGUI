@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 
     layout = [ 
-        [ gc.GMenuForTheme(menu, font="Sans, 15") ],
+        [gc.GMenuForTheme(menu, font="Sans, 15")],
         [gc.GTabGroup(TabGroupLayout=[
             [gc.GTab(title="window 0", TabLayout=win0, value="tab0")],
             [gc.GTab(title="window 1", TabLayout=win1, value="tab1")],
@@ -195,36 +195,43 @@ if __name__ == "__main__":
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab0, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab0)
                 if ActiveTab == "tab1":
                     _GetText = gc.GetValues["text1"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab1, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab1)
                 if ActiveTab == "tab2":
                     _GetText = gc.GetValues["text2"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab2, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab2)
                 if ActiveTab == "tab3":
                     _GetText = gc.GetValues["text3"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab3, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab3)
                 if ActiveTab == "tab4":
                     _GetText = gc.GetValues["text4"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab4, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab4)
                 if ActiveTab == "tab5":
                     _GetText = gc.GetValues["text5"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab5, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab5)
                 if ActiveTab == "tab6":
                     _GetText = gc.GetValues["text6"]
                     _tab0 = popup_get_file('Select a file to open', save_as=True, no_window=True, default_path=os.path.expanduser("~"), keep_on_top=True, no_titlebar=True)
                     with open(_tab6, 'w', encoding="utf-8") as _GetValue:
                         _GetValue.write(_GetText)
+                        gc.window["text0_path"].update(_tab6)
             except Exception as ERR:
                 print(ERR)
 
@@ -266,4 +273,9 @@ if __name__ == "__main__":
 
 
 
-    gc.update(GUpdate=update)
+    def BeforeExit():
+        pass
+
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+
+

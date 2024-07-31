@@ -7,7 +7,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 from GnuChanGUI import *
 from threading import Thread
 import subprocess
-import pygame
+from pygame import mixer
 
 
 #Thread(target=DownloadVideo, args=[]).start()
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
-    pygame.mixer.init()
+    mixer.init()
 
     Buttons = [
         [gc.GButton(title="Add Folder", size=(12, None))],
@@ -24,9 +24,6 @@ if __name__ == "__main__":
         [gc.GButton(title="Next Music", size=(12, None))],
         [gc.GButton(title="Stop Music", size=(12, None))],
         [gc.GButton(title="Previous Music", size=(12, None))],
-        [gc.hsep],
-        [gc.GText(title="Next or Previous\nonly works\n if you Play Music", position="center", xStretch=True, bcolor=GColors().purple6)],
-        [gc.hsep],
         [gc.Push]
     ]
 
@@ -85,13 +82,13 @@ if __name__ == "__main__":
                 musicIndex = musicList.index(gc.GetValues["mp3"][0])
                 musicSelect = musicList[musicIndex]
                 music_command = os.path.expanduser(f"{path}/{musicSelect}")
-                pygame.mixer.music.load(music_command)
-                pygame.mixer.music.set_volume(volume)
+                mixer.music.load(music_command)
+                mixer.music.set_volume(volume)
                 gc.window["musicName"].update(musicSelect)
                 start = True
 
         elif gc.event == "Stop Music":
-            pygame.mixer.music.stop()
+            mixer.music.stop()
             start = False
 
 
@@ -101,8 +98,8 @@ if __name__ == "__main__":
                     musicIndex += 1
                     musicSelect = musicList[musicIndex]
                     music_command = os.path.expanduser(f"{path}/{musicSelect}")
-                    pygame.mixer.music.load(music_command)
-                    pygame.mixer.music.set_volume(volume)
+                    mixer.music.load(music_command)
+                    mixer.music.set_volume(volume)
                     gc.window["musicName"].update(musicSelect)
                     start = True
 
@@ -112,15 +109,15 @@ if __name__ == "__main__":
                     musicIndex -= 1
                     musicSelect = musicList[musicIndex]
                     music_command = os.path.expanduser(f"{path}/{musicSelect}")
-                    pygame.mixer.music.load(music_command)
-                    pygame.mixer.music.set_volume(volume)
+                    mixer.music.load(music_command)
+                    mixer.music.set_volume(volume)
                     gc.window["musicName"].update(musicSelect)
                     start = True
 
         if start:
             try:
                 if start:
-                    pygame.mixer.music.play()
+                    mixer.music.play()
                     start = False
             except Exception as ERR:
                 print(f"{ERR}")
@@ -133,12 +130,16 @@ if __name__ == "__main__":
             volume = float(f"0.{volume_slider}")
         else:
             volume = 1
-        pygame.mixer.music.set_volume(volume)
+        mixer.music.set_volume(volume)
 
 
     def update():
         Thread(target=MusicPlay, args=[]).start()
         Thread(target=volume_func, args=[]).start()
 
+    def BeforeExit():
+        pass
 
-    gc.update(GUpdate=update)
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+
+

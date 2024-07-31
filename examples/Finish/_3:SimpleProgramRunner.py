@@ -93,8 +93,12 @@ if __name__ == "__main__":
             except Exception as Err:
                 print(f"{Err} - UwU")
 
+    def BeforeExit():
+        pass
 
-    gc.update(GUpdate=update)
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+
+
 
 
 

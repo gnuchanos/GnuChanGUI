@@ -7,5 +7,11 @@ setup(
     author="archkubi",
     author_email="gnuchanos@email.com",
     packages=["GnuChanGUI"],
+    install_requires=[
+        "pygame",
+        "Pillow",
+        "shapely",
+        "pydub",
+    ],
 
 )

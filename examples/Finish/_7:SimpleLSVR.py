@@ -61,6 +61,12 @@ if __name__ == "__main__":
         [   gc.GText(title="Monutor ID 'xrandr here': ", font=gc.font),
             gc.GInput(value="mID", xStretch=True, size=(20, None), font=gc.font)
         ],
+        [
+            gc.GText(title="Micraphone Device ID: ", font="Sans, 15"), gc.GInput(value="mic", xStretch=True, size=(20, None), font="Sans, 15"),
+        ],
+        [
+            gc.GText(title="Desktop Sound Device ID: ", font="Sans, 15"), gc.GInput(value="desk", xStretch=True, size=(20, None), font="Sans, 15"),
+        ],
         [   gc.GText(title="Live Stream Settings", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [   gc.GText(title="RTMP URL: ", font=gc.font),
             gc.GInput(value="rtmp", xStretch=True, size=(20, None), font=gc.font)
@@ -95,17 +101,21 @@ if __name__ == "__main__":
                ]
 
     gc.GWindow(mainWindow=layout)
-    gc.window["rtmp"].update("rtmp://live.restream.io/live")
-    gc.window["mID"].update("VGA-1")
 
     _rtmp = _key = _monutorID = _fps = _quality = _sound = ""
     _path = _videoName = ""
     _Start = False
-
+    _desktop = "$(pactl get-default-sink).monitor"
+    _mic = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
     _now = datetime.now()
 
+    gc.window["rtmp"].update("rtmp://live.restream.io/live")
+    gc.window["mID"].update("VGA-1")
+    gc.window["mic"].update(_mic)
+    gc.window["desk"].update(_desktop)
+
     def LiveStream():
-        global _rtmp, _key, _monutorID, _fps, _quality, _sound, _path, _videoName, _Start, _now
+        global _rtmp, _key, _monutorID, _fps, _quality, _sound, _path, _videoName, _Start, _now, _mic, _desktop
         if gc.event in ["14", "24", "30", "60", "120"]:
             _fps = gc.event
         if gc.event in ["Medium", "high", "very_high", "ultra"]:
@@ -116,6 +126,8 @@ if __name__ == "__main__":
             _rtmp = gc.GetValues["rtmp"]
             _key = gc.GetValues["skey"]
             _monutorID = gc.GetValues["mID"]
+            _desktop = gc.GetValues["desk"]
+            _mic = gc.GetValues["mic"]
 
             _desktop = "$(pactl get-default-sink).monitor"
             _mic = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
@@ -135,7 +147,7 @@ if __name__ == "__main__":
             _Start = False
 
     def RecordVideo():
-        global _monutorID, _fps, _quality, _sound, _videoName, _Start, _path
+        global _monutorID, _fps, _quality, _sound, _videoName, _Start, _path, _desktop, _mic
         _monutorID = gc.GetValues["mID"]
         _videoName = gc.GetValues["vname"]
         if gc.event in ["14", "24", "30", "60", "120"]:
@@ -148,6 +160,7 @@ if __name__ == "__main__":
         if gc.event == "Save And Start Record":
             if _path and _videoName and _monutorID and _fps and _quality and _sound != "":
                 if not _Start:
+                    # change this place for your device
                     _desktop = "$(pactl get-default-sink).monitor"
                     _mic = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
 
