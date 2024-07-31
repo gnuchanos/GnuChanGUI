@@ -10,9 +10,8 @@ Finish Examples <br>
 ----------------------------------- <br>
 Simple Timer -> Finish <br>
 Simple Calculator -> Fimish <br>
-Simple Text Editor <br>
+Simple Text Editor -> finish <br>
 
-Simple Terminal Emulator -> not finish <br>
 Simple Program Runner Like Rofi -> finish <br>
 Simple Video and Music Download from Youtube -> finish <br>
 Simple Video to Sound # convert -> finish <br>
