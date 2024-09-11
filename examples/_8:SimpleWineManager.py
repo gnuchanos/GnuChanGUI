@@ -3,7 +3,6 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-
 from GnuChanGUI import *
 from threading import Thread
 from gamelist import gamelist
@@ -13,10 +12,12 @@ if __name__ == "__main__":
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
+    # First Create Wine Container
     CreateWinePrefix = [
-        [   gc.GText(title="Create New Wine Prefix", position="center", xStretch=True, bcolor=GColors().purple8)   ],
         [   gc.hsep   ],
-        [   gc.GText(title=f"'{os.path.expanduser("~")}/Games/winePrefix/' <-- your Wine Prefix here", position="center", xStretch=True, bcolor=GColors().purple7)   ],
+        [   gc.GText(title=f"'{os.path.expanduser("~")}/Games/winePrefix/' <-- Wine Prefix here", 
+                     position="center", xStretch=True, bcolor=GColors().purple7)   
+        ],
         [   
             gc.GText(title=f"{os.path.expanduser("~")}/Games/winePrefix/", EmptySpace=(0, 0), bcolor=GColors().purple6),
             gc.GInput(value="path_wine", xStretch=True, EmptySpace=(0, 0), bcolor=GColors().purple6)
@@ -28,13 +29,18 @@ if __name__ == "__main__":
             gc.Push
         ],
         [   gc.Push, gc.GButton(title="Create Prefix"), gc.Push    ],
+        [   
+            gc.GListBox(value="gamelist_create", xStretch=True, yStretch=True, bcolor=GColors().purple8),
+        ],
         [   gc.hsep   ],
     ]
 
+    # Second Run Games 
     wineBody = [
         [   gc.hsep   ],
         [   gc.GText(title="Don't forget to choose your game's own Wine prefix!", xStretch=True, position="center", bcolor=GColors().purple7)     ],
-        [   gc.GText(title="This Important Warning! 'File Name' is okay but ' file name ' NOPE!", bcolor=GColors().purple5, xStretch=True, position="center")   ],
+        [   gc.GText(title="This Important Warning! 'File Name' is okay but ' file name ' NOPE!", 
+                     bcolor=GColors().purple5, xStretch=True, position="center")   ],
 
         [   gc.GText(title="Choose Youre Wine", xStretch=True, position="center", bcolor=GColors().purple7)   ],
 
@@ -48,16 +54,19 @@ if __name__ == "__main__":
             gc.Push,
         ],
         [   
-            gc.GListBox(value="gamelist", xStretch=True, yStretch=True, bcolor=GColors().purple8),
+            gc.GListBox(value="gamelist_run", xStretch=True, yStretch=True, bcolor=GColors().purple8),
         ],
         [   gc.hsep   ],
     ]
 
 
-    wine_default = [
-        [   gc.GColumn(winColumn=CreateWinePrefix, xStretch=True, bcolor=GColors().purple7)   ],
+    wine_Create = [
+        [   gc.GColumn(winColumn=CreateWinePrefix, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ],
         [   gc.GText(title="", xStretch=True)   ],
-        [   gc.GColumn(winColumn=wineBody, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ],
+    ]
+
+    wine_Run = [ 
+        [   gc.GColumn(winColumn=wineBody, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ]
     ]
 
     wine_debug = [
@@ -73,29 +82,35 @@ if __name__ == "__main__":
         [
             gc.GTabGroup(
                 TabGroupLayout=[
-                    [gc.GTab(title="Wine", TabLayout=wine_default, value="tab1")],
-                    [gc.GTab(title="Output", TabLayout=wine_debug, value="tab2")],
-                    [gc.GTab(title="Help!", TabLayout=wine_triks, value="tab3")]
+                    [gc.GTab(title="Output", TabLayout=wine_debug, value="tab0")],
+                    [gc.GTab(title="Help!", TabLayout=wine_triks, value="tab1")],
+
+                    [gc.GTab(title="Create Wine", TabLayout=wine_Create, value="tab2")],
+                    [gc.GTab(title="Run Wine", TabLayout=wine_Run, value="tab3")],
                       ], 
             value="tabG")
         ]
     ]
 
     gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(windowValue="gamelist", border=0)
-    gc.window["gamelist"].update(gamelist)
+    gc.GListBoxBorderSize(windowValue="gamelist_create", border=1)
+    gc.GListBoxBorderSize(windowValue="gamelist_run", border=1)
+
+    gc.window["gamelist_create"].update(gamelist)
+    gc.window["gamelist_run"].update(gamelist)
 
     class gcWine:
         def __init__(self) -> None:
             self.winePrefix_List = gamelist
-            gc.window["gamelist"].update(self.winePrefix_List)
+            gc.window["gamelist_create"].update(self.winePrefix_List)
+            gc.window["gamelist_run"].update(self.winePrefix_List)
 
             self.Path = f"{os.path.expanduser("~")}/Games/winePrefix/"
             self._currentPosition = None
             self._exe = None
             self.winePrefix = None
             self._WinePrefix = None
-
+            self.game = None
 
         def CreatePrefix(self):
             try:
@@ -123,7 +138,8 @@ if __name__ == "__main__":
                         _file_path = os.path.expanduser(f"{os.path.expanduser("~")}/.config/qtile/Programs/gamelist.py")
                         with open(_file_path, 'w') as file:
                             file.write(f"gamelist = {gamelist}")
-                        gc.window["gamelist"].update(gamelist)
+                        gc.window["gamelist_create"].update(gamelist)
+                        gc.window["gamelist_run"].update(gamelist)
                         print(f"Wine Prefix List: {self.winePrefix_List}")
                 else:
                     print(str(gc.GetValues["path_wine"]).strip(" "))
@@ -133,21 +149,22 @@ if __name__ == "__main__":
 
         def RemovePrefix(self):
             try:
-                self.winePrefix_List.remove(gc.GetValues["gamelist"][0])
-                gc.window["gamelist"].update(showPath.winePrefix_List)
-                _removeThis = f"rm -r {str(gc.GetValues["gamelist"][0])}"
+                self.winePrefix_List.remove(gc.GetValues["gamelist_run"][0])
+                gc.window["gamelist_run"].update(showPath.winePrefix_List)
+                _removeThis = f"rm -r {str(gc.GetValues["gamelist_run"][0])}"
                 os.popen(_removeThis)
                 file_path = os.path.expanduser(f"{os.path.expanduser("~")}/.config/qtile/Programs/gamelist.py")
                 with open(file_path, 'w') as file:
                     file.write(f"gamelist = {gamelist}")
-                    gc.window["gamelist"].update(gamelist)
+                    gc.window["gamelist_run"].update(gamelist)
+                    gc.window["gamelist_create"].update(gamelist)
                 print(f"Remove Finish!: {_removeThis}")
             except Exception as ERR:
                 print(ERR)
 
         def wineTRICKS(self):
-            if len(str(gc.GetValues["gamelist"]).strip("[]'")) > 0:
-                choose = str(gc.GetValues["gamelist"]).strip("[]'")
+            if len(str(gc.GetValues["gamelist_run"]).strip("[]'")) > 0:
+                choose = str(gc.GetValues["gamelist_run"]).strip("[]'")
                 _Winetriks = f"WINEPREFIX={choose} winetricks"
                 os.popen(_Winetriks)
                 print(f"WineTriks Opening: {_Winetriks}")
@@ -155,8 +172,8 @@ if __name__ == "__main__":
                 print("first Choose Wine prefix")
 
         def wineCFG(self):
-            if len(str(gc.GetValues["gamelist"]).strip("[]'")) > 0:
-                choose = str(gc.GetValues["gamelist"]).strip("[]'")
+            if len(str(gc.GetValues["gamelist_run"]).strip("[]'")) > 0:
+                choose = str(gc.GetValues["gamelist_run"]).strip("[]'")
                 _Winecfg = f"WINEPREFIX={choose} winecfg"
                 os.popen(_Winecfg)
                 print(f"WineCFG Opening: {_Winecfg}")
@@ -165,9 +182,11 @@ if __name__ == "__main__":
 
         def ChooseGame(self):
             try:
-                if len(str(gc.GetValues["gamelist"]).strip("[]'")) > 0:
-                    self.game = popup_get_file('Select a file to open', no_window=True, default_path=str(gc.GetValues["gamelist"]).strip("[]'"),
-                                               keep_on_top=True, no_titlebar=True)
+                if len(str(gc.GetValues["gamelist_run"]).strip("[]'")) > 0:
+                    try:
+                        self.game = gc.GetFilePath(defaultPATH=str(gc.GetValues["gamelist_run"]).strip("[]'") )
+                    except Exception as ERR:
+                        print(ERR)
 
                     # fake workers
                     _pass = str(self.game).split("/")
@@ -188,24 +207,27 @@ if __name__ == "__main__":
 
         def PlayGame(self):
             try:
-                _winePrefix = str(gc.GetValues["gamelist"]).strip("[]'")
+                _winePrefix = str(gc.GetValues["gamelist_run"]).strip("[]'")
                 if str(self.game).endswith(".exe"):
-                    game_path = os.path.abspath(os.path.expanduser(str(self.game)))
-                    _Wine = f"WINEPREFIX={_winePrefix} primusrun gamemoderun mangohud --dlsym wine {str(self._exe)}"
+                    #game_path = os.path.abspath(os.path.expanduser(str(self.game)))
+                    # ( problem here i hope this is fix
+                    _dir = os.path.dirname(os.path.abspath(__file__))
+                    _Wine = f"WINEPREFIX={_winePrefix} primusrun gamemoderun mangohud --dlsym wine \"{str(self._exe)}\" > {_dir}/output.txt 2>&1"
+                   
                     print(f"Game Or Program Start: {_Wine}")
                     os.popen(_Wine)
             except Exception as ERR:
                 print(ERR)
 
         def UpdateWinePrefix(self):
-            _UpdateWinePrefix_ = str(gc.GetValues["gamelist"]).strip("[]'")
+            _UpdateWinePrefix_ = str(gc.GetValues["gamelist_run"]).strip("[]'")
             _wine = f"WINEPREFIX={_UpdateWinePrefix_} wineboot --update"
             print(f"WINEPREFIX={_UpdateWinePrefix_} wineboot --update")
             os.popen(_wine)
 
     showPath = gcWine()
 
-    _output = "welcome to GnuChanOS Wine Manager!\nuse help command!"
+    _output = "welcome to GnuChanOS Wine Manager!\nuse help command! \n"
     gc.window["output"].update(_output)
     def update():
         global showPath, _output
@@ -246,4 +268,3 @@ if __name__ == "__main__":
         pass
 
     gc.update(GUpdate=update, exitBEFORE=BeforeExit)
-

@@ -1,3 +1,8 @@
+"""
+this lgpl3+ 4.61.0.206 Unreleased version
+fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
+"""
+
 from GnuChanGUI import *
 
 gc = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -5,20 +10,14 @@ gc.font = "Sans, 20"
 Themecolors().GnuChanOS
 
 layout = [ 
-     [   gc.GMultiline(value="out", xStretch=True, yStretch=True, font="Sans, 20")   ],
-     [   gc.GInput(value="in", xStretch=True, font="Sans, 20")   ]
+
 ]
 
 gc.GWindow(mainWindow=layout)
-
-def PrintThis():
-    print("Works!")
+keyboard = GKeyboard(window=gc.window)
 
 def update():
-    gd = GKeyboard(window=gc.window, event=gc.event)
-
-    control = gd.SingleKeyPressCheck(gd.Return)
-    if control:PrintThis()
+    pass
 
 def beforeExit():
     pass

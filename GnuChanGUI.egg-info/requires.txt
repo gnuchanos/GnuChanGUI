@@ -1,4 +1,0 @@
-pygame
-Pillow
-shapely
-pydub

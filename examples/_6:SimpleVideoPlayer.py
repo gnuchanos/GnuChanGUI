@@ -4,11 +4,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 from GnuChanGUI import *
-from threading import Thread
 import vlc
-#import tkinter as tk
-
-#Thread(target=DownloadVideo, args=[]).start()
 
 
 

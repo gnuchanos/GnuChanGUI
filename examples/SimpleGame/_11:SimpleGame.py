@@ -28,12 +28,19 @@ class DefaultExample:
 
         self.CurrentLevel = 1
         self.CurrentScene = self.can.Scene_LOGO
-        self.LogoTime = 1
+        self.LogoTime = 2
         self.StartMusic = False
 
         # first start logo
-        self.OpenImage = self.can.OpenImage(ImagePath="/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/background.png", Scale=GVector2(self.can.GetCanvasScale_X(), self.can.GetCanvasScale_Y()))
-        self.bg = self.can.AddImageObject(ObjectName="background", Image=self.OpenImage, Transform=GVector2(0, 0), Scale=GVector2(self.can.GetCanvasScale_X(), self.can.GetCanvasScale_Y()))
+        self.OpenImage = self.can.OpenImage(
+                ImagePath="/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/background.png", 
+                Scale=GVector2(self.can.GetCanvasScale_X(), self.can.GetCanvasScale_Y())
+        )
+        self.bg = self.can.AddImageObject(
+                ObjectName="background", Image=self.OpenImage, 
+                Transform=GVector2(0, 0), 
+                Scale=GVector2(self.can.GetCanvasScale_X(), self.can.GetCanvasScale_Y())
+        )
 
         # menu GUI
         self.StartButton = self.can.AddRectangleObject(
@@ -115,13 +122,15 @@ class DefaultExample:
         )
         # Second Level Object
 
+        _path = os.path.dirname(os.path.abspath(__file__))
+
         # Music List
         self.soundPlay = False
-        self.GrabSound0 = "/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/grab0.wav"
-        self.GrabSound1 = "/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/grab1.wav"
-        self.GrabSound2 = "/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/grab2.wav"
-        self.doorOpenSound = "/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/doorOpen.wav"
-        self.Music = "/home/archkubi/Github/gnuchangui/examples/Finish/SimpleGame/music0.wav"
+        self.GrabSound0 = f"{_path}/grab0.wav"
+        self.GrabSound1 = f"{_path}/grab1.wav"
+        self.GrabSound2 = f"{_path}/grab2.wav"
+        self.doorOpenSound = f"{_path}/doorOpen.wav"
+        self.Music = f"{_path}/music0.wav"
         self.Mixer = GMixer()
         self.musicStart = False
         # Music List
@@ -134,22 +143,25 @@ class DefaultExample:
             FillColor=self.colors.purple1, OutLineColor=self.colors.purple7
         )
         self.PlayerGrab = False
+        self.can.Draw()
 
         self.GC.update(GUpdate=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
-        
         if self.CurrentScene == self.can.Scene_LOGO:
             if self.LogoTime > 0:
-                self.LogoTime -= self.GC.dt
+                self.LogoTime -= 1
+                print(self.LogoTime)
             else:
                 self.LogoTime = 3
-                self.CurrentScene = self.can.Scene_MENU
+                self.CurrentScene = self.can.Scene_MENU #self.can.Scene_MENU
+                self.CurrentLevel = 1
             self.can.Draw()
 
 
         elif self.CurrentScene == self.can.Scene_MENU:
             self.can.ReadMousePosition()
+            self.can.ChangeObjectVisible(Object=self.bg, Visible=False)
             self.can.ChangeObjectVisible(Object=self.StartButton, Visible=True)
             self.can.ChangeObjectVisible(Object=self.StartButtonText, Visible=True)
 
@@ -206,10 +218,10 @@ class DefaultExample:
 
                     if _hitTriger:
                         if self.GC.event == self.KYB.e and not self.PlayerGrab:
-                            self.Mixer.PlaySound(SoundPath=self.GrabSound0, ChannelID=1)
+                            self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.GrabSound0, ChannelID=1)
                             self.PlayerGrab = True
                         elif self.GC.event == self.KYB.e and self.PlayerGrab:
-                            self.Mixer.PlaySound(SoundPath=self.GrabSound1, ChannelID=1)
+                            self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.GrabSound1, ChannelID=1)
                             self.PlayerGrab = False
 
                     if not self.Door_0_Open:
@@ -218,8 +230,8 @@ class DefaultExample:
                             self.can.TeleportObject(Object=self.Door_0_TrigerObject, Position=self.can.GetObjectPosition(Object=self.Player, xOrY='y'), XorY='y')
                             if _hitDoorArea:
                                 if not self.soundPlay:
-                                    self.Mixer.PlaySound(SoundPath=self.GrabSound2, ChannelID=1)
-                                    self.Mixer.PlaySound(SoundPath=self.doorOpenSound, ChannelID=2)
+                                    self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.GrabSound2, ChannelID=1)
+                                    self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.doorOpenSound, ChannelID=2)
                                     self.soundPlay = True
                                 self.PlayerGrab = False; 
                                 self.Door_0_Open = True
@@ -230,17 +242,13 @@ class DefaultExample:
                 # leave the map
                 if self.can.RecordY < 0:
                     self.CurrentLevel = 2
-                    self.CurrentScene = self.can.Scene_End
 
-                self.Mixer.PlaySound_Loop(SoundPath=self.Music, Loop=True, ChannelID=0)
+                self.Mixer.PlaySound_MultiChannelLoop(SoundPath=self.Music, Loop=True, ChannelID=0)
 
                 self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.event, Keyboard=self.KYB, SolidObjectList=self.FirstLevelWarlls)
                 self.can.Draw()
 
             elif self.CurrentLevel == 2:
-                pass
-
-        elif self.CurrentScene == self.can.Scene_End:
                 # unload Things -> Visible False
                 self.can.ChangeObjectVisible(Object=self.Door_0, Visible=False)
                 self.can.ChangeObjectVisible(Object=self.Door_0_TrigerArea_obj, Visible=False)
@@ -249,10 +257,13 @@ class DefaultExample:
                     self.can.ChangeObjectVisible(Object=i, Visible=False)
                 # show new objects
                 self.can.ChangeObjectVisible(Object=self.Player, Visible=True)
-                self.can.ChangeObjectVisible(Object=self.GameOver, Visible=True)
+
 
                 self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.event, Keyboard=self.KYB, SolidObjectList=())
                 self.can.Draw()
+
+        elif self.CurrentScene == self.can.Scene_End:
+            pass
 
     def BeforeExit(self):
         print("Exit")

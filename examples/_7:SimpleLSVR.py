@@ -25,11 +25,6 @@ if __name__ == "__main__":
     Themecolors().GnuChanOS
 
     win = [
-        [   gc.GText(title="This Is First Version gpu-screen-recorder GUI", xStretch=True, position="center", font=gc.font)   ],
-        [   gc.GText(title="Video or LiveStream Time", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
-        [   gc.GText(title="0:0:0", value="time", xStretch=True, position="center", font="Sans, 20")   ],
-        [   gc.GText(title="Video or LiveStream Time", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
-        [   gc.hsep,   ],
         [   gc.GText(title="Video FPS", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [
             gc.Push,
@@ -61,12 +56,29 @@ if __name__ == "__main__":
         [   gc.GText(title="Monutor ID 'xrandr here': ", font=gc.font),
             gc.GInput(value="mID", xStretch=True, size=(20, None), font=gc.font)
         ],
-        [
-            gc.GText(title="Micraphone Device ID: ", font="Sans, 15"), gc.GInput(value="mic", xStretch=True, size=(20, None), font="Sans, 15"),
+        [gc.GText(title="If You Don't Know Mic Name \nLook At Here In Terminal -> pactl List Sources Short",
+                  xStretch=True, position="center", bcolor=GnuChanOSColor().colors0)
         ],
+        [gc.GText(title="Micraphone Device ID: ", font="Sans, 15")   ],
+        [gc.GInput(value="mic", xStretch=True, size=(20, None), font="Sans, 15")],
+        [gc.GText(title="Desktop Sound Device ID: ", font="Sans, 15")],
+        [gc.GInput(value="desk", xStretch=True, size=(20, None), font="Sans, 15")]
+    ]
+
+    RecordVideo = [
+        [   gc.GText(title="Video Record", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
+        [   gc.GText(title="File Path Here!", value="path", xStretch=True, bcolor=GColors().purple7, font=gc.font)],
+        [   gc.GText(title="Video Name: ", font=gc.font), gc.GInput(value="vname", size=(20, None), xStretch=True, font=gc.font)   ],
         [
-            gc.GText(title="Desktop Sound Device ID: ", font="Sans, 15"), gc.GInput(value="desk", xStretch=True, size=(20, None), font="Sans, 15"),
-        ],
+            gc.Push,
+                gc.GButton(title="Select Output Folder", font=gc.font),
+                gc.GButton(title="Save And Start Record", font=gc.font),
+                gc.GButton(title="Stop Record", font=gc.font),
+            gc.Push,
+        ]
+    ]
+
+    LiveStream = [
         [   gc.GText(title="Live Stream Settings", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [   gc.GText(title="RTMP URL: ", font=gc.font),
             gc.GInput(value="rtmp", xStretch=True, size=(20, None), font=gc.font)
@@ -79,28 +91,28 @@ if __name__ == "__main__":
             gc.GButton(title="Save And Start Live Stream", font=gc.font), gc.GButton(title="Stop Live Stream", font=gc.font),
             gc.Push,
         ],
-        [   gc.GText(title="Video Record", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
-        [   gc.GText(title="File Path Here!", value="path", xStretch=True, bcolor=GColors().purple7, font=gc.font)],
-        [   gc.GText(title="Video Name: ", font=gc.font), gc.GInput(value="vname", size=(20, None), xStretch=True, font=gc.font)   ],
-        [
-            gc.Push,
-                gc.GButton(title="Select Output Folder", font=gc.font),
-                gc.GButton(title="Save And Start Record", font=gc.font),
-                gc.GButton(title="Stop Record", font=gc.font),
-            gc.Push,
-        ]
+    ]
 
+    debug =  [
+        [gc.GMultiline(value="log", xStretch=True, yStretch=True, bcolor=GnuChanOSColor().colors0, font="Sans, 23", readonly=True)]
     ]
 
     layout = [ 
-        [   
-            gc.vsep,
-            gc.GColumn(winColumn=win, xStretch=True, yStretch=True),
-            gc.vsep,
+        [
+            gc.GTabGroup(
+                TabGroupLayout=[
+                    [gc.GTab(title="Read Log",     TabLayout=debug, value="tab0")],
+                    [gc.GTab(title="Settings",     TabLayout=win, value="tab1")],
+                    [gc.GTab(title="Live Stream",  TabLayout=LiveStream, value="tab2")],
+                    [gc.GTab(title="Record Video", TabLayout=RecordVideo, value="tab3")],
+                      ], 
+            value="tabG")
         ]
-               ]
+    ]
 
     gc.GWindow(mainWindow=layout)
+    gc.window["log"].update("There is no error log please open with terminal for debug")
+
 
     _rtmp = _key = _monutorID = _fps = _quality = _sound = ""
     _path = _videoName = ""
@@ -128,16 +140,20 @@ if __name__ == "__main__":
             _monutorID = gc.GetValues["mID"]
             _desktop = gc.GetValues["desk"]
             _mic = gc.GetValues["mic"]
-
-            _desktop = "$(pactl get-default-sink).monitor"
-            _mic = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
+            _GSR = "gpu-screen-recorder"
+            _mic = "-a {_desktop}"
+            _NoMic = f"-a {_mic}\\{_desktop}"
+            _key = "-o {_rtmp}/{_key}"
 
             try:
                 if _rtmp and _key and _fps and _quality and _sound != "":
                     if not _Start:
-                        _liveStream = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound}000 -o {_rtmp}/{_key}"
+                        if len(_mic) > 0:
+                            _liveStream = f"{_GSR} -w {_monutorID} -k h264 -ac aac -c flv {_NoMic} -f {_fps} -q {_quality} -ab {_sound}000 {_key}"
+                        else:
+                            _liveStream = f"{_GSR} -w {_monutorID} -k h264 -ac aac -c flv {_mic} -f {_fps} -q {_quality} -ab {_sound}000 {_key}"
                         os.popen(_liveStream)
-                        os.popen("notify-send -t 3500 -u low \"Live Stream is Starting!\"")
+                        os.popen("notify-send -t 3500 -u low 'Live Stream is Starting!' don't forget to check live stream'")
                         _Start = True
             except Exception as ERR:
                 print(ERR)
@@ -161,16 +177,28 @@ if __name__ == "__main__":
             if _path and _videoName and _monutorID and _fps and _quality and _sound != "":
                 if not _Start:
                     # change this place for your device
-                    _desktop = "$(pactl get-default-sink).monitor"
-                    _mic = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
+                    _desktop = gc.GetValues["desk"]
+                    _mic = gc.GetValues["mic"]
 
                     _now = datetime.now()
                     _FileName = f"{_now.year}-{_now.month}-{_now.day}_{_now.hour}-{_now.minute}-{_now.second}"
+                    _GSR = "gpu-screen-recorder"
+                    _Flags = "-k h264 -ac aac -c flv" 
+                    _Video = f"-o {_path}/{str(_videoName).replace(' ', '\\ ')}_{_FileName}.mkv"
 
-                    _VideoRecord = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound}000 -o {_path}/{str(_videoName).replace(" ", "\\ ")}_{_FileName}.mkv"
-                    os.popen(_VideoRecord)
-                    os.popen("notify-send -t 3500 -u low \"Video Recording is Starting\"")
-                    _Start = True
+                    if _mic != "":
+                        _VideoRecord = f"{_GSR} -w {_monutorID} {_Flags} -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_Video}"
+                    else:
+                        _VideoRecord = f"{_GSR} -w {_monutorID} {_Flags} -a {_desktop} -f {_fps} -q {_quality} -ab {_sound}000 {_Video} "
+
+                    import sys
+                    _dir = f"{sys.path[0]}/output.txt"
+                    _output = ""                    
+                    with open(_dir, 'w') as f:
+                        f.write("")
+
+                    os.popen(f"{_VideoRecord} > {_dir} 2>&1")
+                    os.popen("notify-send -t 3500 -u low 'Video Recording is Starting' Maybe... ")
 
         elif gc.event == "Stop Record":
             os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 3500 -u low \"Work Is Finish!\"")
@@ -188,21 +216,6 @@ if __name__ == "__main__":
 
         Thread(target=LiveStream, args=[]).start()
         Thread(target=RecordVideo, args=[]).start()
-
-        global _second, _minute, _hour, _Start, _sec
-        if _Start:
-            if _second < 60:
-                _second += 1 * 0.1
-            else:
-                if _minute != 60:
-                    _minute += 1
-                else:
-                    _hour += 1
-                    _minute = 0
-                _second = 0
-        else:
-            _second = _minute = _hour = 0
-        gc.window["time"].update(f"{_hour}:{_minute}:{int(_second)}")
 
     def LastWorkBeforeExit():
         global _Start

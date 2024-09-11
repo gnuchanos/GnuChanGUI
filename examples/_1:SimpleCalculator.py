@@ -5,9 +5,6 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 
 from GnuChanGUI import *
-from threading import Thread
-
-#Thread(target=DownloadVideo, args=[]).start()
 
 
 if __name__ == "__main__":
@@ -146,5 +143,5 @@ if __name__ == "__main__":
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.update(GUpdate=update, exitBEFORE=BeforeExit, timeout=0)
 

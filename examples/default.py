@@ -3,7 +3,6 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-
 from GnuChanGUI import *
 #Thread(target=DownloadVideo, args=[]).start()
 

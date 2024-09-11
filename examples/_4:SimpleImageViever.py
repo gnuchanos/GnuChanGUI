@@ -5,12 +5,8 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 
 from GnuChanGUI import *
-from threading import Thread
 from PIL import Image
 import io
-
-
-#Thread(target=DownloadVideo, args=[]).start()
 
 
 
@@ -60,7 +56,7 @@ if __name__ == "__main__":
                 if str(_defIMG).endswith(".png") or str(_defIMG).endswith(".jpg"):
                     gd.ClearCanvas()
                     _img = gd.OpenImage(ImagePath=_defIMG, Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
-                    gd.AddImageObject( Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
+                    gd.AddImageObject(ObjectName="image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
 
                     gc.window["path"].update(_defIMG)
@@ -77,7 +73,7 @@ if __name__ == "__main__":
                 _imgs.sort()
                 gd.ClearCanvas()
                 _img = gd.OpenImage(ImagePath=_imgs[0], Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
-                gd.AddImageObject( Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
+                gd.AddImageObject(ObjectName="image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                 gd.Draw()
                 gc.window["path"].update(_imgs[0])
             except Exception as ERR:
@@ -90,7 +86,7 @@ if __name__ == "__main__":
                     _selectImage = _imgs[_index]
                     gd.ClearCanvas()
                     _img = gd.OpenImage(ImagePath=_selectImage, Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
-                    gd.AddImageObject( Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
+                    gd.AddImageObject(ObjectName="Image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
 
                     gc.window["path"].update(_selectImage)
@@ -105,7 +101,7 @@ if __name__ == "__main__":
                     _selectImage = _imgs[_index]
                     _img = gd.OpenImage(ImagePath=_selectImage, Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.ClearCanvas()
-                    gd.AddImageObject( Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
+                    gd.AddImageObject(ObjectName="Image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
                     gc.window["path"].update(_selectImage)
             except Exception as ERR:

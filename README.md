@@ -10,14 +10,13 @@ Finish Examples <br>
 ----------------------------------- <br>
 Simple Timer -> Finish <br>
 Simple Calculator -> Fimish <br>
-Simple Text Editor <br>
+Simple Text Editor -> Fimish <br>
 
-Simple Terminal Emulator -> not finish <br>
-Simple Program Runner Like Rofi -> finish <br>
-Simple Video and Music Download from Youtube -> finish <br>
-Simple Video to Sound # convert -> finish <br>
-Simple Music Player -> finish <br>
-Simple Wine Manager -> not finish??? <br>
+Simple Program Runner Like Rofi -> Fimish <br>
+Simple Video and Music Download from Youtube -> Fimish <br>
+Simple Video to Sound # convert -> Fimish <br>
+Simple Music Player -> Fimish <br>
+Simple Wine Manager -> not Fimish??? <br>
 
 </p>
 

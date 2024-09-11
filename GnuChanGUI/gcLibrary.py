@@ -1949,7 +1949,10 @@ class Input(Element):
         self.disabled_readonly_text_color = disabled_readonly_text_color
         self.ReadOnly = readonly
         self.BorderWidth = border_width if border_width is not None else DEFAULT_BORDER_WIDTH
-        self.TKEntry = self.Widget = None  # type: tk.Entry
+        
+        # type: tk.Entry
+        self.TKEntry = self.Widget = None
+
         key = key if key is not None else k
         sz = size if size != (None, None) else s
         pad = pad if pad is not None else p
@@ -2176,7 +2179,10 @@ class Combo(Element):
         self.Values = values
         self.DefaultValue = default_value
         self.ChangeSubmits = change_submits or enable_events
-        self.Widget = self.TKCombo = None  # type: ttk.Combobox
+
+        # type: ttk.Combobox
+        self.Widget = self.TKCombo = None
+
         self.Disabled = disabled
         self.Readonly = readonly
         self.BindReturnKey = bind_return_key
@@ -2433,7 +2439,10 @@ class OptionMenu(Element):
 
         self.Values = values
         self.DefaultValue = default_value
-        self.Widget = self.TKOptionMenu = None  # type: tk.OptionMenu
+        
+        # type: tk.OptionMenu
+        self.Widget = self.TKOptionMenu = None
+
         self.Disabled = disabled
         bg = background_color if background_color else DEFAULT_INPUT_ELEMENTS_COLOR
         fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
@@ -2633,10 +2642,19 @@ class Listbox(Element):
         self.HighlightBackgroundColor = highlight_background_color if highlight_background_color is not None else fg
         self.HighlightTextColor = highlight_text_color if highlight_text_color is not None else bg
         self.RightClickMenu = right_click_menu
-        self.vsb = None  # type: tk.Scrollbar or None
-        self.hsb = None  # type: tk.Scrollbar | None
-        self.TKListbox = self.Widget = None  # type: tk.Listbox
-        self.element_frame = None  # type: tk.Frame
+        
+        # type: tk.Scrollbar or None
+        self.vsb = None  
+        
+        # type: tk.Scrollbar | None
+        self.hsb = None
+
+          # type: tk.Listbox
+        self.TKListbox = self.Widget = None
+        
+          # type: tk.Frame
+        self.element_frame = None
+        
         self.NoScrollbar = no_scrollbar
         self.HorizontalScroll = horizontal_scroll
         key = key if key is not None else k
@@ -2916,7 +2934,10 @@ class Radio(Element):
 
         self.InitialState = default
         self.Text = text
-        self.Widget = self.TKRadio = None  # type: tk.Radiobutton
+
+        # type: tk.Radiobutton
+        self.Widget = self.TKRadio = None
+
         self.GroupID = group_id
         self.Value = None
         self.Disabled = disabled
@@ -3124,7 +3145,10 @@ class Checkbox(Element):
         self.Text = text
         self.InitialState = bool(default)
         self.Value = None
-        self.TKCheckbutton = self.Widget = None  # type: tk.Checkbutton
+        
+        # type: tk.Checkbutton
+        self.TKCheckbutton = self.Widget = None
+        
         self.Disabled = disabled
         self.TextColor = text_color if text_color else theme_text_color()
         self.RightClickMenu = right_click_menu
@@ -3324,7 +3348,10 @@ class Spin(Element):
         self.Values = values
         self.DefaultValue = initial_value
         self.ChangeSubmits = change_submits or enable_events
-        self.TKSpinBox = self.Widget = None  # type: tk.Spinbox
+        
+        # type: tk.Spinbox
+        self.TKSpinBox = self.Widget = None
+        
         self.Disabled = disabled
         self.Readonly = readonly
         self.RightClickMenu = right_click_menu
@@ -3602,7 +3629,10 @@ class Multiline(Element):
         self.RightClickMenu = right_click_menu
         self.BorderWidth = border_width if border_width is not None else DEFAULT_BORDER_WIDTH
         self.TagCounter = 0
-        self.TKText = self.Widget = None  # type: tk.Text
+        
+        # type: tk.Text
+        self.TKText = self.Widget = None
+        
         self.element_frame = None  # type: tk.Frame
         self.HorizontalScroll = horizontal_scroll
         self.tags = set()
@@ -4353,7 +4383,10 @@ class StatusBar(Element):
             bg = DEFAULT_TEXT_ELEMENT_BACKGROUND_COLOR
         else:
             bg = background_color
-        self.TKText = self.Widget = None  # type: tk.Label
+        
+        # type: tk.Label
+        self.TKText = self.Widget = None
+        
         key = key if key is not None else k
         self.RightClickMenu = right_click_menu
         sz = size if size != (None, None) else s
@@ -4696,7 +4729,10 @@ class Button(Element):
             warnings.warn('file_types parameter not correctly specified. This parameter is a LIST of TUPLES. You have passed (str,str) rather than ((str, str),). Fixing it for you this time.\nchanging {} to {}\nPlease correct your code'.format(file_types, ((file_types[0], file_types[1]),)), UserWarning)
             file_types = ((file_types[0], file_types[1]),)
         self.FileTypes = file_types
-        self.Widget = self.TKButton = None  # type: tk.Button
+
+        # type: tk.Button
+        self.Widget = self.TKButton = None
+
         self.Target = target
         self.ButtonText = str(button_text)
         self.RightClickMenu = right_click_menu
@@ -5287,8 +5323,13 @@ class ButtonMenu(Element):
         self.Disabled = disabled
         self.IsButtonMenu = True
         self.MenuItemChosen = None
-        self.Widget = self.TKButtonMenu = None  # type: tk.Menubutton
-        self.TKMenu = None  # type: tk.Menu
+        
+        # type: tk.Menubutton
+        self.Widget = self.TKButtonMenu = None
+
+          # type: tk.Menu
+        self.TKMenu = None
+
         self.part_of_custom_menubar = False
         self.custom_menubar_key = None
         # self.temp_size = size if size != (NONE, NONE) else
@@ -5665,7 +5706,10 @@ class Image(Element):
 
         self.Filename = filename
         self.Data = data
-        self.Widget = self.tktext_label = None  # type: tk.Label
+
+        # type: tk.Label
+        self.Widget = self.tktext_label = None
+
         self.BackgroundColor = background_color
         if data is None and filename is None:
             self.Filename = ''
@@ -6055,8 +6099,12 @@ class Graph(Element):
         self.CanvasSize = canvas_size
         self.BottomLeft = graph_bottom_left
         self.TopRight = graph_top_right
-        # self._TKCanvas = None               # type: tk.Canvas
-        self._TKCanvas2 = self.Widget = None  # type: tk.Canvas
+
+
+        # self._TKCanvas = None
+        # type: tk.Canvas
+        self._TKCanvas2 = self.Widget = None
+        
         self.ChangeSubmits = change_submits or enable_events
         self.DragSubmits = drag_submits
         self.ClickPosition = (None, None)
@@ -7745,7 +7793,8 @@ class Slider(Element):
         :type metadata:                (Any)
         """
 
-        self.TKScale = self.Widget = None  # type: tk.Scale
+         # type: tk.Scale
+        self.TKScale = self.Widget = None
         self.Range = (1, 10) if range == (None, None) else range
         self.DefaultValue = self.Range[0] if default_value is None else default_value
         self.Orientation = orientation if orientation else DEFAULT_SLIDER_ORIENTATION
@@ -8639,7 +8688,10 @@ class Menu(Element):
 
         self.DisabledTextColor = disabled_text_color if disabled_text_color is not None else COLOR_SYSTEM_DEFAULT
         self.MenuDefinition = copy.deepcopy(menu_definition)
-        self.Widget = self.TKMenu = None  # type: tk.Menu
+        
+        # type: tk.Menu
+        self.Widget = self.TKMenu = None
+
         self.MenuItemChosen = None
         key = key if key is not None else k
         sz = size if size != (None, None) else s
@@ -8878,7 +8930,10 @@ class Table(Element):
         self.DisplayRowNumbers = display_row_numbers
         self.NumRows = num_rows if num_rows is not None else size[1]
         self.RowHeight = row_height
-        self.Widget = self.TKTreeview = None  # type: ttk.Treeview
+        
+        # type: ttk.Treeview
+        self.Widget = self.TKTreeview = None
+        
         self.AlternatingRowColor = alternating_row_color
         self.VerticalScrollOnly = vertical_scroll_only
         self.HideVerticalScroll = hide_vertical_scroll
@@ -9637,7 +9692,9 @@ VP = VPush
 class _TimerPeriodic:
     id_counter = 1
     # Dictionary containing the active timers.  Format is {id : _TimerPeriodic object}
-    active_timers = {}         #type: dict[int:_TimerPeriodic]
+    #type: dict[int:_TimerPeriodic]
+    active_timers = {}
+    
 
     def __init__(self, window, frequency_ms, key=EVENT_TIMER, repeating=True):
         """
@@ -9750,10 +9807,18 @@ class Window:
     _user_defined_icon = None
     hidden_master_root = None  # type: tk.Tk
     _animated_popup_dict = {}  # type: Dict
-    _active_windows = {}  # type: Dict[Window, tk.Tk()]
-    _move_all_windows = False  # if one window moved, they will move
-    _window_that_exited = None  # type: Window
-    _root_running_mainloop = None  # type: tk.Tk()    # (may be the hidden root or a window's root)
+    
+    # type: Dict[Window, tk.Tk()]
+    _active_windows = {}
+    
+    # if one window moved, they will move
+    _move_all_windows = False
+
+    # type: Window
+    _window_that_exited = None
+
+    # type: tk.Tk()    # (may be the hidden root or a window's root)
+    _root_running_mainloop = None
     _timeout_key = None
     _TKAfterID = None  # timer that is used to run reads with timeouts
     _window_running_mainloop = None  # The window that is running the mainloop
@@ -9763,9 +9828,13 @@ class Window:
     _counter_for_ttk_widgets = 0
     _floating_debug_window_build_needed = False
     _main_debug_window_build_needed = False
+    
     # rereouted stdout info. List of tuples (window, element, previous destination)
-    _rerouted_stdout_stack = []             # type: List[Tuple[Window, Element]]
-    _rerouted_stderr_stack = []             # type: List[Tuple[Window, Element]]
+    # type: List[Tuple[Window, Element]]
+    _rerouted_stdout_stack = []
+    # type: List[Tuple[Window, Element]]
+    _rerouted_stderr_stack = []
+    
     _original_stdout = None
     _original_stderr = None
     _watermark = None
@@ -12413,7 +12482,10 @@ class Window:
     @classmethod
     def _restore_stdout(cls):
         for item in cls._rerouted_stdout_stack:
-            (window, element) = item   # type: (Window, Element)
+            """
+            type: (Window, Element)
+            """
+            (window, element) = item
             if not window.is_closed():
                 sys.stdout = element
                 break
@@ -12426,7 +12498,10 @@ class Window:
     @classmethod
     def _restore_stderr(cls):
         for item in cls._rerouted_stderr_stack:
-            (window, element) = item   # type: (Window, Element)
+            """
+            type: (Window, Element)
+            """
+            (window, element) = item
             if not window.is_closed():
                 sys.stderr = element
                 break
@@ -22212,7 +22287,8 @@ class UserSettings:
             self.config = configparser.ConfigParser()
             self.config.optionxform = str
             # self.config_dict = {}
-            self.section_class_dict = {}        # type: dict[_SectionDict]
+            # type: dict[_SectionDict]
+            self.section_class_dict = {}
         if filename is not None or path is not None:
             self.load(filename=filename, path=path)
 

@@ -5,9 +5,7 @@ import random
 import math
 from PIL import Image, ImageTk
 from shapely.geometry import box
-from pygame import mixer
 from pydub import AudioSegment
-
 
 
 """
@@ -20,36 +18,8 @@ python -m venv ./venv
 """
 
 """
-```
-
-upgrade is not ready
-position | left - center - right
-
-font -> font
-visible -> visible
-readonly -> readonly and  disabled -> readonly
-no_scrollbar -> noScroolBar
-group_id -> groupID
-default_value -> defaultValue
-
-expand_x --> xStretch
-expand_y --> yStretch
-justification -> position
-text_color -> tColor
-background_color -> bcolor
-border_width -> border
-image_filename -> bImage
-password_char -> PwChars # like this 1234 showing as ****
-ReadyTheme -> more costume color theme
-```
-"""
-
-"""
 Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working with Thread(target=Create, args=[]).start(). 
-    The GUI is freezing, and you can only close the program using the task manager.
-
-
-
+The GUI is freezing, and you can only close the program using the task manager.
 """
 
 # more colors
@@ -185,7 +155,6 @@ class GnuChanOSColor:
         self.colors5 = "#3c096c"
 
 class Themecolors:
-
     @property
     def GnuChanOS(self, themeName="GnuchanTheme", text="#9d4edd", background="#240046", input="#3c096c", text_input="#9d4edd", 
                      scroll="#5a189a", button=('#c77dff', '#3c096c'), progress=('#c77dff', '#3c096c'), 
@@ -284,49 +253,55 @@ class GnuChanGUI:
         self.ImagesType = [("PNG (*.png)", "*.png"), ("JPEG (*.jpg)", "*.jpg")]
         self.VideoTypes = [("MKV (*.mkv)", "*.mkv"), ("MP4 (*.mp4)", "*.mp4")]
         self.MusicTypes = [("MP3 (*.mp3)", "*.mp3")]
-        self.AllTypes = [("All files (*.*)", "*.*")]
+        self.AllTypes   = [("All files (*.*)", "*.*")]
 
+        # f"{gc.PathPythonFile}/music.mp3" or diffrent file
+        self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
     # Create Window
-    def GWindow(self, mainWindow=None, TopMode=False, rightClickMenu=None, locationX=100, locationY=100):
+    def GWindow(self, mainWindow=None, TopMode=False, rightClickMenu=None, locationX=0, locationY=0):
         if mainWindow != None:
             self.layout = mainWindow
-            #if mainWindow is None self.layout can warning user and self.layout is ready warning layout
+            # if main Window is None self.layout can warning user and self.layout is ready warning layout
         self.window = Window(self.title, layout=self.layout, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
                                 finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY))
-        self.window.finalize() # this is new for close window good way
+        self.window.finalize()
+        # this is new for close window good way
         return self.window
         """
         window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
         """
 
-    def update(self, GUpdate="", exitBEFORE="", timeout=100):
+    def update(self, GUpdate="", exitBEFORE="", timeout=1000):
         while True:
             self.event, self.GetValues = self.window.read(timeout=timeout)
             if self.event in (WIN_CLOSED, "Exit"):
                 try:
-                    exitBEFORE()
+                    if exitBEFORE != "":
+                        exitBEFORE()
                 except Exception as ERR:
                     print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
             if self.closeWindow:
                 try:
-                    exitBEFORE()
+                    if exitBEFORE != "":
+                        exitBEFORE()
                 except Exception as ERR:
                     print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
-            GUpdate()
+            if GUpdate != "":
+                GUpdate()
         self.window.close() # if loop finish wnidow close
     
     @property
     def close(self):
         self.window.close()
 
+    # Note there is no delta time
     @property
     def dt(self):
-        dt = 1 * 0.1
+        dt = 1 # use this with timeout 1000/MS still not like real second slow or sometimes is fast
         return dt
-
 
     def GTitleBar(self, title="Window Title", icon=None, font="Sans, 12", tcolor=None, bcolor=None):
         return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)
@@ -338,13 +313,19 @@ class GnuChanGUI:
     # window top menu bar regular default or custom for theme
     def GMenu(self, winMenu=None, font="Sans, 20"):
         return Menu(menu_definition=winMenu, font=font)
+
     def GMenuForTheme(self, winMenu=None, font="Sans, 20", tcolor=None, bcolor=None, ):
         return MenubarCustom(menu_definition=winMenu, font=font, text_color=tcolor, background_color=bcolor)
+
     def GFocus(self, GetValues=None):
         return self.window[GetValues].set_focus() 
         """
         focus not Finish
         """
+
+    # GetValue With GText
+    def GetGTextValue(self, GTextValue):
+        return self.window[GTextValue].get()
 
     # ekstra options
     # This setting only works under GWindow. "this is tk"
@@ -376,6 +357,7 @@ class GnuChanGUI:
         self.window[windowValue].update(background_color=color)
 
     # this can change visible true or false but also change layer position! i don't know how to fix for now or never
+    # Don't Forget to Pin Object
     def GVisible(self, Value, show):
         self.window[Value].update(visible=show)
         if show:
@@ -385,16 +367,24 @@ class GnuChanGUI:
 
     # Experimantal
     def GCanvas(self, value, bcolor=None, xStretch=False, yStretch=False, Visible=True, border=0, size=(None, None), EmptySpace=(None, None)):
-        return Canvas(key=value, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible, border_width=border, size=size, pad=EmptySpace)
+        return Canvas(
+                key=value, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, 
+                visible=Visible, border_width=border, size=size, pad=EmptySpace
+        )
     """
     This is not finish yet!
     but you can draw someting in canvas use GCanvas Class
     """
 
     # window widgets
-    def GFrame(self, title=None, winLayout=[[]], value=None, infoWındow=None, border=1, font="Sans, 20", size=(None, None), xStretch=False, yStretch=False, EmptySpace=(None, None), tColor=None, bcolor=None, visible=True):
-        return Frame(title=title, layout=winLayout, key=value, border_width=border, tooltip=infoWındow, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, title_color=tColor, background_color=bcolor, visible=visible)
-        """
+    def GFrame(
+            self, title=None, winLayout=[[]], value=None, infoWındow=None, border=1, font="Sans, 20", size=(None, None), 
+            xStretch=False, yStretch=False, EmptySpace=(None, None), tColor=None, bcolor=None, visible=True
+        ): return Frame(
+            title=title, layout=winLayout, key=value, border_width=border, tooltip=infoWındow, font=font, size=size, pad=EmptySpace, 
+            expand_x=xStretch, expand_y=yStretch, title_color=tColor, background_color=bcolor, visible=visible )
+    
+    """
         gMenu = [ ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]], ["System", ["Exit"]] ]
         defaultFont = "Sans, 20"
         c = GColors()
@@ -419,10 +409,13 @@ class GnuChanGUI:
                 gc.GFrame(winLayout=test4, value="test4", xStretch=True, yStretch=True, bcolor=c.blue1, border=2)]]
 
         default.GWindow(mainWindow=layout)
-        """
+    """
 
     def GColumn(self, winColumn=None, size=(None, None), xStretch=None, yStretch=None, EmptySpace=(None, None), visible=True, value=None, bcolor=None):
-        return Column(layout=winColumn, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=visible, background_color=bcolor)
+        return Column(
+                layout=winColumn, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, 
+                visible=visible, background_color=bcolor
+        )
         """
         TopLayer = [[gc.GText(title="Top Layer", position="center", font="Sans, 20", bcolor=c.blue1, xStretch=True, yStretch=True, 
                             EmptySpace=(0,0))]]
@@ -444,9 +437,13 @@ class GnuChanGUI:
         """
 
     # this is can grab print
-    def GLog(self, value=None, font="Sans, 15", size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, visible=True, tcolor=None, bcolor=None):
-        return Output(key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=tcolor, background_color=bcolor, visible=visible, 
-                      autoscroll_only_at_bottom=True)
+    def GLog(
+            self, value=None, font="Sans, 15", size=(None, None), EmptySpace=(None, None), 
+            xStretch=False, yStretch=False, visible=True, tcolor=None, bcolor=None):
+        return Output(
+                key=value, font=font, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
+                text_color=tcolor, background_color=bcolor, visible=visible, autoscroll_only_at_bottom=True
+        )
         """
         I must disable the scrollbar and make it readonly.
 
@@ -454,14 +451,18 @@ class GnuChanGUI:
         """
 
     # create Gtab and create GTap Group
-    def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
-        return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
-
     def GTabGroup(self, TabGroupLayout=None, value=None, font="Sans, 20",
         bcolor=None, sbcolor=None, tbcolor=None, tcolor=None, fcolor=None, stcolor=None, size=(None, None)):
-        return TabGroup(layout=TabGroupLayout, key=value, expand_x=True, expand_y=True, size=size,
-        background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor, enable_events=True,
-        title_color=tcolor, focus_color=fcolor, selected_title_color=stcolor, font=font, tab_border_width=0, border_width=0)
+        return TabGroup(
+                layout=TabGroupLayout, key=value, expand_x=True, expand_y=True, size=size,
+                background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor, enable_events=True,
+                title_color=tcolor, focus_color=fcolor, selected_title_color=stcolor, font=font, tab_border_width=0, border_width=0
+        )
+    def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
+        return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
+    def GTabNewTab(self, TabGroupValue, TabTitle, WinLayout, TabValue):
+        return self.window[TabGroupLayout].add_tab(self.GTab(title=TabTitle, TabLayout=WinLayout, value=TabValue))
+
         """
         TabGroup Value: TabG : | tab1 value | tab2 value |
         [gc.GTabGroup(TabGroupLayout=[
@@ -480,18 +481,25 @@ class GnuChanGUI:
 
 # All Widgets
     # text widget
-    def GText(self, title="", font="Sans, 20", value=None, size=(None, None), position="left", xStretch=False, yStretch=False, EmptySpace=(None), tColor=None, bcolor=None, border=None):
+    def GText(
+            self, title="", font="Sans, 20", value=None, size=(None, None), position="left", 
+            xStretch=False, yStretch=False, EmptySpace=(None), tColor=None, bcolor=None, border=None ):
         return Text(text=title, font=font, key=value, size=size, justification=position, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
-                       text_color=tColor, background_color=bcolor, border_width=border)
+            text_color=tColor, background_color=bcolor, border_width=border
+        )
         """
         gc.GText(value="text")
         gc.window["text"].update("change text")
         """
 
     # button widget
-    def GButton(self, title="", bImage=None, font="Sans, 20", value=None, size=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), border=None):
-        return Button(title, button_color=(bcolor, tcolor), font=font, key=value, size=size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, 
-                         border_width=border)
+    def GButton(
+            self, title="", bImage=None, font="Sans, 20", value=None, size=(None, None), 
+            visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), border=None ):
+        return Button(
+                title, button_color=(bcolor, tcolor), font=font, key=value, size=size, 
+                expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=visible, border_width=border
+        )
         """
         gc.GButton(title="button")
         if gc.event == "button name or value": click event
@@ -499,10 +507,12 @@ class GnuChanGUI:
         """
 
     # listbox widget
-    def GListBox(self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, position="left", EmptySpace=(None, None), noScroolBar=False, 
-                 xStretch=False, yStretch=False, tColor=None, bcolor=None):
+    def GListBox(
+            self, list=[], font="Sans, 20", value=None, size=(None, None), ActiveEvent=True, visible=True, 
+            position="left", EmptySpace=(None, None), noScroolBar=False, xStretch=False, yStretch=False, tColor=None, bcolor=None):
         return Listbox(list, font=font, key=value, enable_events=ActiveEvent, visible=visible, justification=position, size=size, pad=EmptySpace,
-                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bcolor)
+                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=tColor, background_color=bcolor
+        )
         """
         [gc.GListBox(value="list", xStretch=True, yStretch=True)],
 
@@ -515,10 +525,12 @@ class GnuChanGUI:
         """
     
     # input widget
-    def GInput (self, InText="", font="Sans, 20", value=None, size=(None, None), focus=True, position="left", visible=True, PwChars=False, readonly=False, 
-                xStretch=False, yStretch=False, EmptySpace=(None), tcolor=None, bcolor=None, border=None):
-        return Input(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position,  pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
-                        password_char=PwChars, visible=visible, readonly=readonly,  background_color=bcolor, text_color=tcolor, border_width=border)
+    def GInput (self, InText="", font="Sans, 20", value=None, size=(None, None), focus=True, position="left", visible=True, 
+                PwChars=False, readonly=False, xStretch=False, yStretch=False, EmptySpace=(None), tcolor=None, bcolor=None, border=None):
+        return Input(
+                default_text=InText, font=font, key=value, size=size, focus=focus, justification=position,  pad=EmptySpace, expand_x=xStretch, 
+                expand_y=yStretch, password_char=PwChars, visible=visible, readonly=readonly, background_color=bcolor, text_color=tcolor, border_width=border
+        )
         """
         [gc.GText(value="text")],
         [gc.GInput(value="input", xStretch=True),  gc.GButton(title="Click", value="button", xStretch=True)],
@@ -529,9 +541,11 @@ class GnuChanGUI:
     # multiLine widget
     def GMultiline (self, InText="", font=None, value=None, size=(None, None), visible=True, position="left", enableEvent=True, WriteOnly=False, wrapLines=True,
                     xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
-        return Multiline(default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
-                            expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
-                            autoscroll=True, auto_size_text=True, enable_events=enableEvent, write_only=WriteOnly, wrap_lines=wrapLines)
+        return Multiline(
+                default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
+                expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
+                autoscroll=True, auto_size_text=True, enable_events=enableEvent, write_only=WriteOnly, wrap_lines=wrapLines
+        )
         """
         if gc.event == "addList":
             testList += str(random.randint(0, 50)) + "\n"
@@ -582,24 +596,37 @@ class GnuChanGUI:
         """
 
     # selections
-    def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False):
-        return Combo(values=values, key=value, default_value=defaultValue, font=font, pad=EmptySpace, visible=visible, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, readonly=True)
+    def GSelection(self, font="Sans, 20", values=None, defaultValue=None, value=None, EmptySpace=(None, None), visible=True, 
+                   tcolor=None, bcolor=None, xStretch=False, yStretch=False):
+        return Combo(
+                values=values, key=value, default_value=defaultValue, font=font, pad=EmptySpace, visible=visible, text_color=tcolor, background_color=bcolor, 
+                expand_x=xStretch, expand_y=yStretch, readonly=True
+        )
         """
         [gc.GSelection(values=[1,2,3,4,5], value="GSelection", defaultValue=1, font=gc.font, xStretch=True)],
         if gc.GetValues["GSelection"]:
             print(gc.GetValues["GSelection"])
         """
     
-    def GIncreaseSelection(self, rangeValue=None, startValue=None, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
-        return Spin(values=rangeValue, initial_value=startValue, font=font, key=value, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=tcolor, background_color=bcolor, visible=Visible)
+    def GIncreaseSelection(self, rangeValue=None, startValue=None, value=None, font="Sans, 20", size=(None, None), EmptySpace=(None, None), 
+                           tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
+        return Spin(
+                values=rangeValue, initial_value=startValue, font=font, key=value, size=size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
+                text_color=tcolor, background_color=bcolor, visible=Visible
+        )
         """
         [gc.GIncreaseSelection(startValue=1, rangeValue=[1,2,3,4,5], value="GIncreaseSelection", font=gc.font, xStretch=True)],
         if gc.GetValues["GIncreaseSelection"]:
             print(gc.GetValues["GIncreaseSelection"])
         """
     
-    def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, bcolor=None, xStretch=False, yStretch=False, Visible=True):
-        return Slider(range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible)   
+    def GSlider(self, range=None, value=None, defaultValue=None, font="Sans, 20", size=(None, None), direction="h", EmptySpace=(None, None), tcolor=None, 
+                bcolor=None, xStretch=False, yStretch=False, Visible=True):
+        
+        return Slider(
+                range=range, key=value, default_value=defaultValue, orientation=direction, font=font, size=size, pad=EmptySpace, text_color=tcolor, 
+                background_color=bcolor, expand_x=xStretch, expand_y=yStretch, visible=Visible
+        )   
 
     def GProgressBar(self, MaxValue=None, value=None, visible=True, direction="h"):
         return ProgressBar(max_value=MaxValue, key=value, visible=visible, orientation=direction)
@@ -614,8 +641,15 @@ class GnuChanGUI:
     # Little things
     def GetFilePath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")]):
         return popup_get_file(default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title)
+
+    def GetFileForSave(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")]):
+        return popup_get_file(save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title)
+
     def GetFolderPath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False):
         return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title)
+
+    # GFrame, xStretch and yStretch not working with pin
+    # GColumn, it's same in here not working xStretch and yStretch
     def GPin(self, GObject):
         return pin(GObject)
 
@@ -623,15 +657,17 @@ class GnuChanGUI:
     @property
     def Push(self):
         return Push()
+
     @property
     def hsep(self):
         return HSeparator()
+
     @property
     def vsep(self):
         return VSeparator()
+
     def GMessage(self, message=None, wmTitle="default Window", font="Sans, 15", tcolor=None, bcolor=None):
         return popup(message, title=wmTitle, font=font, text_color=tcolor, background_color=bcolor)
-
 
 # This is not finished yet! And man, it's not good. It can't read two keys at the same time. This is why I make my own thing, but it's a bad way to read keyboard press events.
 class GKeyboard:
@@ -765,7 +801,6 @@ class GKeyboard:
         self.RightMouseKey = f"{MouseTrigerValue}-RIGHT"
         self.MiddleMouseKey = f"{MouseTrigerValue}-MIDDLE"
 
-
 # for canvas Object Transform and Scale
 class GVector2:
     def __init__(self, x=0, y=0):
@@ -823,6 +858,7 @@ class GCanvas:
             return self.Canvas.winfo_width()
         except Exception as ERR:
             print(ERR, " Get Canvas Scale X")
+
     def GetCanvasScale_Y(self):
         try:
             return self.Canvas.winfo_height()
@@ -835,6 +871,7 @@ class GCanvas:
             self.Canvas.bind('<Motion>', self.GetMousePosition)
         except Exception as ERR:
             print(ERR, " Read Mouse Position")
+
     def GetMousePosition(self, event):
         try:
             self.MousePosition = GVector2( event.x, event.y )
@@ -855,6 +892,7 @@ class GCanvas:
             return ObjectName
         except Exception as ERR:
             print(ERR, "Add Circle Object Function ERR")
+
     # need update
     def AddRectangleObject(self, ObjectName, Transform, Scale, OutLineColor, FillColor, Active=True):
         try:
@@ -868,6 +906,7 @@ class GCanvas:
             return ObjectName
         except Exception as ERR:
             print(ERR, "Add Circle Object Function ERR")
+
     def AddLineObject(self, ObjectName, Transform, Scale, FillColor, Thickness, Active=True):
         try:
             self.DrawList[ObjectName] = {
@@ -880,6 +919,7 @@ class GCanvas:
             return ObjectName
         except Exception as ERR:
             print(ERR, "Add Circle Object Function ERR")
+
     def AddTextObject(self, ObjectName, Transform, Text, Color, Font, Scale, Active=True):
         try:
             self.DrawList[ObjectName] = {
@@ -893,6 +933,7 @@ class GCanvas:
             return ObjectName
         except Exception as ERR:
             print(ERR, "Add Circle Object Function ERR")
+
     def AddImageObject(self, ObjectName, Transform, Image, Active=True, Scale=GVector2(20, 20)):
         try:
             self.DrawList[ObjectName] = {
@@ -916,6 +957,7 @@ class GCanvas:
                 return _Return.y
         except Exception as ERR:
             print(ERR, " Get Object Position X")
+
     def GetObjectScale(self, Object=0, xOrY='x'):
         try:
             if xOrY == 'x':
@@ -924,24 +966,28 @@ class GCanvas:
                 return self.DrawList[Object][self.Scale].y
         except Exception as ERR:
             print(ERR, " Get object Scale X")
+
     def GetObjectScale_noXY(self, Object):
         try:
             returnValue = self.DrawList[Object][self.Scale]
             return returnValue
         except Exception as ERR:
             print(ERR, " Get Object Scale Y")
+
     def GetObjectRadius(self, Object):
         try:
             returnValue = self.DrawList[Object][self.Radius]
             return returnValue
         except Exception as ERR:
             print(ERR, " Get Object Scale Y")
+
     def GetObjectThickness(self, Object):
         try:
             returnValue = self.DrawList[Object][self.Thickness]
             return returnValue.y
         except Exception as ERR:
             print(ERR, " Get Object Thickness ERR")
+
     def GetObjectVisible(self, Object):
         try:
             return self.DrawList[Object][self.Active]
@@ -966,6 +1012,7 @@ class GCanvas:
                     self.DrawList[Object][self.Transform].y += Speed * 0.1
             except Exception as ERR:
                 print(ERR, "Move Circle Y withUpdate Function ERR")
+
     # this is works like teleport
     def TeleportObject(self, Object, XorY, Position):
         try:
@@ -975,6 +1022,7 @@ class GCanvas:
                 self.DrawList[Object][self.Transform].y = Position
         except Exception as ERR:
             print(ERR, "Change Object Transform Function ERR")
+
     def ChangeObjectColor(self, Object=None, Color=None, BorderColor=None):
         try:
             if Color != None:
@@ -983,6 +1031,7 @@ class GCanvas:
                 self.DrawList[Object][self.BorderColor] = BorderColor
         except Exception as ERR:
             print(ERR, " Change Object Color ERR")
+
     def ChangeObjectVisible(self, Object, Visible):
         try:
             if Visible:
@@ -998,22 +1047,26 @@ class GCanvas:
             self.Canvas.create_oval(Transform.x-Radius, Transform.y-Radius, Transform.x+Radius, Transform.y+Radius, outline=OutLineColor, fill=FillColor)
         except Exception as ERR:
             print(ERR, " Render Circle ERR for ")
+
     def RenderRectangle(self, Transform=GVector2(0, 0), Scale=GVector2(20, 30), OutLineColor="red", FillColor="blue"):
         try:
             self.Canvas.create_rectangle(Transform.x, Transform.y, Transform.x+Scale.x, Transform.y+Scale.y, outline=OutLineColor, fill=FillColor)
         except Exception as ERR:
             print(ERR, " Render Rectangle ERR for ")
+
     # StartX, StartY, EndX, EndY
     def RenderLine(self, Transform, Scale, Color='black', width=1):
         try:
             self.Canvas.create_line(Transform.x, Transform.y, Transform.x+Scale, Transform.y, fill=Color, width=width)
         except Exception as ERR:
             print(ERR, " Render Line ERR for ")
+
     def RenderText(self, Transform=GVector2(0, 0), Text="Default text", Color="red", Font="Sans", Size=12):
         try:
             self.Canvas.create_text(Transform.x, Transform.y, text=Text, fill=Color, font=(Font, Size))
         except Exception as ERR:
             print(ERR, " Render Text ERR for ")
+
     # only use this with OpenImage() 
     def RenderImage(self, Transform, Image):
         try:
@@ -1031,6 +1084,7 @@ class GCanvas:
             else: return False
         except Exception as ERR:
             print(ERR, " Check Mouse In Circle")
+
     def GetCircleCollision(self, Object0, Object1, radius):
         try:
             dx = Object0.x  - Object1.x
@@ -1046,6 +1100,7 @@ class GCanvas:
             return rect_x <= mouse_x <= (rect_x + rect_width) and rect_y <= mouse_y <= (rect_y + rect_height)
         except Exception as ERR:
             print(ERR, " Check Mouse In Rectangle")
+
     def SingleObject_RectangleCollisionCheck(self, Player=0, SingleObject=0, IfHit=""):
         try:
             pTransform = GVector2( self.GetObjectPosition(Object=Player, xOrY='x'), self.GetObjectPosition(Object=Player, xOrY='y') )
@@ -1063,12 +1118,14 @@ class GCanvas:
                     return False
         except Exception as ERR:
             print(ERR, " Simple object rectangle collision check ERR")
+
     def MultiObjectCollision(self, Player, ObjectList, DebugMode, IfHitTrue):
         try:
             for i in ObjectList:
                 self.Hit0 = self.SingleObject_RectangleCollisionCheck(Player=Player, SingleObject=i, DebugMode=DebugMode, IfHit=IfHitTrue)
         except Exception as ERR:
             print(ERR, "Multi Object Collision ERR...")
+
     def Mooo(self, Player=0, SolidObjectList=[]):
         try:
             pTransform = GVector2( self.GetObjectPosition(Object=Player, xOrY='x'), self.GetObjectPosition(Object=Player, xOrY='y') )
@@ -1113,7 +1170,6 @@ class GCanvas:
         except Exception as ERR:
             print(ERR, "2D Player Move ERR...")
 
-
     # this is simple way render pipline
     def Draw(self):
         try:
@@ -1155,51 +1211,48 @@ class GCanvas:
 
 
 class GMixer:
-    def __init__(self, SoundFileList=[], MaxChannelLimit=5) -> None:
+    def __init__(self, MaxChannelLimit=5) -> None:
+        global pygame
+        import pygame.mixer
         self.MaxChannelLimit = MaxChannelLimit
-        self.SoundFileList = SoundFileList
+        self.SoundFileList = []
         self.SoundIndex = 0
         self.Volume = 1
         self.SoundLength = 0
         self.SoundLength_Backup = 0
         self.PlayAgain = False
         self.GiveLength = False
+        self.MusicName = ""
 
-        mixer.init()
-        mixer.set_num_channels(self.MaxChannelLimit)
+        pygame.mixer.init()
+        pygame.mixer.set_num_channels(self.MaxChannelLimit)
 
-    def OpenSoundFolder(self, GnuChanGUICALL=GnuChanGUI()):
-        try:
-            self.SoundFilePath = GnuChanGUICALL.GetFolderPath(defaultPATH=str(os.path.expanduser("~")))
-            DefSounds = os.listdir(self.SoundFilePath)
-            for SoundFile in DefSounds:
-                if SoundFile.endswith(".mp3"):
-                    self.SoundFileList.append(os.path.join(self.SoundFilePath, SoundFile))
-        except Exception as ERR:
-            print(ERR, "Open Sound Folder ERR")
-
-    def PlaySound(self,  SoundPath="", ChannelID=0):
+    def PlaySound_MultiChannelNoLoop(self,  SoundPath="", ChannelID=0):
         _play = False
         if not _play:
-            channel = mixer.Channel(ChannelID)
-            channel.play(mixer.Sound(SoundPath))
+            channel = pygame.mixer.Channel(ChannelID)
+            channel.play(pygame.mixer.Sound(SoundPath))
             channel.set_volume(self.Volume)
             _play = True
 
-    def PlaySound_Loop(self,  SoundPath="", Loop=True, ChannelID=0, AutoPlayList=False):
+    def PlaySound_MultiChannelLoop(self,  SoundPath="", Loop=True, ChannelID=0, AutoPlayList=False):
         try:
+            pygame.mixer.init()
+            pygame.mixer.set_num_channels(self.MaxChannelLimit)
+
             if not self.GiveLength:
-                if str(SoundPath.strip(" ")).endswith(".wav"):
+                if str(SoundPath.strip(" ")).endswith(".wav") or str(SoundPath.strip(" ")).endswith(".wp3"):
                     audio = AudioSegment.from_file(SoundPath)
                     self.SoundLength = len(audio) / 1000.0
                     self.SoundLength_Backup = self.SoundLength
                     self.GiveLength = True
+
             if self.SoundLength > 0:
                 if not self.PlayAgain:
                     if not AutoPlayList:
                         if Loop:
-                            channel = mixer.Channel(ChannelID)
-                            channel.play(mixer.Sound(SoundPath))
+                            channel = pygame.mixer.Channel(ChannelID)
+                            channel.play(pygame.mixer.Sound(SoundPath))
                             channel.set_volume(self.Volume)
                     else:
                         pass
@@ -1212,28 +1265,34 @@ class GMixer:
             print(ERR, "Play Sound ERR")
 
     def StopSound(self):
-        try:
-            mixer.stop()
-        except Exception as ERR:
-            print(ERR, "Stop Sound ERR")
+        pygame.mixer.music.stop()
 
-    def NextSound(self):
+    def PlaySound_SingleChannel(self,  SoundPath=""):
+        self.SoundIndex = self.SoundFileList.index(SoundPath)
+        pygame.mixer.music.load(SoundPath)
+        pygame.mixer.music.set_volume(self.Volume)
+        pygame.mixer.music.play()
+        self.MusicName = SoundPath
+
+    def NextSound_SingleChannel(self):
         try:
             if self.SoundIndex < len(self.SoundFileList) - 1:
                 self.SoundIndex += 1
-                mixer.music.load(self.SoundFileList[self.SoundIndex])
-                mixer.music.set_volume(self.Volume)
-                mixer.music.play()
+            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
+            pygame.mixer.music.set_volume(self.Volume)
+            pygame.mixer.music.play()
+            self.MusicName = self.SoundFileList[self.SoundIndex]
         except Exception as ERR:
             print(ERR, "Next Sound ERR")
 
-    def PreviousSound(self):
+    def PreviousSound_SingleChannel(self):
         try:
             if self.SoundIndex > 0:
                 self.SoundIndex -= 1
-                mixer.music.load(self.SoundFileList[self.SoundIndex])
-                mixer.music.set_volume(self.Volume)
-                mixer.music.play()
+            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
+            pygame.mixer.music.set_volume(self.Volume)
+            pygame.mixer.music.play()
+            self.MusicName = self.SoundFileList[self.SoundIndex]
         except Exception as ERR:
             print(ERR, "Previous Sound ERR")
 
@@ -1244,7 +1303,7 @@ class GMixer:
                 self.Volume = float(f"0.{VolumeSlider}")
             else:
                 self.Volume = 1
-            mixer.music.set_volume(self.Volume)
+            pygame.mixer.music.set_volume(self.Volume)
         except Exception as ERR:
             print(ERR, "Volume Changer ERR")
 

@@ -5,10 +5,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 
 from GnuChanGUI import *
-from threading import Thread
-
-
-#Thread(target=DownloadVideo, args=[]).start()
+import time
 
 
 if __name__ == "__main__":
@@ -21,6 +18,8 @@ if __name__ == "__main__":
     hour = 0
     timeLog = f"{int(hour)}:{int(minute)}:{second}"
     timerStart = False
+    StartTime = 0
+
 
 
     win = [
@@ -46,7 +45,7 @@ if __name__ == "__main__":
                ]
     
     def timerStart_func():
-        global second, minute, hour, timeLog, timerStart
+        global second, minute, hour, timeLog, timerStart, StartTime
         if gc.event == "Start Timer":
             timerStart = True
         if gc.event == "Stop Timer":
