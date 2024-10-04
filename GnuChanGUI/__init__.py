@@ -263,8 +263,10 @@ class GnuChanGUI:
         if mainWindow != None:
             self.layout = mainWindow
             # if main Window is None self.layout can warning user and self.layout is ready warning layout
-        self.window = Window(self.title, layout=self.layout, size=self.size, keep_on_top=TopMode, resizable=self.resizable, 
-                                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY))
+        self.window = Window(
+                self.title, layout=self.layout, size=self.size, keep_on_top=TopMode, resizable=self.resizable,
+                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY)
+        )
         self.window.finalize()
         # this is new for close window good way
         return self.window

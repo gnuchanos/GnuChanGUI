@@ -5,16 +5,15 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 
 from GnuChanGUI import *
-
+import subprocess
 
 if __name__ == "__main__":
-    gc = GnuChanGUI(Title="Very Simple Program Runner Like Rofi and dmenu", Size=(350, 600), resizable=False, finalize=True)
+    gc = GnuChanGUI(Title="Very Simple Program Runner Like Rofi and dmenu", Size=(500, 700), resizable=True, finalize=True)
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
-    SoftwareListActive = []
-    mySoftwareList = [
 
+    mySoftwareList = [
         # for conten creators
         "kdenlive", "audacity", "shotcut", "openshot", "resolve", "pitivi",
         "blender", "obs", "simplescreenrecorder",
@@ -37,13 +36,13 @@ if __name__ == "__main__":
         # Package Managers GUI
         "synaptic", "pamac", "gnome-software", "discover", "software-center",
         # Chat APP
-        "discord", "telegram-desktop", "skype", "zoom",
+        "discord", "vesktop", "telegram-desktop", "skype", "zoom",
         # Clouth APP
         "dropbox", "nextcloud", "megasync", "insync",
         # EMail APP
         "thunderbird", "geary", "evolution", "kmail",
         # Games
-        "steam", "lutris", "minecraft-launcher", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2-qt", "melonDS", "snes9x", "nestopia"
+        "steam", "lutris", "heroic", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2-qt", "melonDS", "snes9x", "nestopia"
         # Sanal Makineler ve Emülatörler
         "virtualbox", "vmware-player", "gnome-boxes", "qemu"
     ]
@@ -51,46 +50,88 @@ if __name__ == "__main__":
     middleThings = [
         [ 
             gc.GText(title="> ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
-            gc.GInput(value="input", size=(17, None), bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
+            gc.GInput(value="input",  xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
-        [ gc.GText(title="", xStretch=True) ],
-        [ gc.GListBox(value="software", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],
-        [ gc.GText(title="", xStretch=True) ],
+        [ gc.hsep ],
+        [ gc.GListBox(value="software", font="Sans, 14", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],
+        [ gc.hsep ],
     ]
 
     layout = [ 
         [ gc.GText(xStretch=True) ],
-        [ gc.GText(xStretch=True), gc.GColumn(winColumn=middleThings, yStretch=True), gc.GText(xStretch=True) ] ]
+        [ gc.GColumn(winColumn=middleThings, xStretch=True, yStretch=True)],
+        [ gc.GText(title="Press left or right shift to refresh list", font="Sans, 20", xStretch=True) ]
+    ]
 
     gc.GWindow(mainWindow=layout)
     gc.GListBoxBorderSize(windowValue="software", border=0)
-
-    def softwareListFunc():
-        global SoftwareListActive, mySoftwareList
-        softwareList = os.listdir("/usr/bin")
-        for i in softwareList:
-            if i in mySoftwareList:
-                SoftwareListActive.append(i)
-        SoftwareListActive.sort()
-        gc.window["software"].update(SoftwareListActive)
-    softwareListFunc()
-
     #Thread(target=DownloadVideo, args=[]).start()
 
+    keyboard = GKeyboard(window=gc.window)
+
+    drawFinish = False
+    SoftwareListActive = []
+    drawTime = 1 
+
+    # Control Program if install
+    _ReadyPrograms = []
+    _SoftwareList = os.listdir("/usr/bin")
+    for s in _SoftwareList:
+        if s in mySoftwareList:
+            if s not in _ReadyPrograms:
+                _ReadyPrograms.append(s)
+                gc.window["software"].update(_ReadyPrograms)
+
+    def RunThis(commandInput):
+        try:
+            subprocess.run([commandInput], check=True, shell=True)
+        except subprocess.CalledProcessError as e:
+            os.system("clear")
+            print(f"there is no like this program -> {gc.GetValues["input"]}")
 
     def update():
-        if gc.event == "Return:36":
-            try:
-                commandInput = str(gc.GetValues["input"])
-                if commandInput != "" or len(commandInput) > 3:
-                    os.popen(commandInput)
-                    gc.closeWindow = True
+        global mySoftwareList, drawFinish, drawTime
+        _Input = str(gc.GetValues["input"]).strip("")
+
+        # refrest list with input
+        if gc.event == keyboard.Shift_L or gc.event == keyboard.Shift_R:
+            if len(_Input) > 0:
+                _inputHere = []
+                _SoftwareList = os.listdir("/usr/bin")
+                if drawTime > 0:
+                    drawTime -= gc.dt
                 else:
-                    command = str(gc.GetValues["software"]).strip("[]")
-                    os.popen(command)
-                    gc.closeWindow = True
-            except Exception as Err:
-                print(f"{Err} - UwU")
+                    for i in _SoftwareList:
+                        if _Input in i:
+                            _inputHere.append(i)
+                            gc.window["software"].update(_inputHere)
+                            drawTime = 1
+                drawFinish = False
+            else:
+                if not drawFinish:
+                    _ReadyPrograms = []
+                    _SoftwareList = os.listdir("/usr/bin")
+                    for s in _SoftwareList:
+                        if s in mySoftwareList:
+                            if s not in _ReadyPrograms:
+                                _ReadyPrograms.append(s)
+                    gc.window["software"].update(_ReadyPrograms)
+                    drawFinish = True
+
+        # Run Program In Line
+        if gc.event == "Return:36":
+            _commandInput = str(gc.GetValues["input"])
+            if len(_commandInput) > 0:
+                print(_commandInput)
+                Thread(target=RunThis, args=[_commandInput]).start()
+            gc.closeWindow = True
+
+        # Run Program In List
+        elif gc.event == keyboard.space:
+            _Select = str(gc.GetValues["software"]).strip("[]''")
+            print(_Select)
+            Thread(target=RunThis, args=[_Select]).start()
+            gc.closeWindow = True
 
     def BeforeExit():
         pass
