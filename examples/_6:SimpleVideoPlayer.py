@@ -19,7 +19,6 @@ if __name__ == "__main__":
     vid = [[gc.GCanvas(value="canvas", xStretch=True, yStretch=True, size=(750, None), bcolor=GColors().purple7)]]
 
     left = [
-        [gc.GText(value="time", xStretch=True, position="center")],
         [gc.GListBox(value="videos", font="Sans, 12", yStretch=True, xStretch=True, bcolor=GColors().purple8, noScroolBar=True)],
         [gc.hsep],
         [gc.GText(title="Volume Slider", xStretch=True, position="center")],
@@ -60,10 +59,9 @@ if __name__ == "__main__":
     _folderPath = ""
     video = ""
     videos = []
-    second = minute = hour = 0
     _index = 0
     def update():
-        global _Pause, video, videos, second, minute, hour, player, _startVideo, _index, _videoFinish, _readyPlay, _folderPath, db
+        global _Pause, video, videos, player, _startVideo, _index, _videoFinish, _readyPlay, _folderPath, db
 
         try:
             if gc.event == db.Return:
@@ -141,20 +139,6 @@ if __name__ == "__main__":
                         pass
                     else:
                         _videoFinish = True
-
-                    if not _Pause:
-                        time = int(player.get_time() / 1000)
-                        if second < 60:
-                            second = int(player.get_time() / 1000)
-                        else:
-                            if minute == 60:
-                                hour += 1
-                                minute = 0
-                            else:
-                                minute += 1
-                                second = 0
-
-                gc.window["time"].update(f"{hour}:{minute}:{second}")
 
         except Exception as ERR:
             print(ERR)

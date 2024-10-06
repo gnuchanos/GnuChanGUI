@@ -15,14 +15,14 @@ if __name__ == "__main__":
 
     mySoftwareList = [
         # for conten creators
-        "kdenlive", "audacity", "shotcut", "openshot", "resolve", "pitivi",
+        "kdenlive", "audacity", "shortcut", "openshot", "resolve", "pitivi",
         "blender", "obs", "simplescreenrecorder",
         # Web Browser
-        "qutebrowser", "firefox", "chromium", "google-chrome", "brave",
+        "qutebrowser", "firefox", "chromium", "google-chrome", "brave: Browser",
         # Text Editors
-        "gedit", "kate", "sublime-text", "code", "atom", "notepadqq",     
+        "gedit", "kate", "notepadqq", "leafpad",
         # Office Software
-        "libreoffice", "evince", "okular", "masterpdfeditor", "gnumeric", "openoffice",
+        "libreoffice: Office Program", "openoffice: Office Program",
         # Image Edit and Paint Software
         "gimp", "krita", "inkscape", "darktable", "mypaint", "pinta",
         # Video and Audio Players
@@ -31,10 +31,6 @@ if __name__ == "__main__":
         "gnome-system-monitor", "kde-system-monitor", "bleachbit", "gparted", "timeshift",
         # File Managers
         "nautilus", "dolphin", "thunar", "pcmanfm", "nemo", "doublecmd",
-        # Terminal Emulators
-        "gnome-terminal", "konsole", "xfce4-terminal", "guake", "cool-retro-term", "alacritty",
-        # Package Managers GUI
-        "synaptic", "pamac", "gnome-software", "discover", "software-center",
         # Chat APP
         "discord", "vesktop", "telegram-desktop", "skype", "zoom",
         # Clouth APP
@@ -52,6 +48,11 @@ if __name__ == "__main__":
             gc.GText(title="> ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
             gc.GInput(value="input",  xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
+        [
+            gc.Push,
+            gc.GButton(title="Run Program", font="Sans, 20"),
+            gc.Push,
+        ],
         [ gc.hsep ],
         [ gc.GListBox(value="software", font="Sans, 14", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],
         [ gc.hsep ],
@@ -60,27 +61,26 @@ if __name__ == "__main__":
     layout = [ 
         [ gc.GText(xStretch=True) ],
         [ gc.GColumn(winColumn=middleThings, xStretch=True, yStretch=True)],
-        [ gc.GText(title="Press left or right shift to refresh list", font="Sans, 20", xStretch=True) ]
+        [ gc.GText(title="", font="Sans, 20", xStretch=True) ]
     ]
 
     gc.GWindow(mainWindow=layout)
     gc.GListBoxBorderSize(windowValue="software", border=0)
-    #Thread(target=DownloadVideo, args=[]).start()
-
     keyboard = GKeyboard(window=gc.window)
 
     drawFinish = False
     SoftwareListActive = []
-    drawTime = 1 
 
     # Control Program if install
     _ReadyPrograms = []
     _SoftwareList = os.listdir("/usr/bin")
-    for s in _SoftwareList:
-        if s in mySoftwareList:
-            if s not in _ReadyPrograms:
-                _ReadyPrograms.append(s)
-                gc.window["software"].update(_ReadyPrograms)
+    _programs = []
+    for i in _SoftwareList:
+        if i in mySoftwareList:
+            if not i in _ReadyPrograms:
+                _ReadyPrograms.append(i)
+    gc.window["software"].update(_ReadyPrograms)
+    
 
     def RunThis(commandInput):
         try:
@@ -93,45 +93,19 @@ if __name__ == "__main__":
         global mySoftwareList, drawFinish, drawTime
         _Input = str(gc.GetValues["input"]).strip("")
 
-        # refrest list with input
-        if gc.event == keyboard.Shift_L or gc.event == keyboard.Shift_R:
-            if len(_Input) > 0:
-                _inputHere = []
-                _SoftwareList = os.listdir("/usr/bin")
-                if drawTime > 0:
-                    drawTime -= gc.dt
-                else:
-                    for i in _SoftwareList:
-                        if _Input in i:
-                            _inputHere.append(i)
-                            gc.window["software"].update(_inputHere)
-                            drawTime = 1
-                drawFinish = False
-            else:
-                if not drawFinish:
-                    _ReadyPrograms = []
-                    _SoftwareList = os.listdir("/usr/bin")
-                    for s in _SoftwareList:
-                        if s in mySoftwareList:
-                            if s not in _ReadyPrograms:
-                                _ReadyPrograms.append(s)
-                    gc.window["software"].update(_ReadyPrograms)
-                    drawFinish = True
-
         # Run Program In Line
         if gc.event == "Return:36":
             _commandInput = str(gc.GetValues["input"])
             if len(_commandInput) > 0:
-                print(_commandInput)
                 Thread(target=RunThis, args=[_commandInput]).start()
             gc.closeWindow = True
 
         # Run Program In List
-        elif gc.event == keyboard.space:
+        elif gc.event == "Run Program":
             _Select = str(gc.GetValues["software"]).strip("[]''")
-            print(_Select)
-            Thread(target=RunThis, args=[_Select]).start()
-            gc.closeWindow = True
+            if _Select != "":
+                Thread(target=RunThis, args=[_Select]).start()
+                gc.closeWindow = True
 
     def BeforeExit():
         pass

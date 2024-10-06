@@ -110,7 +110,7 @@ if __name__ == "__main__":
     _now = datetime.now()
 
     gc.window["rtmp"].update("rtmp://live.restream.io/live")
-    gc.window["mID"].update("VGA-1")
+    gc.window["mID"].update("VGA1")
     gc.window["mic"].update(_mic)
     gc.window["desk"].update(_desktop)
 
