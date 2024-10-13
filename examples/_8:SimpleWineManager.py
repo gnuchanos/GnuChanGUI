@@ -23,12 +23,12 @@ if __name__ == "__main__":
             gc.GInput(value="path_wine", xStretch=True, EmptySpace=(0, 0), bcolor=GColors().purple6)
         ],
         [
-            gc.Push,
+            gc.Push(bcolor=GColors().purple7),
             gc.GRadio(value="32bit", groupID="wine", title="32Bit", bcolor=GColors().purple7),
             gc.GRadio(value="64bit", groupID="wine", title="64Bit", bcolor=GColors().purple7),
-            gc.Push
+            gc.Push(bcolor=GColors().purple7)
         ],
-        [   gc.Push, gc.GButton(title="Create Prefix"), gc.Push    ],
+        [   gc.Push(bcolor=GColors().purple7), gc.GButton(title="Create Prefix"), gc.Push(bcolor=GColors().purple7)    ],
         [   
             gc.GListBox(value="gamelist_create", xStretch=True, yStretch=True, bcolor=GColors().purple8),
         ],
@@ -45,13 +45,13 @@ if __name__ == "__main__":
         [   gc.GText(title="Choose Youre Wine", xStretch=True, position="center", bcolor=GColors().purple7)   ],
 
         [   
-            gc.Push,
+            gc.Push(bcolor=GColors().purple7),
             gc.GButton(title="WineTRICKS"),
             gc.GButton(title="WineCFG"),
             gc.GButton(title="Run .EXE"),
             gc.GButton(title="Update Prefix"),
             gc.GButton(title="Remove Prefix"),
-            gc.Push,
+            gc.Push(bcolor=GColors().purple7),
         ],
         [   
             gc.GListBox(value="gamelist_run", xStretch=True, yStretch=True, bcolor=GColors().purple8),

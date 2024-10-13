@@ -28,35 +28,36 @@ if __name__ == "__main__":
         [   gc.GText(title="This Is First Version gpu-screen-recorder GUI", xStretch=True, position="center", font=gc.font)   ],
         [   gc.GText(title="Video or LiveStream Time", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [   gc.GText(title="0:0:0", value="time", xStretch=True, position="center", font="Sans, 20")   ],
-        [   gc.GText(title="Video or LiveStream Time", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
-        [   gc.hsep,   ],
+
         [   gc.GText(title="Video FPS", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
             gc.GRadio(value="14", groupID="fps", title="14-FPS", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="24", groupID="fps", title="24-FPS", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="30", groupID="fps", title="30-FPS", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="60", groupID="fps", title="60-FPS", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="120", groupID="fps", title="120-FPS", bcolor=GColors().purple7, font=gc.font),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ],
+
         [   gc.GText(title="Sound Quality", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
             gc.GRadio(value="128", groupID="Kbps", title="128 Kbps", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="192", groupID="Kbps", title="192 Kbps", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="256", groupID="Kbps", title="256 Kbps", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="320", groupID="Kbps", title="320 Kbps", bcolor=GColors().purple7, font=gc.font),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ],
+
         [   gc.GText(title="Video Quality", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
             gc.GRadio(value="Medium", groupID="quality", title="Medium", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="high", groupID="quality", title="High", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="very_high", groupID="quality", title="Very High", bcolor=GColors().purple7, font=gc.font),
             gc.GRadio(value="ultra", groupID="quality", title="Ultra", bcolor=GColors().purple7, font=gc.font),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ],
         [   gc.GText(title="Monutor ID 'xrandr here': ", font=gc.font),
             gc.GInput(value="mID", xStretch=True, size=(20, None), font=gc.font)
@@ -75,19 +76,19 @@ if __name__ == "__main__":
             gc.GInput(value="skey", xStretch=True, PwChars="*", size=(20, None), font=gc.font)
         ],
         [   
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
             gc.GButton(title="Save And Start Live Stream", font=gc.font), gc.GButton(title="Stop Live Stream", font=gc.font),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ],
         [   gc.GText(title="Video Record", xStretch=True, position="center", bcolor=GColors().purple8, font=gc.font)   ],
         [   gc.GText(title="File Path Here!", value="path", xStretch=True, bcolor=GColors().purple7, font=gc.font)],
         [   gc.GText(title="Video Name: ", font=gc.font), gc.GInput(value="vname", size=(20, None), xStretch=True, font=gc.font)   ],
         [
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
                 gc.GButton(title="Select Output Folder", font=gc.font),
                 gc.GButton(title="Save And Start Record", font=gc.font),
                 gc.GButton(title="Stop Record", font=gc.font),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ]
 
     ]

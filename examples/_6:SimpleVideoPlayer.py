@@ -29,13 +29,13 @@ if __name__ == "__main__":
     _timeSize = 100
     layout = [ 
         [
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
             gc.GButton(title="<"),
             gc.GButton(title="Open Video"),
             gc.GButton(title="Open Video Folder"),
             gc.GButton(title="Pause", value="pPlay"),
             gc.GButton(title=">"),
-            gc.Push,
+            gc.Push(bcolor=GnuChanOSColor().colors1),
         ],
         [
             gc.GColumn(winColumn=vid, xStretch=True, yStretch=True, bcolor=GColors().purple8),
@@ -60,8 +60,9 @@ if __name__ == "__main__":
     video = ""
     videos = []
     _index = 0
+    hideTree = False
     def update():
-        global _Pause, video, videos, player, _startVideo, _index, _videoFinish, _readyPlay, _folderPath, db
+        global _Pause, video, videos, player, _startVideo, _index, _videoFinish, _readyPlay, _folderPath, db, hideTree
 
         try:
             if gc.event == db.Return:
@@ -139,6 +140,16 @@ if __name__ == "__main__":
                         pass
                     else:
                         _videoFinish = True
+            
+            if gc.event == db.h:
+                if not hideTree:
+                    gc.window["filePath"].update(visible=False)
+                    hideTree = True
+                else:
+                    gc.window["filePath"].update(visible=True)
+                    hideTree = False
+
+
 
         except Exception as ERR:
             print(ERR)

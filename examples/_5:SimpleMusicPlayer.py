@@ -7,6 +7,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 from GnuChanGUI import *
 from threading import Thread
 import subprocess
+import keyboard
 from pygame import mixer
 
 if __name__ == "__main__":
@@ -17,12 +18,15 @@ if __name__ == "__main__":
     musicPlay = GMixer()
 
     Buttons = [
-        [gc.GButton(title="Add Folder", size=(12, None))],
-        [gc.GButton(title="Play Music", size=(12, None))],
-        [gc.GButton(title="Next Music", size=(12, None))],
-        [gc.GButton(title="Stop Music", size=(12, None))],
-        [gc.GButton(title="Previous Music", size=(12, None))],
-        [gc.Push]
+        [
+            gc.Push(bcolor=GnuChanOSColor().colors0),
+            gc.GButton(title="Add Folder"),
+            gc.GButton(title="<", value="Previous Music"),
+            gc.GButton(title="Play Music"),
+            gc.GButton(title="Stop Music"),
+            gc.GButton(title=">", value="Next Music"),
+            gc.Push(bcolor=GnuChanOSColor().colors0)
+        ],
     ]
 
     dir = os.path.expanduser("~")
@@ -41,24 +45,23 @@ if __name__ == "__main__":
             gc.GText(title=f"{dir}/", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
             gc.GInput(value="input", xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0))
         ],
+        [   gc.GColumn(winColumn=Buttons, xStretch=True, bcolor=GColors().purple8)   ],
         [ 
             gc.vsep,
-            gc.GColumn(winColumn=Buttons, yStretch=True, bcolor=GColors().purple8, EmptySpace=(0, 0)),
-            gc.vsep,
-            gc.GListBox(value="mp3", size=(75, None), font="Sans, 15", xStretch=True, yStretch=True, bcolor=GColors().purple5, EmptySpace=(0, 0)),
+            gc.GListBox(value="mp3", size=(75, None), font="Sans, 15", xStretch=True, yStretch=True, bcolor=GnuChanOSColor().colors1, EmptySpace=(0, 0)),
             gc.vsep,
         ],
         [ 
             gc.GText(title="Music: ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
             gc.GText(value="musicName", xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
-        [ gc.GSlider(range=(0, 10), defaultValue=volume_slider, direction="h", value="slider", xStretch=True) ]
+        [   gc.GSlider(range=(0, 10), defaultValue=volume_slider, direction="h", value="slider", xStretch=True)   ]
     ]
 
     gc.GWindow(mainWindow=layout)
     gc.GListBoxBorderSize(windowValue="mp3", border=0)
     gc.window["input"].update("Music")
-
+    gkeys = GKeyboard(window=gc.window)
 
     def MusicPlay():
         global dir, path, volume, fileList, musicList, musicIndex, musicSelect, start, volume_slider, volume
@@ -83,12 +86,12 @@ if __name__ == "__main__":
         elif gc.event == "Stop Music":
             musicPlay.StopSound()
 
-        elif gc.event == "Next Music":
+        elif gc.event == "Next Music" or gc.event == gkeys.d:
             if not start:
                 _musicName = musicPlay.NextSound_SingleChannel()
                 gc.window["musicName"].update(musicPlay.MusicName)
 
-        elif gc.event == "Previous Music":
+        elif gc.event == "Previous Music" or gc.event == gkeys.a:
             if not start:
                 _musicName = musicPlay.PreviousSound_SingleChannel()
                 gc.window["musicName"].update(musicPlay.MusicName)

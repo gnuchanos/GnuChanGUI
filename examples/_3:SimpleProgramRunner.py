@@ -40,7 +40,10 @@ if __name__ == "__main__":
         # Games
         "steam", "lutris", "heroic", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2-qt", "melonDS", "snes9x", "nestopia"
         # Sanal Makineler ve Emülatörler
-        "virtualbox", "vmware-player", "gnome-boxes", "qemu"
+        "virtualbox", "vmware-player", "gnome-boxes", "qemu",
+
+        # Extra List
+        "StartBlender",
     ]
 
     middleThings = [
@@ -79,6 +82,7 @@ if __name__ == "__main__":
         if i in mySoftwareList:
             if not i in _ReadyPrograms:
                 _ReadyPrograms.append(i)
+    _ReadyPrograms.sort()
     gc.window["software"].update(_ReadyPrograms)
     
 

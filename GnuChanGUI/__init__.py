@@ -463,7 +463,7 @@ class GnuChanGUI:
     def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
         return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
     def GTabNewTab(self, TabGroupValue, TabTitle, WinLayout, TabValue):
-        return self.window[TabGroupLayout].add_tab(self.GTab(title=TabTitle, TabLayout=WinLayout, value=TabValue))
+        return self.window[TabGroupValue].add_tab(self.GTab(title=TabTitle, TabLayout=WinLayout, value=TabValue))
 
         """
         TabGroup Value: TabG : | tab1 value | tab2 value |
@@ -656,9 +656,8 @@ class GnuChanGUI:
         return pin(GObject)
 
     # with Property
-    @property
-    def Push(self):
-        return Push()
+    def Push(self, bcolor):
+        return Push(background_color=bcolor)
 
     @property
     def hsep(self):
