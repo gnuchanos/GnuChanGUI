@@ -4,6 +4,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 from GnuChanGUI import *
+import termcolor
 #Thread(target=DownloadVideo, args=[]).start()
 
 if __name__ == "__main__":
@@ -35,9 +36,9 @@ if __name__ == "__main__":
             gc.GInput(value="bcolor", xStretch=True, size=(30, None), bcolor=GColors().purple6),
         ],
         [ 
-            gc.Push,
+            gc.Push(GnuChanOSColor().colors1),
             gc.GButton(title="Save Settings"),
-            gc.Push
+            gc.Push(GnuChanOSColor().colors1)
         ]
     ]
 
@@ -64,7 +65,7 @@ if __name__ == "__main__":
         [gc.GMenuForTheme(menu, font="Sans, 15")],
         [gc.GTabGroup(TabGroupLayout=[
             [gc.GTab(title="TAB-0", TabLayout=win0, value="tab0")],
-        ], value="tabG")],
+        ], value="tabG", border=1)],
         [ gc.GColumn(winColumn=settingsWin, xStretch=True, value="settings", bcolor=GColors().purple7) ],
     ]
 

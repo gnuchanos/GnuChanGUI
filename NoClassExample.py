@@ -14,24 +14,24 @@ if __name__ == "__main__":
 
     buttons = [
         [
-            gc.Push,
+            gc.Push(GnuChanOSColor().colors1),
             gc.GButton(title="Press Button"),
             gc.GButton(title="Remove"),
-            gc.Push
+            gc.Push(GnuChanOSColor().colors1)
         ],
     ]
 
     layout = [
             [gc.GPin(
-                gc.GText(title="This is Text", value="text", font="Sans, 20", xStretch=True)
+                gc.GText(title="This is Text", value="text", font="Sans, 20", xStretch=True), shrink=True
             )],
             [gc.GPin(
                 gc.GInput(value="input", font="Sans, 20", xStretch=True)
             )],
             [
-                gc.Push,
+                gc.Push(GnuChanOSColor().colors1),
                 gc.GPin( gc.GColumn(winColumn=buttons) ),
-                gc.Push
+                gc.Push(GnuChanOSColor().colors1)
             
             ],
             [gc.GListBox(value="list", font="Sans, 20", xStretch=True, yStretch=True)]

@@ -47,9 +47,9 @@ if __name__ == "__main__":
         ],
         [   gc.GColumn(winColumn=Buttons, xStretch=True, bcolor=GColors().purple8)   ],
         [ 
-            gc.vsep,
+            gc.vsep(color=GnuChanOSColor().colors3),
             gc.GListBox(value="mp3", size=(75, None), font="Sans, 15", xStretch=True, yStretch=True, bcolor=GnuChanOSColor().colors1, EmptySpace=(0, 0)),
-            gc.vsep,
+            gc.vsep(color=GnuChanOSColor().colors3),
         ],
         [ 
             gc.GText(title="Music: ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 

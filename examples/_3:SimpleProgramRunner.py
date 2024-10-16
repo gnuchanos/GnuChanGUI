@@ -52,13 +52,13 @@ if __name__ == "__main__":
             gc.GInput(value="input",  xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
         [
-            gc.Push,
+            gc.Push(GnuChanOSColor().colors1),
             gc.GButton(title="Run Program", font="Sans, 20"),
-            gc.Push,
+            gc.Push(GnuChanOSColor().colors1),
         ],
-        [ gc.hsep ],
+        [ gc.hsep(color=GnuChanOSColor().colors3) ],
         [ gc.GListBox(value="software", font="Sans, 14", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],
-        [ gc.hsep ],
+        [ gc.hsep(color=GnuChanOSColor().colors3) ],
     ]
 
     layout = [ 

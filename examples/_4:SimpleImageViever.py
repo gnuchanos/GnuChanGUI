@@ -18,14 +18,14 @@ if __name__ == "__main__":
 
     buttons = [
         [
-            gc.Push,
-            gc.vsep,
+            gc.Push(GnuChanOSColor().colors2),
+            gc.vsep(color=GnuChanOSColor().colors3),
             gc.GButton(title="<"),
             gc.GButton(title="Open Image"),
             gc.GButton(title="Open Image Folder"),
             gc.GButton(title=">"),
-            gc.vsep,
-            gc.Push,
+            gc.vsep(color=GnuChanOSColor().colors3),
+            gc.Push(GnuChanOSColor().colors2),
         ],
     ]
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     layout = [
         [   gc.GColumn(winColumn=buttons, xStretch=True, bcolor=GnuChanOSColor().colors2)   ],
         [   gc.GText(value="path", xStretch=True)   ],
-        [   gc.Push   ],
+        [   gc.Push(GnuChanOSColor().colors1)   ],
         [   gc.GColumn(winColumn=showImage, xStretch=True, yStretch=True, EmptySpace=(0, 0)) ],
                ]
 

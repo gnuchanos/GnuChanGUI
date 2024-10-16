@@ -20,10 +20,10 @@ if __name__ == "__main__":
 
     left = [
         [gc.GListBox(value="videos", font="Sans, 12", yStretch=True, xStretch=True, bcolor=GColors().purple8, noScroolBar=True)],
-        [gc.hsep],
+        [gc.hsep(color=GnuChanOSColor().colors3)],
         [gc.GText(title="Volume Slider", xStretch=True, position="center")],
         [gc.GSlider(value="volume", xStretch=True, range=(0, 100), defaultValue=80, bcolor=GColors().purple7, size=(20, None))],
-        [gc.hsep],
+        [gc.hsep(color=GnuChanOSColor().colors3)],
     ]
 
     _timeSize = 100

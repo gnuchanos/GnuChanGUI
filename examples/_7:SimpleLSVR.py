@@ -95,11 +95,11 @@ if __name__ == "__main__":
 
     layout = [ 
         [   
-            gc.vsep,
+            gc.vsep(color=GColors().black),
             gc.GColumn(winColumn=win, xStretch=True, yStretch=True),
-            gc.vsep,
+            gc.vsep(color=GColors().black),
         ]
-               ]
+            ]
 
     gc.GWindow(mainWindow=layout)
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
             try:
                 if _rtmp and _key and _fps and _quality and _sound != "":
                     if not _Start:
-                        _liveStream = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound}000 -o {_rtmp}/{_key}"
+                        _liveStream = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound} -o {_rtmp}/{_key}"
                         os.popen(_liveStream)
                         os.popen("notify-send -t 3500 -u low \"Live Stream is Starting!\"")
                         _Start = True
@@ -168,7 +168,7 @@ if __name__ == "__main__":
                     _now = datetime.now()
                     _FileName = f"{_now.year}-{_now.month}-{_now.day}_{_now.hour}-{_now.minute}-{_now.second}"
 
-                    _VideoRecord = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound}000 -o {_path}/{str(_videoName).replace(" ", "\\ ")}_{_FileName}.mkv"
+                    _VideoRecord = f"gpu-screen-recorder -w {_monutorID} -k h264 -ac aac -c flv -a {_mic}\\|{_desktop} -f {_fps} -q {_quality} -ab {_sound} -o {_path}/{str(_videoName).replace(" ", "\\ ")}_{_FileName}.mkv"
                     os.popen(_VideoRecord)
                     os.popen("notify-send -t 3500 -u low \"Video Recording is Starting\"")
                     _Start = True

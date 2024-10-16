@@ -38,9 +38,9 @@ if __name__ == "__main__":
 
     layout = [ 
         [
-            gc.vsep,
+            gc.vsep(color=GnuChanOSColor().colors3),
             gc.GColumn(winColumn=win, xStretch=True, yStretch=True),
-            gc.vsep,
+            gc.vsep(color=GnuChanOSColor().colors3),
         ]
                ]
     

@@ -142,7 +142,11 @@ class GColors:
 class RandColor:
     @property
     def take(self):
-        randomColor = random.choice(["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "#FFFFFF", "#000000", "#800080", "#FFA500", "#FFC0CB", "#008080", "#FFD700", "#A52A2A", "#FF1493", "#4B0082", "#00FF7F", "#1E90FF", "#FF4500", "#FF69B4"])
+        randomColor = random.choice([
+            "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "#FFFFFF", 
+            "#000000", "#800080", "#FFA500", "#FFC0CB", "#008080", "#FFD700", "#A52A2A", 
+            "#FF1493", "#4B0082", "#00FF7F", "#1E90FF", "#FF4500", "#FF69B4"
+        ])
         return randomColor
 
 class GnuChanOSColor:
@@ -454,14 +458,15 @@ class GnuChanGUI:
 
     # create Gtab and create GTap Group
     def GTabGroup(self, TabGroupLayout=None, value=None, font="Sans, 20",
-        bcolor=None, sbcolor=None, tbcolor=None, tcolor=None, fcolor=None, stcolor=None, size=(None, None)):
+        bcolor=None, sbcolor=None, tbcolor=None, tcolor=None, stcolor=None, size=(None, None), tborder=0, border=0):
         return TabGroup(
                 layout=TabGroupLayout, key=value, expand_x=True, expand_y=True, size=size,
                 background_color=bcolor, selected_background_color=sbcolor, tab_background_color=tbcolor, enable_events=True,
-                title_color=tcolor, focus_color=fcolor, selected_title_color=stcolor, font=font, tab_border_width=0, border_width=0
+                title_color=tcolor, selected_title_color=stcolor, font=font, tab_border_width=tborder, border_width=border
         )
-    def GTab(self, title, TabLayout=None, value=None, rclickMenu=None):
-        return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu)
+    def GTab(self, title, TabLayout=None, value=None, rclickMenu=None, Position="center", tcolor=None, bcolor=None, border=0):
+        return Tab(title=title, layout=TabLayout, key=value, right_click_menu=rclickMenu, element_justification=Position,
+                   title_color=tcolor, background_color=bcolor, border_width=border)
     def GTabNewTab(self, TabGroupValue, TabTitle, WinLayout, TabValue):
         return self.window[TabGroupValue].add_tab(self.GTab(title=TabTitle, TabLayout=WinLayout, value=TabValue))
 
@@ -542,7 +547,7 @@ class GnuChanGUI:
 
     # multiLine widget
     def GMultiline (self, InText="", font=None, value=None, size=(None, None), visible=True, position="left", enableEvent=True, WriteOnly=False, wrapLines=True,
-                    xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
+            xStretch=False, yStretch=False, focus=True, readonly=False, noScroolBar=True, EmptySpace=(None, None), tcolor=None, bcolor=None, border=None):
         return Multiline(
                 default_text=InText, font=font, key=value, size=size, focus=focus, justification=position, visible=visible, disabled=readonly, 
                 expand_x=xStretch, expand_y=yStretch, no_scrollbar=noScroolBar, text_color=tcolor, background_color=bcolor, pad=EmptySpace, border_width=border,
@@ -641,31 +646,35 @@ class GnuChanGUI:
         """
 
     # Little things
-    def GetFilePath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")]):
-        return popup_get_file(default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title)
+    def GetFilePath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
+                    bcolor=GnuChanOSColor().colors1, buttonColor = GnuChanOSColor().colors3):
+        return popup_get_file(default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
+                              button_color=buttonColor, background_color=bcolor)
 
-    def GetFileForSave(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")]):
-        return popup_get_file(save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title)
+    def GetFileForSave(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
+                    bcolor=GnuChanOSColor().colors1, buttonColor = GnuChanOSColor().colors3):
+        return popup_get_file(save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
+                              button_color=buttonColor, background_color=bcolor)
 
-    def GetFolderPath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False):
-        return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title)
+    def GetFolderPath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False,
+                    bcolor=GnuChanOSColor().colors1, buttonColor = GnuChanOSColor().colors3):
+        return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title,
+                              button_color=buttonColor, background_color=bcolor)
 
     # GFrame, xStretch and yStretch not working with pin
     # GColumn, it's same in here not working xStretch and yStretch
-    def GPin(self, GObject):
-        return pin(GObject)
+    def GPin(self, GObject, shrink=False):
+        return pin(GObject, shrink=shrink)
 
     # with Property
     def Push(self, bcolor):
         return Push(background_color=bcolor)
 
-    @property
-    def hsep(self):
-        return HSeparator()
+    def hsep(self, color):
+        return HorizontalSeparator(color=color)
 
-    @property
-    def vsep(self):
-        return VSeparator()
+    def vsep(self, color):
+        return VerticalSeparator(color=color)
 
     def GMessage(self, message=None, wmTitle="default Window", font="Sans, 15", tcolor=None, bcolor=None):
         return popup(message, title=wmTitle, font=font, text_color=tcolor, background_color=bcolor)

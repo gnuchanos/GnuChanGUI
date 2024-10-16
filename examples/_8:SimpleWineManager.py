@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     # First Create Wine Container
     CreateWinePrefix = [
-        [   gc.hsep   ],
+        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
         [   gc.GText(title=f"'{os.path.expanduser("~")}/Games/winePrefix/' <-- Wine Prefix here", 
                      position="center", xStretch=True, bcolor=GColors().purple7)   
         ],
@@ -32,12 +32,12 @@ if __name__ == "__main__":
         [   
             gc.GListBox(value="gamelist_create", xStretch=True, yStretch=True, bcolor=GColors().purple8),
         ],
-        [   gc.hsep   ],
+        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
     ]
 
     # Second Run Games 
     wineBody = [
-        [   gc.hsep   ],
+        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
         [   gc.GText(title="Don't forget to choose your game's own Wine prefix!", xStretch=True, position="center", bcolor=GColors().purple7)     ],
         [   gc.GText(title="This Important Warning! 'File Name' is okay but ' file name ' NOPE!", 
                      bcolor=GColors().purple5, xStretch=True, position="center")   ],
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         [   
             gc.GListBox(value="gamelist_run", xStretch=True, yStretch=True, bcolor=GColors().purple8),
         ],
-        [   gc.hsep   ],
+        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
     ]
 
 
@@ -66,8 +66,19 @@ if __name__ == "__main__":
     ]
 
     wine_Run = [ 
-        [   gc.GColumn(winColumn=wineBody, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ]
+        [   gc.GColumn(winColumn=wineBody, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ],
+        [   
+            gc.Push(GnuChanOSColor().colors1),
+                gc.GCheackBox(title="Primusrun",        value="pri",  font="Sans, 15"),
+                gc.GCheackBox(title="Optirun",          value="op",   font="Sans, 15"),
+                gc.GCheackBox(title="MangoHUD=OpenGL",  value="gl",   font="Sans, 15"),
+                gc.GCheackBox(title="MangoHUD=Vulkan",  value="dx",   font="Sans, 15"),
+                gc.GCheackBox(title="GameMode",         value="game", font="Sans, 15"),
+            gc.Push(GnuChanOSColor().colors1)
+           ]
     ]
+
+
 
     wine_debug = [
         [gc.GLog(xStretch=True, yStretch=True, bcolor=GnuChanOSColor().colors0)]
@@ -183,39 +194,76 @@ if __name__ == "__main__":
         def ChooseGame(self):
             try:
                 if len(str(gc.GetValues["gamelist_run"]).strip("[]'")) > 0:
-                    try:
-                        self.game = gc.GetFilePath(defaultPATH=str(gc.GetValues["gamelist_run"]).strip("[]'") )
-                    except Exception as ERR:
-                        print(ERR)
+                    # Extra Options
+                    _Primusrun = gc.GetValues["pri"]
+                    _Optirun   = gc.GetValues["op"]
+                    _MangoHud_gl  = gc.GetValues["gl"]
+                    _MangoHud_dx  = gc.GetValues["dx"]
 
-                    # fake workers
-                    _pass = str(self.game).split("/")
-                    _exe = _pass[len(_pass)-1]
-                    _pass.pop()
+                    if _Primusrun and _Optirun or _MangoHud_gl and _MangoHud_dx:
+                        pass
+                    else:
+                        try:
+                            self.game = gc.GetFilePath(defaultPATH=str(gc.GetValues["gamelist_run"]).strip("[]'") )
+                        except Exception as ERR:
+                            print(ERR)
 
-                    # last work old man!
-                    self._exe = _exe.replace(" ", "\\ ")  # this take .exe name
-                    _def = str(self.game).replace(_exe, " ")
-                    self._currentPosition = os.chdir(f"{os.path.expanduser(_def.strip(" "))}") # auto os. location
+                        # fake workers
+                        _pass = str(self.game).split("/")
+                        _exe = _pass[len(_pass)-1]
+                        _pass.pop()
 
-                    # debug
-                    print(f"{_def} | ")
-                    print(f"this is test >>>>> {self._exe}")
-                    print(f"you select Winfart game or program: \n{os.getcwd()}")
+                        # last work old man!
+                        self._exe = _exe.replace(" ", "\\ ")  # this take .exe name
+                        _def = str(self.game).replace(_exe, " ")
+                        self._currentPosition = os.chdir(f"{os.path.expanduser(_def.strip(" "))}") # auto os. location
+
+                        # debug
+                        print(f"{_def} | ")
+                        print(f"this is test >>>>> {self._exe}")
+                        print(f"you select Winfart game or program: \n{os.getcwd()}")
             except Exception as ERR:
                 print(ERR)
 
         def PlayGame(self):
             try:
-                _winePrefix = str(gc.GetValues["gamelist_run"]).strip("[]'")
-                if str(self.game).endswith(".exe"):
-                    #game_path = os.path.abspath(os.path.expanduser(str(self.game)))
-                    # ( problem here i hope this is fix
-                    _dir = os.path.dirname(os.path.abspath(__file__))
-                    _Wine = f"WINEPREFIX={_winePrefix} primusrun gamemoderun mangohud --dlsym wine \"{str(self._exe)}\" > {_dir}/output.txt 2>&1"
-                   
-                    print(f"Game Or Program Start: {_Wine}")
-                    os.popen(_Wine)
+                # Extra Options
+                _Primusrun = gc.GetValues["pri"]
+                _Optirun   = gc.GetValues["op"]
+                _MangoHud_gl  = gc.GetValues["gl"]
+                _MangoHud_dx  = gc.GetValues["dx"]
+                _GameMode  = gc.GetValues["game"]
+
+                if _Primusrun and _Optirun or _MangoHud_gl and _MangoHud_dx:
+                        print("| You Can't Select Primusrun And Optirun | You Can't Enable ALL -> MangoHUD |")
+                else:
+                    _winePrefix = str(gc.GetValues["gamelist_run"]).strip("[]'")
+                    if str(self.game).endswith(".exe"):
+                        #game_path = os.path.abspath(os.path.expanduser(str(self.game)))
+                        # ( problem here i hope this is fix
+                        _dir = os.path.dirname(os.path.abspath(__file__))
+
+                        _Default = ""
+
+                        # Primusrun or Optirun
+                        if _Primusrun:
+                            _Default += " primusrun"
+                        elif _Optirun:
+                            _Default += " optirun"
+
+                        # Vulkan or OpenGL
+                        if _MangoHud_gl:
+                            _Default += " mangohud --dlsym"
+                        elif _MangoHud_dx:
+                            _Default += " MANGOHUD=1"
+                                    
+                        # Game Mode
+                        if _GameMode:
+                            _Default += " gamemoderun"
+
+                        _Wine = f"WINEPREFIX={_winePrefix} {_Default} wine \"{str(self._exe)}\" > {_dir}/output.txt 2>&1"
+                        print(f"Game Or Program Start: \n{_Wine}")
+                        os.popen(_Wine)
             except Exception as ERR:
                 print(ERR)
 
