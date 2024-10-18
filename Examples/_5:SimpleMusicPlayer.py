@@ -59,7 +59,7 @@ if __name__ == "__main__":
     ]
 
     gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(windowValue="mp3", border=0)
+    gc.AddNewBorderWithColor(ThisWindow=gc.window, Value="mp3", Color="red", BorderSize=0)
     gc.window["input"].update("Music")
     gkeys = GKeyboard(window=gc.window)
 

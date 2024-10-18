@@ -65,19 +65,18 @@ if __name__ == "__main__":
         [gc.GMenuForTheme(menu, font="Sans, 15")],
         [gc.GTabGroup(TabGroupLayout=[
             [gc.GTab(title="TAB-0", TabLayout=win0, value="tab0")],
+            [gc.GTab(title="TAB-1", TabLayout=win0, value="tab1")],
+            [gc.GTab(title="TAB-2", TabLayout=win0, value="tab2")],
+            [gc.GTab(title="TAB-3", TabLayout=win0, value="tab3")],
+            [gc.GTab(title="TAB-4", TabLayout=win0, value="tab4")],
+            [gc.GTab(title="TAB-5", TabLayout=win0, value="tab5")],
+            [gc.GTab(title="TAB-6", TabLayout=win0, value="tab6")],
         ], value="tabG", border=1)],
         [ gc.GColumn(winColumn=settingsWin, xStretch=True, value="settings", bcolor=GColors().purple7) ],
     ]
 
     gc.GWindow(mainWindow=layout)
     
-    _index = 0
-    _TabIndex = 1
-    for i in defaultWin:
-        gc.window["tabG"].add_tab(gc.GTab(title=f"TAB-{_TabIndex}", TabLayout=defaultWin[_index], value=f"tab{_index}"))
-        _index += 1
-        _TabIndex += 1
-
     gc.window["settings"].update(visible=False)
     gc.window["settings"].hide_row()
 
