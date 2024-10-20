@@ -15,31 +15,30 @@ if __name__ == "__main__":
     gc.font = "Sans, 20"
     Themecolors().GnuChanOS
 
-
     buttons = [
         [
-            gc.Push(GnuChanOSColor().colors2),
-            gc.vsep(color=GnuChanOSColor().colors3),
-            gc.GButton(title="<"),
-            gc.GButton(title="Open Image"),
-            gc.GButton(title="Open Image Folder"),
-            gc.GButton(title=">"),
-            gc.vsep(color=GnuChanOSColor().colors3),
-            gc.Push(GnuChanOSColor().colors2),
+            gc.GPush(GnuChanOSColor().colors2),
+            gc.GVSep(Color=GnuChanOSColor().colors3),
+            gc.GButton(Text="<"),
+            gc.GButton(Text="Open Image"),
+            gc.GButton(Text="Open Image Folder"),
+            gc.GButton(Text=">"),
+            gc.GVSep(Color=GnuChanOSColor().colors3),
+            gc.GPush(GnuChanOSColor().colors2),
         ],
     ]
 
-    showImage = [[gc.GCanvas(value="image", xStretch=True, yStretch=True, bcolor="black")]]
+    showImage = [[gc.GCanvas(WindowValue="image", xStretch=True, yStretch=True, BColor="black")]]
 
     layout = [
-        [   gc.GColumn(winColumn=buttons, xStretch=True, bcolor=GnuChanOSColor().colors2)   ],
-        [   gc.GText(value="path", xStretch=True)   ],
-        [   gc.Push(GnuChanOSColor().colors1)   ],
-        [   gc.GColumn(winColumn=showImage, xStretch=True, yStretch=True, EmptySpace=(0, 0)) ],
+        [   gc.GColumn(winColumnLayout_List=buttons, xStretch=True, BColor=GnuChanOSColor().colors2)   ],
+        [   gc.GText(TextValue="path", xStretch=True)   ],
+        [   gc.GPush(GnuChanOSColor().colors1)   ],
+        [   gc.GColumn(winColumnLayout_List=showImage, xStretch=True, yStretch=True, EmptySpace=(0, 0)) ],
                ]
 
-    gc.GWindow(mainWindow=layout)
-    gd = GCanvas(CanvasValue="image", Window=gc.window)
+    gc.GWindow(SetMainWindowLayout_List=layout)
+    gd = GCanvas(CanvasValue="image", Window=gc.GetWindow)
 
 
     _img = ""
@@ -50,7 +49,7 @@ if __name__ == "__main__":
         global _img, _imgs, _index, _selectImage, gd
 
 
-        if gc.event == "Open Image":
+        if gc.GetEvent == "Open Image":
             try:
                 _defIMG = gc.GetFilePath(defaultPATH=str(os.path.expanduser("~")), fileTypes=gc.ImagesType)
                 if str(_defIMG).endswith(".png") or str(_defIMG).endswith(".jpg"):
@@ -59,11 +58,11 @@ if __name__ == "__main__":
                     gd.AddImageObject(ObjectName="image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
 
-                    gc.window["path"].update(_defIMG)
+                    gc.GetWindow["path"].update(_defIMG)
             except Exception as ERR:
                 print(ERR)
 
-        elif gc.event == "Open Image Folder":
+        elif gc.GetEvent == "Open Image Folder":
             try:
                 _defFOLDER = gc.GetFolderPath(defaultPATH=str(os.path.expanduser("~")))
                 _defFiles = os.listdir(os.path.expanduser(_defFOLDER))
@@ -75,11 +74,11 @@ if __name__ == "__main__":
                 _img = gd.OpenImage(ImagePath=_imgs[0], Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                 gd.AddImageObject(ObjectName="image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                 gd.Draw()
-                gc.window["path"].update(_imgs[0])
+                gc.GetWindow["path"].update(_imgs[0])
             except Exception as ERR:
                 pass
 
-        elif gc.event == "<":
+        elif gc.GetEvent == "<":
             try:
                 if _index > 0:
                     _index -= 1
@@ -89,12 +88,12 @@ if __name__ == "__main__":
                     gd.AddImageObject(ObjectName="Image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
 
-                    gc.window["path"].update(_selectImage)
+                    gc.GetWindow["path"].update(_selectImage)
 
             except Exception as ERR:
                 print(ERR)
 
-        elif gc.event == ">":
+        elif gc.GetEvent == ">":
             try:
                 if _index < len(_imgs) - 1:
                     _index += 1
@@ -103,12 +102,12 @@ if __name__ == "__main__":
                     gd.ClearCanvas()
                     gd.AddImageObject(ObjectName="Image", Image=_img, Transform=GVector2(0, 0), Scale=GVector2(gd.GetCanvasScale_X(), gd.GetCanvasScale_Y()))
                     gd.Draw()
-                    gc.window["path"].update(_selectImage)
+                    gc.GetWindow["path"].update(_selectImage)
             except Exception as ERR:
                 print(ERR)
 
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)
 

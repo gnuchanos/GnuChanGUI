@@ -24,82 +24,108 @@ if __name__ == "__main__":
 
     settingsWin = [
         [
-            gc.GText(title="Text Size: ", EmptySpace=(0, 0), bcolor=GColors().purple7),
-            gc.GSlider(value="fontSize", range=(5, 100), direction="h", xStretch=True, defaultValue=12, bcolor=GColors().purple6), 
+            gc.GText(SetText="Text Size: ", EmptySpace=(0, 0), BColor=GColors().purple7),
+            gc.GSlider(WindowValue="fontSize", MaxRange=(5, 100), SDirection="h", xStretch=True, DefaultValue=12, BColor=GColors().purple6), 
         ],
         [
-            gc.GText(title="Text Color 'Enter Color name': ", bcolor=GColors().purple7),
-            gc.GInput(value="tcolor", xStretch=True, size=(30, None), bcolor=GColors().purple6),
+            gc.GText(SetText="Text Color 'Enter Color name': ", BColor=GColors().purple7),
+            gc.GInput(WindowValue="tcolor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
         ],
         [
-            gc.GText(title="Background Color 'Enter Color name': ", bcolor=GColors().purple7),
-            gc.GInput(value="bcolor", xStretch=True, size=(30, None), bcolor=GColors().purple6),
+            gc.GText(SetText="Background Color 'Enter Color name': ", BColor=GColors().purple7),
+            gc.GInput(WindowValue="BColor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
         ],
         [ 
-            gc.Push(GnuChanOSColor().colors1),
-            gc.GButton(title="Save Settings"),
-            gc.Push(GnuChanOSColor().colors1)
+            gc.GPush(GColors().purple7),
+            gc.GButton(Text="Save Settings"),
+            gc.GPush(GColors().purple7)
         ]
     ]
 
-    def TextWindow(gMultilineValue, TextValue):
-        return [
-            [ gc.GMultiline(value=gMultilineValue, xStretch=True, yStretch=True, font=f"Sans, {str(_textFont)}", 
-                            noScroolBar=False, bcolor=GColors().purple8, border=2) 
+
+
+    win0 = [
+            [ gc.GMultiline(WindowValue="text0", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
             ],
-            [ gc.GText(title="File Path Here", value=TextValue, font=f"Sans, {str(_textFont)}", xStretch=True)]
+            [ gc.GText(SetText="File Path Here", TextValue="text0_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
         ]
-
-    win0 = TextWindow(gMultilineValue=f"text0", TextValue=f"text0_path")
-    win1 = TextWindow(gMultilineValue=f"text1", TextValue=f"text1_path")
-    win2 = TextWindow(gMultilineValue=f"text2", TextValue=f"text2_path")
-    win3 = TextWindow(gMultilineValue=f"text3", TextValue=f"text3_path")
-    win4 = TextWindow(gMultilineValue=f"text4", TextValue=f"text4_path")
-    win5 = TextWindow(gMultilineValue=f"text5", TextValue=f"text5_path")
-    win6 = TextWindow(gMultilineValue=f"text6", TextValue=f"text6_path")
-
-    defaultWin = [win1, win2, win3, win4, win5, win6]
-    _WinIndex = 0
+    win1 = [
+            [ gc.GMultiline(WindowValue="text1", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text1_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
+    win2 = [
+            [ gc.GMultiline(WindowValue="text2", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text2_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
+    win3 = [
+            [ gc.GMultiline(WindowValue="text3", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text3_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
+    win4 = [
+            [ gc.GMultiline(WindowValue="text4", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text4_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
+    win5 = [
+            [ gc.GMultiline(WindowValue="text5", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text5_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
+    win6 = [
+            [ gc.GMultiline(WindowValue="text6", xStretch=True, yStretch=True, TFont=f"Sans, {str(_textFont)}", 
+                            NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+            ],
+            [ gc.GText(SetText="File Path Here", TextValue="text6_path", TFont=f"Sans, {str(_textFont)}", xStretch=True)]
+        ]
 
     layout = [ 
-        [gc.GMenuForTheme(menu, font="Sans, 15")],
+        [gc.GMenuForTheme(menu, TFont="Sans, 15")],
         [gc.GTabGroup(TabGroupLayout=[
-            [gc.GTab(title="TAB-0", TabLayout=win0, value="tab0")],
-            [gc.GTab(title="TAB-1", TabLayout=win0, value="tab1")],
-            [gc.GTab(title="TAB-2", TabLayout=win0, value="tab2")],
-            [gc.GTab(title="TAB-3", TabLayout=win0, value="tab3")],
-            [gc.GTab(title="TAB-4", TabLayout=win0, value="tab4")],
-            [gc.GTab(title="TAB-5", TabLayout=win0, value="tab5")],
-            [gc.GTab(title="TAB-6", TabLayout=win0, value="tab6")],
-        ], value="tabG", border=1)],
-        [ gc.GColumn(winColumn=settingsWin, xStretch=True, value="settings", bcolor=GColors().purple7) ],
+            [gc.GTab(Text="TAB-0", TabLayout=win0, WindowValue="tab0")],
+            [gc.GTab(Text="TAB-1", TabLayout=win1, WindowValue="tab1")],
+            [gc.GTab(Text="TAB-2", TabLayout=win2, WindowValue="tab2")],
+            [gc.GTab(Text="TAB-3", TabLayout=win3, WindowValue="tab3")],
+            [gc.GTab(Text="TAB-4", TabLayout=win4, WindowValue="tab4")],
+            [gc.GTab(Text="TAB-5", TabLayout=win5, WindowValue="tab5")],
+            [gc.GTab(Text="TAB-6", TabLayout=win6, WindowValue="tab6")],
+        ], WindowValue="tabG", Border=1)],
+        [ gc.GColumn(winColumnLayout_List=settingsWin, xStretch=True, SetWindowValue="settings", BColor=GColors().purple7) ],
     ]
 
-    gc.GWindow(mainWindow=layout)
+    gc.GWindow(SetMainWindowLayout_List=layout)
     
-    gc.window["settings"].update(visible=False)
-    gc.window["settings"].hide_row()
+    gc.GetWindow["settings"].update(visible=False)
+    gc.GetWindow["settings"].hide_row()
 
     for i in ("text0", "text1", "text2", "text3", "text4", "text5", "text6"):
-        gc.GMultilineTabSpace(gMultilineValue=i, gMultilineFont=f"Sans, {str(_textFont)}")
-        gc.AddNewBorderWithColor(Value=i, Color=GnuChanOSColor().colors2, BorderSize=5)
+        gc.GMultilineTabSpace(WindowValue=i, TFont=f"Sans, {str(_textFont)}")
+        gc.AddNewBorderWithColor(WindowValue=i, Color=GnuChanOSColor().colors2, BorderSize=5)
 
     def update():
         global _defaultTextValue 
         
         ActiveTab = gc.GetValues["tabG"]
         _defaultTextValue = f"text{ActiveTab[len(ActiveTab)-1:]}"
-        if gc.event == "Open File":
+        if gc.GetEvent == "Open File":
             try:
                 _FilePath = gc.GetFilePath(defaultPATH=os.path.expanduser("~"))
-                gc.window[f"text{ActiveTab[-1]}_path"].update(_FilePath)
+                gc.GetWindow[f"text{ActiveTab[-1]}_path"].update(_FilePath)
                 with open(_FilePath, 'r', encoding="utf-8") as Value:
                     _ThisText = Value.read()
-                    gc.window[f"text{ActiveTab[-1]}"].update(_ThisText)
+                    gc.GetWindow[f"text{ActiveTab[-1]}"].update(_ThisText)
             except Exception as ERR:
                 print(ERR)
 
-        elif gc.event == "Save File":
+        elif gc.GetEvent == "Save File":
             try:
                 _GetText = gc.GetValues[f"text{ActiveTab[-1]}"]
                 _ThisPath = gc.GetGTextValue(f"text{ActiveTab[-1]}_path")
@@ -108,28 +134,28 @@ if __name__ == "__main__":
             except Exception as ERR:
                 print(ERR)
 
-        elif gc.event == "Save As File":
+        elif gc.GetEvent == "Save As File":
             try:
                 _GetText = gc.GetValues[f"text{ActiveTab[-1]}"]
                 _ThisPath = gc.GetFileForSave(defaultPATH=os.path.expanduser("~"))
                 with open(_ThisPath, 'w', encoding="utf-8") as _GetValue:
                     _GetValue.write(_GetText)
-                    gc.window[f"text{ActiveTab[-1]}_path"].update(_ThisPath)
+                    gc.GetWindow[f"text{ActiveTab[-1]}_path"].update(_ThisPath)
             except Exception as ERR:
                 print(ERR)
 
-        if gc.event == "Close File":
-            gc.window[_defaultTextValue].update("")
+        if gc.GetEvent == "Close File":
+            gc.GetWindow[_defaultTextValue].update("")
             _defPath = f"text{ActiveTab[len(ActiveTab)-1:]}_path".strip("")
-            gc.window[_defPath].update("File Path Here")
+            gc.GetWindow[_defPath].update("File Path Here")
 
-        if gc.event == "Remove Tab":
+        if gc.GetEvent == "Remove Tab":
             pass
-        elif gc.event == "Create Tab":
+        elif gc.GetEvent == "Create Tab":
             pass
 
         ######### Settings #########
-        if gc.event == "Save Settings":
+        if gc.GetEvent == "Save Settings":
             try:
                 gc.FontSize_Change(windowValue=_defaultTextValue, fontSize=int(gc.GetValues["fontSize"]))
                 if len(str(gc.GetValues["tcolor"]).strip(" ")) > 0:
@@ -140,23 +166,23 @@ if __name__ == "__main__":
                 gc.GMessage(wmTitle="Danger!", message=f"This is ERR{ERR}")
 
         # Press Button For This
-        elif gc.event == "Show Settings":
-            gc.window["settings"].update(visible=True)
-            gc.window["settings"].unhide_row()
-        elif gc.event == "Hide Settings":
-            gc.window["settings"].update(visible=False)
-            gc.window["settings"].hide_row()
+        elif gc.GetEvent == "Show Settings":
+            gc.GetWindow["settings"].update(visible=True)
+            gc.GetWindow["settings"].unhide_row()
+        elif gc.GetEvent == "Hide Settings":
+            gc.GetWindow["settings"].update(visible=False)
+            gc.GetWindow["settings"].hide_row()
         
         # Press Key For This
-        elif gc.event == "F1:67":
-            gc.window["settings"].update(visible=True)
-            gc.window["settings"].unhide_row()
-        elif gc.event == "F2:68":
-            gc.window["settings"].update(visible=False)
-            gc.window["settings"].hide_row()
+        elif gc.GetEvent == "F1:67":
+            gc.GetWindow["settings"].update(visible=True)
+            gc.GetWindow["settings"].unhide_row()
+        elif gc.GetEvent == "F2:68":
+            gc.GetWindow["settings"].update(visible=False)
+            gc.GetWindow["settings"].hide_row()
         
         # Press Key For Help!
-        elif gc.event == "ShortCut":
+        elif gc.GetEvent == "ShortCut":
             help = """
     f1 = hide settings
     f2 = show settings
@@ -167,6 +193,6 @@ if __name__ == "__main__":
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)
 
 

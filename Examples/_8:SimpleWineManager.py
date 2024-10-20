@@ -3,6 +3,7 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
+from turtle import color
 from GnuChanGUI import *
 from threading import Thread
 from gamelist import gamelist
@@ -14,107 +15,105 @@ if __name__ == "__main__":
 
     # First Create Wine Container
     CreateWinePrefix = [
-        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
-        [   gc.GText(title=f"'{os.path.expanduser("~")}/Games/winePrefix/' <-- Wine Prefix here", 
-                     position="center", xStretch=True, bcolor=GColors().purple7)   
+        [   gc.GHSep(Color=GnuChanOSColor().colors5)   ],
+        [   gc.GText(SetText=f"'{os.path.expanduser("~")}/Games/winePrefix/' <-- Wine Prefix here", TPosition="center", xStretch=True, BColor=GColors().purple7)   
         ],
         [   
-            gc.GText(title=f"{os.path.expanduser("~")}/Games/winePrefix/", EmptySpace=(0, 0), bcolor=GColors().purple6),
-            gc.GInput(value="path_wine", xStretch=True, EmptySpace=(0, 0), bcolor=GColors().purple6)
+            gc.GText(SetText=f"{os.path.expanduser("~")}/Games/winePrefix/", EmptySpace=(0, 0), BColor=GColors().purple6),
+            gc.GInput(SetValue="path_wine", xStretch=True, EmptySpace=(0, 0), BColor=GColors().purple6)
         ],
         [
-            gc.Push(bcolor=GColors().purple7),
-            gc.GRadio(value="32bit", groupID="wine", title="32Bit", bcolor=GColors().purple7),
-            gc.GRadio(value="64bit", groupID="wine", title="64Bit", bcolor=GColors().purple7),
-            gc.Push(bcolor=GColors().purple7)
+            gc.GPush(BColor=GColors().purple7),
+            gc.GRadio(SetValue="32bit", groupID="wine", RText="32Bit", BColor=GColors().purple7),
+            gc.GRadio(SetValue="64bit", groupID="wine", RText="64Bit", BColor=GColors().purple7),
+            gc.GPush(BColor=GColors().purple7)
         ],
-        [   gc.Push(bcolor=GColors().purple7), gc.GButton(title="Create Prefix"), gc.Push(bcolor=GColors().purple7)    ],
+        [   gc.GPush(BColor=GColors().purple7), gc.GButton(Text="Create Prefix"), gc.GPush(BColor=GColors().purple7)    ],
         [   
-            gc.GListBox(value="gamelist_create", xStretch=True, yStretch=True, bcolor=GColors().purple8),
+            gc.GListBox(SetValue="gamelist_create", xStretch=True, yStretch=True, BColor=GColors().purple8),
         ],
-        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
+        [   gc.GHSep(Color=GnuChanOSColor().colors5)   ],
     ]
 
     # Second Run Games 
     wineBody = [
-        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
-        [   gc.GText(title="Don't forget to choose your game's own Wine prefix!", xStretch=True, position="center", bcolor=GColors().purple7)     ],
-        [   gc.GText(title="This Important Warning! 'File Name' is okay but ' file name ' NOPE!", 
-                     bcolor=GColors().purple5, xStretch=True, position="center")   ],
+        [   gc.GHSep(Color=GnuChanOSColor().colors5)   ],
+        [   gc.GText(SetText="Don't forget to choose your game's own Wine prefix!", xStretch=True, TPosition="center", BColor=GColors().purple7)     ],
+        [   gc.GText(SetText="This Important Warning! 'File Name' is okay but ' file name ' NOPE!", BColor=GColors().purple5, xStretch=True, TPosition="center")   ],
 
-        [   gc.GText(title="Choose Youre Wine", xStretch=True, position="center", bcolor=GColors().purple7)   ],
+        [   gc.GText(SetText="Choose Youre Wine", xStretch=True, TPosition="center", BColor=GColors().purple7)   ],
 
         [   
-            gc.Push(bcolor=GColors().purple7),
-            gc.GButton(title="WineTRICKS"),
-            gc.GButton(title="WineCFG"),
-            gc.GButton(title="Run .EXE"),
-            gc.GButton(title="Update Prefix"),
-            gc.GButton(title="Remove Prefix"),
-            gc.Push(bcolor=GColors().purple7),
+            gc.GPush(BColor=GColors().purple7),
+            gc.GButton(Text="WineTRICKS"),
+            gc.GButton(Text="WineCFG"),
+            gc.GButton(Text="Run .EXE"),
+            gc.GButton(Text="Update Prefix"),
+            gc.GButton(Text="Remove Prefix"),
+            gc.GPush(BColor=GColors().purple7),
         ],
         [   
-            gc.GListBox(value="gamelist_run", xStretch=True, yStretch=True, bcolor=GColors().purple8),
+            gc.GListBox(SetValue="gamelist_run", xStretch=True, yStretch=True, BColor=GColors().purple8),
         ],
-        [   gc.hsep(color=GnuChanOSColor().colors5)   ],
+        [   gc.GHSep(Color=GnuChanOSColor().colors5)   ],
     ]
 
 
     wine_Create = [
-        [   gc.GColumn(winColumn=CreateWinePrefix, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ],
-        [   gc.GText(title="", xStretch=True)   ],
+        [   gc.GColumn(winColumnLayout_List=CreateWinePrefix, xStretch=True, yStretch=True, BColor=GColors().purple7)   ],
+        [   gc.GText(SetText="", xStretch=True)   ],
     ]
 
     wine_Run = [ 
-        [   gc.GColumn(winColumn=wineBody, xStretch=True, yStretch=True, bcolor=GColors().purple7)   ],
+        [   gc.GColumn(winColumnLayout_List=wineBody, xStretch=True, yStretch=True, BColor=GColors().purple7)   ],
         [   
-            gc.Push(GnuChanOSColor().colors1),
-                gc.GCheackBox(title="Primusrun",        value="pri",  font="Sans, 15"),
-                gc.GCheackBox(title="Optirun",          value="op",   font="Sans, 15"),
-                gc.GCheackBox(title="MangoHUD=OpenGL",  value="gl",   font="Sans, 15"),
-                gc.GCheackBox(title="MangoHUD=Vulkan",  value="dx",   font="Sans, 15"),
-                gc.GCheackBox(title="GameMode",         value="game", font="Sans, 15"),
-            gc.Push(GnuChanOSColor().colors1)
+            gc.GPush(GnuChanOSColor().colors1),
+                gc.GCheackBox(CText="Primusrun",        SetValue="pri",  TFont="Sans, 15"),
+                gc.GCheackBox(CText="Optirun",          SetValue="op",   TFont="Sans, 15"),
+                gc.GCheackBox(CText="MangoHUD=OpenGL",  SetValue="gl",   TFont="Sans, 15"),
+                gc.GCheackBox(CText="MangoHUD=Vulkan",  SetValue="dx",   TFont="Sans, 15"),
+                gc.GCheackBox(CText="GameMode",         SetValue="game", TFont="Sans, 15"),
+            gc.GPush(GnuChanOSColor().colors1)
            ]
     ]
 
 
 
     wine_debug = [
-        [gc.GLog(xStretch=True, yStretch=True, bcolor=GnuChanOSColor().colors0)]
+        [gc.GLog(xStretch=True, yStretch=True, BColor=GnuChanOSColor().colors0)]
     ]
 
     wine_triks = [
-        [gc.GMultiline(value="output", font="Sans, 12", xStretch=True, yStretch=True, readonly=True, bcolor=GnuChanOSColor().colors0)],
-        [gc.GInput(value="input", font="Sans, 15", xStretch=True, bcolor=GColors().purple8)],
+        [gc.GMultiline(SetValue="output", TFont="Sans, 12", xStretch=True, yStretch=True, ReadOnly=True, BColor=GnuChanOSColor().colors0)],
+        [gc.GInput(SetValue="input", TFont="Sans, 15", xStretch=True, BColor=GColors().purple8)],
     ]
 
     layout = [ 
         [
             gc.GTabGroup(
                 TabGroupLayout=[
-                    [gc.GTab(title="Output", TabLayout=wine_debug, value="tab0")],
-                    [gc.GTab(title="Help!", TabLayout=wine_triks, value="tab1")],
+                    [gc.GTab(Text="Output", TabLayout=wine_debug, SetValue="tab0")],
+                    [gc.GTab(Text="Help!", TabLayout=wine_triks, SetValue="tab1")],
 
-                    [gc.GTab(title="Create Wine", TabLayout=wine_Create, value="tab2")],
-                    [gc.GTab(title="Run Wine", TabLayout=wine_Run, value="tab3")],
+                    [gc.GTab(Text="Create Wine", TabLayout=wine_Create, SetValue="tab2")],
+                    [gc.GTab(Text="Run Wine", TabLayout=wine_Run, SetValue="tab3")],
                       ], 
-            value="tabG")
+            SetValue="tabG")
         ]
     ]
 
-    gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(windowValue="gamelist_create", border=1)
-    gc.GListBoxBorderSize(windowValue="gamelist_run", border=1)
+    gc.GWindow(SetMainWindowLayout_List=layout)
+    gc.GListBoxBorderSize(WindowValue="gamelist_create", Border=1)
+    gc.GListBoxBorderSize(WindowValue="gamelist_run", Border=1)
 
-    gc.window["gamelist_create"].update(gamelist)
-    gc.window["gamelist_run"].update(gamelist)
+    gc.GetWindow["gamelist_create"].update(gamelist)
+    gc.GetWindow["gamelist_run"].update(gamelist)
 
     class gcWine:
         def __init__(self) -> None:
             self.winePrefix_List = gamelist
-            gc.window["gamelist_create"].update(self.winePrefix_List)
-            gc.window["gamelist_run"].update(self.winePrefix_List)
+            gc.GetWindow["gamelist_create"].update(self.winePrefix_List)
+            gc.GetWindow["gamelist_run"].update(self.winePrefix_List)
 
             self.Path = f"{os.path.expanduser("~")}/Games/winePrefix/"
             self._currentPosition = None
@@ -149,8 +148,8 @@ if __name__ == "__main__":
                         _file_path = os.path.expanduser(f"{os.path.expanduser("~")}/.config/qtile/Programs/gamelist.py")
                         with open(_file_path, 'w') as file:
                             file.write(f"gamelist = {gamelist}")
-                        gc.window["gamelist_create"].update(gamelist)
-                        gc.window["gamelist_run"].update(gamelist)
+                        gc.GetWindow["gamelist_create"].update(gamelist)
+                        gc.GetWindow["gamelist_run"].update(gamelist)
                         print(f"Wine Prefix List: {self.winePrefix_List}")
                 else:
                     print(str(gc.GetValues["path_wine"]).strip(" "))
@@ -161,14 +160,14 @@ if __name__ == "__main__":
         def RemovePrefix(self):
             try:
                 self.winePrefix_List.remove(gc.GetValues["gamelist_run"][0])
-                gc.window["gamelist_run"].update(showPath.winePrefix_List)
+                gc.GetWindow["gamelist_run"].update(showPath.winePrefix_List)
                 _removeThis = f"rm -r {str(gc.GetValues["gamelist_run"][0])}"
                 os.popen(_removeThis)
                 file_path = os.path.expanduser(f"{os.path.expanduser("~")}/.config/qtile/Programs/gamelist.py")
                 with open(file_path, 'w') as file:
                     file.write(f"gamelist = {gamelist}")
-                    gc.window["gamelist_run"].update(gamelist)
-                    gc.window["gamelist_create"].update(gamelist)
+                    gc.GetWindow["gamelist_run"].update(gamelist)
+                    gc.GetWindow["gamelist_create"].update(gamelist)
                 print(f"Remove Finish!: {_removeThis}")
             except Exception as ERR:
                 print(ERR)
@@ -276,43 +275,43 @@ if __name__ == "__main__":
     showPath = gcWine()
 
     _output = "welcome to GnuChanOS Wine Manager!\nuse help command! \n"
-    gc.window["output"].update(_output)
+    gc.GetWindow["output"].update(_output)
     def update():
         global showPath, _output
 
-        if gc.event in ["32bit", "64bit"]:
-            if gc.event == "32bit":
+        if gc.GetEvent in ["32bit", "64bit"]:
+            if gc.GetEvent == "32bit":
                 showPath.winePrefix = 32
-            elif gc.event == "64bit":
+            elif gc.GetEvent == "64bit":
                 showPath.winePrefix = 64
 
         #Thread(target=DownloadVideo, args=[]).start()
-        if gc.event == "Create Prefix":
+        if gc.GetEvent == "Create Prefix":
             Thread(target=showPath.CreatePrefix, args=[]).start()
-        elif gc.event == "Run .EXE":
+        elif gc.GetEvent == "Run .EXE":
             showPath.ChooseGame()
             Thread(target=showPath.PlayGame, args=[]).start()
-        elif gc.event == "Remove Prefix":
+        elif gc.GetEvent == "Remove Prefix":
             Thread(target=showPath.RemovePrefix, args=[]).start()
-        elif gc.event == "WineTRICKS":
+        elif gc.GetEvent == "WineTRICKS":
             Thread(target=showPath.wineTRICKS, args=[]).start()
-        elif gc.event == "WineCFG":
+        elif gc.GetEvent == "WineCFG":
             Thread(target=showPath.wineCFG, args=[]).start()
-        elif gc.event == "Update Prefix":
+        elif gc.GetEvent == "Update Prefix":
             Thread(target=showPath.UpdateWinePrefix, args=[]).start()
 
         # this is help!
-        if gc.event == "Return:36":
+        if gc.GetEvent == "Return:36":
             _command = gc.GetValues["input"]
             _output += _command + "\n"
 
             if _command == "help":
                 _output += "this is help how i can help you!" + "\n"
 
-            gc.window["output"].update(_output)
-            gc.window["input"].update("")
+            gc.GetWindow["output"].update(_output)
+            gc.GetWindow["input"].update("")
 
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)

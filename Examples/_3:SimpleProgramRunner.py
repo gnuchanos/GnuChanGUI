@@ -48,28 +48,28 @@ if __name__ == "__main__":
 
     middleThings = [
         [ 
-            gc.GText(title="> ", bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
-            gc.GInput(value="input",  xStretch=True, bcolor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
+            gc.GText(SetText="> ", BColor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
+            gc.GInput(WindowValue="input",  xStretch=True, BColor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
         ],
         [
-            gc.Push(GnuChanOSColor().colors1),
-            gc.GButton(title="Run Program", font="Sans, 20"),
-            gc.Push(GnuChanOSColor().colors1),
+            gc.GPush(GnuChanOSColor().colors1),
+            gc.GButton(Text="Run Program", TFont="Sans, 20"),
+            gc.GPush(GnuChanOSColor().colors1),
         ],
-        [ gc.hsep(color=GnuChanOSColor().colors3) ],
-        [ gc.GListBox(value="software", font="Sans, 14", position="center", xStretch=True, yStretch=True, noScroolBar=True) ],
-        [ gc.hsep(color=GnuChanOSColor().colors3) ],
+        [ gc.GHSep(Color=GnuChanOSColor().colors3) ],
+        [ gc.GListBox(WindowValue="software", LFont="Sans, 14", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True) ],
+        [ gc.GHSep(Color=GnuChanOSColor().colors3) ],
     ]
 
     layout = [ 
         [ gc.GText(xStretch=True) ],
-        [ gc.GColumn(winColumn=middleThings, xStretch=True, yStretch=True)],
-        [ gc.GText(title="", font="Sans, 20", xStretch=True) ]
+        [ gc.GColumn(winColumnLayout_List=middleThings, xStretch=True, yStretch=True)],
+        [ gc.GText(SetText="", TFont="Sans, 20", xStretch=True) ]
     ]
 
-    gc.GWindow(mainWindow=layout)
-    gc.GListBoxBorderSize(windowValue="software", border=0)
-    keyboard = GKeyboard(window=gc.window)
+    gc.GWindow(SetMainWindowLayout_List=layout)
+    gc.GListBoxBorderSize(WindowValue="software", Border=0)
+    keyboard = GKeyboard(window=gc.GetWindow)
 
     drawFinish = False
     SoftwareListActive = []
@@ -77,13 +77,12 @@ if __name__ == "__main__":
     # Control Program if install
     _ReadyPrograms = []
     _SoftwareList = os.listdir("/usr/bin")
-    _programs = []
     for i in _SoftwareList:
         if i in mySoftwareList:
             if not i in _ReadyPrograms:
                 _ReadyPrograms.append(i)
     _ReadyPrograms.sort()
-    gc.window["software"].update(_ReadyPrograms)
+    gc.GetWindow["software"].update(_ReadyPrograms)
     
 
     def RunThis(commandInput):
@@ -98,14 +97,14 @@ if __name__ == "__main__":
         _Input = str(gc.GetValues["input"]).strip("")
 
         # Run Program In Line
-        if gc.event == "Return:36":
+        if gc.GetEvent == "Return:36":
             _commandInput = str(gc.GetValues["input"])
             if len(_commandInput) > 0:
                 Thread(target=RunThis, args=[_commandInput]).start()
             gc.closeWindow = True
 
         # Run Program In List
-        elif gc.event == "Run Program":
+        elif gc.GetEvent == "Run Program":
             _Select = str(gc.GetValues["software"]).strip("[]''")
             if _Select != "":
                 Thread(target=RunThis, args=[_Select]).start()
@@ -114,9 +113,6 @@ if __name__ == "__main__":
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
-
-
-
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)
 
 

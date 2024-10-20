@@ -16,40 +16,39 @@ if __name__ == "__main__":
     vlc_instance = vlc.Instance()
     player = vlc_instance.media_player_new()
 
-    vid = [[gc.GCanvas(value="canvas", xStretch=True, yStretch=True, size=(750, None), bcolor=GColors().purple7)]]
+    vid = [[gc.GCanvas(WindowValue="canvas", xStretch=True, yStretch=True, Size=(750, None), BColor=GColors().purple7)]]
 
     left = [
-        [gc.GListBox(value="videos", font="Sans, 12", yStretch=True, xStretch=True, bcolor=GColors().purple8, noScroolBar=True)],
-        [gc.hsep(color=GnuChanOSColor().colors3)],
-        [gc.GText(title="Volume Slider", xStretch=True, position="center")],
-        [gc.GSlider(value="volume", xStretch=True, range=(0, 100), defaultValue=80, bcolor=GColors().purple7, size=(20, None))],
-        [gc.hsep(color=GnuChanOSColor().colors3)],
+        [gc.GListBox(WindowValue="videos", LFont="Sans, 12", yStretch=True, xStretch=True, BColor=GColors().purple8, noScroolBar=True)],
+        [gc.GHSep(Color=GnuChanOSColor().colors3)],
+        [gc.GText(SetText="Volume Slider", xStretch=True, TPosition="center")],
+        [gc.GSlider(WindowValue="volume", xStretch=True, MaxRange=(0, 100), DefaultValue=80, BColor=GColors().purple7, Size=(20, None))],
+        [gc.GHSep(Color=GnuChanOSColor().colors3)],
     ]
 
-    _timeSize = 100
     layout = [ 
         [
-            gc.Push(bcolor=GnuChanOSColor().colors1),
-            gc.GButton(title="<"),
-            gc.GButton(title="Open Video"),
-            gc.GButton(title="Open Video Folder"),
-            gc.GButton(title="Pause", value="pPlay"),
-            gc.GButton(title=">"),
-            gc.Push(bcolor=GnuChanOSColor().colors1),
+            gc.GPush(BColor=GnuChanOSColor().colors1),
+            gc.GButton(Text="<"),
+            gc.GButton(Text="Open Video"),
+            gc.GButton(Text="Open Video Folder"),
+            gc.GButton(Text="Pause", WindowValue="pPlay"),
+            gc.GButton(Text=">"),
+            gc.GPush(BColor=GnuChanOSColor().colors1),
         ],
         [
-            gc.GColumn(winColumn=vid, xStretch=True, yStretch=True, bcolor=GColors().purple8),
-            gc.GColumn(winColumn=left, xStretch=True, yStretch=True, bcolor=GColors().purple6, value="filePath"),
+            gc.GColumn(winColumnLayout_List=vid,  xStretch=True, yStretch=True, BColor=GColors().purple8),
+            gc.GColumn(winColumnLayout_List=left, xStretch=True, yStretch=True, BColor=GColors().purple6, SetWindowValue="filePath"),
         ],
     ]
 
-    gc.GWindow(mainWindow=layout)
-    db = GKeyboard(window=gc.window)
+    gc.GWindow(SetMainWindowLayout_List=layout)
+    db = GKeyboard(window=gc.GetWindow)
 
 
-    gc.GListBoxBorderSize(windowValue="videos", border=0)
+    gc.GListBoxBorderSize(WindowValue="videos", Border=0)
 
-    cans = gc.window["canvas"].Widget
+    cans = gc.GetWindow["canvas"].Widget
     player.set_xwindow(cans.winfo_id()) # vscode can't auto-completed this .winfo_id()
 
     _Pause = False
@@ -65,7 +64,7 @@ if __name__ == "__main__":
         global _Pause, video, videos, player, _startVideo, _index, _videoFinish, _readyPlay, _folderPath, db, hideTree
 
         try:
-            if gc.event == db.Return:
+            if gc.GetEvent == db.Return:
                 try:
                     video = vlc_instance.media_new(f"{_folderPath}/{videos[videos.index(str(gc.GetValues["videos"]).strip("[]'"))]}")
                     player.set_media(video)
@@ -73,7 +72,7 @@ if __name__ == "__main__":
                 except Exception as ERR:
                     print(ERR, " Return Key Press ERR")
 
-            if gc.event == "Open Video Folder":
+            if gc.GetEvent == "Open Video Folder":
                 _readyPlay = True
                 _videoFinish = False
                 _folderPath = gc.GetFolderPath(defaultPATH=str(os.path.expanduser("~")))
@@ -81,13 +80,13 @@ if __name__ == "__main__":
                 for i in _defaultList:
                     if str(i).endswith(".mp4") or str(i).endswith(".mkv"):
                         videos.append(i)
-                gc.window["videos"].update(videos)
+                gc.GetWindow["videos"].update(videos)
 
                 video = vlc_instance.media_new(f"{_folderPath}/{videos[0]}")
                 player.set_media(video)
                 player.play()
 
-            if gc.event == "Open Video":
+            if gc.GetEvent == "Open Video":
                 _videoFinish = False
                 _startVideo = True
                 _videoPath = gc.GetFilePath(defaultPATH=str(os.path.expanduser("~")), fileTypes=gc.VideoTypes)
@@ -96,21 +95,21 @@ if __name__ == "__main__":
                 player.set_media(video)
                 player.play()
 
-            elif gc.event == "pPlay":
+            elif gc.GetEvent == "pPlay":
                 if not _videoFinish:
                     if _startVideo:
                         if pause:
                             player.pause()
-                            gc.window["pPlay"].update("Pause")
+                            gc.GetWindow["pPlay"].update("Pause")
                             pause = False
                         else:
                             player.pause()
-                            gc.window["pPlay"].update("Play")
+                            gc.GetWindow["pPlay"].update("Play")
                             pause = True
 
             player.audio_set_volume(int(gc.GetValues["volume"]))
 
-            if gc.event == "<":
+            if gc.GetEvent == "<":
                 try:
                     if _readyPlay:
                         if _index > 0:
@@ -124,7 +123,7 @@ if __name__ == "__main__":
                 except Exception as ERR:
                     print(ERR, " < button ERR")
 
-            if gc.event == '>':
+            if gc.GetEvent == '>':
                 if _readyPlay:
                     if _index < len(videos):
                         _index += 1
@@ -141,12 +140,12 @@ if __name__ == "__main__":
                     else:
                         _videoFinish = True
             
-            if gc.event == db.h:
+            if gc.GetEvent == db.h:
                 if not hideTree:
-                    gc.window["filePath"].update(visible=False)
+                    gc.GetWindow["filePath"].update(visible=False)
                     hideTree = True
                 else:
-                    gc.window["filePath"].update(visible=True)
+                    gc.GetWindow["filePath"].update(visible=True)
                     hideTree = False
 
 
@@ -157,5 +156,5 @@ if __name__ == "__main__":
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)
 

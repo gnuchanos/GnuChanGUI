@@ -15,16 +15,16 @@ class DefaultExample:
         self.text = ""
 
         self.Layout = [
-            [self.GC.GCanvas(value="canvas", xStretch=True, yStretch=True)]            
+            [self.GC.GCanvas(WindowValue="canvas", xStretch=True, yStretch=True)]            
         ]
 
-        self.GC.GWindow(mainWindow=self.Layout)
+        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         # KEYBOARD, CANVAS, GColors() 
         self.colors = GColors()
-        self.KYB = GKeyboard(window=self.GC.window)
+        self.KYB = GKeyboard(window=self.GC.GetWindow)
         self.KYB.AddMouseEvent(MouseTrigerValue="canvas")
 
-        self.can = GCanvas(Window=self.GC.window, CanvasValue="canvas")
+        self.can = GCanvas(Window=self.GC.GetWindow, CanvasValue="canvas")
 
         self.CurrentLevel = 1
         self.CurrentScene = self.can.Scene_LOGO
@@ -145,7 +145,7 @@ class DefaultExample:
         self.PlayerGrab = False
         self.can.Draw()
 
-        self.GC.update(GUpdate=self.Update, exitBEFORE=self.BeforeExit)
+        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
         if self.CurrentScene == self.can.Scene_LOGO:
@@ -172,7 +172,7 @@ class DefaultExample:
             )
 
             if _StartButtonArea:
-                if self.GC.event == self.KYB.LeftMouseKey:
+                if self.GC.GetEvent == self.KYB.LeftMouseKey:
                     self.CurrentScene = self.can.Scene_GAMEPLAY
                 self.can.ChangeObjectColor(Object=self.StartButton, Color=GColors().purple1)
             else:
@@ -204,7 +204,7 @@ class DefaultExample:
                         self.can.stop = False
 
                 # reset level
-                if self.GC.event == self.KYB.r:
+                if self.GC.GetEvent == self.KYB.r:
                     self.PlayerGrab = False
                     self.can.TeleportObject(Object=self.Player, Position=self.can.GetCanvasScale_X()/2-50, XorY='x')
                     self.can.TeleportObject(Object=self.Player, Position=self.can.GetCanvasScale_Y()/2-50, XorY='y')
@@ -217,10 +217,10 @@ class DefaultExample:
                     _hitTriger = self.can.SingleObject_RectangleCollisionCheck(Player=self.Player, SingleObject=self.Door_0_TrigerObject)
 
                     if _hitTriger:
-                        if self.GC.event == self.KYB.e and not self.PlayerGrab:
+                        if self.GC.GetEvent == self.KYB.e and not self.PlayerGrab:
                             self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.GrabSound0, ChannelID=1)
                             self.PlayerGrab = True
-                        elif self.GC.event == self.KYB.e and self.PlayerGrab:
+                        elif self.GC.GetEvent == self.KYB.e and self.PlayerGrab:
                             self.Mixer.PlaySound_MultiChannelNoLoop(SoundPath=self.GrabSound1, ChannelID=1)
                             self.PlayerGrab = False
 
@@ -245,7 +245,7 @@ class DefaultExample:
 
                 self.Mixer.PlaySound_MultiChannelLoop(SoundPath=self.Music, Loop=True, ChannelID=0)
 
-                self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.event, Keyboard=self.KYB, SolidObjectList=self.FirstLevelWarlls)
+                self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.GetEvent, Keyboard=self.KYB, SolidObjectList=self.FirstLevelWarlls)
                 self.can.Draw()
 
             elif self.CurrentLevel == 2:
@@ -259,7 +259,7 @@ class DefaultExample:
                 self.can.ChangeObjectVisible(Object=self.Player, Visible=True)
 
 
-                self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.event, Keyboard=self.KYB, SolidObjectList=())
+                self.can.SimplePlayer2D(Player=self.Player, Event=self.GC.GetEvent, Keyboard=self.KYB, SolidObjectList=())
                 self.can.Draw()
 
         elif self.CurrentScene == self.can.Scene_End:

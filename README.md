@@ -18,6 +18,8 @@ Simple Video to Sound # convert -> Fimish <br>
 Simple Music Player -> Fimish <br>
 Simple Wine Manager -> not Fimish??? <br>
 
+Simple Game -> 1 level demo finish but have keyboard delay :@
+
 </p>
 
 <p> Please note that this library with the aim of simplifying and making it more user-friendly. Keep in mind that I am also a beginner in Python and i still learning! </p>
@@ -35,23 +37,6 @@ second install
 3: cd gnuchangui
 4: pip install .
 
-
-font -> font
-visible -> visible
-readonly -> readonly and  disabled -> readonly
-no_scrollbar -> noScroolBar
-group_id -> groupID
-default_value -> defaultValue
-
-
-expand_x --> xStretch
-expand_y --> yStretch
-justification -> position > left,center,right
-text_color -> tColor
-background_color -> bColor
-border_width -> border > border size
-image_filename -> bImage
-password_char -> PwChars > 123 > ***
 ```
 
 
@@ -66,12 +51,12 @@ key ---> Getvalues ı give you 1 example you can understan why ı change key nam
 gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
 Themecolors().GnuChanOS
 
-event -> gc.event
-window[] -> gc.window[].update()
-value[]  -> gc.getvalue[]
-key=""   -> value=""
+event -> gc.GetEvent
+window[] -> gc.GetWindow[].update()
+value[]  -> gc.GetValues[]
+key=""   -> SetValue=""
 
-if gc.event == "Button":
+if gc.GetEvent == "Button":
     gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
 
 window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
@@ -80,10 +65,7 @@ window["button"].update(gc.window["text"].get())   --> text name change button n
 
 <p>
 GCanvas detaile
-    if you press key program become fast this is not good for simple game there is no lock fps
-    there is no easy multi key support like this if key.w and key.return: print()
-    read keyboard evet is have to much delay
-    i create simple render pipeline like system it just works you can reade _11:SimpleGame Example
+    it's okay but not making game you can read simplegame in examples dir
 
     Music -> pygame mixer
     2D Render -> Canvas

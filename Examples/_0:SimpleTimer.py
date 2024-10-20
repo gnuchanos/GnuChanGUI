@@ -23,38 +23,38 @@ if __name__ == "__main__":
 
 
     win = [
-        [gc.GText(xStretch=True, bcolor=GnuChanOSColor().colors0)],
+        [gc.GText(xStretch=True, BColor=GnuChanOSColor().colors0)],
         [
-            gc.GText(title=timeLog, value="time", EmptySpace=(0,0), xStretch=True, position="center", font="Sans, 60"),
+            gc.GText(SetText=timeLog, TextValue="time", EmptySpace=(0,0), xStretch=True, TPosition="center", TFont="Sans, 60"),
         ],
 
         [
-            gc.GButton(title="Start Timer", xStretch=True),
-            gc.GButton(title="Stop Timer", xStretch=True),
-            gc.GButton(title="Clear Timer", xStretch=True),
+            gc.GButton(Text="Start Timer", xStretch=True),
+            gc.GButton(Text="Stop Timer", xStretch=True),
+            gc.GButton(Text="Clear Timer", xStretch=True),
         ],
-        [gc.GText(xStretch=True, bcolor=GnuChanOSColor().colors0)],
+        [gc.GText(xStretch=True, BColor=GnuChanOSColor().colors0)],
     ]
 
     layout = [ 
         [
-            gc.vsep(color=GnuChanOSColor().colors3),
-            gc.GColumn(winColumn=win, xStretch=True, yStretch=True),
-            gc.vsep(color=GnuChanOSColor().colors3),
+            gc.GVSep(Color=GnuChanOSColor().colors3),
+            gc.GColumn(winColumnLayout_List=win, xStretch=True, yStretch=True),
+            gc.GVSep(Color=GnuChanOSColor().colors3),
         ]
                ]
     
     def timerStart_func():
         global second, minute, hour, timeLog, timerStart, StartTime
-        if gc.event == "Start Timer":
+        if gc.GetEvent == "Start Timer":
             timerStart = True
-        if gc.event == "Stop Timer":
+        if gc.GetEvent == "Stop Timer":
             timerStart = False
-        if gc.event == "Clear Timer":
+        if gc.GetEvent == "Clear Timer":
             timerStart = False
             second = minute = hour = 0
             timeLog = f"{int(hour)}:{int(minute)}:{int(second)}"    
-            gc.window["time"].update(timeLog)           
+            gc.GetWindow["time"].update(timeLog)           
 
         if timerStart:
             if second < 60:
@@ -66,9 +66,9 @@ if __name__ == "__main__":
                     hour += 1
                     minute = 0
             timeLog = f"{int(hour)}:{int(minute)}:{int(second)}"    
-            gc.window["time"].update(timeLog)
+            gc.GetWindow["time"].update(timeLog)
 
-    gc.GWindow(mainWindow=layout)
+    gc.GWindow(SetMainWindowLayout_List=layout)
 
     def update():
         timerStart_func()
@@ -76,5 +76,5 @@ if __name__ == "__main__":
     def BeforeExit():
         pass
 
-    gc.update(GUpdate=update, exitBEFORE=BeforeExit)
+    gc.SetUpdate(Update=update, exitBEFORE=BeforeExit)
 
