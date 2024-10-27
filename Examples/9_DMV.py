@@ -4,6 +4,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 from GnuChanGUI import *
+import cProfile
 #Thread(target=DownloadVideo, args=[]).start()
 
 """
@@ -200,6 +201,7 @@ class DefaultExample:
                 Thread(target=self.DownloadMusic, args=[_DownloadNow]).start()
                 os.popen("notify-send -t 7000 -u low \"Music Download Starting..! Maybe Check Terminal\"")
                 print(_DownloadNow)
+                self.GC.GetWindow["vlink_music"].update("")
         
         elif self.GC.GetEvent == "rmusic":
             if len(self.Path) > 0:
@@ -215,4 +217,4 @@ class DefaultExample:
         print("Exit")
 
 if __name__ == "__main__":
-    gc = DefaultExample()
+    cProfile.run("DefaultExample()")
