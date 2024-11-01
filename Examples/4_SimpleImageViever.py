@@ -3,10 +3,17 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+from GnuChanGUI import GCanvas
+from GnuChanGUI import GVector2
+
+# Extra Lib
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleImageViever:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -21,20 +28,20 @@ class SimpleImageViever:
         # main window layout you can use column and frame in here
         self.buttons = [
             [
-                self.GC.GPush(GnuChanOSColor().colors2),
+                self.GC.GPush(self.CGC.FColors2),
                 self.GC.GButton(Text="<"),
                 self.GC.GButton(Text="Open Image"),
                 self.GC.GButton(Text="Open Image Folder"),
                 self.GC.GButton(Text=">"),
-                self.GC.GPush(GnuChanOSColor().colors2),
+                self.GC.GPush(self.CGC.FColors2),
             ],
         ]
 
         self.showImage = [[self.GC.GCanvas(SetValue="image", xStretch=True, yStretch=True, BColor=self.C.purple8)]]
 
         self.Layout = [
-            [   self.GC.GColumn(winColumnLayout_List=self.buttons, xStretch=True, BColor=GnuChanOSColor().colors2)   ],
-            [   self.GC.GText(SetText="Open Video!", SetValue="path", xStretch=True)   ],
+            [   self.GC.GColumn(winColumnLayout_List=self.buttons, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))   ],
+            [   self.GC.GText(SetText="Open Video!", SetValue="path", xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0))   ],
             [   self.GC.GColumn(winColumnLayout_List=self.showImage, xStretch=True, yStretch=True, EmptySpace=(0, 0)) ],
                 ]
 

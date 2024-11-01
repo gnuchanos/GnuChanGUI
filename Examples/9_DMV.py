@@ -3,8 +3,12 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, Themecolors
+from GnuChanGUI import GKeyboard
+
+# Extra Lib
 #Thread(target=DownloadVideo, args=[]).start()
 
 """
@@ -24,7 +28,7 @@ yt-dlp -f "bestvideo[ext=mp4][height=240]+bestaudio[ext=m4a]/best[ext=mp4][heigh
 """
 
 
-class DefaultExample:
+class SimpleVideoAndMusicDownload:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
         Themecolors().GnuChanOS
@@ -42,52 +46,53 @@ class DefaultExample:
         self.Path    = ""
         self.Link    = ""
         
-
-        self.VideoDownload = [
-            [self.GC.GText(SetText="Video Download Settings", TPosition="center", xStretch=True, BColor=self.C.colors0, SetValue="video")],
-            [
-                self.GC.GText(SetText="Link:", EmptySpace=(0, 0)),
-                self.GC.GInput(SetValue="vlink_video", xStretch=True, EmptySpace=(0, 0))
-            ],
-            [self.GC.GText(SetText="Output Dir Path Empty!", xStretch=True, BColor=self.C.colors2, TColor=self.C.colors0, SetValue="video_pathStr")],
-
-
-            [self.GC.GText(SetText="Video Quality Settings", xStretch=True, TPosition="center", BColor=self.C.colors0)],
+        self.VideoSettingsLayout = [
+            [self.GC.GText(SetText="Video Quality Settings", xStretch=True, TPosition="center", BColor=self.C.FColors1)],
             [self.GC.GText(SetText="Warning If Video Don't Have 1080 You can't Download Please Open In Terminal For Control Error Log!", xStretch=True, TFont="Sans, 15")],
             [
-                self.GC.GPush(self.C.colors1),
+                self.GC.GPush(),
                 self.GC.GRadio(RText="Very High(1080)", groupID="video", SetValue="1080"),
                 self.GC.GRadio(RText="High(720)",       groupID="video", SetValue="720"),
                 self.GC.GRadio(RText="Medium(480)",     groupID="video", SetValue="480"),
                 self.GC.GRadio(RText="LOW(240)",        groupID="video", SetValue="240"),
-                self.GC.GPush(self.C.colors1),
+                self.GC.GPush(),
             ],
             [
+                self.GC.GPush(),
                 self.GC.GButton(Text="Select Output Dir", SetValue="path_video"),
                 self.GC.GButton(Text="Refresh List", SetValue="refrest_video"),
+                self.GC.GPush()
+            ]
+        ]
+
+        self.VideoDownload = [
+            [self.GC.GText(SetText="Output Dir Path Empty!", xStretch=True, BColor=self.C.FColors2, TColor=self.C.TColor, SetValue="video_pathStr", TPosition="center", EmptySpace=(0, 0))],
+            [
+                self.GC.GText(SetText="Link:", EmptySpace=(0, 0), BColor=self.C.FColors0),
+                self.GC.GInput(SetValue="vlink_video", xStretch=True, EmptySpace=(0, 0), BColor=self.C.FColors0)
             ],
-            [self.GC.GHSep(self.C.colors5)],
+            [self.GC.GColumn(winColumnLayout_List=self.VideoSettingsLayout, xStretch=True)],
+            [self.GC.GHSep(self.C.FColors5)],
             [self.GC.GListBox(SetValue="out_video", xStretch=True, yStretch=True)],
-            [self.GC.GHSep(self.C.colors5)],
+            [self.GC.GHSep(self.C.FColors5)],
             [self.GC.GButton(Text="Download",          SetValue="Download_Video"),],
-            [self.GC.GHSep(self.C.colors5)],
+            [self.GC.GHSep(self.C.FColors5)],
         ]
 
         self.MusicDownload = [
-            [self.GC.GText(SetText="Music Download Settings", TPosition="center", xStretch=True, BColor=self.C.colors0, SetValue="music")],
             [
-                self.GC.GText(SetText="Link:", EmptySpace=(0, 0)),
-                self.GC.GInput(SetValue="vlink_music", xStretch=True, EmptySpace=(0, 0))
+                self.GC.GText(SetText="Link:", EmptySpace=(0, 0), BColor=self.C.FColors0),
+                self.GC.GInput(SetValue="vlink_music", xStretch=True, EmptySpace=(0, 0), BColor=self.C.FColors0)
             ],
-            [self.GC.GText(SetText="Output Dir Path Empty!", xStretch=True, BColor=self.C.colors2, TColor=self.C.colors0, SetValue="music_pathStr")],
+            [self.GC.GText(SetText="Output Dir Path Empty!", xStretch=True, BColor=self.C.FColors2, TColor=self.C.TColor, SetValue="music_pathStr", TPosition="center", EmptySpace=(0, 0))],
             [
                 self.GC.GButton(Text="Select Output Directory", SetValue="path_mp3"),
                 self.GC.GButton(Text="Refrest Music List", SetValue="rmusic")
             ],
-            [self.GC.GHSep(self.C.colors5)],
+            [self.GC.GHSep(self.C.FColors5)],
             [self.GC.GListBox(SetValue="out_music", xStretch=True, yStretch=True)],
             [self.GC.GButton(Text="Download",          SetValue="Download_mp3")],
-            [self.GC.GHSep(self.C.colors5)],
+            [self.GC.GHSep(self.C.FColors5)],
         ]
 
         self.Layout = [
@@ -217,4 +222,4 @@ class DefaultExample:
         print("Exit")
 
 if __name__ == "__main__":
-    cProfile.run("DefaultExample()")
+    SimpleVideoAndMusicDownload()

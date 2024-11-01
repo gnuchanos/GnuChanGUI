@@ -422,6 +422,8 @@ class RandColor:
 
 class GnuChanOSColor:
     def __init__(self) -> None:
+        self.BGColor = "#240046"
+        self.TColor  = "#9d4edd"
         # First Part
         self.FColors0 = "#1f0047"
         self.FColors1 = "#240052"  
@@ -565,13 +567,15 @@ class GnuChanGUI:
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
     # Create Window
-    def GWindow(self, SetMainWindowLayout_List=None, TopMode=False, rightClickMenu=None, locationX=0, locationY=0):
+    def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, locationX = 0, locationY = 0, KeepOnTop = True, Borderless = False):
         if SetMainWindowLayout_List != None:
             self.layout = SetMainWindowLayout_List
             # if main Window is None self.layout can warning user and self.layout is ready warning layout
         self.GetWindow = Window(
-                self.title, layout=self.layout, size=self.size, keep_on_top=TopMode, resizable=self.resizable,
-                finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY)
+            self.title, 
+            layout=self.layout, size=self.size, keep_on_top=KeepOnTop, resizable=self.resizable,
+            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY),
+            no_titlebar=Borderless
         )
         self.GetWindow.finalize()
         # this is new for close window good way
@@ -588,14 +592,14 @@ class GnuChanGUI:
                     if exitBEFORE != "":
                         exitBEFORE()
                 except Exception as ERR:
-                    print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
+                    print(ERR, "if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
             if self.closeWindow:
                 try:
                     if exitBEFORE != "":
                         exitBEFORE()
                 except Exception as ERR:
-                    print(ERR, "This is not an error, just a warning if you do not add extra functions for exitBEFORE. it's in .update()")
+                    print(ERR, "if you do not add extra functions for exitBEFORE. it's in .update()")
                 break
             if Update != "":
                 Update()
@@ -668,8 +672,6 @@ class GnuChanGUI:
         multiline = self.GetWindow[WindowValue]
         multiline.Widget.configure(tabs=tabs)
 
-
-
     # this can change visible true or false but also change layer position! i don't know how to fix for now or never
     # Don't Forget to Pin Object or Index Can Change
     def GVisible(self, WindowValue: str , show: bool):
@@ -681,16 +683,11 @@ class GnuChanGUI:
 
     # Experimantal -> GCanvas Class
     def GCanvas(
-            self,
-            SetValue: str,
-            BColor: str, 
-            xStretch: bool = False, 
-            yStretch: bool = False, 
-            Visible: bool = True, 
-            border: int = 0,
-            Size: tuple = (None, None), 
-            EmptySpace: tuple = (None, None)
-        ): return Canvas(
+        self, SetValue: str, BColor: str, xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0, 
+        Size: tuple = (None, None), EmptySpace: tuple = (None, None)
+        ): 
+        
+        return Canvas(
             key=SetValue, background_color=BColor, expand_x=xStretch, expand_y=yStretch, visible=Visible, border_width=border, size=Size, pad=EmptySpace
         )
     """
@@ -702,9 +699,12 @@ class GnuChanGUI:
     def GFrame(
             self, GFText=None, InsideWindowLayout=[[]], SetValue=None, InfoWindow=None, Border=1, TFont="Sans, 20", Size=(None, None), 
             xStretch=False, yStretch=False, EmptySpace=(None, None), TColor=None, BColor=None, Visible=True
-        ): return Frame(
+        ): 
+        
+        return Frame(
             title=GFText, layout=InsideWindowLayout, key=SetValue, border_width=Border, tooltip=InfoWindow, font=TFont, size=Size, pad=EmptySpace, 
-            expand_x=xStretch, expand_y=yStretch, title_color=TColor, background_color=BColor, visible=Visible )
+            expand_x=xStretch, expand_y=yStretch, title_color=TColor, background_color=BColor, visible=Visible 
+        )
     
     """
     gMenu = [ ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]], ["System", ["Exit"]] ]
@@ -747,7 +747,7 @@ class GnuChanGUI:
 
     def GColumn(self, winColumnLayout_List=None, Size=(None, None), xStretch=None, yStretch=None, EmptySpace=(None, None), Visible=True, SetValue=None, BColor=None):
         return Column(
-                layout=winColumnLayout_List, key=SetValue, size=Size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=Visible, background_color=BColor
+            layout=winColumnLayout_List, key=SetValue, size=Size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=Visible, background_color=BColor
         )
         """
         c = GColors()
@@ -775,83 +775,88 @@ class GnuChanGUI:
         gc.GWindow(SetMainWindowLayout_List=layout)
         """
 
-    # this is can grab print
-    def GLog(self, LogValue=None, TFont="Sans, 15", TColor=None, BColor=None, Size=(None, None), EmptySpace=(None, None), xStretch=False, yStretch=False, Visible=True):
-        return Output(
-            key=LogValue, font=TFont, size=Size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, text_color=TColor, background_color=BColor, visible=Visible, 
-            autoscroll_only_at_bottom=True
-        )
-        """
-        Print() In Window
-        """
-
     # create Gtab and create GTap Group
-    def GTabGroup(self, TabGroupLayout=None, SetValue=None, TFont="Sans, 20",
-        BColor=None, SBColor=None, TBColor=None, TColor=None, STColor=None, Size=(None, None), TBorder=0, Border=0):
+    def GTabGroup(
+            self, TabGroupLayout=None, SetValue=None, TFont="Sans, 20",
+            BColor=None, TBColor=GnuChanOSColor().SColors3, TColor=None, STColor=GnuChanOSColor().TColor, SBColor=GnuChanOSColor().SColors0, Size=(None, None), TBorder=0, Border=0
+        ): 
+        
         return TabGroup(
-                layout=TabGroupLayout, key=SetValue, expand_x=True, expand_y=True, size=Size,
-                background_color=BColor, selected_background_color=SBColor, tab_background_color=TBColor, enable_events=True,
-                title_color=TColor, selected_title_color=STColor, font=TFont, tab_border_width=TBorder, border_width=Border
+            layout=TabGroupLayout, key=SetValue, expand_x=True, expand_y=True, size=Size,
+            background_color=BColor, selected_background_color=SBColor, tab_background_color=TBColor, enable_events=True,
+            title_color=TColor, selected_title_color=STColor, font=TFont, tab_border_width=TBorder, border_width=Border
         )
-    def GTab(self, Text, TabLayout=None, SetValue=None, rclickMenu=None, Position="center", TColor=None, BColor=None, Border=0):
-        return Tab(title=Text, layout=TabLayout, key=SetValue, right_click_menu=rclickMenu, element_justification=Position,
-                   title_color=TColor, background_color=BColor, border_width=Border)
-        """
-        c = GColors()
+    def GTab(
+            self, Text, TabLayout=None, SetValue=None, rclickMenu=None, Position="center", TColor=None, BColor=None, Border=0
+        ): 
+        
+        return Tab(
+            title=Text, layout=TabLayout, key=SetValue, right_click_menu=rclickMenu, element_justification=Position,
+            title_color=TColor, background_color=BColor, border_width=Border
+        )
+        # """
+        # c = GColors()
 
-        tab1 = [
-            [gc.GText(SetText="Top Layer",    TPosition="center", TFont="Sans, 20",    BColor=c.blue1, xStretch=True, yStretch=True, EmptySpace=(0,0))]
-        ]
+        # tab1 = [
+        #     [gc.GText(SetText="Top Layer",    TPosition="center", TFont="Sans, 20",    BColor=c.blue1, xStretch=True, yStretch=True, EmptySpace=(0,0))]
+        # ]
 
-        tab2 = [
-            [gc.GText(SetText="Middle Left",  TPosition="center", TFont="Sans, 20",  BColor=c.pink1, xStretch=True, yStretch=True, EmptySpace=(0,0))]
-        ]
+        # tab2 = [
+        #     [gc.GText(SetText="Middle Left",  TPosition="center", TFont="Sans, 20",  BColor=c.pink1, xStretch=True, yStretch=True, EmptySpace=(0,0))]
+        # ]
 
-        layout = [
-            [gc.GTabGroup(TabGroupLayout=[
-                [gc.GTab(Text="test1", TabLayout=tab1, SetValue="tab1")],
-                [gc.GTab(Text="test2", TabLayout=tab2, SetValue="tab2")],
-            ], SetValue="tabG")]
-        ]
-        """   
+        # layout = [
+        #     [gc.GTabGroup(TabGroupLayout=[
+        #         [gc.GTab(Text="test1", TabLayout=tab1, SetValue="tab1")],
+        #         [gc.GTab(Text="test2", TabLayout=tab2, SetValue="tab2")],
+        #     ], SetValue="tabG")]
+        # ]
+        # """
 
 # All Widgets
     # text widget
     def GText(
             self, SetText="", TFont="Sans, 20", SetValue=None, Size=(None, None), TPosition="left", 
-            xStretch=False, yStretch=False, EmptySpace=(None), TColor=None, BColor=None, border=None ):
+            xStretch=False, yStretch=False, EmptySpace=(None), TColor=None, BColor=None, border=None 
+        ): 
+        
         return Text(text=SetText, font=TFont, key=SetValue, size=Size, justification=TPosition, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
             text_color=TColor, background_color=BColor, border_width=border
         )
-        """
-        gc.GText(SetValue="text")
-        gc.GetWindow["text"].update("change text")
-        """
+        # """
+        # gc.GText(SetValue="text")
+        # gc.GetWindow["text"].update("change text")
+        # """
 
     # button widget
     def GButton(
             self, Text="", bImage=None, TFont="Sans, 20", SetValue=None, Size=(None, None), 
-            Visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), Border=None ):
+            Visible=True, tcolor=None, bcolor=None, xStretch=False, yStretch=False, EmptySpace=(None), Border=None 
+        ): 
+        
         return Button(
                 Text, button_color=(bcolor, tcolor), font=TFont, key=SetValue, size=Size, 
                 expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, image_filename=bImage, visible=Visible, border_width=Border
         )
-        """
-        layout = [
-            [gc.GText(SetText="Default Text", TextValue="text", TPosition="center", xStretch=True)],
-            [gc.GButton(Text="This Button", SetValue="button", Border=1)]
-        ]
+        # """
+        # layout = [
+        #     [gc.GText(SetText="Default Text", TextValue="text", TPosition="center", xStretch=True)],
+        #     [gc.GButton(Text="This Button", SetValue="button", Border=1)]
+        # ]
 
-        gc.GWindow(SetMainWindowLayout_List=layout)
-        keyboard = GKeyboard(window=gc.GetWindow)
-        """
+        # gc.GWindow(SetMainWindowLayout_List=layout)
+        # keyboard = GKeyboard(window=gc.GetWindow)
+        # """
 
     # listbox widget
     def GListBox(
             self, list=[], LFont="Sans, 20", SetValue=None, Size=(None, None), ActiveEvent=True, Visible=True, 
-            LPosition="left", EmptySpace=(None, None), noScroolBar=False, xStretch=False, yStretch=False, TColor=None, BColor=None):
-        return Listbox(list, font=LFont, key=SetValue, enable_events=ActiveEvent, visible=Visible, justification=LPosition, size=Size, pad=EmptySpace,
-                   no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=TColor, background_color=BColor
+            LPosition="left", EmptySpace=(None, None), noScroolBar=False, xStretch=False, yStretch=False, TColor=None, BColor=None
+        ):
+
+        return Listbox(
+            list, font=LFont, key=SetValue, enable_events=ActiveEvent, visible=Visible, justification=LPosition, size=Size, pad=EmptySpace,
+            no_scrollbar=noScroolBar, expand_x=xStretch, expand_y=yStretch, text_color=TColor, background_color=BColor
         )
         """
         layout = [
@@ -868,8 +873,11 @@ class GnuChanGUI:
             """
 
     # input widget
-    def GInput (self, InText="", TFont="Sans, 20", SetValue=None, Size=(None, None), Focus=True, TPosition="left", Visible=True, 
-                HidePassword=False, ReadOnly=False, xStretch=False, yStretch=False, EmptySpace=(None), TColor=None, BColor=None, Border=None):
+    def GInput (
+            self, InText="", TFont="Sans, 20", SetValue=None, Size=(None, None), Focus=True, TPosition="left", Visible=True, 
+            HidePassword=False, ReadOnly=False, xStretch=False, yStretch=False, EmptySpace=(None), TColor=None, BColor=None, Border=None
+        ):
+
         return Input(
                 default_text=InText, font=TFont, key=SetValue, size=Size, focus=Focus, justification=TPosition,  pad=EmptySpace, expand_x=xStretch, 
                 expand_y=yStretch, password_char=HidePassword, visible=Visible, readonly=ReadOnly, text_color=TColor, background_color=BColor, border_width=Border
@@ -889,8 +897,11 @@ class GnuChanGUI:
         """
 
     # multiLine widget
-    def GMultiline (self, InText="", TFont=None, SetValue=None, Size=(None, None), Visible=True, TPosition="left", EnableEvent=True, WriteOnly=False, WrapLines=True,
-            xStretch=False, yStretch=False, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None, Border=None):
+    def GMultiline (
+            self, InText="", TFont=None, SetValue=None, Size=(None, None), Visible=True, TPosition="left", EnableEvent=True, WriteOnly=False, WrapLines=True,
+            xStretch=False, yStretch=False, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None, Border=0
+        ):
+
         return Multiline(
                 default_text=InText, font=TFont, key=SetValue, size=Size, focus=Focus, justification=TPosition, visible=Visible, disabled=ReadOnly, 
                 expand_x=xStretch, expand_y=yStretch, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=Border,
@@ -958,8 +969,11 @@ class GnuChanGUI:
         """
 
     # selections
-    def GSelection(self, TFont="Sans, 20", ListValues=None, DefaultValue=None, SetValue=None, EmptySpace=(None, None), Visible=True, 
-                   TColor=None, BColor=None, xStretch=False, yStretch=False):
+    def GSelection(
+        self, TFont="Sans, 20", ListValues=None, DefaultValue=None, SetValue=None, EmptySpace=(None, None), Visible=True, 
+        TColor=None, BColor=None, xStretch=False, yStretch=False
+        ):
+
         return Combo(
                 values=ListValues, key=SetValue, default_value=DefaultValue, font=TFont, pad=EmptySpace, visible=Visible, text_color=TColor, background_color=BColor, 
                 expand_x=xStretch, expand_y=yStretch, readonly=True
@@ -978,8 +992,11 @@ class GnuChanGUI:
                 gc.GetWindow["text"].update(gc.GetValues["GSelection"])
         """
     
-    def GIncreaseSelection(self, ListValues=None, StartValue=None, SetValue=None, TFont="Sans, 20", Size=(None, None), EmptySpace=(None, None), 
-                           TColor=None, BColor=None, xStretch=False, yStretch=False, Visible=True):
+    def GIncreaseSelection(
+        self, ListValues=None, StartValue=None, SetValue=None, TFont="Sans, 20", Size=(None, None), EmptySpace=(None, None), 
+        TColor=None, BColor=None, xStretch=False, yStretch=False, Visible=True
+        ):
+
         return Spin(
                 values=ListValues, initial_value=StartValue, font=TFont, key=SetValue, size=Size, pad=EmptySpace, expand_x=xStretch, expand_y=yStretch, 
                 text_color=TColor, background_color=BColor, visible=Visible
@@ -999,8 +1016,11 @@ class GnuChanGUI:
                 gc.GetWindow["text"].update(gc.GetValues["GIncreaseSelection"])
         """
     
-    def GSlider(self, MaxRange=None, SetValue=None, DefaultValue=None, TFont="Sans, 20", Size=(None, None), SDirection="h", EmptySpace=(None, None), 
-                TColor=None, BColor=None, xStretch=True, Visible=True):
+    def GSlider(
+            self, MaxRange=None, SetValue=None, DefaultValue=None, TFont="Sans, 20", Size=(None, None), SDirection="h", EmptySpace=(None, None), 
+            TColor=None, BColor=None, xStretch=True, Visible=True
+        ):
+
         return Slider(
                 range=MaxRange, key=SetValue, default_value=DefaultValue, orientation=SDirection, font=TFont, size=Size, pad=EmptySpace, 
                 text_color=TColor, background_color=BColor, expand_x=xStretch, visible=Visible
@@ -1025,19 +1045,32 @@ class GnuChanGUI:
                 gc.GetWindow["pro"].update(gc.GetValues["slider"])
         """
 
-    # Little things
-    def GetFilePath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
-                    bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3):
-        return popup_get_file(default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
-                              button_color=buttonColor, background_color=bcolor)
+    # this is can change in the future
+    def GetFilePath(
+        self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        ):
 
-    def GetFileForSave(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
-                    bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3):
-        return popup_get_file(save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
-                              button_color=buttonColor, background_color=bcolor)
+        return popup_get_file(
+            default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
+            button_color=buttonColor, background_color=bcolor
+        )
 
-    def GetFolderPath(self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False,
-                    bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3):
+    def GetFileForSave(
+        self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        ):
+
+        return popup_get_file(
+            save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
+            button_color=buttonColor, background_color=bcolor
+        )
+
+    def GetFolderPath(
+        self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False,
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        ):
+
         return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title,
                               button_color=buttonColor, background_color=bcolor)
 
@@ -1047,7 +1080,7 @@ class GnuChanGUI:
         return pin(GObject, shrink=shrink)
 
     # with Property
-    def GPush(self, BColor):
+    def GPush(self, BColor="#240046"):
         return Push(background_color=BColor)
 
     def GHSep(self, Color):
@@ -1060,14 +1093,11 @@ class GnuChanGUI:
         pass
 
 
-
-
 # for canvas Object Transform and Scale
 class GVector2:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
-
 
 # this is not finish yet!
 class GCanvas:
@@ -1409,7 +1439,6 @@ class GCanvas:
         except Exception as ERR:
             print(ERR, " what cow say ERR...")
 
-
     # this is simple player control With Wall Collision
     def SimplePlayer2D(self, Event, Keyboard, Player, SolidObjectList):
         try:
@@ -1469,5 +1498,56 @@ class GCanvas:
                             Transform=self.DrawList[i]["transform"] )
         except Exception as ERR:
             print(ERR, "This is Error")
+
+
+# Popup Message Window
+class GMessage:
+    def __init__(self,
+                 WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20,
+                 WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
+                 WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False
+        ) -> None:
+
+        self.GC = GnuChanGUI(Title=WindowTitle, Size=WindowSize, resizable=WindowResizable, finalize=True)
+        Themecolors().GnuChanOS        # you can change theme color
+        self.CGC = GnuChanOSColor()
+
+        self.WindowTitle = WindowTitle
+        self.TextFont = f"{WindowTextFont}, {WindowTextFontSize}"
+        self.WindowTextBackgroundColor = WindowTBC
+        self.ButtonLayoutBackgroundColor = ButtonLBC
+
+        # main window layout you can use column and frame in here
+        self.button = [
+            [
+                self.GC.GPush(self.CGC.FColors11),
+                self.GC.GButton(Text = "Exit"),
+                self.GC.GPush(self.CGC.FColors11),
+            ]
+        ]
+
+        self.Layout = [
+            [self.GC.GMultiline(
+                InText=WindowText, TFont=self.TextFont, TPosition="center", 
+                xStretch=True, yStretch=True, BColor=self.WindowTextBackgroundColor, ReadOnly=True
+            )],
+            [self.GC.GColumn(winColumnLayout_List=self.button, BColor=self.ButtonLayoutBackgroundColor, xStretch=True)]
+        ]
+
+        self.GC.GWindow(SetMainWindowLayout_List=self.Layout, locationX=1024/2-300, locationY=768/2-150)
+        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+
+    def Update(self):
+        if self.GC.GetEvent == "exit":
+            self.GC.closeWindow = True
+
+    def BeforeExit(self):
+        print(f"{self.WindowTitle} is closed")
+
+
+
+
+
+
 
 

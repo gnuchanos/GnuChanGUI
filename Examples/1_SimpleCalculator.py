@@ -3,14 +3,16 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
 
+
+# Extra Lib
 from numpy import number
 
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleCalculator:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -21,7 +23,7 @@ class SimpleCalculator:
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            [self.GC.GText(SetText="Let's Start Math", SetValue="math", xStretch=True, TPosition="center", BColor=self.CGC.colors0)],
+            [self.GC.GText(SetText="Let's Start Math", SetValue="math", xStretch=True, TPosition="center", BColor=self.CGC.FColors0)],
             [self.gb(text="1"), self.gb(text="2"), self.gb(text="3"), self.gb(text="+")],
             [self.gb(text="4"), self.gb(text="5"), self.gb(text="6"), self.gb(text="-")],
             [self.gb(text="7"), self.gb(text="8"), self.gb(text="9"), self.gb(text="*")],
@@ -32,8 +34,7 @@ class SimpleCalculator:
                 self.GC.GButton(Text="CLEAR LOG", xStretch=True),
             ],
             [self.gb(text="=")],
-            [self.GC.GText(BColor=self.CGC.colors0, xStretch=True)],
-            [self.GC.GListBox(SetValue="output", xStretch=True, yStretch=True, LPosition="center", noScroolBar=True, BColor=self.C.purple8)]
+            [self.GC.GListBox(SetValue="output", xStretch=True, yStretch=True, LPosition="center", noScroolBar=True, BColor=self.CGC.SColors0)]
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
@@ -88,47 +89,49 @@ class SimpleCalculator:
                     self.Number1Typing = False
                     self.CurrentMathSymbol = self.GC.GetEvent
 
-        if self.GC.GetEvent == "=":
-            if not self.Number1Typing:
-                if self.CurrentMathSymbol == "+":
-                    self.MathEnd = float(self.Number0) + float(self.Number1)
-                    self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
-                    self.MathFinish = False
-                    
-                    self.MathList.append(self.MathEnd)
-                    self.GC.GetWindow["output"].update(self.MathList)
-                elif self.CurrentMathSymbol == "-":
-                    self.MathEnd = float(self.Number0) - float(self.Number1)
-                    self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
-                    self.MathFinish = False
+            if self.GC.GetEvent == "=":
+                if not self.Number1Typing:
+                    if self.CurrentMathSymbol == "+":
+                        self.MathEnd = float(self.Number0) + float(self.Number1)
+                        self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
+                        self.MathFinish = True
+                        
+                        self.MathList.append(self.MathEnd)
+                        self.GC.GetWindow["output"].update(self.MathList)
+                    elif self.CurrentMathSymbol == "-":
+                        self.MathEnd = float(self.Number0) - float(self.Number1)
+                        self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
+                        self.MathFinish = True
 
-                    self.MathList.append(self.MathEnd)
-                    self.GC.GetWindow["output"].update(self.MathList)
-                elif self.CurrentMathSymbol == "*":
-                    self.MathEnd = float(self.Number0) * float(self.Number1)
-                    self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
-                    self.MathFinish = False
+                        self.MathList.append(self.MathEnd)
+                        self.GC.GetWindow["output"].update(self.MathList)
+                    elif self.CurrentMathSymbol == "*":
+                        self.MathEnd = float(self.Number0) * float(self.Number1)
+                        self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
+                        self.MathFinish = True
 
-                    self.MathList.append(self.MathEnd)
-                    self.GC.GetWindow["output"].update(self.MathList)
-                elif self.CurrentMathSymbol == "/":
-                    self.MathEnd = float(self.Number0) / float(self.Number1)
-                    self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
-                    self.MathFinish = False
+                        self.MathList.append(self.MathEnd)
+                        self.GC.GetWindow["output"].update(self.MathList)
+                    elif self.CurrentMathSymbol == "/":
+                        self.MathEnd = float(self.Number0) / float(self.Number1)
+                        self.GC.GetWindow["math"].update(round(self.MathEnd, 5))
+                        self.MathFinish = True
 
-                    self.MathList.append(self.MathEnd)
-                    self.GC.GetWindow["output"].update(self.MathList)
+                        self.MathList.append(self.MathEnd)
+                        self.GC.GetWindow["output"].update(self.MathList)
 
         if self.GC.GetEvent == "GO":
             self.Number1Typing = True
             self.Number0 = str(self.MathEnd)
             self.Number1 = self.CurrentMathSymbol = ""
+            self.MathFinish = False
             self.GC.GetWindow["math"].update(self.Number0)
 
         elif self.GC.GetEvent == "CLEAN":
             self.Number1Typing = True
             self.Number0 = self.Number1 = self.CurrentMathSymbol = ""
             self.MathEnd = 0
+            self.MathFinish = False
             self.GC.GetWindow["math"].update("Let's Start Math")
         
         elif self.GC.GetEvent == "CLEAR LOG":

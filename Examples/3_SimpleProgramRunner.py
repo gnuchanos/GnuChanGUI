@@ -3,11 +3,16 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+
+
+# Extra Lib
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleProgramRunner:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -52,28 +57,29 @@ class SimpleProgramRunner:
 
         self.middleThings = [
             [ 
-                self.GC.GText(SetText="> ", BColor=GnuChanOSColor().colors0, EmptySpace=(0, 0)), 
-                self.GC.GInput(SetValue="input",  xStretch=True, BColor=GnuChanOSColor().colors0, EmptySpace=(0, 0)) 
+                self.GC.GText(SetText="> ", BColor=self.CGC.FColors0, EmptySpace=(0, 0)), 
+                self.GC.GInput(SetValue="input",  xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0)) 
             ],
-            [ self.GC.GHSep(Color=GnuChanOSColor().colors3) ],
-            [ self.GC.GListBox(SetValue="software", LFont="Sans, 14", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True) ],
-            [ self.GC.GHSep(Color=GnuChanOSColor().colors3) ],
+            [self.GC.GHSep(Color=self.CGC.FColors3)],
+            [self.GC.GListBox(SetValue="software", LFont="Sans, 14", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True)],
+            [self.GC.GHSep(Color=self.CGC.FColors3)],
             [
-                self.GC.GPush(GnuChanOSColor().colors1),
+                self.GC.GPush(self.CGC.BGColor),
                 self.GC.GButton(Text="Run Program", TFont="Sans, 20"),
-                self.GC.GPush(GnuChanOSColor().colors1),
+                self.GC.GPush(self.CGC.BGColor),
             ],
-            [ self.GC.GHSep(Color=GnuChanOSColor().colors3) ],
+            [self.GC.GHSep(Color=self.CGC.FColors3)],
         ]
 
         self.Layout = [ 
-            [ self.GC.GColumn(winColumnLayout_List=self.middleThings, xStretch=True, yStretch=True)],
-            [ self.GC.GText(SetText="The program calls Linux commands, but there is no error message. Please check the Python file for more information.", TFont="Sans, 13", xStretch=True) ]
+            [self.GC.GColumn(winColumnLayout_List=self.middleThings, xStretch=True, yStretch=True)],
+            [self.GC.GText(SetText="The program calls Linux commands, but there is no error message. Please check the Python file for more information.", TFont="Sans, 13", xStretch=True) ]
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         self.KYB = GKeyboard(window=self.GC)
         # Call Function Here
+        self.GC.GListBoxBorderSize(WindowValue="software", Border=0)
 
         self.SoftwareListActive = []
 

@@ -3,11 +3,15 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+
+# Extra Lib
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleTextEditor:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -27,83 +31,83 @@ class SimpleTextEditor:
 
         self.settingsWin = [
             [
-                self.GC.GText(SetText="Text Size: ", EmptySpace=(0, 0), BColor=GColors().purple7),
-                self.GC.GSlider(SetValue="fontSize", MaxRange=(5, 100), SDirection="h", xStretch=True, DefaultValue=12, BColor=GColors().purple6), 
+                self.GC.GText(SetText="Text Size: ", EmptySpace=(0, 0), BColor=self.C.purple7),
+                self.GC.GSlider(SetValue="fontSize", MaxRange=(5, 100), SDirection="h", xStretch=True, DefaultValue=12, BColor=self.C.purple6), 
             ],
             [
-                self.GC.GText(SetText="Text Color 'Enter Color name': ", BColor=GColors().purple7),
-                self.GC.GInput(SetValue="tcolor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
+                self.GC.GText(SetText="Text Color 'Enter Color name': ", BColor=self.C.purple7),
+                self.GC.GInput(SetValue="tcolor", xStretch=True, Size=(30, None), BColor=self.C.purple6),
             ],
             [
-                self.GC.GText(SetText="Background Color 'Enter Color name': ", BColor=GColors().purple7),
-                self.GC.GInput(SetValue="BColor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
+                self.GC.GText(SetText="Background Color 'Enter Color name': ", BColor=self.C.purple7),
+                self.GC.GInput(SetValue="BColor", xStretch=True, Size=(30, None), BColor=self.C.purple6),
             ],
             [ 
-                self.GC.GPush(GColors().purple7),
+                self.GC.GPush(self.C.purple7),
                 self.GC.GButton(Text="Save Settings"),
-                self.GC.GPush(GColors().purple7)
+                self.GC.GPush(self.C.purple7)
             ]
         ]
 
         self.settingsWin = [
             [
-                self.GC.GText(SetText="Text Size: ", EmptySpace=(0, 0), BColor=GColors().purple7),
-                self.GC.GSlider(SetValue="fontSize", MaxRange=(5, 100), SDirection="h", xStretch=True, DefaultValue=12, BColor=GColors().purple6), 
+                self.GC.GText(SetText="Text Size: ", EmptySpace=(0, 0), BColor=self.C.purple7),
+                self.GC.GSlider(SetValue="fontSize", MaxRange=(5, 100), SDirection="h", xStretch=True, DefaultValue=12, BColor=self.C.purple6), 
             ],
             [
-                self.GC.GText(SetText="Text Color 'Enter Color name': ", BColor=GColors().purple7),
-                self.GC.GInput(SetValue="tcolor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
+                self.GC.GText(SetText="Text Color 'Enter Color name': ", BColor=self.C.purple7),
+                self.GC.GInput(SetValue="tcolor", xStretch=True, Size=(30, None), BColor=self.C.purple6),
             ],
             [
-                self.GC.GText(SetText="Background Color 'Enter Color name': ", BColor=GColors().purple7),
-                self.GC.GInput(SetValue="BColor", xStretch=True, Size=(30, None), BColor=GColors().purple6),
+                self.GC.GText(SetText="Background Color 'Enter Color name': ", BColor=self.C.purple7),
+                self.GC.GInput(SetValue="BColor", xStretch=True, Size=(30, None), BColor=self.C.purple6),
             ],
             [ 
-                self.GC.GPush(GColors().purple7),
+                self.GC.GPush(self.C.purple7),
                 self.GC.GButton(Text="Save Settings"),
-                self.GC.GPush(GColors().purple7)
+                self.GC.GPush(self.C.purple7)
             ]
         ]
 
         self.win0 = [
                 [ self.GC.GMultiline(SetValue="text0", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8, Border=2) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text0_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win1 = [
                 [ self.GC.GMultiline(SetValue="text1", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8, Border=2) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text1_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win2 = [
                 [ self.GC.GMultiline(SetValue="text2", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text2_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win3 = [
                 [ self.GC.GMultiline(SetValue="text3", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text3_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win4 = [
                 [ self.GC.GMultiline(SetValue="text4", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text4_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win5 = [
                 [ self.GC.GMultiline(SetValue="text5", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text5_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win6 = [
                 [ self.GC.GMultiline(SetValue="text6", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=GColors().purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GC.GText(SetText="File Path Here", SetValue="text6_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
@@ -132,7 +136,7 @@ class SimpleTextEditor:
 
         for i in ("text0", "text1", "text2", "text3", "text4", "text5", "text6"):
             self.GC.GMultilineTabSpace(WindowValue=i, TFont=f"Sans, {str(self.TextFont)}")
-            self.GC.AddNewBorderWithColor(WindowValue=i, Color=GnuChanOSColor().colors2, BorderSize=5)
+            self.GC.AddNewBorderWithColor(WindowValue=i, Color=self.CGC.FColors5, BorderSize=5)
 
         # Call Function Here
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)

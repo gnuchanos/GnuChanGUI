@@ -1,0 +1,17 @@
+@import(gclib)
+
+Start {
+    var name: str = "kubilay";
+    var age: int = 31;
+    var numb: float = 31.0;
+    var live: bool  = False;
+
+    func print_name(name): void {
+        printThis(name);
+    }
+
+    func getName(name): str {
+        return name;
+    }
+}
+

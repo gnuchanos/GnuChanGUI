@@ -3,11 +3,17 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile, vlc
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+
+# Extra Lib
+import vlc
+
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleVideoPlayer:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -15,38 +21,37 @@ class SimpleVideoPlayer:
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
 
-
         self.vlc_instance = vlc.Instance()
         self.player = self.vlc_instance.media_player_new()
 
         self.vid = [
-            [self.GC.GCanvas(SetValue="canvas", xStretch=True, yStretch=True, Size=(750, None), BColor=GColors().purple7)],
-            [self.GC.GText(SetText="Open Video!", SetValue="video_name", xStretch=True, TPosition="center")],
+            [self.GC.GCanvas(SetValue="canvas", xStretch=True, yStretch=True, Size=(750, None), BColor=self.CGC.FColors1, EmptySpace=(0, 0))],
+            [self.GC.GText(SetText="Open Video!", SetValue="video_name", xStretch=True, TPosition="center", EmptySpace=(0, 0))],
         ]
 
         self.left = [
-            [self.GC.GListBox(SetValue="videos", LFont="Sans, 12", yStretch=True, xStretch=True, BColor=GColors().purple8, noScroolBar=True)],
-            [self.GC.GHSep(Color=GnuChanOSColor().colors3)],
+            [self.GC.GListBox(SetValue="videos", LFont="Sans, 12", yStretch=True, xStretch=True, BColor=self.CGC.FColors2, noScroolBar=True)],
+            [self.GC.GHSep(Color=self.CGC.FColors3)],
             [self.GC.GText(SetText="Volume Slider", xStretch=True, TPosition="center")],
-            [self.GC.GSlider(SetValue="volume", xStretch=True, MaxRange=(0, 100), DefaultValue=80, BColor=GColors().purple6, Size=(20, None))],
-            [self.GC.GHSep(Color=GnuChanOSColor().colors3)],
+            [self.GC.GSlider(SetValue="volume", xStretch=True, MaxRange=(0, 100), DefaultValue=80, BColor=self.CGC.FColors4, Size=(20, None))],
+            [self.GC.GHSep(Color=self.CGC.FColors3)],
         ]
 
 
         # main window layout you can use column and frame in here
         self.Layout = [
             [
-                self.GC.GPush(BColor=GnuChanOSColor().colors1),
+                self.GC.GPush(BColor=self.CGC.BGColor),
                 self.GC.GButton(Text="<"),
                 self.GC.GButton(Text="Open Video"),
                 self.GC.GButton(Text="Open Video Folder"),
                 self.GC.GButton(Text="Pause", SetValue="pPlay"),
                 self.GC.GButton(Text=">"),
-                self.GC.GPush(BColor=GnuChanOSColor().colors1),
+                self.GC.GPush(BColor=self.CGC.BGColor),
             ],
             [
-                self.GC.GColumn(winColumnLayout_List=self.vid,  xStretch=True, yStretch=True, BColor=GColors().purple8),
-                self.GC.GColumn(winColumnLayout_List=self.left, xStretch=True, yStretch=True, BColor=GColors().purple6, SetValue="filePath"),
+                self.GC.GColumn(winColumnLayout_List=self.vid,  xStretch=True, yStretch=True, BColor=self.CGC.FColors8),
+                self.GC.GColumn(winColumnLayout_List=self.left, xStretch=True, yStretch=True, BColor=self.CGC.FColors6, SetValue="filePath"),
             ],
         ]
 

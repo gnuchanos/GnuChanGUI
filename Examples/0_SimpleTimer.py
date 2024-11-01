@@ -3,10 +3,17 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+from GnuChanGUI import GTimer
+
+
+# Extra Lib
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleTimer:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title="Simple Timer!", Size=(700, 228), resizable=False, finalize=True)
@@ -19,7 +26,7 @@ class SimpleTimer:
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            [self.GC.GText(SetValue="timer", xStretch=True, BColor=self.CGC.colors0, TPosition="center", TFont="Sans, 60")],
+            [self.GC.GText(SetValue="timer", xStretch=True, BColor=self.CGC.SColors0, TPosition="center", TFont="Sans, 60")],
             [
                 self.GC.GButton(Text="Start Timer", SetValue="start", xStretch=True),
                 self.GC.GButton(Text="Stop Timer", SetValue="stop", xStretch=True),

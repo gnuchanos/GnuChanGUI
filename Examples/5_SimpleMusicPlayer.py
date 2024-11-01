@@ -3,12 +3,17 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from GnuChanGUI import *
-import cProfile
-from pygame import mixer
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+from GnuChanGUI import GMixer
+
+# Extra Lib
+
+
+
 #Thread(target=DownloadVideo, args=[]).start()
-
-
 class SimpleMusicPlayer:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
@@ -19,35 +24,34 @@ class SimpleMusicPlayer:
 
         self.Buttons = [
             [
-                self.GC.GPush(BColor=GnuChanOSColor().colors0),
+                self.GC.GPush(BColor=self.C.purple8),
                 self.GC.GButton(Text="Add Folder"),
                 self.GC.GButton(Text="<", SetValue="Previous Music"),
                 self.GC.GButton(Text="Play Music"),
                 self.GC.GButton(Text="Stop Music"),
                 self.GC.GButton(Text=">", SetValue="Next Music"),
-                self.GC.GPush(BColor=GnuChanOSColor().colors0)
+                self.GC.GPush(BColor=self.C.purple8)
             ],
         ]
-
 
         # main window layout you can use column and frame in here
         self.Layout = [
             [
-                self.GC.GText(SetText=f"{os.path.expanduser("~")}/", BColor=GColors().purple7, EmptySpace=(0, 0)), 
-                self.GC.GInput(SetValue="input", xStretch=True, BColor=GColors().purple7, EmptySpace=(0, 0))
+                self.GC.GText(SetText=f"{os.path.expanduser("~")}/", BColor=self.C.purple7, EmptySpace=(0, 0)), 
+                self.GC.GInput(SetValue="input", xStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0))
             ],
-            [   self.GC.GColumn(winColumnLayout_List=self.Buttons, xStretch=True, BColor=GColors().purple8)   ],
+            [self.GC.GColumn(winColumnLayout_List=self.Buttons, xStretch=True, BColor=self.C.purple8)],
             [ 
-                self.GC.GVSep(Color=GnuChanOSColor().colors3),
-                self.GC.GListBox(SetValue="mp3", Size=(75, None), LFont="Sans, 15", xStretch=True, yStretch=True, BColor=GnuChanOSColor().colors1, EmptySpace=(0, 0)),
-                self.GC.GVSep(Color=GnuChanOSColor().colors3),
+                self.GC.GVSep(Color=self.CGC.FColors3),
+                self.GC.GListBox(SetValue="mp3", Size=(75, None), LFont="Sans, 15", xStretch=True, yStretch=True, BColor=self.CGC.FColors1, EmptySpace=(0, 0)),
+                self.GC.GVSep(Color=self.CGC.FColors3),
             ],
             [ 
-                self.GC.GText(SetText="Music: ", BColor=GColors().purple7, EmptySpace=(0, 0)), 
-                self.GC.GText(SetValue="musicName", xStretch=True, BColor=GColors().purple7, EmptySpace=(0, 0)) 
+                self.GC.GText(SetText="Music: ", BColor=self.C.purple8, EmptySpace=(0, 0)), 
+                self.GC.GText(SetValue="musicName", TPosition="center",  BColor=self.C.purple8, xStretch=True, EmptySpace=(0, 0)) 
             ],
-            [   self.GC.GSlider(MaxRange=(0, 10), DefaultValue=5, SDirection="h", SetValue="slider", xStretch=True, BColor=GColors().purple8)   ]
-    ]
+            [self.GC.GSlider(MaxRange=(0, 10), DefaultValue=5, SDirection="h", SetValue="slider", xStretch=True, BColor=self.C.purple8)   ]
+        ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         self.KYB = GKeyboard(window=self.GC)
@@ -108,7 +112,7 @@ class SimpleMusicPlayer:
             self.volume = float(f"0.{self.volume_slider}")
         else:
             self.volume = 1
-        mixer.music.set_volume(self.volume)
+        self.musicPlay.music.set_volume(self.volume)
 
     def Update(self):
         #self.GC.GetEvent == "event" -> window event
