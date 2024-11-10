@@ -110,7 +110,7 @@ class SimpleProgramRunner:
             _commandInput = str(self.GC.GetValues["input"])
             if len(_commandInput) > 0:
                 Thread(target=self.RunThis, args=[_commandInput]).start()
-            self.GC.closeWindow = True
+                self.GC.closeWindow = True
 
         # Run Program In List
         elif self.GC.GetEvent == "Run Program":
