@@ -91,12 +91,12 @@ class SimpleWineManager:
         ]
 
         self.wine_debug = [
-            [self.GC.GLog(xStretch=True, yStretch=True, BColor=self.CGC.FColors0)]
+            [self.GC.GText(xStretch=True, yStretch=True, BColor=self.CGC.FColors0)]
         ]
 
         self.wine_triks = [
-            [self.GC.GMultiline(SetValue="output", TFont="Sans, 12", xStretch=True, yStretch=True, ReadOnly=True, BColor=self.CGC.FColors0)],
-            [self.GC.GInput(SetValue="input", TFont="Sans, 15", xStretch=True, BColor=self.C.purple8)],
+            [self.GC.GMultiline(SetValue="output", TFont="Sans, 12", xStretch=True, yStretch=True, ReadOnly=True, BColor=self.CGC.FColors0, EmptySpace=(0,0))],
+            [self.GC.GInput(SetValue="input", TFont="Sans, 15", xStretch=True, BColor=self.C.purple8, EmptySpace=(0,0))],
         ]
 
         # main window layout you can use column and frame in here

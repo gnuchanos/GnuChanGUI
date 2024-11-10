@@ -63,7 +63,7 @@ class SimpleMusicPlayer:
 
         self.dir = os.path.expanduser("~")
         self.path = ""
-        self.volume = 0.5
+        self.volume = 5
         self.volume_slider = 5
         self.fileList = []
         self.musicList = []
@@ -109,10 +109,11 @@ class SimpleMusicPlayer:
     def volume_func(self):
         self.volume_slider = int(self.GC.GetValues["slider"])
         if self.volume_slider != 10:
-            self.volume = float(f"0.{self.volume_slider}")
+            self.volume = float(self.volume_slider)
         else:
-            self.volume = 1
-        self.musicPlay.music.set_volume(self.volume)
+            self.volume = 10
+
+        self.musicPlay.VolumeChange_Gslider(self.volume)
 
     def Update(self):
         #self.GC.GetEvent == "event" -> window event
