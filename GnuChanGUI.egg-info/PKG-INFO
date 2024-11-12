@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: GnuChanGUI
+Version: 1.1.0
+Summary: 4.61.0.206 Unreleased version open source 
+Author: archkubi
+Author-email: gnuchanos@email.com
+License-File: LICENSE
+Requires-Dist: pygame
+Requires-Dist: Pillow
+Requires-Dist: shapely
+Requires-Dist: pydub

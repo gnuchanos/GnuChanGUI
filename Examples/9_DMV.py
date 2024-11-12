@@ -118,10 +118,12 @@ class SimpleVideoAndMusicDownload:
     def DownloadVideo(self, Download: str):
         os.system(Download)
         os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
+        self.GC.GetWindow["vlink_video"].update("")
 
     def DownloadMusic(self, Download: str):
         os.system(Download)
         os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
+        self.GC.GetWindow["music_pathStr"].update("")
 
     def Update(self):
         # Download Video
@@ -152,7 +154,8 @@ class SimpleVideoAndMusicDownload:
                     for i in _list:
                         if str(i).endswith(".mp4"):
                             _videoList.append(i)
-                            self.GC.GetWindow["out_video"].update(_videoList)
+                _videoList.sort()
+                self.GC.GetWindow["out_video"].update(_videoList)
 
         elif self.GC.GetEvent == "Download_Video":
             try:
@@ -206,7 +209,7 @@ class SimpleVideoAndMusicDownload:
                 Thread(target=self.DownloadMusic, args=[_DownloadNow]).start()
                 os.popen("notify-send -t 7000 -u low \"Music Download Starting..! Maybe Check Terminal\"")
                 print(_DownloadNow)
-                self.GC.GetWindow["vlink_music"].update("")
+
         
         elif self.GC.GetEvent == "rmusic":
             if len(self.Path) > 0:
@@ -216,6 +219,7 @@ class SimpleVideoAndMusicDownload:
                     for i in _list:
                         if str(i).endswith(".mp3"):
                             _musicList.append(i)
+                    _musicList.sort()
                     self.GC.GetWindow["out_music"].update(_musicList)
 
     def BeforeExit(self):
