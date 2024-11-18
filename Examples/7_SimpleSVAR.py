@@ -38,7 +38,7 @@ class SimpleRecordAndLivestream:
         self.StartRS = False
         self.DesktopID = "VGA1 "
         self.MonutorID = "$(pactl get-default-sink).monitor "
-        self.MicrophoneName = "alsa_input.usb-Generic_USB2.0_PC_CAMERA_20100331010203-02.mono-fallback"
+        self.MicrophoneName = "default_input (Default input)"
 
         self.GSR          = "gpu-screen-recorder "
         self.Codecs       = "-k h264 -ac aac -c flv "
@@ -348,6 +348,7 @@ class SimpleRecordAndLivestream:
                     _DesktopID = f"-w {self.GC.GetValues["mID"]}"
                     _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {self.StreamKey}"
                     Thread(target=self.StartLiveStream, args=[_FullCommand]).start()
+                    print(_FullCommand)
 
 
                     time.sleep(1)                  

@@ -195,7 +195,6 @@ class SimpleWineManager:
                 print(ERR)
 
         elif self.GC.GetEvent == "Run .EXE":
-            _primusrun = ""
             try:
                 _SelectPath = str(self.GC.GetValues["gamelist_run"]).strip("[]'")
                 if len(_SelectPath) > 0:
@@ -208,7 +207,7 @@ class SimpleWineManager:
                         time.sleep(1)
 
                         self.PrimusrunTrue = self.GC.GetValues["_primusrun"]
-                        print(self.PrimusrunTrue)
+                        print(self.PrimusrunTrue, "<----")
                         if self.PrimusrunTrue:
                             self.RunThis = f"WINEPREFIX=\"{_SelectPath.replace(' ', '\\ ')}\" {self.BumbleeTech} {self.Mangohud} {self.GameMode} wine {_GameName}"
                         else:
@@ -217,7 +216,7 @@ class SimpleWineManager:
 
                         Thread(target=self.RunEXE, args=[self.RunThis]).start()
             except Exception as ERR:
-                print(ERR)
+                print(ERR, "it's error")
 
         elif self.GC.GetEvent == "Update Prefix":
             try:

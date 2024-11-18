@@ -12,6 +12,7 @@ setup(
         "Pillow",
         "shapely",
         "pydub",
+        "PyGObject"
     ],
 
 )
