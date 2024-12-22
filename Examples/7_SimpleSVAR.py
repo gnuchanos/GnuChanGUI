@@ -16,6 +16,7 @@ from datetime import datetime
 
 
 
+#gpu-screen-recorder -w DVI-D-0 -k h264 -ac aac -c flv -a "default_input|$(pactl get-default-sink).monitor" -f 30 -q medium -ab 256 -o /home/archkubi/Videos/test-2024-12-22_9-15-38.mkv
 
 
 
@@ -36,9 +37,9 @@ class SimpleRecordAndLivestream:
         self.StreamKey = ""
         self.VideoPath = self.VideoName = ""
         self.StartRS = False
-        self.DesktopID = "VGA1 "
-        self.MonutorID = "$(pactl get-default-sink).monitor "
-        self.MicrophoneName = "default_input (Default input)"
+        self.DesktopID = "DVI-D-0 "
+        self.MonutorID = "$(pactl get-default-sink).monitor\""
+        self.MicrophoneName = "\"default_input|"
 
         self.GSR          = "gpu-screen-recorder "
         self.Codecs       = "-k h264 -ac aac -c flv "
@@ -100,10 +101,6 @@ class SimpleRecordAndLivestream:
             [   
                 self.GC.GText(SetText=" Monutor ID 'xrandr here': ", TFont=self.GC.font, BColor=self.CGC.FColors0),
                 self.GC.GInput(SetValue="mID", xStretch=True, Size=(20, None), TFont=self.GC.font, BColor=self.C.purple6)
-            ],
-            [
-                self.GC.GText(SetText=" Micraphone Device ID: ", TFont="Sans, 15", BColor=self.CGC.FColors0), 
-                self.GC.GInput(SetValue="mic", xStretch=True, Size=(20, None), TFont="Sans, 15", BColor=self.C.purple6),
             ],
         ]
 
@@ -203,7 +200,6 @@ class SimpleRecordAndLivestream:
 
         # update window element
         self.GC.GetWindow["rtmp"].update("rtmp://a.rtmp.youtube.com/live2")
-        self.GC.GetWindow["mic"].update(self.MicrophoneName)
         self.GC.GetWindow["mID"].update(self.DesktopID)
 
         # Call Function Here
@@ -298,11 +294,13 @@ class SimpleRecordAndLivestream:
                         _now = datetime.now()
                         _Time = f"{_now.year}-{_now.month}-{_now.day}_{_now.hour}-{_now.minute}-{_now.second}"
                         _VideoPath = f"-o {self.VideoPath}/{str(self.VideoName).replace(" ", "\\ ")}-{_Time}.mkv"
-                        _deskMic = f"-a {self.MicrophoneName}\\|{self.MonutorID} "
+                        _deskMic = f"-a {self.MicrophoneName}{self.MonutorID} "
                         _DesktopID = f"-w {self.GC.GetValues["mID"]}"
                         _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
                         Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
-                        
+                        print(_FullCommand)                        
+
+
                         # Video Name Update In Window
                         time.sleep(1) # time sleep for wait if video path exit refresh video list
                         self.IsProgramRunning = IsProgramRunning("gpu-screen-recorder")
@@ -344,7 +342,7 @@ class SimpleRecordAndLivestream:
         elif self.GC.GetEvent == "Start Live Stream":
             if not self.StartRecordORStream:
                 if len(self.Rtmp) > 0 and len(self.Key) > 0:
-                    _deskMic = f"-a {self.MicrophoneName}\\|{self.MonutorID} "
+                    _deskMic = f"-a {self.MicrophoneName}{self.MonutorID} "
                     _DesktopID = f"-w {self.GC.GetValues["mID"]}"
                     _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {self.StreamKey}"
                     Thread(target=self.StartLiveStream, args=[_FullCommand]).start()

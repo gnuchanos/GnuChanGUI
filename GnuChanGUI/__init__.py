@@ -3,7 +3,6 @@ from .gcLibrary import __version__
 
 from PIL import Image, ImageTk
 from shapely.geometry import box
-from pydub import AudioSegment
 import os, random, math
 from threading import Thread
 

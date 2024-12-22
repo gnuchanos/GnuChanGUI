@@ -11,8 +11,7 @@ setup(
         "pygame",
         "Pillow",
         "shapely",
-        "pydub",
-        "PyGObject"
+        "PyGObject",
     ],
 
 )
