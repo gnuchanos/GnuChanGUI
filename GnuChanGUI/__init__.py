@@ -46,6 +46,7 @@ class GTimer:
         self.GetWindow = GetWindow
         self.SetValue  = SetValue
         self.Hour = self.Minute = self.Second = 0
+        self.clearNow = False
 
     def GetSecondCount(self):
         if not self.StartNow:
@@ -64,10 +65,12 @@ class GTimer:
             self.Hour = int(self.Second // 3600)
 
             self.GetWindow[self.SetValue].update(f"{self.Hour}:{self.Minute}:{int(self.Second) % 60}")
-        else:
+
+        if self.clearNow:
             self.Second = self.Minute = self.Hour = 0
             self.StartNow = False
             self.GetWindow[self.SetValue].update(f"{0}:{0}:{0}")
+            self.clearNow = False
 
     @property
     def Start(self):
@@ -98,35 +101,6 @@ class GMixer:
             channel.play(pygame.mixer.Sound(SoundPath))
             channel.set_volume(self.Volume)
             _play = True
-
-    def PlaySound_MultiChannelLoop(self,  SoundPath="", Loop=True, ChannelID=0, AutoPlayList=False):
-        try:
-            pygame.mixer.init()
-            pygame.mixer.set_num_channels(self.MaxChannelLimit)
-
-            if not self.GiveLength:
-                if str(SoundPath.strip(" ")).endswith(".wav") or str(SoundPath.strip(" ")).endswith(".wp3"):
-                    audio = AudioSegment.from_file(SoundPath)
-                    self.SoundLength = len(audio) / 1000.0
-                    self.SoundLength_Backup = self.SoundLength
-                    self.GiveLength = True
-
-            if self.SoundLength > 0:
-                if not self.PlayAgain:
-                    if not AutoPlayList:
-                        if Loop:
-                            channel = pygame.mixer.Channel(ChannelID)
-                            channel.play(pygame.mixer.Sound(SoundPath))
-                            channel.set_volume(self.Volume)
-                    else:
-                        pass
-                    self.PlayAgain = True
-                self.SoundLength -= 1 * 0.1
-            else:
-                self.SoundLength = self.SoundLength_Backup
-                self.PlayAgain = False
-        except Exception as ERR:
-            print(ERR, "Play Sound ERR")
 
     def StopSound(self):
         pygame.mixer.music.stop()
@@ -551,6 +525,9 @@ class Themecolors:
         theme(themeName)
 
 
+
+
+
 # i hope this become better one day
 class GnuChanGUI:
     def __init__(self, Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True) -> None:
@@ -580,14 +557,14 @@ class GnuChanGUI:
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
     # Create Window
-    def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, locationX = 0, locationY = 0, KeepOnTop = True, Borderless = False):
+    def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, locationX = 1920/2, locationY = 1080/2, KeepOnTop = True, Borderless = False):
         if SetMainWindowLayout_List != None:
             self.layout = SetMainWindowLayout_List
             # if main Window is None self.layout can warning user and self.layout is ready warning layout
         self.GetWindow = Window(
             self.title, 
             layout=self.layout, size=self.size, keep_on_top=KeepOnTop, resizable=self.resizable,
-            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX, locationY),
+            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX-self.size[0]/2, locationY-self.size[0]/2),
             no_titlebar=Borderless
         )
         self.GetWindow.finalize()
@@ -1106,411 +1083,6 @@ class GnuChanGUI:
         pass
 
 
-# for canvas Object Transform and Scale
-class GVector2:
-    def __init__(self, x=0, y=0):
-        self.x = x
-        self.y = y
-
-# this is not finish yet!
-class GCanvas:
-    def __init__(self, Window, CanvasValue) -> None:
-        self.GWindow = Window
-        self.Canvas = self.GWindow[CanvasValue].Widget # widget
-        self.CanvasID = self.Canvas.winfo_id()         # widget ID
-        self.DrawList = {}
-
-        self.Scene_LOGO = 0
-        self.Scene_MENU = 1
-        self.Scene_GAMEPLAY = 2
-        self.Scene_End = 3
-
-        self.MousePosition = GVector2(0, 0)
-
-        self.Transform = "transform"
-        self.Scale = "scale"
-        self.Color = "fcolor"
-        self.BorderColor = "ocolor"
-        self.Radius = "radius"
-        self.Active = "active"
-        self.Thickness = 'b'
-        self.RecordX = 0
-        self.RecordY = 0
-        self.Hit0 = False
-        self.Hit1 = False
-        self.speed = 75
-        self.stop = False
-
-    # Clear Man or 23123123123 Gender
-    def ClearCanvas(self):
-        try:
-            self.Canvas.delete('all')
-        except Exception as ERR:
-            print(ERR, " Clear Canvas")
-
-    # Get Variable
-    def OpenImage(self, ImagePath, Scale):
-        try:
-            image = Image.open(ImagePath)
-            resized_image = image.resize(size=(Scale.x, Scale.y))
-            return ImageTk.PhotoImage(resized_image)
-        except Exception as ERR:
-            print(ERR, "OpenImage Function ERR")
-
-    # Canvas Size
-    def GetCanvasScale_X(self):
-        try:
-            return self.Canvas.winfo_width()
-        except Exception as ERR:
-            print(ERR, " Get Canvas Scale X")
-
-    def GetCanvasScale_Y(self):
-        try:
-            return self.Canvas.winfo_height()
-        except Exception as ERR:
-            print(ERR, " Get Canvas Scale Y")
-
-    # get Mouse Position using Motion
-    def ReadMousePosition(self):
-        try:
-            self.Canvas.bind('<Motion>', self.GetMousePosition)
-        except Exception as ERR:
-            print(ERR, " Read Mouse Position")
-
-    def GetMousePosition(self, event):
-        try:
-            self.MousePosition = GVector2( event.x, event.y )
-            return self.MousePosition
-        except Exception as ERR:
-            print(ERR, " Get Mouse Position")
-
-    # Add add object in render pipline  # object name is index Number --------------------------------------------------------------------------------------------------------------------------
-    def AddCircleObject(self, ObjectName, Transform, Radius, OutLineColor, FillColor, Active=True):
-        try:
-            self.DrawList[ObjectName] = {
-                "type"      : 'c',
-                'transform' : Transform,
-                'radius'    : Radius,
-                "ocolor"    : OutLineColor,
-                "fcolor"    : FillColor,
-                "active"    : Active   }
-            return ObjectName
-        except Exception as ERR:
-            print(ERR, "Add Circle Object Function ERR")
-
-    # need update
-    def AddRectangleObject(self, ObjectName, Transform, Scale, OutLineColor, FillColor, Active=True):
-        try:
-            self.DrawList[ObjectName] = {
-                "type"      : 'r',
-                'transform' : Transform,
-                'scale' : Scale,
-                "ocolor" : OutLineColor,
-                "fcolor" : FillColor,
-                "active" : Active   }
-            return ObjectName
-        except Exception as ERR:
-            print(ERR, "Add Circle Object Function ERR")
-
-    def AddLineObject(self, ObjectName, Transform, Scale, FillColor, Thickness, Active=True):
-        try:
-            self.DrawList[ObjectName] = {
-                "type"      : 'l',
-                "transform" : Transform,
-                "scale" : Scale,
-                "fcolor" : FillColor,
-                'b'  : Thickness,
-                "active" : Active   }
-            return ObjectName
-        except Exception as ERR:
-            print(ERR, "Add Circle Object Function ERR")
-
-    def AddTextObject(self, ObjectName, Transform, Text, Color, Font, Scale, Active=True):
-        try:
-            self.DrawList[ObjectName] = {
-                "type"      : 't',
-                'transform'     : Transform,
-                "text"          : Text,
-                "color"         : Color,
-                "font"          : Font,
-                "scale"         : Scale,
-                "active"        : Active    }
-            return ObjectName
-        except Exception as ERR:
-            print(ERR, "Add Circle Object Function ERR")
-
-    def AddImageObject(self, ObjectName, Transform, Image, Active=True, Scale=GVector2(20, 20)):
-        try:
-            self.DrawList[ObjectName] = {
-                "type"      : 'i',
-                "transform" : Transform,
-                "Image"     : Image,
-                "scale"     : Scale,
-                "active"    : Active    }
-            return ObjectName
-        except Exception as ERR:
-            print(ERR, "Add Circle Object Function ERR")
-    # need update
-
-    # get object Things
-    def GetObjectPosition(self, Object, xOrY='x'):
-        try:
-            _Return = GVector2(self.DrawList[Object][self.Transform].x, self.DrawList[Object][self.Transform].y)
-            if xOrY == 'x':
-                return _Return.x
-            elif xOrY == 'y':
-                return _Return.y
-        except Exception as ERR:
-            print(ERR, " Get Object Position X")
-
-    def GetObjectScale(self, Object=0, xOrY='x'):
-        try:
-            if xOrY == 'x':
-                return self.DrawList[Object][self.Scale].x
-            elif xOrY == 'y':
-                return self.DrawList[Object][self.Scale].y
-        except Exception as ERR:
-            print(ERR, " Get object Scale X")
-
-    def GetObjectScale_noXY(self, Object):
-        try:
-            returnValue = self.DrawList[Object][self.Scale]
-            return returnValue
-        except Exception as ERR:
-            print(ERR, " Get Object Scale Y")
-
-    def GetObjectRadius(self, Object):
-        try:
-            returnValue = self.DrawList[Object][self.Radius]
-            return returnValue
-        except Exception as ERR:
-            print(ERR, " Get Object Scale Y")
-
-    def GetObjectThickness(self, Object):
-        try:
-            returnValue = self.DrawList[Object][self.Thickness]
-            return returnValue.y
-        except Exception as ERR:
-            print(ERR, " Get Object Thickness ERR")
-
-    def GetObjectVisible(self, Object):
-        try:
-            return self.DrawList[Object][self.Active]
-        except Exception as ERR:
-            print(ERR, " Get Object Visible")
-
-    # move object realtime this is not teleport like thing
-    def MoveObject(self, Object=0, Speed=50, WhichDirection="left", XorY='x'):
-        if str(XorY.startswith('x')).lower():
-            try:
-                if str(WhichDirection).startswith("l"):
-                    self.DrawList[Object][self.Transform].x -= Speed * 0.1
-                elif str(WhichDirection).startswith("r"):
-                    self.DrawList[Object][self.Transform].x += Speed * 0.1
-            except Exception as ERR:
-                print(ERR, "Move Circle X withUpdate Function ERR")
-        if str(XorY.startswith('y')).lower():
-            try:
-                if str(WhichDirection).startswith("u"):
-                    self.DrawList[Object][self.Transform].y -= Speed * 0.1
-                elif str(WhichDirection).startswith("d"):
-                    self.DrawList[Object][self.Transform].y += Speed * 0.1
-            except Exception as ERR:
-                print(ERR, "Move Circle Y withUpdate Function ERR")
-
-    # this is works like teleport
-    def TeleportObject(self, Object, XorY, Position):
-        try:
-            if str(XorY).startswith('x'):
-                self.DrawList[Object][self.Transform].x = Position
-            elif str(XorY).startswith('y'):
-                self.DrawList[Object][self.Transform].y = Position
-        except Exception as ERR:
-            print(ERR, "Change Object Transform Function ERR")
-
-    def ChangeObjectColor(self, Object=None, Color=None, BorderColor=None):
-        try:
-            if Color != None:
-                self.DrawList[Object][self.Color] = Color
-            if BorderColor != None:
-                self.DrawList[Object][self.BorderColor] = BorderColor
-        except Exception as ERR:
-            print(ERR, " Change Object Color ERR")
-
-    def ChangeObjectVisible(self, Object, Visible):
-        try:
-            if Visible:
-                self.DrawList[Object]["active"] = True
-            else:
-                self.DrawList[Object]["active"] = False
-        except Exception as ERR:
-            print(ERR, " Change Object Visible ERR")
-
-    # Render Object
-    def RenderCircle(self, Transform=GVector2(0, 0), Radius=20, OutLineColor="red", FillColor="blue"):
-        try:
-            self.Canvas.create_oval(Transform.x-Radius, Transform.y-Radius, Transform.x+Radius, Transform.y+Radius, outline=OutLineColor, fill=FillColor)
-        except Exception as ERR:
-            print(ERR, " Render Circle ERR for ")
-
-    def RenderRectangle(self, Transform=GVector2(0, 0), Scale=GVector2(20, 30), OutLineColor="red", FillColor="blue"):
-        try:
-            self.Canvas.create_rectangle(Transform.x, Transform.y, Transform.x+Scale.x, Transform.y+Scale.y, outline=OutLineColor, fill=FillColor)
-        except Exception as ERR:
-            print(ERR, " Render Rectangle ERR for ")
-
-    # StartX, StartY, EndX, EndY
-    def RenderLine(self, Transform, Scale, Color='black', width=1):
-        try:
-            self.Canvas.create_line(Transform.x, Transform.y, Transform.x+Scale, Transform.y, fill=Color, width=width)
-        except Exception as ERR:
-            print(ERR, " Render Line ERR for ")
-
-    def RenderText(self, Transform=GVector2(0, 0), Text="Default text", Color="red", Font="Sans", Size=12):
-        try:
-            self.Canvas.create_text(Transform.x, Transform.y, text=Text, fill=Color, font=(Font, Size))
-        except Exception as ERR:
-            print(ERR, " Render Text ERR for ")
-
-    # only use this with OpenImage() 
-    def RenderImage(self, Transform, Image):
-        try:
-            self.Canvas.create_image(Transform.x, Transform.y, anchor='nw', image=Image)
-        except Exception as ERR:
-            print(ERR, " Render Image")
-
-    # Thi is all Circle Colllions
-    def CheckMouseInCircle(self, mouse_x, mouse_y, circle_x, circle_y, radius):
-        try:
-            # Fare pozisyonunun daire içinde olup olmadığını kontrol et
-            distance = math.sqrt((mouse_x - circle_x) ** 2 + (mouse_y - circle_y) ** 2)
-            is_inside = distance <= radius
-            if is_inside: return True
-            else: return False
-        except Exception as ERR:
-            print(ERR, " Check Mouse In Circle")
-
-    def GetCircleCollision(self, Object0, Object1, radius):
-        try:
-            dx = Object0.x  - Object1.x
-            dy = Object0.y  - Object1.y
-            distance = math.sqrt(dx * dx + dy * dy)
-            return distance < radius + radius
-        except Exception as ERR:
-            print(ERR, " get circle collision")
-
-    # This is all Rectangle Collisions
-    def CheckMouseInRectangle(self, mouse_x, mouse_y, rect_x, rect_y, rect_width, rect_height):
-        try:
-            return rect_x <= mouse_x <= (rect_x + rect_width) and rect_y <= mouse_y <= (rect_y + rect_height)
-        except Exception as ERR:
-            print(ERR, " Check Mouse In Rectangle")
-
-    def SingleObject_RectangleCollisionCheck(self, Player=0, SingleObject=0, IfHit=""):
-        try:
-            pTransform = GVector2( self.GetObjectPosition(Object=Player, xOrY='x'), self.GetObjectPosition(Object=Player, xOrY='y') )
-            pScale = GVector2( self.GetObjectScale(Object=Player, xOrY='x'), self.GetObjectScale(Object=Player, xOrY='y') )
-            if self.DrawList[SingleObject]["active"]:
-                SolidTransform = self.DrawList[SingleObject][self.Transform]
-                SolidScale = self.DrawList[SingleObject][self.Scale]
-                player_box = box(pTransform.x, pTransform.y, pTransform.x + pScale.y, pTransform.y + pScale.y)
-                hit_box = box(SolidTransform.x, SolidTransform.y, SolidTransform.x + SolidScale.x, SolidTransform.y + SolidScale.y)
-                if player_box.intersects(hit_box):
-                    if IfHit != "":
-                        IfHit()
-                    return True
-                else:
-                    return False
-        except Exception as ERR:
-            print(ERR, " Simple object rectangle collision check ERR")
-
-    def MultiObjectCollision(self, Player, ObjectList, DebugMode, IfHitTrue):
-        try:
-            for i in ObjectList:
-                self.Hit0 = self.SingleObject_RectangleCollisionCheck(Player=Player, SingleObject=i, DebugMode=DebugMode, IfHit=IfHitTrue)
-        except Exception as ERR:
-            print(ERR, "Multi Object Collision ERR...")
-
-    def Mooo(self, Player=0, SolidObjectList=[]):
-        try:
-            pTransform = GVector2( self.GetObjectPosition(Object=Player, xOrY='x'), self.GetObjectPosition(Object=Player, xOrY='y') )
-            pScale = GVector2( self.GetObjectScale(Object=Player, xOrY='x'), self.GetObjectScale(Object=Player, xOrY='y') )
-            for i in SolidObjectList:
-                if self.DrawList[i]["active"]:
-                    SolidTransform = self.DrawList[i][self.Transform]
-
-                    SolidScale = self.DrawList[i][self.Scale]
-                    player_box = box(pTransform.x, pTransform.y, pTransform.x + pScale.y, pTransform.y + pScale.y)
-                    hit_box = box(SolidTransform.x, SolidTransform.y, SolidTransform.x + SolidScale.x, SolidTransform.y + SolidScale.y)
-
-                    if player_box.intersects(hit_box):
-                        self.Hit = True
-                        break
-                    else: 
-                        self.Hit = False
-            return self.Hit
-        except Exception as ERR:
-            print(ERR, " what cow say ERR...")
-
-    # this is simple player control With Wall Collision
-    def SimplePlayer2D(self, Event, Keyboard, Player, SolidObjectList):
-        try:
-            if not self.stop:
-                if Event == Keyboard.w:
-                    self.MoveObject(Object=Player, WhichDirection="up", XorY='y', Speed=self.speed)
-                elif Event == Keyboard.s:
-                    self.MoveObject(Object=Player, WhichDirection="down", XorY='y', Speed=self.speed)
-                if Event == Keyboard.a:
-                    self.MoveObject(Object=Player, WhichDirection="left", XorY='x', Speed=self.speed)
-                elif Event == Keyboard.d:
-                    self.MoveObject(Object=Player, WhichDirection="right", XorY='x', Speed=self.speed)
-            self.Hit1 = self.Mooo(Player=Player, SolidObjectList=SolidObjectList)
-            if self.Hit1:
-                self.TeleportObject(Object=Player, Position=self.RecordX, XorY='x')
-                self.TeleportObject(Object=Player, Position=self.RecordY, XorY='y')
-            else:
-                self.RecordX = self.GetObjectPosition(Object=Player, xOrY='x')
-                self.RecordY = self.GetObjectPosition(Object=Player, xOrY='y')
-        except Exception as ERR:
-            print(ERR, "2D Player Move ERR...")
-
-    # this is simple way render pipline
-    def Draw(self):
-        try:
-            self.ClearCanvas()
-            for i in self.DrawList:
-                if self.DrawList[i][self.Active]:
-                    if self.DrawList[i]["type"] == 'c':
-                        self.RenderCircle(
-                            Transform=self.DrawList[i]["transform"],
-                            Radius=self.DrawList[i]["radius"],
-                            FillColor=self.DrawList[i]["fcolor"],
-                            OutLineColor=self.DrawList[i]["ocolor"] )
-                    if self.DrawList[i]["type"] == 'r':
-                        self.RenderRectangle(
-                            Transform=self.DrawList[i]["transform"],
-                            Scale=self.DrawList[i]["scale"],
-                            FillColor=self.DrawList[i]["fcolor"],
-                            OutLineColor=self.DrawList[i]["ocolor"] )
-                    if self.DrawList[i]["type"] == 'l':
-                        self.RenderLine(
-                            Transform=self.DrawList[i]["transform"],
-                            Scale=self.DrawList[i]["scale"],
-                            Color=self.DrawList[i]["fcolor"],
-                            width=self.DrawList[i]["b"] )
-                    if self.DrawList[i]["type"] == 't':
-                        self.RenderText(
-                            Text=self.DrawList[i]["text"],
-                            Transform=self.DrawList[i]["transform"],
-                            Font=self.DrawList[i]["font"],
-                            Size=self.DrawList[i]["scale"],
-                            Color=self.DrawList[i]["color"] )
-                    if self.DrawList[i]["type"] == 'i':
-                        self.RenderImage(
-                            Image=self.DrawList[i]["Image"],
-                            Transform=self.DrawList[i]["transform"] )
-        except Exception as ERR:
-            print(ERR, "This is Error")
 
 
 # Popup Message Window

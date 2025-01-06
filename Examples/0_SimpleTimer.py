@@ -29,7 +29,6 @@ class SimpleTimer:
             [self.GC.GText(SetValue="timer", xStretch=True, BColor=self.CGC.SColors0, TPosition="center", TFont="Sans, 60")],
             [
                 self.GC.GButton(Text="Start Timer", SetValue="start", xStretch=True),
-                self.GC.GButton(Text="Stop Timer", SetValue="stop", xStretch=True),
                 self.GC.GButton(Text="Clear Timer", SetValue="clear", xStretch=True),
             ],
             [self.GC.GText(SetText="This Is Simple Timer Example", xStretch=True, yStretch=True, TPosition="center")]
@@ -39,7 +38,7 @@ class SimpleTimer:
         self.KYB = GKeyboard(window=self.GC)
         # Call Function Here
         self.StartTimer = GTimer(GetWindow=self.GC.GetWindow, SetValue="timer")
-        self.IsClear = False
+
 
         # Call Function Here
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
@@ -50,11 +49,10 @@ class SimpleTimer:
         
         if self.GC.GetEvent == "start":
             self.StartTimer.RecordUpdateTRUE = True
-            self.IsClear = False
-        elif self.GC.GetEvent == "stop":
+
+        elif self.GC.GetEvent == "clear":
+            self.StartTimer.clearNow = True
             self.StartTimer.RecordUpdateTRUE = False
-        elif self.GC.GetValues == "clear":
-            self.IsClear = True
 
         self.StartTimer.Start
 

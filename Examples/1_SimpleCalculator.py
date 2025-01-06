@@ -4,7 +4,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 # Don't do like this from lib import * for gnchangui
-from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanGUI
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 from GnuChanGUI import GKeyboard
 
@@ -15,7 +15,7 @@ from numpy import number
 #Thread(target=DownloadVideo, args=[]).start()
 class SimpleCalculator:
     def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
+        self.GC = GnuChanGUI(Title=" UwU ", Size=(500, 655), resizable=False, finalize=True)
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors

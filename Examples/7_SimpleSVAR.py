@@ -7,9 +7,6 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 from GnuChanGUI import GnuChanGUI, os, Thread, time
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 from GnuChanGUI import GKeyboard
-from GnuChanGUI import GTimer
-from GnuChanGUI import GMessage
-from GnuChanGUI import IsProgramRunning
 
 # Extra Lib
 from datetime import datetime
@@ -53,70 +50,69 @@ class SimpleRecordAndLivestream:
 
         self.QualitySettings = [
             [
-                self.GC.GPush(BColor=self.CGC.FColors0),
-                self.GC.GRadio(SetValue="14",  groupID="fps", RText="14-FPS",  BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="24",  groupID="fps", RText="24-FPS",  BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="30",  groupID="fps", RText="30-FPS",  BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="60",  groupID="fps", RText="60-FPS",  BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="120", groupID="fps", RText="120-FPS", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GPush(BColor=self.CGC.FColors0),
+                self.GC.GPush(BColor=self.CGC.FColors2),
+                self.GC.GRadio(SetValue="14",  groupID="fps", RText="14-FPS",  BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="24",  groupID="fps", RText="24-FPS",  BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="30",  groupID="fps", RText="30-FPS",  BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="60",  groupID="fps", RText="60-FPS",  BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="120", groupID="fps", RText="120-FPS", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GPush(BColor=self.CGC.FColors2),
             ],
             [
-                self.GC.GText(SetText="Video FPS: ", BColor=self.C.purple7),
+                self.GC.GText(SetText="Video FPS: ", BColor=self.CGC.FColors2),
                 self.GC.GText(SetText=self.Fps, SetValue="fps_log", xStretch=True, TPosition="center", BColor=self.C.purple6)
             ]
         ]
 
         self.SoundQualitySettings = [
             [
-                self.GC.GPush(BColor=self.CGC.FColors0),
-                self.GC.GRadio(SetValue="128", groupID="Kbps", RText="128 Kbps", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="192", groupID="Kbps", RText="192 Kbps", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="256", groupID="Kbps", RText="256 Kbps", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="320", groupID="Kbps", RText="320 Kbps", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GPush(BColor=self.CGC.FColors0),
+                self.GC.GPush(BColor=self.CGC.FColors2),
+                self.GC.GRadio(SetValue="128", groupID="Kbps", RText="128 Kbps", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="192", groupID="Kbps", RText="192 Kbps", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="256", groupID="Kbps", RText="256 Kbps", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="320", groupID="Kbps", RText="320 Kbps", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GPush(BColor=self.CGC.FColors2),
             ],
             [
-                self.GC.GText(SetText="Sound Quality: ", BColor=self.C.purple7),
+                self.GC.GText(SetText="Sound Quality: ", BColor=self.CGC.FColors2),
                 self.GC.GText(SetText=self.SoundQuality, SetValue="sound_log", xStretch=True, TPosition="center", BColor=self.C.purple6)
             ]
         ]
 
         self.VideoQualitySettings = [
             [
-                self.GC.GPush(BColor=self.CGC.FColors0),
-                self.GC.GRadio(SetValue="Medium",    groupID="quality", RText="Medium",    BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="High",      groupID="quality", RText="High",      BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="Very_High", groupID="quality", RText="Very High", BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GRadio(SetValue="Ultra",     groupID="quality", RText="Ultra",     BColor=self.CGC.FColors0, TFont=self.GC.font),
-                self.GC.GPush(BColor=self.CGC.FColors0),
+                self.GC.GPush(BColor=self.CGC.FColors2),
+                self.GC.GRadio(SetValue="Medium",    groupID="quality", RText="Medium",    BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="High",      groupID="quality", RText="High",      BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="Very_High", groupID="quality", RText="Very High", BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GRadio(SetValue="Ultra",     groupID="quality", RText="Ultra",     BColor=self.CGC.FColors2, TFont=self.GC.font),
+                self.GC.GPush(BColor=self.CGC.FColors2),
             ],
             [
-                self.GC.GText(SetText="Video Quality: ", BColor=self.C.purple7),
-                self.GC.GText(SetText=self.VideoQuality, SetValue="video_log", xStretch=True, TPosition="center", BColor=self.C.purple6)
+                self.GC.GText(SetText="Video Quality: ", BColor=self.CGC.FColors2),
+                self.GC.GText(SetText=self.VideoQuality, SetValue="video_log", xStretch=True, TPosition="center", BColor=self.CGC.FColors2)
             ]
         ]
 
         self.SettingsWindow = [
             [   
-                self.GC.GText(SetText=" Monutor ID 'xrandr here': ", TFont=self.GC.font, BColor=self.CGC.FColors0),
+                self.GC.GText(SetText=" Monutor ID 'xrandr here': ", TFont=self.GC.font, BColor=self.CGC.FColors2),
                 self.GC.GInput(SetValue="mID", xStretch=True, Size=(20, None), TFont=self.GC.font, BColor=self.C.purple6)
             ],
         ]
 
         self.SettingsTab = [
             [self.GC.GText(SetText="Settings Tab", xStretch=True, TPosition="center", BColor=self.CGC.FColors5, EmptySpace=(0, 0))],
-            [self.GC.GColumn(winColumnLayout_List=self.SettingsWindow, xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.SettingsWindow, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
             [self.GC.GText(SetText="Video FPS",    xStretch=True, TPosition="center", BColor=self.CGC.FColors5, TFont=self.GC.font, EmptySpace=(0, 0))],
-            [self.GC.GColumn(winColumnLayout_List=self.QualitySettings, xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.QualitySettings, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
             [self.GC.GText(SetText="Sound Quality",    xStretch=True, TPosition="center", BColor=self.CGC.FColors5, TFont=self.GC.font, EmptySpace=(0, 0))],
-            [self.GC.GColumn(winColumnLayout_List=self.SoundQualitySettings, xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.SoundQualitySettings, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
             [self.GC.GText(SetText="Video Quality",    xStretch=True, TPosition="center", BColor=self.CGC.FColors5, TFont=self.GC.font, EmptySpace=(0, 0))],
-            [self.GC.GColumn(winColumnLayout_List=self.VideoQualitySettings, xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.VideoQualitySettings, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
         ]
 
         self.ScreenRecordParts = [
-            [self.GC.GText(SetText="0:0:0", SetValue="live", TPosition="center", TFont="Sans, 40", xStretch=True, BColor=self.C.purple8, EmptySpace=(0, 0))],
             [   
                 self.GC.GText(SetText="RTMP URL: ", TFont=self.GC.font, BColor=self.CGC.FColors2),
                 self.GC.GInput(SetValue="rtmp", xStretch=True, Size=(20, None), TFont=self.GC.font, BColor=self.C.purple6)
@@ -142,36 +138,35 @@ class SimpleRecordAndLivestream:
 
         self.InputAndButtonsVideoRecord = [
             [   
-                self.GC.GText(SetText="Video Name: ", TFont=self.GC.font, BColor=self.CGC.SColors0), 
-                self.GC.GInput(SetValue="vname", Size=(20, None), xStretch=True, TFont=self.GC.font)   
+                self.GC.GText(SetText="Video Name: ", TFont=self.GC.font, BColor=self.CGC.FColors2), 
+                self.GC.GInput(SetValue="vname", Size=(20, None), xStretch=True, TFont=self.GC.font, BColor=self.C.purple6)   
             ],
             [
-                self.GC.GPush(BColor=self.CGC.SColors0),
+                self.GC.GPush(BColor=self.CGC.FColors2),
                     self.GC.GButton(Text="Select Video Directory", TFont=self.GC.font),
                     self.GC.GButton(Text="Video Name Save", TFont=self.GC.font),
                     self.GC.GButton(Text="Start Record", TFont=self.GC.font),
                     self.GC.GButton(Text="Stop Record", TFont=self.GC.font),
                     self.GC.GButton(Text="Refresh Video List", TFont=self.GC.font),
                     self.GC.GButton(Text="Remove Video", TFont=self.GC.font),
-                self.GC.GPush(BColor=self.CGC.SColors0),
+                self.GC.GPush(BColor=self.CGC.FColors2),
             ],
         ]
 
         self.ScreenRecordTabPart = [
-            [self.GC.GText(SetText="0:0:0", SetValue="record", TFont="Sans, 40", TPosition="center", xStretch=True, BColor=self.C.purple8, EmptySpace=(0, 0))],
-            [self.GC.GText(SetText="File Path Here!", SetValue="path", xStretch=True, BColor=self.CGC.SColors0, TFont=self.GC.font, EmptySpace=(0, 0))],
+            [self.GC.GText(SetText="File Path Here!", SetValue="path", xStretch=True, BColor=self.CGC.FColors2, TFont=self.GC.font, EmptySpace=(0, 0))],
             [
-                self.GC.GText(SetText="Video Name: ", EmptySpace=(0, 0)),
-                self.GC.GText(SetText="Start Record Video", SetValue="video_name", EmptySpace=(0, 0))
+                self.GC.GText(SetText="Video Name: ", EmptySpace=(0, 0), BColor=self.CGC.FColors2),
+                self.GC.GText(SetText="Start Record Video", SetValue="video_name", EmptySpace=(0, 0), BColor=self.CGC.FColors2)
             ],
-            [self.GC.GColumn(winColumnLayout_List=self.InputAndButtonsVideoRecord, xStretch=True, BColor=self.CGC.SColors1, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.InputAndButtonsVideoRecord, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
             [self.GC.GText(SetText="Directory Video List", xStretch=True, TPosition="center", BColor=self.CGC.FColors5, EmptySpace=(0, 0))],
-            [self.GC.GListBox(SetValue="videos", xStretch=True, yStretch=True, noScroolBar=True, BColor=self.C.purple8, LPosition="center", EmptySpace=(0, 0))]
+            [self.GC.GListBox(SetValue="videos", xStretch=True, yStretch=True, noScroolBar=True, BColor=self.CGC.FColors0, LPosition="center", EmptySpace=(0, 0))]
         ]
 
         self.ScreenRecordTab = [
             [self.GC.GText(SetText="Screen Record Tab", xStretch=True, TPosition="center", BColor=self.CGC.FColors5, EmptySpace=(0, 0))],
-            [self.GC.GColumn(winColumnLayout_List=self.ScreenRecordTabPart, xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.ScreenRecordTabPart, xStretch=True, yStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
         ]
 
 
@@ -191,10 +186,7 @@ class SimpleRecordAndLivestream:
         self.GC.GListBoxBorderSize(WindowValue="videos", Border=0)
 
         # Timer for Record and Livestream
-        self.RecordTimer = GTimer(GetWindow=self.GC.GetWindow, SetValue="record")
-        self.LiveStreamTimer = GTimer(GetWindow=self.GC.GetWindow, SetValue="live")
         self.StartRecordORStream = False
-        self.TimerLiveStream = self.TimerRecord = False
         self.VideoPath = ""
         self.IsProgramRunning = False
 
@@ -214,14 +206,6 @@ class SimpleRecordAndLivestream:
     def Update(self):
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
-
-        if self.StartRecordORStream:
-            if self.TimerRecord:
-                self.RecordTimer.RecordUpdateTRUE = True
-                self.RecordTimer.Start
-            elif self.TimerLiveStream:
-                self.LiveStreamTimer.RecordUpdateTRUE = True
-                self.LiveStreamTimer.Start
 
         # Settings
         if self.GC.GetEvent in ("14", "24", "30", "60", "120"):
@@ -275,17 +259,21 @@ class SimpleRecordAndLivestream:
                 self.GC.GetWindow["videos"].update(_videosList)
 
         elif self.GC.GetEvent == "Remove Video":
-            if os.path.exists(f"{self.VideoPath}/{self.GC.GetValues["videos"][0]}"):
-                if len(self.VideoPath) > 0:
-                    os.remove(f"{self.VideoPath}/{self.GC.GetValues["videos"][0]}")
-                    time.sleep(1) # time sleep for wait if video path exit refresh video list
-                    _listfiles = os.listdir(self.VideoPath)
-                    _videosList = []
-                    for i in _listfiles:
-                        if str(i).endswith(".mp4") or str(i).endswith(".mkv"):
-                            _videosList.append(i)
-                        _videosList.sort()
-                    self.GC.GetWindow["videos"].update(_videosList)
+            try:
+                if os.path.exists(f"{self.VideoPath}/{self.GC.GetValues["videos"][0]}"):
+                    if len(self.VideoPath) > 0:
+                        os.remove(f"{self.VideoPath}/{self.GC.GetValues["videos"][0]}")
+                        time.sleep(1) # time sleep for wait if video path exit refresh video list
+                        _listfiles = os.listdir(self.VideoPath)
+                        _videosList = []
+                        for i in _listfiles:
+                            if str(i).endswith(".mp4") or str(i).endswith(".mkv"):
+                                _videosList.append(i)
+                            _videosList.sort()
+                        self.GC.GetWindow["videos"].update(_videosList)
+            except Exception as ERR:
+                print(ERR)
+
 
         elif self.GC.GetEvent == "Start Record":
             if not self.StartRecordORStream:
@@ -300,36 +288,10 @@ class SimpleRecordAndLivestream:
                         Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
                         print(_FullCommand)                        
 
-
-                        # Video Name Update In Window
-                        time.sleep(1) # time sleep for wait if video path exit refresh video list
-                        self.IsProgramRunning = IsProgramRunning("gpu-screen-recorder")
-                        time.sleep(1)
-                        if self.IsProgramRunning:
-                            self.TimerRecord = True
-                            self.StartRecordORStream = True
-
-                            self.GC.GetWindow["video_name"].update(f"{str(self.VideoName).replace(" ", "\\ ")}-{_Time}.mkv")
-                            if os.path.exists(self.VideoPath):
-                                _listfiles = os.listdir(self.VideoPath)
-                                _videosList = []
-                                for i in _listfiles:
-                                    if str(i).endswith(".mp4") or str(i).endswith(".mkv"):
-                                        _videosList.append(i)
-                                _videosList.sort()
-                                self.GC.GetWindow["videos"].update(_videosList)
-
-                        else:
-                            GMessage(WindowText="Record Not Starting You Must Check This Problems\nMonutor ID\nMicroPhone ID\n")
-
         elif self.GC.GetEvent == "Stop Record":
-            if self.StartRecordORStream:
-                os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Work Is Finish!\"")
-                self.StartRecordORStream = False
-                if self.TimerRecord:
-                    self.RecordTimer.RecordUpdateTRUE = False
-                    self.RecordTimer.Start
-                    self.TimerRecord = False
+            os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Work Is Finish!\"")
+            self.StartRecordORStream = False
+
 
         # LiveStream
         elif self.GC.GetEvent == "Save Stream Key":
@@ -348,30 +310,13 @@ class SimpleRecordAndLivestream:
                     Thread(target=self.StartLiveStream, args=[_FullCommand]).start()
                     print(_FullCommand)
 
-
-                    time.sleep(1)                  
-                    self.IsProgramRunning = IsProgramRunning("gpu-screen-recorder")
-                    time.sleep(1)
-                    if self.IsProgramRunning:
-                        self.TimerLiveStream = True
-                        self.StartRecordORStream = True
-                    else:
-                        GMessage(WindowText="livestream Not Starting You Must Check This Problems\nMonutor ID\nMicroPhone ID\n")
-
-
         elif self.GC.GetEvent == "Stop Live Stream":
             if self.StartRecordORStream:
                 os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"LiveStream Is Finish!\"")
-                if self.TimerLiveStream:
-                    self.LiveStreamTimer.RecordUpdateTRUE = False
-                    self.LiveStreamTimer.Start
-                    self.TimerLiveStream = False
-                    self.StartRecordORStream = False
+                self.StartRecordORStream = False
 
     def BeforeExit(self):
-        if self.StartRecordORStream:
-            self.RecordTimer.RecordUpdateTRUE = False
-            os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Record or LiveStream Is Finish!\"")
+        os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Record or LiveStream Is Finish!\"")
 
 if __name__ == "__main__":
     SimpleRecordAndLivestream()

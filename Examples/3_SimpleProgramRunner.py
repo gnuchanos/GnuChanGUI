@@ -51,7 +51,7 @@ class SimpleProgramRunner:
             "virtualbox", "vmware-player", "gnome-boxes", "qemu",
 
             # Extra List
-            "StartBlender", "vcode"
+            "StartBlender", "vcode", "deluge"
         ]
 
 
