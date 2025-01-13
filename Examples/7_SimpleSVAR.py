@@ -274,7 +274,6 @@ class SimpleRecordAndLivestream:
             except Exception as ERR:
                 print(ERR)
 
-
         elif self.GC.GetEvent == "Start Record":
             if not self.StartRecordORStream:
                 if len(self.VideoPath) > 0 and len(self.VideoName) > 0:
@@ -286,21 +285,15 @@ class SimpleRecordAndLivestream:
                         _DesktopID = f"-w {self.GC.GetValues["mID"]}"
                         _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
                         Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+                        self.GC.GetWindow["video_name"].update(self.VideoName)
                         print(_FullCommand)                        
 
         elif self.GC.GetEvent == "Stop Record":
             os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Work Is Finish!\"")
+            self.GC.GetWindow["video_name"].update("Video Is Finish")
             self.StartRecordORStream = False
 
-
         # LiveStream
-        elif self.GC.GetEvent == "Save Stream Key":
-            self.Rtmp = self.GC.GetValues["rtmp"]
-            self.Key = self.GC.GetValues["skey"]
-            if len(self.Rtmp) > 0 and len(self.Key) > 0:
-                self.StreamKey = f"-o {self.Rtmp}/{self.Key}"
-            self.GC.GetWindow["ready"].update("Stream Ready To Start")
-
         elif self.GC.GetEvent == "Start Live Stream":
             if not self.StartRecordORStream:
                 if len(self.Rtmp) > 0 and len(self.Key) > 0:
@@ -310,10 +303,16 @@ class SimpleRecordAndLivestream:
                     Thread(target=self.StartLiveStream, args=[_FullCommand]).start()
                     print(_FullCommand)
 
+        elif self.GC.GetEvent == "Save Stream Key":
+            self.Rtmp = self.GC.GetValues["rtmp"]
+            self.Key = self.GC.GetValues["skey"]
+            if len(self.Rtmp) > 0 and len(self.Key) > 0:
+                self.StreamKey = f"-o {self.Rtmp}/{self.Key}"
+            self.GC.GetWindow["ready"].update("Stream Ready To Start")
+
         elif self.GC.GetEvent == "Stop Live Stream":
-            if self.StartRecordORStream:
-                os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"LiveStream Is Finish!\"")
-                self.StartRecordORStream = False
+            os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"LiveStream Is Finish!\"")
+            self.StartRecordORStream = False
 
     def BeforeExit(self):
         os.popen("killall -SIGINT gpu-screen-recorder && notify-send -t 7500 -u low \"Record or LiveStream Is Finish!\"")
