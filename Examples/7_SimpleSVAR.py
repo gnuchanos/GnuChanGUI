@@ -199,9 +199,11 @@ class SimpleRecordAndLivestream:
 
     def StartScreenRecord(self, Command: str):
         os.system(Command)
+        os.popen("gpu-screen-recorder && notify-send -t 7500 -u low \"Screen Recording Is Starting Now!\"")
 
     def StartLiveStream(self, Command: str):
         os.system(Command)
+        os.popen("gpu-screen-recorder && notify-send -t 7500 -u low \"LiveStream Is Starting Now!\"")
 
     def Update(self):
         #self.GC.GetEvent == "event" -> window event
