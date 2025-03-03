@@ -3,41 +3,44 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-from termios import TAB2
-from turtle import color
-from GnuChanGUI import *
-from matplotlib.pyplot import yscale
 
 
 
 
 
-if __name__ == "__main__":
-    gc = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
-    gc.font = "Sans, 20"
-    Themecolors().GnuChanOS
-
-    gMenu = [ ["Info", ["GnuChanOS", "Youtube Channel", "Github Page"]], ["System", ["Exit"]] ]
-    defaultFont = "Sans, 20"
 
 
-    layout = [
-        [gc.GSlider(MaxRange=(0, 100), DefaultValue=20, SDirection="h", WindowValue="slider")],
-        [gc.GProgressBar(MaxRange=100, WindowValue="pro", PDirection="h")],
-        [gc.GText(SetText="Default", xStretch=True, TextValue="text")],
-        [gc.GButton(Text="Press HERE!", xStretch=True, WindowValue="button")]
-    ]
 
-    gc.GWindow(SetMainWindowLayout_List=layout)
-    #gc.AddNewBorderWithColor(WindowValue="pro", Color="red", BorderSize=1)
 
-    def update():
-        if gc.GetEvent == "button":
-            gc.GetWindow["text"].update(gc.GetValues["slider"])
-        if gc.GetValues["slider"]:
-            gc.GetWindow["pro"].update(gc.GetValues["slider"])
 
-    def beforeExit():
-        pass
 
-    gc.SetUpdate(Update=update, exitBEFORE=beforeExit, TimeOUT=1)
+
+
+# import speech_recognition as sr
+# import os
+
+# rec = sr.Recognizer()
+# rec.energy_threshold = 400
+# rec.dynamic_energy_threshold = False
+# rec.pause_threshold = 2
+
+# with sr.Microphone() as source:
+#     rec.adjust_for_ambient_noise(source, duration=1)
+#     while True:
+#         print("Konuşabilirsiniz...")
+#         text = ""
+#         try:
+#             audio = rec.listen(source)
+#             text = rec.recognize_google(audio, language="tr-TR")
+#             print(f"Söylediğiniz: {text}")
+#         except sr.UnknownValueError:
+#             print("Ses anlaşılamadı, tekrar deneyin.")
+#         except sr.RequestError:
+#             print("API'ye bağlanılamadı.")
+
+#         # Komutları çalıştırma
+#         if text.lower() == "tarayıcıyı aç":
+#             os.popen("qutebrowser")
+#         elif text.lower() == "sistemi kapat":
+#             print("Sistem kapatılıyor...")
+#             break  # Döngüyü sonlandırır.

@@ -37,7 +37,7 @@ class SimpleRecordAndLivestream:
         self.DesktopID = "DVI-D-0 "
         self.MonutorID = "$(pactl get-default-sink).monitor\""
         self.MicrophoneName = "\"default_input|"
-
+        self.DisableMicrophone = False
         self.GSR          = "gpu-screen-recorder "
         self.Codecs       = "-k h264 -ac aac -c flv "
         self.Fps          = "-f 30 "
@@ -101,6 +101,14 @@ class SimpleRecordAndLivestream:
             ],
         ]
 
+        self.DisableAndEnable = [
+            [
+                self.GC.GPush(BColor=self.CGC.FColors2),
+                self.GC.GButton(Text="Disable Microphone", SetValue="md"),
+                self.GC.GPush(BColor=self.CGC.FColors2)
+            ]
+        ]
+
         self.SettingsTab = [
             [self.GC.GText(SetText="Settings Tab", xStretch=True, TPosition="center", BColor=self.CGC.FColors5, EmptySpace=(0, 0))],
             [self.GC.GColumn(winColumnLayout_List=self.SettingsWindow, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
@@ -110,6 +118,8 @@ class SimpleRecordAndLivestream:
             [self.GC.GColumn(winColumnLayout_List=self.SoundQualitySettings, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
             [self.GC.GText(SetText="Video Quality",    xStretch=True, TPosition="center", BColor=self.CGC.FColors5, TFont=self.GC.font, EmptySpace=(0, 0))],
             [self.GC.GColumn(winColumnLayout_List=self.VideoQualitySettings, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))],
+            [self.GC.GText(SetText="Open or Close Microphone", xStretch=True, TPosition="center", BColor=self.CGC.FColors5, EmptySpace=(0, 0))],
+            [self.GC.GColumn(winColumnLayout_List=self.DisableAndEnable, xStretch=True, BColor=self.CGC.FColors2, EmptySpace=(0, 0))]
         ]
 
         self.ScreenRecordParts = [
@@ -221,6 +231,16 @@ class SimpleRecordAndLivestream:
         elif self.GC.GetEvent in ("128", "192", "256", "320"):
             self.SoundQuality = f"-ab {self.GC.GetEvent}"
             self.GC.GetWindow["sound_log"].update(self.SoundQuality)
+
+        elif self.GC.GetEvent == "md":
+            if not self.DisableMicrophone:
+                self.DisableMicrophone = True
+                self.GC.GetWindow["md"].update("Enable Microphone")
+                print(f"Microphone is Disable -> Self.DisableMicrophone={self.DisableMicrophone}")
+            else:
+                self.DisableMicrophone = False
+                self.GC.GetWindow["md"].update("Disable Microphone")
+                print(f"Microphone is Enable  -> Self.DisableMicrophone={self.DisableMicrophone}")
         
         # Screen Record
         elif self.GC.GetEvent == "Video Name Save":
@@ -285,8 +305,16 @@ class SimpleRecordAndLivestream:
                         _VideoPath = f"-o {self.VideoPath}/{str(self.VideoName).replace(" ", "\\ ")}-{_Time}.mkv"
                         _deskMic = f"-a {self.MicrophoneName}{self.MonutorID} "
                         _DesktopID = f"-w {self.GC.GetValues["mID"]}"
-                        _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
-                        Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+
+                        if self.DisableMicrophone:
+                            _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} -a $(pactl get-default-sink).monitor {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
+                            Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+                            print(self.DisableMicrophone)
+                        else:
+                            _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
+                            Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+                            print(self.DisableMicrophone)
+
                         self.GC.GetWindow["video_name"].update(self.VideoName)
                         print(_FullCommand)                        
 

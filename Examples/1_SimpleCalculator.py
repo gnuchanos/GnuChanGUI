@@ -47,7 +47,7 @@ class SimpleCalculator:
         self.Number1: str = ""
         self.MathFinish: bool = False
         self.Number1Typing: bool = True
-        self.Numbers: tuple = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
+        self.Numbers: tuple = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.')
         self.MathSymbols: tuple = ('+', '-', '*', '/')
         self.CurrentMathSymbol: str = ""
         self.MathEnd: float = 0
