@@ -63,44 +63,48 @@ window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button 
 window["button"].update(gc.window["text"].get())   --> text name change button name
 ```
 
-<p>
-GCanvas detaile
-    it's okay but not making game you can read simplegame in examples dir
-
-    Music -> pygame mixer
-    2D Render -> Canvas
-</p>
-
-
 ```
-from GnuChanGUI import *
+# Don't do like this from lib import * for gnchangui
+from GnuChanGUI import GnuChanGUI, os, Thread
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
+from GnuChanGUI import GKeyboard
+
+
+# Extra Lib
+# #Thread(target=DownloadVideo, args=[]).start()
+
 
 class DefaultExample:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
-        Themecolors().GnuChanOS
+        Themecolors().GnuChanOS        # you can change theme color
+        self.C = GColors()             # all color in here
+        self.CGC = GnuChanOSColor()    # gnuchanos colors
 
-        self.text = ""
 
+        # main window layout you can use column and frame in here
         self.Layout = [
-            [   self.GC.GMultiline(value="out", xStretch=True, yStretch=True, font="Sans, 20")   ],
-            [   self.GC.GInput(value="in", xStretch=True, font="Sans, 20")   ]
+            
         ]
 
-        self.GC.GWindow(mainWindow=self.Layout)
+        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         self.KYB = GKeyboard(window=self.GC)
-        self.GC.update(GUpdate=self.Update, exitBEFORE=self.BeforeExit)
+        # Call Function Here
+
+
+
+
+        # Call Function Here
+        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
-        _pressCheck = self.KYB.SingleKeyPressCheck(event=self.GC.event, key=self.KYB.Return)
-        if _pressCheck: 
-            self.text += self.GC.GetValues["in"] + "\n"
-            self.GC.window["out"].update(self.text)
-            self.GC.window["in"].update("")
+        #self.GC.GetEvent == "event" -> window event
+        #self.GC.GetWindow["text"].update("this text") -> update window objects
+        pass
 
     def BeforeExit(self):
         print("Exit")
 
 if __name__ == "__main__":
-    gc = DefaultExample()
+    DefaultExample()
 ```

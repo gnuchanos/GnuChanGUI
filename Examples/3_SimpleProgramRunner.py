@@ -25,33 +25,39 @@ class SimpleProgramRunner:
             # for conten creators
             "kdenlive", "audacity", "shortcut", "openshot", "resolve", "pitivi",
             "blender", "obs", "simplescreenrecorder",
+            
             # Web Browser
-            "qutebrowser", "firefox", "chromium", "google-chrome", "brave: Browser",
-            # Text Editors
-            "gedit", "kate", "notepadqq", "leafpad",
+            "qutebrowser", "brave",
+            
             # Office Software
-            "libreoffice: Office Program", "openoffice: Office Program",
+            "libreoffice",
+            
             # Image Edit and Paint Software
             "gimp", "krita", "inkscape", "darktable", "mypaint", "pinta",
+            
             # Video and Audio Players
             "vlc", "mpv", "rhythmbox", "smplayer", "audacious", "banshee", "clementine",
+            
             # System tools
             "gnome-system-monitor", "kde-system-monitor", "bleachbit", "gparted", "timeshift",
-            # File Managers
-            "nautilus", "dolphin", "thunar", "pcmanfm", "nemo", "doublecmd",
+
             # Chat APP
-            "discord", "vesktop", "telegram-desktop", "skype", "zoom",
+            "discord", "vesktop",
+            
             # Clouth APP
             "dropbox", "nextcloud", "megasync", "insync",
+            
             # EMail APP
             "thunderbird", "geary", "evolution", "kmail",
+            
             # Games
-            "steam", "lutris", "heroic", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2-qt", "melonDS", "snes9x", "nestopia"
+            "steam", "lutris", "heroic", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2", "melonDS", "snes9x", "nestopia",
+            
             # Sanal Makineler ve Emülatörler
-            "virtualbox", "vmware-player", "gnome-boxes", "qemu",
+            "virtualbox", "gnome-boxes",
 
             # Extra List
-            "StartBlender", "vcode", "deluge"
+            "code", "deluge"
         ]
 
 
@@ -109,7 +115,10 @@ class SimpleProgramRunner:
         if self.GC.GetEvent == "Return:36":
             _commandInput = str(self.GC.GetValues["input"])
             if len(_commandInput) > 0:
-                Thread(target=self.RunThis, args=[_commandInput]).start()
+                if "brave" == _commandInput:
+                    os.popen("brave --password-store=basic")
+                else:
+                    Thread(target=self.RunThis, args=[_commandInput]).start()
                 self.GC.closeWindow = True
 
         # Run Program In List
