@@ -8,7 +8,7 @@ from threading import Thread
 
 # Is Program Running
 import psutil as p
-
+import time
 
 
 
@@ -26,114 +26,16 @@ Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working
 The GUI is freezing, and you can only close the program using the task manager.
 """
 
-# Simple Timer
-class GTimer:
-    def __init__(self, GetWindow, SetValue) -> None:
-        self.StartNow = False
-        self.RecordUpdateTRUE = False
-        self.StartTime = 0.0
-        self.GetWindow = GetWindow
-        self.SetValue  = SetValue
-        self.Hour = self.Minute = self.Second = 0
-        self.clearNow = False
 
-    def GetSecondCount(self):
-        if not self.StartNow:
-            self.StartTime = time.time()
-            self.StartNow = True
-        return (time.time() - self.StartTime)
 
-    def Update(self):
-        if self.RecordUpdateTRUE:
-            if not self.StartNow:
-                self.StartTime = time.time()
-                self.StartNow = True
 
-            self.Second = int(time.time() - self.StartTime)       
-            self.Minute = int((self.Second // 60) % 60)
-            self.Hour = int(self.Second // 3600)
 
-            self.GetWindow[self.SetValue].update(f"{self.Hour}:{self.Minute}:{int(self.Second) % 60}")
 
-        if self.clearNow:
-            self.Second = self.Minute = self.Hour = 0
-            self.StartNow = False
-            self.GetWindow[self.SetValue].update(f"{0}:{0}:{0}")
-            self.clearNow = False
 
-    @property
-    def Start(self):
-        Thread(target=self.Update).start()
-
-# pygame mixer for play sound
-class GMixer:
-    def __init__(self, MaxChannelLimit=5) -> None:
-        global pygame
-        import pygame.mixer
-        self.MaxChannelLimit = MaxChannelLimit
-        self.SoundFileList = []
-        self.SoundIndex = 0
-        self.Volume = 1
-        self.SoundLength = 0
-        self.SoundLength_Backup = 0
-        self.PlayAgain = False
-        self.GiveLength = False
-        self.MusicName = ""
-
-        pygame.mixer.init()
-        pygame.mixer.set_num_channels(self.MaxChannelLimit)
-
-    def PlaySound_MultiChannelNoLoop(self,  SoundPath="", ChannelID=0):
-        _play = False
-        if not _play:
-            channel = pygame.mixer.Channel(ChannelID)
-            channel.play(pygame.mixer.Sound(SoundPath))
-            channel.set_volume(self.Volume)
-            _play = True
-
-    def StopSound(self):
-        pygame.mixer.music.stop()
-
-    def PlaySound_SingleChannel(self,  SoundPath=""):
-        self.SoundIndex = self.SoundFileList.index(SoundPath)
-        pygame.mixer.music.load(SoundPath)
-        pygame.mixer.music.set_volume(self.Volume)
-        pygame.mixer.music.play()
-        self.MusicName = SoundPath
-
-    def NextSound_SingleChannel(self):
-        try:
-            if self.SoundIndex < len(self.SoundFileList) - 1:
-                self.SoundIndex += 1
-            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
-            pygame.mixer.music.set_volume(self.Volume)
-            pygame.mixer.music.play()
-            self.MusicName = self.SoundFileList[self.SoundIndex]
-        except Exception as ERR:
-            print(ERR, "Next Sound ERR")
-
-    def PreviousSound_SingleChannel(self):
-        try:
-            if self.SoundIndex > 0:
-                self.SoundIndex -= 1
-            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
-            pygame.mixer.music.set_volume(self.Volume)
-            pygame.mixer.music.play()
-            self.MusicName = self.SoundFileList[self.SoundIndex]
-        except Exception as ERR:
-            print(ERR, "Previous Sound ERR")
-
-    def VolumeChange_Gslider(self, Volume):
-        try:
-            VolumeSlider = int(Volume)
-            if VolumeSlider != 10:
-                self.Volume = float(f"0.{VolumeSlider}")
-            else:
-                self.Volume = 1
-            pygame.mixer.music.set_volume(self.Volume)
-        except Exception as ERR:
-            print(ERR, "Volume Changer ERR")
-
+# Keyboard event / Colors / ready theme and gui class
+# Simple timer System works in diffrent thread
+# pygame mixer for sound
+# simple warning window
 
 # Simple Keyboard
 class GKeyboard:
@@ -517,17 +419,27 @@ class Themecolors:
 
 # i hope this become better one day
 class GnuChanGUI:
-    def __init__(self, Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True) -> None:
+    def __init__(self, Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920/2, winPosY=1080/2) -> None:
         self.size = Size
         self.title = Title
         self.resizable = resizable
         self.finalize = finalize
 
+        self.WinPosX = winPosX
+        self.WinPosY = winPosY
+
         self.fontName = "Sans"
         self.fontSize = 15
         self.font = f"{self.fontName}, {self.fontSize}"
 
-        self.code = "missing Window list!!"
+        self.code = """
+        Example for window layout
+            self.Layout = [
+                [self.GC.GText(SetText="Hello foking world")]
+            ]
+
+            self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
+        """
         self.layout = [[self.GText(SetText=self.code, xStretch=True, yStretch=True, BColor="black", TFont="Sans, 13")]]
 
         self.GetEvent = None
@@ -544,14 +456,16 @@ class GnuChanGUI:
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
     # Create Window
-    def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, locationX = 1920/2, locationY = 1080/2, KeepOnTop = True, Borderless = False):
+    def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, KeepOnTop = True, Borderless = False):
         if SetMainWindowLayout_List != None:
             self.layout = SetMainWindowLayout_List
+        else:
+            self.layout = [[self.GText(SetText=self.code, xStretch=True, yStretch=True, BColor="black", TFont="Sans, 13")]]
             # if main Window is None self.layout can warning user and self.layout is ready warning layout
         self.GetWindow = Window(
             self.title, 
             layout=self.layout, size=self.size, keep_on_top=KeepOnTop, resizable=self.resizable,
-            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(locationX-self.size[0]/2, locationY-self.size[0]/2),
+            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(self.WinPosX-self.size[0]/2, self.WinPosY-self.size[0]/2),
             no_titlebar=Borderless
         )
         self.GetWindow.finalize()
@@ -585,12 +499,6 @@ class GnuChanGUI:
     @property
     def CloseNow(self):
         self.GetWindow.close()
-
-    # Note there is no delta time
-    @property
-    def dt(self):
-        dt = 1 # use this with timeout 1000/MS still not like real second slow or sometimes is fast
-        return dt
 
     def GTitleBar(self, title: str = "Window Title", icon: str = None, font: str = "Sans, 12", tcolor: str = None, bcolor: str = None):
         return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)
@@ -666,7 +574,7 @@ class GnuChanGUI:
 
     # Experimantal -> GCanvas Class
     def GCanvas(
-        self, SetValue: str, BColor: str, xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0, 
+        self, SetValue: str, BColor: str = "black", xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0, 
         Size: tuple = (None, None), EmptySpace: tuple = (None, None)
         ): 
         
@@ -1083,7 +991,58 @@ class GVector2:
         self.x = x
         self.y = y
 
-# this is not finish yet!
+# warning this is just fun porpuses not real game
+# first you need create gcanvas in gui like this -> [self.GC.GCanvas(SetValue='Canvas', xStretch=True, yStretch=True)]
+"""
+    self.Layout = [
+        [self.GC.GCanvas(SetValue='Canvas', xStretch=True, yStretch=True)]
+    ]
+
+    self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
+"""
+
+# then self.Game = GCanvas(Window=self.GC.GetWindow, CanvasValue="Canvas")
+
+# this is example create simple circle and good luck
+"""
+    self.Game.AddCircleObject(
+        ObjectName="fartFace",
+        FillColor="red",
+        OutLineColor="yellow",
+        Radius=30,
+        Transform=GVector2(150, 150),
+        Active=True
+    )
+"""
+
+# how to draw
+"""
+    def Update(self):
+        #if self.KYB.Return == self.GC.GetEvent -> Press key
+        #self.GC.GetEvent == "event" -> window event
+        #self.GC.GetWindow["text"].update("this text") -> update window objects
+
+        # Move Object
+        if self.KYB.w == self.GC.GetEvent: # btw this is have big delay it's not good
+            self.Game.MoveObject(
+                Object="fartFace",
+                Speed=10,
+                WhichDirection=self.Game.up,
+                XorY=self.Game.Y
+            )
+        elif self.KYB.s == self.GC.GetEvent:
+            self.Game.MoveObject(
+                Object="fartFace",
+                Speed=10,
+                WhichDirection=self.Game.down,
+                XorY=self.Game.Y
+            )
+        
+        # Draw Object this is works like this -> draw->clear->draw->clear # you get it
+        # its not goodt for real game not like big game it's for very small game
+        self.Game.Draw()
+"""
+
 class GCanvas:
     def __init__(self, Window, CanvasValue) -> None:
         self.GWindow = Window
@@ -1097,6 +1056,15 @@ class GCanvas:
         self.Scene_End = 3
 
         self.MousePosition = GVector2(0, 0)
+
+        #position
+        self.left  = "left"
+        self.right = "right"
+        self.up    = "up"
+        self.down  = "down"
+
+        self.X     = 'x'
+        self.Y     = 'y'
 
         self.Transform = "transform"
         self.Scale = "scale"
@@ -1412,7 +1380,7 @@ class GCanvas:
 
                     SolidScale = self.DrawList[i][self.Scale]
                     player_box = box(pTransform.x, pTransform.y, pTransform.x + pScale.y, pTransform.y + pScale.y)
-                    hit_box = box(SolidTransform.x, SolidTransform.y, SolidTransform.x + SolidScale.x, SolidTransform.y + SolidScale.y)
+                    hit_box    = box(SolidTransform.x, SolidTransform.y, SolidTransform.x + SolidScale.x, SolidTransform.y + SolidScale.y)
 
                     if player_box.intersects(hit_box):
                         self.Hit = True
@@ -1435,6 +1403,7 @@ class GCanvas:
                     self.MoveObject(Object=Player, WhichDirection="left", XorY='x', Speed=self.speed)
                 elif Event == Keyboard.d:
                     self.MoveObject(Object=Player, WhichDirection="right", XorY='x', Speed=self.speed)
+
             self.Hit1 = self.Mooo(Player=Player, SolidObjectList=SolidObjectList)
             if self.Hit1:
                 self.TeleportObject(Object=Player, Position=self.RecordX, XorY='x')
@@ -1486,22 +1455,132 @@ class GCanvas:
 
 
 
+# Simple Timer
+class GTimer:
+    def __init__(self) -> None:
+        self.Second = 0
+        self.Minute = 0
+        self.Hour   = 0
+        self.StringTime = ''
+
+        self.TimerStarts = False
+        self.KillThreads = False
+
+        self.gcT = Thread(target=self.Go, args=[]).start()
+        
+
+    def Go(self):
+        while True:
+            if self.TimerStarts:
+                self.StringTime = f"{self.Hour}:{self.Minute}:{self.Second}"
+                self.Second += 1
+                
+                if self.Second == 60:
+                    self.Second = 0
+                    self.Minute += 1
+
+                if self.Minute == 60:
+                    self.Minute = 0
+                    self.Hour += 1
+
+                time.sleep(1)
+            else:
+                self.Second = self.Minute = self.Hour = 0
+                self.StringTime = f"{self.Hour}:{self.Minute}:{self.Second}"
+                if self.KillThreads:
+                    break
+
+# pygame mixer for play sound
+class GMixer:
+    def __init__(self, MaxChannelLimit=5) -> None:
+        global pygame
+        import pygame.mixer
+        self.MaxChannelLimit = MaxChannelLimit
+        self.SoundFileList = []
+        self.SoundIndex = 0
+        self.Volume = 1
+        self.SoundLength = 0
+        self.SoundLength_Backup = 0
+        self.PlayAgain = False
+        self.GiveLength = False
+        self.MusicName = ""
+
+        pygame.mixer.init()
+        pygame.mixer.set_num_channels(self.MaxChannelLimit)
+
+    def PlaySound_MultiChannelNoLoop(self,  SoundPath="", ChannelID=0):
+        _play = False
+        if not _play:
+            channel = pygame.mixer.Channel(ChannelID)
+            channel.play(pygame.mixer.Sound(SoundPath))
+            channel.set_volume(self.Volume)
+            _play = True
+
+    def StopSound(self):
+        pygame.mixer.music.stop()
+
+    def PlaySound_SingleChannel(self,  SoundPath=""):
+        self.SoundIndex = self.SoundFileList.index(SoundPath)
+        pygame.mixer.music.load(SoundPath)
+        pygame.mixer.music.set_volume(self.Volume)
+        pygame.mixer.music.play()
+        self.MusicName = SoundPath
+
+    def NextSound_SingleChannel(self):
+        try:
+            if self.SoundIndex < len(self.SoundFileList) - 1:
+                self.SoundIndex += 1
+            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
+            pygame.mixer.music.set_volume(self.Volume)
+            pygame.mixer.music.play()
+            self.MusicName = self.SoundFileList[self.SoundIndex]
+        except Exception as ERR:
+            print(ERR, "Next Sound ERR")
+
+    def PreviousSound_SingleChannel(self):
+        try:
+            if self.SoundIndex > 0:
+                self.SoundIndex -= 1
+            pygame.mixer.music.load(self.SoundFileList[self.SoundIndex])
+            pygame.mixer.music.set_volume(self.Volume)
+            pygame.mixer.music.play()
+            self.MusicName = self.SoundFileList[self.SoundIndex]
+        except Exception as ERR:
+            print(ERR, "Previous Sound ERR")
+
+    def VolumeChange_Gslider(self, Volume):
+        try:
+            VolumeSlider = int(Volume)
+            if VolumeSlider != 10:
+                self.Volume = float(f"0.{VolumeSlider}")
+            else:
+                self.Volume = 1
+            pygame.mixer.music.set_volume(self.Volume)
+        except Exception as ERR:
+            print(ERR, "Volume Changer ERR")
+
+
 # Popup Message Window
 class GMessage:
-    def __init__(self,
-                 WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20,
+    def __init__(self, 
+                 WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20, 
                  WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
-                 WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False
-        ) -> None:
+                 WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False ) -> None:
 
-        self.GC = GnuChanGUI(Title=WindowTitle, Size=WindowSize, resizable=WindowResizable, finalize=True)
+        self.WindowTitle      = WindowTitle
+        self.windowText       = WindowText
+        self.WindowSize       = WindowSize
+        self.WindowResizable  = WindowResizable
+        self.TextFont         = f"{WindowTextFont}, {WindowTextFontSize}"
+        self.WindowTextBackgroundColor = WindowTBC
+        self.ButtonLayoutBackgroundColor = ButtonLBC
+
+        self.GC = GnuChanGUI(Title=self.WindowTitle, Size=self.WindowSize, resizable=self.WindowResizable, finalize=True)
         Themecolors().GnuChanOS        # you can change theme color
         self.CGC = GnuChanOSColor()
 
-        self.WindowTitle = WindowTitle
-        self.TextFont = f"{WindowTextFont}, {WindowTextFontSize}"
-        self.WindowTextBackgroundColor = WindowTBC
-        self.ButtonLayoutBackgroundColor = ButtonLBC
+
+
 
         # main window layout you can use column and frame in here
         self.button = [
@@ -1514,14 +1593,15 @@ class GMessage:
 
         self.Layout = [
             [self.GC.GMultiline(
-                InText=WindowText, TFont=self.TextFont, TPosition="center", 
+                InText=self.windowText, TFont=self.TextFont, TPosition="center", 
                 xStretch=True, yStretch=True, BColor=self.WindowTextBackgroundColor, ReadOnly=True
             )],
             [self.GC.GColumn(winColumnLayout_List=self.button, BColor=self.ButtonLayoutBackgroundColor, xStretch=True)]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout, locationX=1024/2-300, locationY=768/2-150)
+        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+
 
     def Update(self):
         if self.GC.GetEvent == "exit":

@@ -31,10 +31,6 @@ class SimpleVideoPlayer:
 
         self.left = [
             [self.GC.GListBox(SetValue="videos", LFont="Sans, 12", yStretch=True, xStretch=True, BColor=self.CGC.FColors2, noScroolBar=True)],
-            [self.GC.GHSep(Color=self.CGC.FColors3)],
-            [self.GC.GText(SetText="Volume Slider", xStretch=True, TPosition="center")],
-            [self.GC.GSlider(SetValue="volume", xStretch=True, MaxRange=(0, 100), DefaultValue=80, BColor=self.CGC.FColors4, Size=(20, None))],
-            [self.GC.GHSep(Color=self.CGC.FColors3)],
         ]
 
 
@@ -49,6 +45,8 @@ class SimpleVideoPlayer:
                 self.GC.GButton(Text=">"),
                 self.GC.GPush(BColor=self.CGC.BGColor),
             ],
+            [self.GC.GText(SetText="Volume Slider", xStretch=True, TPosition="center")],
+            [self.GC.GSlider(SetValue="volume", xStretch=True, MaxRange=(0, 100), DefaultValue=80, BColor=self.CGC.FColors4)],
             [
                 self.GC.GColumn(winColumnLayout_List=self.vid,  xStretch=True, yStretch=True, BColor=self.CGC.FColors8),
                 self.GC.GColumn(winColumnLayout_List=self.left, xStretch=True, yStretch=True, BColor=self.CGC.FColors6, SetValue="filePath"),

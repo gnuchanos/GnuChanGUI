@@ -125,7 +125,7 @@ class SimpleVideoAndMusicDownload:
     def DownloadMusic(self, Download: str):
         os.system(Download)
         os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
-        self.GC.GetWindow["music_pathStr"].update("")
+        self.GC.GetWindow["vlink_music"].update("")
 
     def Update(self):
         # Download Video

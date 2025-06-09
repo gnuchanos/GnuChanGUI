@@ -37,8 +37,7 @@ class SimpleTimer:
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
         self.KYB = GKeyboard(window=self.GC)
         # Call Function Here
-        self.StartTimer = GTimer(GetWindow=self.GC.GetWindow, SetValue="timer")
-
+        self.StartTimer = GTimer()
 
         # Call Function Here
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
@@ -48,16 +47,18 @@ class SimpleTimer:
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         
         if self.GC.GetEvent == "start":
-            self.StartTimer.RecordUpdateTRUE = True
-
+            self.StartTimer.TimerStarts = True
         elif self.GC.GetEvent == "clear":
-            self.StartTimer.clearNow = True
-            self.StartTimer.RecordUpdateTRUE = False
+            self.StartTimer.TimerStarts = False
 
-        self.StartTimer.Start
+        self.GC.GetWindow["timer"].update(self.StartTimer.StringTime)
+
+
 
     def BeforeExit(self):
         print("Exit")
+        self.StartTimer.TimerStarts = False
+        self.StartTimer.KillThreads = True
 
 if __name__ == "__main__":
     SimpleTimer()

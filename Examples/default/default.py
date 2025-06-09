@@ -37,6 +37,7 @@ class DefaultExample:
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
+        #if self.KYB.Return == self.GC.GetEvent -> Press key
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         pass

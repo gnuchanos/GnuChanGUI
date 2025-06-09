@@ -27,8 +27,8 @@ class SimpleProgramRunner:
             "blender", "obs", "simplescreenrecorder",
             
             # Web Browser
-            "qutebrowser", "brave",
-            
+            "qutebrowser",  "chromium", 
+
             # Office Software
             "libreoffice",
             
@@ -51,13 +51,16 @@ class SimpleProgramRunner:
             "thunderbird", "geary", "evolution", "kmail",
             
             # Games
-            "steam", "lutris", "heroic", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2", "melonDS", "snes9x", "nestopia",
+            "steam", "mgba-qt", "PPSSPPSDL", "duckstation-qt", "pcsx2", "melonDS", "snes9x", "nestopia",
             
             # Sanal Makineler ve Emülatörler
             "virtualbox", "gnome-boxes",
 
             # Extra List
-            "code", "deluge"
+            "code", "deluge", "fdm",
+            "nemo",
+
+
         ]
 
 
