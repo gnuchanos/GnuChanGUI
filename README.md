@@ -37,26 +37,41 @@ second install
 3: cd gnuchangui
 4: pip install .
 
+
+
+# simple virtual environment
+python -m venv .gcVENV
+source .gcVENV/bin/activate
+pip install .
+
 ```
 
 
 ```
-event, GetValues = default.window.read(timeout=60)
+gc.GetEvent:  = everythings is event like button click, keyboard, input, multiline,
+gc.GetValues[] = return value in 
+gc.GetWindow[].update() = update everything in window
+         
 
-event ---> everythings is event like button click, keyboard, input, multiline,
-key ---> Getvalues ı give you 1 example you can understan why ı change key name for GetValues
 
 >gc is class name
 
 gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
 Themecolors().GnuChanOS
 
-event -> gc.GetEvent
-window[] -> gc.GetWindow[].update()
-value[]  -> gc.GetValues[]
-key=""   -> SetValue=""
 
-if gc.GetEvent == "Button":
+
+# text
+GText    -> SetText
+GButton  -> Text
+GListBox -> list
+GInput   -> InText
+GMultiline -> InText
+GCheackBox -> CText
+GRadio     -> RText
+
+
+if "Button" == gc.GetEvent:
     gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
 
 window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
@@ -64,6 +79,11 @@ window["button"].update(gc.window["text"].get())   --> text name change button n
 ```
 
 ```
+"""
+this lgpl3+ 4.61.0.206 Unreleased version
+fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
+"""
+
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
@@ -98,6 +118,7 @@ class DefaultExample:
         self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
+        #if self.KYB.Return == self.GC.GetEvent -> Press key
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         pass
