@@ -6,7 +6,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread, GMessage
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
+
 
 # Extra Lib
 
@@ -127,7 +127,8 @@ class SimpleTextEditor:
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
+
         # Call Function Here
 
 
@@ -207,10 +208,10 @@ class SimpleTextEditor:
             self.GC.GetWindow["settings"].hide_row()
         
         # Press Key For This
-        elif self.GC.GetEvent == "F1:67":
+        elif self.GC.f1 in self.GC.CurrentKey:
             self.GC.GetWindow["settings"].update(visible=True)
             self.GC.GetWindow["settings"].unhide_row()
-        elif self.GC.GetEvent == "F2:68":
+        elif self.GC.f2 in self.GC.CurrentKey:
             self.GC.GetWindow["settings"].update(visible=False)
             self.GC.GetWindow["settings"].hide_row()
         
@@ -220,11 +221,11 @@ class SimpleTextEditor:
     f1 = hide settings
     f2 = show settings
             """
-            self.GC.GMessage(wmTitle="Help!", Text=help)
+            GMessage(WindowText="Help!", Text=help)
         ######### Settings ######### 
 
     def BeforeExit(self):
         print("Exit")
 
 if __name__ == "__main__":
-    SimpleTextEditor()
+    gc = SimpleTextEditor()

@@ -4,11 +4,9 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 # Don't do like this from lib import * for gnchangui
-from GnuChanGUI import GnuChanGUI, os
-from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
-from GnuChanGUI import GCanvas
-from GnuChanGUI import GVector2
+from GnuChanGUI import GnuChanGUI, GCanvas
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GVector2
+from GnuChanGUI import os
 
 # Extra Lib
 
@@ -46,7 +44,9 @@ class SimpleImageViever:
                 ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
+
+
         # Call Function Here
 
         self.GD = GCanvas(CanvasValue="image", Window=self.GC.GetWindow)
@@ -123,4 +123,4 @@ class SimpleImageViever:
         print("Exit")
 
 if __name__ == "__main__":
-    SimpleImageViever()
+    gc = SimpleImageViever()

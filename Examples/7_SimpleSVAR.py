@@ -6,7 +6,9 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread, time
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
+
+
+
 
 # Extra Lib
 from datetime import datetime
@@ -191,7 +193,9 @@ class SimpleRecordAndLivestream:
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
+
+
         # Call Function Here
         self.GC.GListBoxBorderSize(WindowValue="videos", Border=0)
 

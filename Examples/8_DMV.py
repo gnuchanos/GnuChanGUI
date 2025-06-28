@@ -6,7 +6,6 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, Themecolors
-from GnuChanGUI import GKeyboard
 
 # Extra Lib
 #Thread(target=DownloadVideo, args=[]).start()
@@ -36,7 +35,7 @@ class SimpleVideoAndMusicDownload:
         
         self.yt = "yt-dlp"
 
-        # Video Quality
+        # Video Quality Note: This Place must update
         self.y1080 = "bestvideo[ext=mp4][height=1080]+bestaudio[ext=m4a]/best[ext=mp4][height=1080]"
         self.y720  = "bestvideo[ext=mp4][height=720]+bestaudio[ext=m4a]/best[ext=mp4][height=720]"
         self.y480  = "bestvideo[ext=mp4][height=480]+bestaudio[ext=m4a]/best[ext=mp4][height=480]"
@@ -106,9 +105,6 @@ class SimpleVideoAndMusicDownload:
 
         # Create Window -> self.GC.window[]
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-
-        # Extra Lib
-        self.KYB = GKeyboard(window=self.GC)
 
         # Settings
         self.GC.GListBoxBorderSize(WindowValue="out_video", Border=0)
@@ -230,4 +226,4 @@ class SimpleVideoAndMusicDownload:
         print("Exit")
 
 if __name__ == "__main__":
-    SimpleVideoAndMusicDownload()
+    gc = SimpleVideoAndMusicDownload()

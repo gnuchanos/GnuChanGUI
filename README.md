@@ -54,6 +54,20 @@ gc.GetWindow[].update() = update everything in window
          
 
 
+new keyboard event example
+self.GC.d == self.GC.CurrentKey # this is hold 
+
+# sorry but i don't like windows or mac this is only for gnu/linux if you you windows or mac use old
+from GnuChanGUI import GKeyboard as GK
+
+if self.GC.GetEvent == GK().w:
+    print("this is old keyboard event i can't remove in source kod right now")
+
+
+
+
+self.GC.num2 == self.GC.CurrentKey
+
 >gc is class name
 
 gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)

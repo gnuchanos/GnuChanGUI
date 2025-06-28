@@ -6,7 +6,6 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
 from GnuChanGUI import GTimer
 
 
@@ -35,7 +34,7 @@ class SimpleTimer:
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
         # Call Function Here
         self.StartTimer = GTimer()
 
@@ -61,4 +60,4 @@ class SimpleTimer:
         self.StartTimer.KillThreads = True
 
 if __name__ == "__main__":
-    SimpleTimer()
+    gc = SimpleTimer()

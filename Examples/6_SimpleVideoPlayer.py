@@ -6,7 +6,10 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
+
+
+
+
 
 # Extra Lib
 import vlc
@@ -54,7 +57,10 @@ class SimpleVideoPlayer:
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
+
+
+
         # Call Function Here
 
         self.GC.GListBoxBorderSize(WindowValue="videos", Border=0)
@@ -80,7 +86,7 @@ class SimpleVideoPlayer:
         #self.GC.GetWindow["text"].update("this text") -> update window objects
 
         try:
-            if self.GC.GetEvent == self.KYB.Return:
+            if self.GC.enter == self.GC.CurrentKey:
                 try:
                     self.video = self.vlc_instance.media_new(f"{self._folderPath}/{self.videos[self.videos.index(str(self.GC.GetValues["videos"]).strip("[]'"))]}")
                     self.player.set_media(self.video)
@@ -157,7 +163,8 @@ class SimpleVideoPlayer:
                             self.player.set_media(self.video)
                             self.player.play()
 
-            if self.GC.GetEvent == self.KYB.h:
+            if self.GC.KeyPressed(Key=self.GC.h):
+                print("hello")
                 if not self.hideTree:
                     self.GC.GetWindow["filePath"].update(visible=False)
                     self.hideTree = True
@@ -174,4 +181,4 @@ class SimpleVideoPlayer:
         print("Exit")
 
 if __name__ == "__main__":
-    SimpleVideoPlayer()
+    gc = SimpleVideoPlayer()

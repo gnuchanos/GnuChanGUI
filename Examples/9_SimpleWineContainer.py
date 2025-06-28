@@ -47,7 +47,7 @@ class WineContainer:
 # #Thread(target=DownloadVideo, args=[]).start()
 
 
-class DefaultExample:
+class SimeWineAndLegandaryContainer:
     def __init__(self) -> None:
         self.GC = GnuChanGUI(Title = " UwU ", Size = (1024, 655), resizable = True, finalize = True)
         Themecolors().GnuChanOS        # you can change theme color
@@ -196,6 +196,7 @@ class DefaultExample:
                 self.GC.GButton(Text="Login Epic Games Account", SetValue="login"),
                 self.GC.GButton(Text="Play Game", SetValue="pgame"),
                 self.GC.GButton(Text="Remove Game", SetValue="rgame"),
+                self.GC.GButton(Text="Refresh Game List", SetValue="refgame"),
                 self.GC.GCheackBox(CText="Gamemode", SetValue="lgamemode", BColor=self.C.purple8, Checked=True),
                 self.GC.GCheackBox(CText="MangoHUD", SetValue="lmangohud", BColor=self.C.purple8, Checked=True),
                 self.GC.GPush(BColor=self.C.purple8)
@@ -220,11 +221,14 @@ class DefaultExample:
             [self.GC.GFrame(InsideWindowLayout=self.LEInstallButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
         ]
 
-        # Installed Games
-        self.LegendaryGamesInstalled = []
-        
-        # All Games
-        self.LegendaryAllGames = []
+
+        # help
+
+        self.HelpLine = [
+            [self.GC.GMultiline(SetValue="help", xStretch=True, yStretch=True, BColor=self.C.purple8, TFont="Sans. 25", ReadOnly=True)]
+        ]
+
+
 
         # main window layout you can use column and frame in here
         self.Layout = [
@@ -232,6 +236,7 @@ class DefaultExample:
                 [self.GC.GTab(Text="Create WinePrefix HERE!", TabLayout=self.CreateWine, SetValue="cWineTab")],
                 [self.GC.GTab(Text="Run Games HERE!", TabLayout=self.RunWineGames, SetValue="rWineTab")],
                 [self.GC.GTab(Text="Legendary/Epic Games", TabLayout=self.LegendaryRun, SetValue="lgames")],
+                [self.GC.GTab(Text="Help!", TabLayout=self.HelpLine, SetValue="help")],
             ], SetValue="tabG")]
         ]
 
@@ -262,14 +267,27 @@ class DefaultExample:
 
         # Legendary Games
         
-        
-        self.UpdateLEGlistbox_AllGames()
-        self.updateLEGListbox_Installed()
+
+        self.LegendaryGamesInstalled = []
+        self.LegendaryAllGames = []
+
+        Thread(target=self.updateLEGListbox_Installed, args=[]).start()
+        Thread(target=self.UpdateLEGlistbox_AllGames, args=[]).start()
 
         self.GC.GListBoxBorderSize(WindowValue="InstalledGames", Border=0)
         self.GC.GListBoxBorderSize(WindowValue="AllGames", Border=0)
 
         # Call Function Here
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -287,11 +305,15 @@ class DefaultExample:
         self.GC.GetWindow["AllGames"].update(self.LegendaryAllGames)
 
     def updateLEGListbox_Installed(self):
+        self.LegendaryGamesInstalled = []
         output = subprocess.check_output(["legendary", "list-installed", "--json"], text=True)
+        print(output, "\n\n")
         installed_games = json.loads(output)
 
         for game in installed_games:
-            self.LegendaryGamesInstalled.append(f"{game['install_path']}  -  {game['app_name']}")
+            _game = f"{game['install_path']}  -  {game['app_name']}"
+            if _game not in self.LegendaryGamesInstalled:
+                self.LegendaryGamesInstalled.append(_game)
 
         self.GC.GetWindow["InstalledGames"].update(self.LegendaryGamesInstalled)
 
@@ -427,11 +449,12 @@ class DefaultExample:
                     _GamePath  = id[0]
                 except Exception as ERR:
                     GMessage(WindowTitle="Warning", WindowText="What Game???")
-
+                
+                self.CurrentWine = ""
                 if os.path.exists("/usr/share/steam/compatibilitytools.d/proton-cachyos/files/bin/wine"):
-                    self.CachyOSProton = "/usr/share/steam/compatibilitytools.d/proton-cachyos/files/bin/wine"
-                if os.path.exists("/usr/bin/wine"):
-                    self.DefaultWine = "/usr/bin/wine"
+                    self.CurrentWine = "/usr/share/steam/compatibilitytools.d/proton-cachyos/files/bin/wine"
+                elif os.path.exists("/usr/bin/wine"):
+                    self.CurrentWine = "/usr/bin/wine"
 
                 _GameMode = ""
                 _Mangohud = ""
@@ -444,7 +467,7 @@ class DefaultExample:
                 self.Gamemode = self.GC.GetValues["gamemode"]
 
                 if len(_GameID) > 0:
-                    EpicGamesRun = f"{_GameMode} {_Mangohud} WINEPREFIX='{_GamePath}' legendary launch '{_GameID}' {self.CachyOSProton} --no-wine"
+                    EpicGamesRun = f"{_GameMode} {_Mangohud} WINEPREFIX='{_GamePath}' legendary launch '{_GameID}' {self.CurrentWine} --no-wine"
                     Thread(target=self.LERunGames, args=[EpicGamesRun]).start()
                 else:
                     GMessage(WindowTitle="Warning", WindowText="Path Is Not Real Dir Path")
@@ -469,10 +492,10 @@ class DefaultExample:
 
                 if len(self.LEPath) > 0:
                     if os.path.exists(self.LEPath):
-                        leGAMES = f"legendary install '{id[1]}' --base-path '{self.LEPath}' -y"
+                        leGAMES = f"legendary install '{id[1]}' --base-path '{self.LEPath}' -y".strip('\"')
                         Thread(target=self.LEInstallGames, args=[leGAMES]).start()
                         os.system(f"WINEPREFIX='{self.LEPath}' ")
-                        print(leGAMES)
+                        print(leGAMES, "\n\n")
                     else:
                         GMessage(WindowTitle="Warning", WindowText="Install Dir '404'")
                 else:
@@ -487,8 +510,13 @@ class DefaultExample:
             if len(self.GC.GetValues["InstalledGames"]) > 0:
                 id = getstr.split("  -  ")
                 RemoveLEGame = f"legendary uninstall '{id[1]}' -y"
+                os.system(f"rm -r {id[0]}")
                 
                 Thread(target=self.LERemoveGames, args=[RemoveLEGame]).start()
+
+        elif "refgame" == self.GC.GetEvent:
+            self.updateLEGListbox_Installed()
+
 
     def BeforeExit(self):
         with open(f"{self.HomePath}/.config/gnuchanGL/settings.gc", "w") as file:
@@ -497,7 +525,7 @@ class DefaultExample:
         print("Exit")
 
 if __name__ == "__main__":
-    DefaultExample()
+    gc = SimeWineAndLegandaryContainer()
 
 
 

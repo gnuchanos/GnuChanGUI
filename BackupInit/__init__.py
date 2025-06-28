@@ -10,10 +10,7 @@ from threading import Thread
 import psutil as p
 import time
 
-# Better Keyboard Event
-from pynput import keyboard
 
-import time
 
 """
 pip install  git+https://github.com/gnuchanos/gnuchangui
@@ -29,27 +26,26 @@ Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working
 The GUI is freezing, and you can only close the program using the task manager.
 """
 
-class GTime:
-    def __init__(self):
-        self.last_time = time.perf_counter()
-        self.FPS = 60
 
-    def DeltaTime(self):
-        now = time.perf_counter()
-        delta = now - self.last_time
-        self.last_time = now
 
-        if self.FPS > 0:
-            frame_duration = 1 / self.FPS
-            if delta < frame_duration:
-                time.sleep(frame_duration - delta)
 
-        return delta
 
-# Warning You can use this gnu/linux, Windows/Spyware/garbage or mac/spyware
-# if you use gnu/linux use GnuChanGUI().num2 == GnuChanGUI().CurrentKey
+
+
+# Keyboard event / Colors / ready theme and gui class
+# Simple timer System works in diffrent thread
+# pygame mixer for sound
+# simple warning window
+
+# Simple Keyboard
 class GKeyboard:
-    def __init__(self) -> None:
+    def __init__(self, window) -> None:
+        self.window = window
+        self.ReadKey = None
+        self.key = ""
+        self.ActiveKeys = []
+        self.timeout = 2
+
         # all keyboard keys
         self.f1 = "F1:67"
         self.f2 = "F2:68"
@@ -157,14 +153,22 @@ class GKeyboard:
         self.KP_Divide = "KP_Divide:106"
         self.Num_Lock = "Num_Lock:77"
 
-# Warning You can use this gnu/linux, Windows/Spyware/garbage or mac/spyware
-# if you use gnu/linux use GnuChanGUI().num2 == GnuChanGUI().CurrentKey
+        self.LeftMouseKey = "NoneValue-LEFT"
+        self.RightMouseKey = "NoneValue-RIGHT"
+        self.MiddleMouseKey = "NoneValue-MIDDLE"
 
+    # mouse event only works with this
+    def AddMouseEvent(self, MouseTrigerValue):
+        self.graph = self.window[MouseTrigerValue]
 
-# Keyboard event / Colors / ready theme and gui class
-# Simple timer System works in diffrent thread
-# pygame mixer for sound
-# simple warning window
+        self.graph.bind("<Button-1>", "-LEFT")
+        self.graph.bind("<Button-2>", "-MIDDLE")
+        self.graph.bind("<Button-3>", "-RIGHT")
+
+        self.LeftMouseKey = f"{MouseTrigerValue}-LEFT"
+        self.RightMouseKey = f"{MouseTrigerValue}-RIGHT"
+        self.MiddleMouseKey = f"{MouseTrigerValue}-MIDDLE"
+
 
 
 # more colors
@@ -451,167 +455,6 @@ class GnuChanGUI:
         # f"{gc.PathPythonFile}/music.mp3" or diffrent file
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
-
-        self.a = "A:97"
-        self.b = "B:98"
-        self.c = "C:99"
-        self.d = "D:100"
-        self.e = "E:101"
-        self.f = "F:102"
-        self.g = "G:103"
-        self.h = "H:104"
-        self.i = "I:105"
-        self.j = "J:106"
-        self.k = "K:107"
-        self.l = "L:108"
-        self.m = "M:109"
-        self.n = "N:110"
-        self.o = "O:111"
-        self.p = "P:112"
-        self.q = "Q:113"
-        self.r = "R:114"
-        self.s = "S:115"
-        self.t = "T:116"
-        self.u = "U:117"
-        self.v = "V:118"
-        self.w = "W:119"
-        self.x = "X:120"
-        self.y = "Y:121"
-        self.z = "Z:122"
-
-        self.num0 = "0:None"
-        self.num1 = "1:None"
-        self.num2 = "2:None"
-        self.num3 = "3:None"
-        self.num4 = "4:None"
-        self.num5 = "<65437>:65437"
-        self.num6 = "6:None"
-        self.num7 = "7:None"
-        self.num8 = "8:None"
-        self.num9 = "9:None"
-
-        self.space = "Space:32"
-        self.enter = "Enter:65293"
-        self.tab = "Tab:65289" 
-        self.backspace = "Backspace:65288"
-        self.comma = "Comma:44"
-        self.period = "Period:46"
-        self.slash = "Slash:47"
-        self.backslash = "Backslash:92"
-        self.semicolon = "Semicolon:59"
-        self.quote = "Quote:39"
-        self.minus = "Minus:45"
-        self.equal = "Equal:61"
-        self.left_bracket = "Left_Bracket:91"
-        self.right_bracket = "Right_Bracket:93"
-        self.grave = "Grave:96"
-
-        self.f1 = "F1:65470"
-        self.f2 = "F2:65471"
-        self.f3 = "F3:65472"
-        self.f4 = "F4:65473"
-        self.f5 = "F5:65474"
-        self.f6 = "F6:65475"
-        self.f7 = "F7:65476"
-        self.f8 = "F8:65477"
-        self.f9 = "F9:65478"
-        self.f10 = "F10:65479"
-        self.f11 = "F11:65480"
-        self.f12 = "F12:65481"
-
-        self.up = "Up:65362"
-        self.down = "Down:65364"
-        self.left = "Left:65361"
-        self.right = "Right:65363"
-
-        self.ctrl_l = "Ctrl_L:65507"
-        self.ctrl_r = "Ctrl_R:65508"
-        self.alt_l = "Alt_L:65513"
-        self.alt_r = "Alt_R:65514"
-        self.shift_l = "Shift_L:65505"
-        self.shift_r = "Shift_R:65506"
-        self.caps_lock = "Caps_Lock:65509"
-        self.esc = "Esc:65307"
-        self.delete = "Delete:65535"
-        self.home = "Home:65360"
-        self.end = "End:65367"
-        self.page_up = "Page_Up:65365"
-        self.page_down = "Page_Down:65366"
-        self.num_lock = "Num_Lock:65407"
-        self.print_screen = "Print_Screen:65377"
-        self.pause = "Pause:65299"
-
-        self.kp_0 = "Keypad_0:65438"
-        self.kp_1 = "Keypad_1:65436"
-        self.kp_2 = "Keypad_2:65433"
-        self.kp_3 = "Keypad_3:65435"
-        self.kp_4 = "Keypad_4:65430"
-        self.kp_5 = "Keypad_5:65437"
-        self.kp_6 = "Keypad_6:65432"
-        self.kp_7 = "Keypad_7:65429"
-        self.kp_8 = "Keypad_8:65431"
-        self.kp_9 = "Keypad_9:65434"
-
-        self.kp_add = "Keypad_Plus:65451"
-        self.kp_subtract = "Keypad_Minus:65453"
-        self.kp_multiply = "Keypad_Multiply:65450"
-        self.kp_divide = "Keypad_Divide:65455"
-        self.kp_enter = "Keypad_Enter:65421"
-        self.kp_decimal = "Keypad_Decimal:65454"
-
-        self.media_play_pause = "Media_Play_Pause:179"
-        self.media_volume_mute = "Media_Volume_Mute:173"
-        self.media_volume_up = "Media_Volume_Up:175"
-        self.media_volume_down = "Media_Volume_Down:174"
-        self.media_previous = "Media_Previous:177"
-        self.media_next = "Media_Next:176"
-
-        self.CurrentKey = ""
-        self.pressing = False
-
-        self.PressTimer = 1
-        self.PressWait  = False
-
-        self.Time = GTime()
-
-        threading.Thread(target=self.listen, daemon=True).start()
-
-    def on_press(self, key):
-        code = getattr(key, 'vk', getattr(getattr(key, 'value', None), 'vk', 'N/A'))
-        try:
-            if hasattr(key, 'char') and key.char is not None:
-                key_name = key.char.upper()
-            else:
-                key_name = str(key).replace('Key.', '').capitalize()
-        except AttributeError:
-            key_name = str(key).replace('Key.', '')
-
-        self.CurrentKey = f"{key_name}:{code}"
-        self.pressing = True
-
-    def on_release(self, key):
-        self.pressing = False
-        self.CurrentKey = ""
-
-
-    def listen(self):
-        with keyboard.Listener(on_press=self.on_press, on_release=self.on_release) as listener:
-            listener.join()
-
-    def KeyPressed(self, Key: str):
-        if Key == self.CurrentKey and not self.PressWait:
-            self.PressWait = True
-            return True
-        
-        if self.PressWait:
-            if self.PressTimer > 0:
-                self.PressTimer -= 1 * self.Time.DeltaTime()
-            else:
-                self.PressTimer = 1
-                self.PressWait = False
-  
-    
-
     # Create Window
     def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, KeepOnTop = True, Borderless = False):
         if SetMainWindowLayout_List != None:
@@ -632,7 +475,7 @@ class GnuChanGUI:
         window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
         """
 
-    def SetUpdate(self, Update: str = "", exitBEFORE: str = "", TimeOUT: int = 100):
+    def SetUpdate(self, Update: str ="", exitBEFORE: str ="", TimeOUT: int =1000):
         while True:
             self.GetEvent, self.GetValues = self.GetWindow.read(timeout=TimeOUT)
             if self.GetEvent in (WIN_CLOSED, "Exit"):
@@ -733,7 +576,7 @@ class GnuChanGUI:
     def GCanvas(
         self, SetValue: str, BColor: str = "black", xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0, 
         Size: tuple = (None, None), EmptySpace: tuple = (None, None)
-    ): 
+        ): 
         
         return Canvas(
             key=SetValue, background_color=BColor, expand_x=xStretch, expand_y=yStretch, visible=Visible, border_width=border, size=Size, pad=EmptySpace
@@ -741,12 +584,6 @@ class GnuChanGUI:
     """
     This is not finish yet!
     but you can draw someting in canvas use GCanvas Class
-
-    self.Layout = [
-        [self.GC.GCanvas(SetValue="canvas", xStretch=True, yStretch=True)]
-    ]
-    
-    self.Canvas = GCanvas(CanvasValue="canvas", Window=self.GC.GetWindow)
     """
 
     # window widgets
@@ -1216,8 +1053,6 @@ class GCanvas:
         self.CanvasID = self.Canvas.winfo_id()         # widget ID
         self.DrawList = {}
 
-        self.KeepDraw = True
-
         self.Scene_LOGO = 0
         self.Scene_MENU = 1
         self.Scene_GAMEPLAY = 2
@@ -1247,9 +1082,6 @@ class GCanvas:
         self.Hit1 = False
         self.speed = 75
         self.stop = False
-
-    def Start(self):
-        threading.Thread(target=self.Draw, daemon=True).start()
 
     # Clear Man or 23123123123 Gender
     def ClearCanvas(self):
@@ -1410,7 +1242,7 @@ class GCanvas:
             print(ERR, " Get Object Visible")
 
     # move object realtime this is not teleport like thing
-    def MoveObject(self, Object="ObjectName", Speed=50, WhichDirection="left", XorY='x'):
+    def MoveObject(self, Object=0, Speed=50, WhichDirection="left", XorY='x'):
         if str(XorY.startswith('x')).lower():
             try:
                 if str(WhichDirection).startswith("l"):
@@ -1587,56 +1419,41 @@ class GCanvas:
 
     # this is simple way render pipline
     def Draw(self):
-        target_fps = 60
-        frame_duration = 1.0 / target_fps
-
-        while self.KeepDraw:
-            start_time = time.time()
-            try:
-                self.ClearCanvas()
-                for i in self.DrawList:
-                    if self.DrawList[i][self.Active]:
-                        if self.DrawList[i]["type"] == 'c':
-                            self.RenderCircle(
-                                Transform=self.DrawList[i]["transform"],
-                                Radius=self.DrawList[i]["radius"],
-                                FillColor=self.DrawList[i]["fcolor"],
-                                OutLineColor=self.DrawList[i]["ocolor"] )
-                            break
-                        elif self.DrawList[i]["type"] == 'r':
-                            self.RenderRectangle(
-                                Transform=self.DrawList[i]["transform"],
-                                Scale=self.DrawList[i]["scale"],
-                                FillColor=self.DrawList[i]["fcolor"],
-                                OutLineColor=self.DrawList[i]["ocolor"] )
-                            break
-                        elif self.DrawList[i]["type"] == 'l':
-                            self.RenderLine(
-                                Transform=self.DrawList[i]["transform"],
-                                Scale=self.DrawList[i]["scale"],
-                                Color=self.DrawList[i]["fcolor"],
-                                width=self.DrawList[i]["b"] )
-                            break
-                        elif self.DrawList[i]["type"] == 't':
-                            self.RenderText(
-                                Text=self.DrawList[i]["text"],
-                                Transform=self.DrawList[i]["transform"],
-                                Font=self.DrawList[i]["font"],
-                                Size=self.DrawList[i]["scale"],
-                                Color=self.DrawList[i]["color"] )
-                            break
-                        elif self.DrawList[i]["type"] == 'i':
-                            self.RenderImage(
-                                Image=self.DrawList[i]["Image"],
-                                Transform=self.DrawList[i]["transform"] )
-                            break
-            except Exception as ERR:
-                print(ERR, "This is Error")
-
-            elapsed = time.time() - start_time
-            sleep_time = frame_duration - elapsed
-            if sleep_time > 0:
-                time.sleep(sleep_time)
+        try:
+            self.ClearCanvas()
+            for i in self.DrawList:
+                if self.DrawList[i][self.Active]:
+                    if self.DrawList[i]["type"] == 'c':
+                        self.RenderCircle(
+                            Transform=self.DrawList[i]["transform"],
+                            Radius=self.DrawList[i]["radius"],
+                            FillColor=self.DrawList[i]["fcolor"],
+                            OutLineColor=self.DrawList[i]["ocolor"] )
+                    if self.DrawList[i]["type"] == 'r':
+                        self.RenderRectangle(
+                            Transform=self.DrawList[i]["transform"],
+                            Scale=self.DrawList[i]["scale"],
+                            FillColor=self.DrawList[i]["fcolor"],
+                            OutLineColor=self.DrawList[i]["ocolor"] )
+                    if self.DrawList[i]["type"] == 'l':
+                        self.RenderLine(
+                            Transform=self.DrawList[i]["transform"],
+                            Scale=self.DrawList[i]["scale"],
+                            Color=self.DrawList[i]["fcolor"],
+                            width=self.DrawList[i]["b"] )
+                    if self.DrawList[i]["type"] == 't':
+                        self.RenderText(
+                            Text=self.DrawList[i]["text"],
+                            Transform=self.DrawList[i]["transform"],
+                            Font=self.DrawList[i]["font"],
+                            Size=self.DrawList[i]["scale"],
+                            Color=self.DrawList[i]["color"] )
+                    if self.DrawList[i]["type"] == 'i':
+                        self.RenderImage(
+                            Image=self.DrawList[i]["Image"],
+                            Transform=self.DrawList[i]["transform"] )
+        except Exception as ERR:
+            print(ERR, "This is Error")
 
 
 

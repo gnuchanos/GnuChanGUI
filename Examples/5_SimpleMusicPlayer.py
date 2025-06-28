@@ -6,7 +6,6 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
 from GnuChanGUI import GMixer
 
 # Extra Lib
@@ -54,7 +53,10 @@ class SimpleMusicPlayer:
         ]
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+
+
+
+
         # Call Function Here
         self.GC.GetWindow["input"].update("Music")
         self.GC.GListBoxBorderSize(WindowValue="mp3", Border=0)
@@ -96,12 +98,12 @@ class SimpleMusicPlayer:
         elif self.GC.GetEvent == "Stop Music":
             self.musicPlay.StopSound()
 
-        elif self.GC.GetEvent == "Next Music" or self.GC.GetEvent == self.KYB.d:
+        elif self.GC.GetEvent == "Next Music" or self.GC.num1 == self.GC.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.NextSound_SingleChannel()
                 self.GC.GetWindow["musicName"].update(self.musicPlay.MusicName)
 
-        elif self.GC.GetEvent == "Previous Music" or self.GC.GetEvent == self.KYB.a:
+        elif self.GC.GetEvent == "Previous Music" or self.GC.num2 == self.GC.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.PreviousSound_SingleChannel()
                 self.GC.GetWindow["musicName"].update(self.musicPlay.MusicName)
@@ -125,4 +127,4 @@ class SimpleMusicPlayer:
         print("Exit")
 
 if __name__ == "__main__":
-    SimpleMusicPlayer()
+    gc = SimpleMusicPlayer()
