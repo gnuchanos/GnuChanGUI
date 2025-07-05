@@ -13,9 +13,10 @@ from GnuChanGUI import GMixer
 
 
 #Thread(target=DownloadVideo, args=[]).start()
-class SimpleMusicPlayer:
-    def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
+class SimpleMusicPlayer(GnuChanGUI):
+    def __init__(self, Title = "Defaul Title", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
@@ -23,43 +24,43 @@ class SimpleMusicPlayer:
 
         self.Buttons = [
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Add Folder"),
-                self.GC.GButton(Text="<", SetValue="Previous Music"),
-                self.GC.GButton(Text="Play Music"),
-                self.GC.GButton(Text="Stop Music"),
-                self.GC.GButton(Text=">", SetValue="Next Music"),
-                self.GC.GPush(BColor=self.C.purple8)
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Add Folder"),
+                self.GButton(Text="<", SetValue="Previous Music"),
+                self.GButton(Text="Play Music"),
+                self.GButton(Text="Stop Music"),
+                self.GButton(Text=">", SetValue="Next Music"),
+                self.GPush(BColor=self.C.purple8)
             ],
         ]
 
         # main window layout you can use column and frame in here
         self.Layout = [
             [
-                self.GC.GText(SetText=f"{os.path.expanduser("~")}/", BColor=self.C.purple7, EmptySpace=(0, 0)), 
-                self.GC.GInput(SetValue="input", xStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0))
+                self.GText(SetText=f"{os.path.expanduser("~")}/", BColor=self.C.purple7, EmptySpace=(0, 0)), 
+                self.GInput(SetValue="input", xStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0))
             ],
-            [self.GC.GColumn(winColumnLayout_List=self.Buttons, xStretch=True, BColor=self.C.purple8)],
+            [self.GColumn(winColumnLayout_List=self.Buttons, xStretch=True, BColor=self.C.purple8)],
             [ 
-                self.GC.GVSep(Color=self.CGC.FColors3),
-                self.GC.GListBox(SetValue="mp3", Size=(75, None), LFont="Sans, 15", xStretch=True, yStretch=True, BColor=self.CGC.FColors1, EmptySpace=(0, 0)),
-                self.GC.GVSep(Color=self.CGC.FColors3),
+                self.GVSep(Color=self.CGC.FColors3),
+                self.GListBox(SetValue="mp3", Size=(75, None), LFont="Sans, 15", xStretch=True, yStretch=True, BColor=self.CGC.FColors1, EmptySpace=(0, 0)),
+                self.GVSep(Color=self.CGC.FColors3),
             ],
             [ 
-                self.GC.GText(SetText="Music: ", BColor=self.C.purple8, EmptySpace=(0, 0)), 
-                self.GC.GText(SetValue="musicName", TPosition="center",  BColor=self.C.purple8, xStretch=True, EmptySpace=(0, 0)) 
+                self.GText(SetText="Music: ", BColor=self.C.purple8, EmptySpace=(0, 0)), 
+                self.GText(SetValue="musicName", TPosition="center",  BColor=self.C.purple8, xStretch=True, EmptySpace=(0, 0)) 
             ],
-            [self.GC.GSlider(MaxRange=(0, 10), DefaultValue=5, SDirection="h", SetValue="slider", xStretch=True, BColor=self.C.purple8)   ]
+            [self.GSlider(MaxRange=(0, 10), DefaultValue=5, SDirection="h", SetValue="slider", xStretch=True, BColor=self.C.purple8)   ]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
 
 
 
 
         # Call Function Here
-        self.GC.GetWindow["input"].update("Music")
-        self.GC.GListBoxBorderSize(WindowValue="mp3", Border=0)
+        self.GetWindow["input"].update("Music")
+        self.GListBoxBorderSize(WindowValue="mp3", Border=0)
 
         self.musicPlay = GMixer()
 
@@ -74,42 +75,42 @@ class SimpleMusicPlayer:
         self.start = False
 
         # Call Function Here
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def MusicPlay(self):
-        if self.GC.GetEvent == "Add Folder":
+        if self.GetEvent == "Add Folder":
             try:
                 self.musicPlay.SoundFileList = []
-                self.path = f"{self.dir}/{self.GC.GetValues["input"]}"
+                self.path = f"{self.dir}/{self.GetValues["input"]}"
                 self.fileList = os.listdir(path=self.path)
                 for i in self.fileList:
                     if i.endswith(".mp3"):
                         self.musicPlay.SoundFileList.append(f"{self.path}/{i}")
                 self.musicPlay.SoundFileList.sort()
-                self.GC.GetWindow["mp3"].update(self.musicPlay.SoundFileList)
+                self.GetWindow["mp3"].update(self.musicPlay.SoundFileList)
             except Exception as ERR:
                 print (f"{ERR}")
 
-        if self.GC.GetEvent == "Play Music":
+        if self.GetEvent == "Play Music":
             if not self.start:
-                self.musicPlay.PlaySound_SingleChannel(SoundPath=self.GC.GetValues["mp3"][0])
-                self.GC.GetWindow["musicName"].update(self.GC.GetValues["mp3"][0])
+                self.musicPlay.PlaySound_SingleChannel(SoundPath=self.GetValues["mp3"][0])
+                self.GetWindow["musicName"].update(self.GetValues["mp3"][0])
 
-        elif self.GC.GetEvent == "Stop Music":
+        elif self.GetEvent == "Stop Music":
             self.musicPlay.StopSound()
 
-        elif self.GC.GetEvent == "Next Music" or self.GC.num1 == self.GC.CurrentKey:
+        elif self.GetEvent == "Next Music" or self.num1 == self.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.NextSound_SingleChannel()
-                self.GC.GetWindow["musicName"].update(self.musicPlay.MusicName)
+                self.GetWindow["musicName"].update(self.musicPlay.MusicName)
 
-        elif self.GC.GetEvent == "Previous Music" or self.GC.num2 == self.GC.CurrentKey:
+        elif self.GetEvent == "Previous Music" or self.num2 == self.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.PreviousSound_SingleChannel()
-                self.GC.GetWindow["musicName"].update(self.musicPlay.MusicName)
+                self.GetWindow["musicName"].update(self.musicPlay.MusicName)
 
     def volume_func(self):
-        self.volume_slider = int(self.GC.GetValues["slider"])
+        self.volume_slider = int(self.GetValues["slider"])
         if self.volume_slider != 10:
             self.volume = float(self.volume_slider)
         else:

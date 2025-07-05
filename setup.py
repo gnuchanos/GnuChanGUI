@@ -11,7 +11,6 @@ setup(
         "pygame",
         "Pillow",
         "shapely",
-        "PyGObject",
         "pynput"
     ],
 

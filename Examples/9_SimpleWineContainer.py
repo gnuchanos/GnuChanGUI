@@ -47,9 +47,10 @@ class WineContainer:
 # #Thread(target=DownloadVideo, args=[]).start()
 
 
-class SimeWineAndLegandaryContainer:
-    def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title = " UwU ", Size = (1024, 655), resizable = True, finalize = True)
+class SimeWineAndLegandaryContainer(GnuChanGUI):
+    def __init__(self, Title = "Defaul Title", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
@@ -88,84 +89,84 @@ class SimeWineAndLegandaryContainer:
         # Create
         self.CreateWineButtons = [
             [
-                self.GC.GPush(BColor=self.C.purple8),
+                self.GPush(BColor=self.C.purple8),
 
-                self.GC.GText(SetText="WinePrefix Name: ", BColor=self.C.purple8),
-                self.GC.GInput(SetValue="prefixName", xStretch=True),
-                self.GC.GButton(Text="Select Dir Path", SetValue="sdpWine"),
-                self.GC.GButton(Text="Create WinePrefix", SetValue="cWine"),
+                self.GText(SetText="WinePrefix Name: ", BColor=self.C.purple8),
+                self.GInput(SetValue="prefixName", xStretch=True),
+                self.GButton(Text="Select Dir Path", SetValue="sdpWine"),
+                self.GButton(Text="Create WinePrefix", SetValue="cWine"),
 
-                self.GC.GPush(BColor=self.C.purple8)
+                self.GPush(BColor=self.C.purple8)
             ]
         ]
 
         self.WinePrefix = [
-            [self.GC.GText(SetText="Wine Prefix dir Path", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
-            [self.GC.GListBox(SetValue="wlist0", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
+            [self.GText(SetText="Wine Prefix dir Path", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
+            [self.GListBox(SetValue="wlist0", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Remove WinePrefix", SetValue="rWine"),
-                self.GC.GPush(BColor=self.C.purple8),
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Remove WinePrefix", SetValue="rWine"),
+                self.GPush(BColor=self.C.purple8),
             ],
         ]
 
         self.Winetricks = [
-            [self.GC.GText(SetText="WineTricks All List", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
-            [self.GC.GListBox(SetValue="winetricks", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
+            [self.GText(SetText="WineTricks All List", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
+            [self.GListBox(SetValue="winetricks", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Install"),
-                self.GC.GPush(BColor=self.C.purple8),
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Install"),
+                self.GPush(BColor=self.C.purple8),
             ],
         ]
 
         self.Winetricks_Installed = [
-            [self.GC.GText(SetText="WineTricks Install List", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
-            [self.GC.GListBox(SetValue="winetricksInstalled", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
+            [self.GText(SetText="WineTricks Install List", BColor=self.C.purple6, xStretch=True, TPosition='c', EmptySpace=(0, 0))],
+            [self.GListBox(SetValue="winetricksInstalled", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0), LFont="Sans, 25", LPosition='c')],
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Refresh"),
-                self.GC.GPush(BColor=self.C.purple8),
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Refresh"),
+                self.GPush(BColor=self.C.purple8),
             ],
         ]
 
 
         self.CreateWine = [
-            [self.GC.GFrame(InsideWindowLayout=self.CreateWineButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
-            [self.GC.GText(SetText="   ")],
+            [self.GFrame(InsideWindowLayout=self.CreateWineButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
+            [self.GText(SetText="   ")],
             [
-                self.GC.GText(SetText="   "),
-                self.GC.GFrame(InsideWindowLayout=self.WinePrefix, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
-                self.GC.GText(SetText="   "),
-                self.GC.GFrame(InsideWindowLayout=self.Winetricks, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
-                self.GC.GText(SetText="   "),
-                self.GC.GFrame(InsideWindowLayout=self.Winetricks_Installed, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
-                self.GC.GText(SetText="   "),
+                self.GText(SetText="   "),
+                self.GFrame(InsideWindowLayout=self.WinePrefix, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
+                self.GText(SetText="   "),
+                self.GFrame(InsideWindowLayout=self.Winetricks, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
+                self.GText(SetText="   "),
+                self.GFrame(InsideWindowLayout=self.Winetricks_Installed, xStretch=True, yStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0)),
+                self.GText(SetText="   "),
             ],
-            [self.GC.GText(SetText="   ")],
+            [self.GText(SetText="   ")],
 
         ]
 
         # Run
         self.RunWineButtons = [
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Run .EXE", SetValue="rexe"),
-                self.GC.GCheackBox(CText="Gamemode", SetValue="gamemode", BColor=self.C.purple8, Checked=True),
-                self.GC.GCheackBox(CText="MangoHUD", SetValue="mangohud", BColor=self.C.purple8, Checked=True),
-                self.GC.GPush(BColor=self.C.purple8)
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Run .EXE", SetValue="rexe"),
+                self.GCheackBox(CText="Gamemode", SetValue="gamemode", BColor=self.C.purple8, Checked=True),
+                self.GCheackBox(CText="MangoHUD", SetValue="mangohud", BColor=self.C.purple8, Checked=True),
+                self.GPush(BColor=self.C.purple8)
             ]
         ]
 
         self.RunWineGames = [
-            [self.GC.GFrame(InsideWindowLayout=self.RunWineButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
-            [self.GC.GText(SetText="   ")],
+            [self.GFrame(InsideWindowLayout=self.RunWineButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
+            [self.GText(SetText="   ")],
             [
-                self.GC.GText(SetText="   "),
-                self.GC.GListBox(SetValue="wlist1", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0)),
-                self.GC.GText(SetText="   "),
+                self.GText(SetText="   "),
+                self.GListBox(SetValue="wlist1", xStretch=True, yStretch=True, BColor=self.C.purple7, EmptySpace=(0, 0)),
+                self.GText(SetText="   "),
             ],
-            [self.GC.GText(SetText="   ")],
+            [self.GText(SetText="   ")],
         ]
 
         # Epic Games Install Process
@@ -192,56 +193,55 @@ class SimeWineAndLegandaryContainer:
 
         self.LegendaryRunButton = [
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Login Epic Games Account", SetValue="login"),
-                self.GC.GButton(Text="Play Game", SetValue="pgame"),
-                self.GC.GButton(Text="Remove Game", SetValue="rgame"),
-                self.GC.GButton(Text="Refresh Game List", SetValue="refgame"),
-                self.GC.GCheackBox(CText="Gamemode", SetValue="lgamemode", BColor=self.C.purple8, Checked=True),
-                self.GC.GCheackBox(CText="MangoHUD", SetValue="lmangohud", BColor=self.C.purple8, Checked=True),
-                self.GC.GPush(BColor=self.C.purple8)
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Login Epic Games Account", SetValue="login"),
+                self.GButton(Text="Play Game", SetValue="pgame"),
+                self.GButton(Text="Remove Game", SetValue="rgame"),
+                self.GButton(Text="Refresh Game List", SetValue="refgame"),
+                self.GCheackBox(CText="Gamemode", SetValue="lgamemode", BColor=self.C.purple8, Checked=True),
+                self.GCheackBox(CText="MangoHUD", SetValue="lmangohud", BColor=self.C.purple8, Checked=True),
+                self.GPush(BColor=self.C.purple8)
             ],
         ]
 
         self.LEInstallButtons = [
             [
-                self.GC.GPush(BColor=self.C.purple8),
-                self.GC.GButton(Text="Select Dir", SetValue="ldpath"),
-                self.GC.GButton(Text="Install Game", SetValue="linstall"),
-                self.GC.GPush(BColor=self.C.purple8),
+                self.GPush(BColor=self.C.purple8),
+                self.GButton(Text="Select Dir", SetValue="ldpath"),
+                self.GButton(Text="Install Game", SetValue="linstall"),
+                self.GPush(BColor=self.C.purple8),
             ]
         ]
 
         self.LegendaryRun = [
-            [self.GC.GFrame(InsideWindowLayout=self.LegendaryRunButton, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
-            [self.GC.GText(SetText="Installed All Epic Games", xStretch=True, BColor=self.C.purple7)],
-            [self.GC.GListBox(SetValue="InstalledGames", xStretch=True, yStretch=True)],
-            [self.GC.GText(SetText="All Epic Games", xStretch=True, BColor=self.C.purple7)],
-            [self.GC.GListBox(SetValue="AllGames", xStretch=True, yStretch=True)],
-            [self.GC.GFrame(InsideWindowLayout=self.LEInstallButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
+            [self.GFrame(InsideWindowLayout=self.LegendaryRunButton, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
+            [self.GText(SetText="Installed All Epic Games", xStretch=True, BColor=self.C.purple7)],
+            [self.GListBox(SetValue="InstalledGames", xStretch=True, yStretch=True)],
+            [self.GText(SetText="All Epic Games", xStretch=True, BColor=self.C.purple7)],
+            [self.GListBox(SetValue="AllGames", xStretch=True, yStretch=True)],
+            [self.GFrame(InsideWindowLayout=self.LEInstallButtons, xStretch=True, Border=0, BColor=self.C.purple8, EmptySpace=(0, 0))],
         ]
 
 
         # help
 
         self.HelpLine = [
-            [self.GC.GMultiline(SetValue="help", xStretch=True, yStretch=True, BColor=self.C.purple8, TFont="Sans. 25", ReadOnly=True)]
+            [self.GMultiline(SetValue="help", xStretch=True, yStretch=True, BColor=self.C.purple8, TFont="Sans. 25", ReadOnly=True)]
         ]
 
 
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            [self.GC.GTabGroup(TabGroupLayout=[
-                [self.GC.GTab(Text="Create WinePrefix HERE!", TabLayout=self.CreateWine, SetValue="cWineTab")],
-                [self.GC.GTab(Text="Run Games HERE!", TabLayout=self.RunWineGames, SetValue="rWineTab")],
-                [self.GC.GTab(Text="Legendary/Epic Games", TabLayout=self.LegendaryRun, SetValue="lgames")],
-                [self.GC.GTab(Text="Help!", TabLayout=self.HelpLine, SetValue="help")],
+            [self.GTabGroup(TabGroupLayout=[
+                [self.GTab(Text="Create WinePrefix HERE!", TabLayout=self.CreateWine, SetValue="cWineTab")],
+                [self.GTab(Text="Run Games HERE!", TabLayout=self.RunWineGames, SetValue="rWineTab")],
+                [self.GTab(Text="Legendary/Epic Games", TabLayout=self.LegendaryRun, SetValue="lgames")],
+                [self.GTab(Text="Help!", TabLayout=self.HelpLine, SetValue="help")],
             ], SetValue="tabG")]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
 
 
         # Call Function Here
@@ -249,11 +249,11 @@ class SimeWineAndLegandaryContainer:
         self.ALLGListbox = ( "wlist0", "wlist1", "winetricks", "winetricksInstalled" )
 
         for i in self.ALLGListbox:
-            self.GC.GListBoxBorderSize(WindowValue=i, Border=0)
+            self.GListBoxBorderSize(WindowValue=i, Border=0)
 
         # load json
-        self.GC.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
-        self.GC.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+        self.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+        self.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
 
         self.allWineTrickPackages =  (
             "d3dx9", "directx9", "d3dx10", "d3dx11", "dxvk", "vkd3d", "cnc_ddraw",
@@ -263,7 +263,7 @@ class SimeWineAndLegandaryContainer:
             "wmp9", "wmp10", "msxml3", "mfc42", "wsh57", "devenum",
             "corefonts", "cjkfonts", "physx", "dxdiag", "dxdiagn"
         )
-        self.GC.GetWindow["winetricks"].update(self.allWineTrickPackages)
+        self.GetWindow["winetricks"].update(self.allWineTrickPackages)
 
         # Legendary Games
         
@@ -274,8 +274,8 @@ class SimeWineAndLegandaryContainer:
         Thread(target=self.updateLEGListbox_Installed, args=[]).start()
         Thread(target=self.UpdateLEGlistbox_AllGames, args=[]).start()
 
-        self.GC.GListBoxBorderSize(WindowValue="InstalledGames", Border=0)
-        self.GC.GListBoxBorderSize(WindowValue="AllGames", Border=0)
+        self.GListBoxBorderSize(WindowValue="InstalledGames", Border=0)
+        self.GListBoxBorderSize(WindowValue="AllGames", Border=0)
 
         # Call Function Here
 
@@ -293,7 +293,7 @@ class SimeWineAndLegandaryContainer:
 
 
 
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def UpdateLEGlistbox_AllGames(self):
         output = subprocess.check_output(["legendary", "list-games", "--json"], text=True)
@@ -302,7 +302,7 @@ class SimeWineAndLegandaryContainer:
         for game in all_games:
             self.LegendaryAllGames.append(f"{game['app_title']}  -  {game['app_name']}")
 
-        self.GC.GetWindow["AllGames"].update(self.LegendaryAllGames)
+        self.GetWindow["AllGames"].update(self.LegendaryAllGames)
 
     def updateLEGListbox_Installed(self):
         self.LegendaryGamesInstalled = []
@@ -315,7 +315,7 @@ class SimeWineAndLegandaryContainer:
             if _game not in self.LegendaryGamesInstalled:
                 self.LegendaryGamesInstalled.append(_game)
 
-        self.GC.GetWindow["InstalledGames"].update(self.LegendaryGamesInstalled)
+        self.GetWindow["InstalledGames"].update(self.LegendaryGamesInstalled)
 
     def CreateWinePrefix(self, _prefixPath: str):
         os.popen(f"WINEPREFIX={_prefixPath} winecfg")
@@ -327,9 +327,9 @@ class SimeWineAndLegandaryContainer:
         _gamemode = ""
         _mangohud = ""
 
-        if self.GC.GetValues["gamemode"]: 
+        if self.GetValues["gamemode"]: 
             _gamemode = "gamemoderun"
-        if self.GC.GetValues["mangohud"]: 
+        if self.GetValues["mangohud"]: 
             _mangohud = "mangohud --dlsym"
 
         cmd = f"{_gamemode} {_mangohud} WINEPREFIX='{_prefixPath}' wine '{GamePath}'"
@@ -338,7 +338,7 @@ class SimeWineAndLegandaryContainer:
     def WineTricksInstallPack(self, PrefixPath: str, PackName: str):
         cmd = f"WINEPREFIX='{PrefixPath}' winetricks '{PackName}'"
         os.system(cmd)
-        self.GC.GetWindow["InstalledGames"].update(self.LegendaryGamesInstalled)
+        self.GetWindow["InstalledGames"].update(self.LegendaryGamesInstalled)
         print(cmd)
     
     def LEInstallGames(self, cmd: str):
@@ -353,27 +353,27 @@ class SimeWineAndLegandaryContainer:
         os.system(cmd)
 
     def Update(self):
-        #if self.KYB.Return == self.GC.GetEvent -> Press key
-        #self.GC.GetEvent == "event" -> window event
-        #self.GC.GetWindow["text"].update("this text") -> update window objects
+        #if self.KYB.Return == self.GetEvent -> Press key
+        #self.GetEvent == "event" -> window event
+        #self.GetWindow["text"].update("this text") -> update window objects
 
 
-        if "sdpWine" == self.GC.GetEvent:
+        if "sdpWine" == self.GetEvent:
             try:
-                self.PlaceHolderPrefixPath = self.GC.GetFolderPath()
+                self.PlaceHolderPrefixPath = self.GetFolderPath()
 
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText=ERR)
 
-        elif "cWine" == self.GC.GetEvent:
+        elif "cWine" == self.GetEvent:
             try:
-                if len(self.GC.GetValues["prefixName"]) > 0:
-                    PrefixName = self.GC.GetValues["prefixName"]
+                if len(self.GetValues["prefixName"]) > 0:
+                    PrefixName = self.GetValues["prefixName"]
                     _prefixPath = os.path.join(self.PlaceHolderPrefixPath, PrefixName)
                     self.ThisWinePrefixContainers.CreateWinePrefix(Path=_prefixPath, PrefixName=PrefixName)
 
-                    self.GC.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
-                    self.GC.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+                    self.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+                    self.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
 
                     if not os.path.exists(_prefixPath):
                         Thread(target=self.CreateWinePrefix, args=[_prefixPath]).start()
@@ -381,13 +381,13 @@ class SimeWineAndLegandaryContainer:
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText=ERR)
 
-        elif "rWine" == self.GC.GetEvent:
+        elif "rWine" == self.GetEvent:
             try:
-                Path = str(self.GC.GetValues["wlist0"]).strip("['']")
+                Path = str(self.GetValues["wlist0"]).strip("['']")
                 self.ThisWinePrefixContainers.RemoveWinePrefix(Path=Path)
 
-                self.GC.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
-                self.GC.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+                self.GetWindow["wlist0"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
+                self.GetWindow["wlist1"].update(self.ThisWinePrefixContainers.WinePrefixPathList)
 
                 if os.path.exists(Path):
                     Thread(target=self.RemoveWinePrefix, args=[Path]).start()
@@ -395,10 +395,10 @@ class SimeWineAndLegandaryContainer:
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText=ERR)
 
-        elif "rexe" == self.GC.GetEvent:
+        elif "rexe" == self.GetEvent:
             try:
-                Path = str(self.GC.GetValues["wlist1"]).strip("['']")
-                exePath = self.GC.GetFilePath(defaultPATH=Path)
+                Path = str(self.GetValues["wlist1"]).strip("['']")
+                exePath = self.GetFilePath(defaultPATH=Path)
 
                 if os.path.exists(exePath):
                     Thread(target=self.RunExe, args=[Path, exePath]).start()
@@ -406,39 +406,39 @@ class SimeWineAndLegandaryContainer:
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText="Select Game File?")
 
-        elif "Refresh" == self.GC.GetEvent:
+        elif "Refresh" == self.GetEvent:
             try:
-                Path = str(self.GC.GetValues["wlist0"]).strip("['']")
+                Path = str(self.GetValues["wlist0"]).strip("['']")
                 _prefixName = Path.split("/")
                 _AllInstalledList = self.ThisWinePrefixContainers.WinePrefix[_prefixName[-1]]["Winetricks"]
-                self.GC.GetWindow["winetricksInstalled"].update(_AllInstalledList)
+                self.GetWindow["winetricksInstalled"].update(_AllInstalledList)
             
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText=ERR)
         
-        elif "Install" == self.GC.GetEvent:
+        elif "Install" == self.GetEvent:
             try:
-                Path = str(self.GC.GetValues["wlist0"]).strip("['']")
-                SelectPackage = str(self.GC.GetValues["winetricks"]).strip("['']")
+                Path = str(self.GetValues["wlist0"]).strip("['']")
+                SelectPackage = str(self.GetValues["winetricks"]).strip("['']")
                 if len(Path) > 0 and len(SelectPackage) > 0:
                     _prefixName = Path.split("/")
 
                     # winetricksInstalled
                     if SelectPackage not in self.ThisWinePrefixContainers.WinePrefix[_prefixName[-1]]["Winetricks"]:
                         self.ThisWinePrefixContainers.WinePrefix[_prefixName[-1]]["Winetricks"].append(SelectPackage)
-                        self.GC.GetWindow["winetricksInstalled"].update(self.ThisWinePrefixContainers.WinePrefix[_prefixName[-1]]["Winetricks"])
+                        self.GetWindow["winetricksInstalled"].update(self.ThisWinePrefixContainers.WinePrefix[_prefixName[-1]]["Winetricks"])
 
                         Thread(target=self.WineTricksInstallPack, args=[Path, SelectPackage]).start()
             except Exception as ERR:
                 GMessage(WindowTitle="Path Err", WindowText=ERR)
 
-        elif "login" == self.GC.GetEvent:
+        elif "login" == self.GetEvent:
             subprocess.Popen( ['xterm', '-e', 'bash', '-c', 'legendary auth; exec bash'] )
 
-        elif "pgame" == self.GC.GetEvent:
-            getstr = str(self.GC.GetValues["InstalledGames"]).strip("['']")
+        elif "pgame" == self.GetEvent:
+            getstr = str(self.GetValues["InstalledGames"]).strip("['']")
 
-            if len(self.GC.GetValues["InstalledGames"]) > 0:
+            if len(self.GetValues["InstalledGames"]) > 0:
                 id     = getstr.split("  -  ")
 
                 _GameID = ""
@@ -459,12 +459,12 @@ class SimeWineAndLegandaryContainer:
                 _GameMode = ""
                 _Mangohud = ""
                     
-                if self.GC.GetValues["lgamemode"]: 
+                if self.GetValues["lgamemode"]: 
                     _GameMode = "gamemoderun"
-                if self.GC.GetValues["lmangohud"]: 
+                if self.GetValues["lmangohud"]: 
                     _Mangohud = "mangohud --dlsym"
                     
-                self.Gamemode = self.GC.GetValues["gamemode"]
+                self.Gamemode = self.GetValues["gamemode"]
 
                 if len(_GameID) > 0:
                     EpicGamesRun = f"{_GameMode} {_Mangohud} WINEPREFIX='{_GamePath}' legendary launch '{_GameID}' {self.CurrentWine} --no-wine"
@@ -481,12 +481,12 @@ class SimeWineAndLegandaryContainer:
                 --no-wine
             """
 
-        elif "ldpath" == self.GC.GetEvent:
-            self.LEPath = self.GC.GetFolderPath()
+        elif "ldpath" == self.GetEvent:
+            self.LEPath = self.GetFolderPath()
 
-        elif "linstall" == self.GC.GetEvent:
-            if len(self.GC.GetValues["AllGames"]) > 0:
-                _IDPath = str(self.GC.GetValues["AllGames"]).strip("['']")
+        elif "linstall" == self.GetEvent:
+            if len(self.GetValues["AllGames"]) > 0:
+                _IDPath = str(self.GetValues["AllGames"]).strip("['']")
                 id      = _IDPath.split("  -  ")
                 leGAMES = ""
 
@@ -504,17 +504,17 @@ class SimeWineAndLegandaryContainer:
             """
             legendary install {GameName} --install-dir {/mnt/games/fortnite}
             """
-        elif "rgame" == self.GC.GetEvent:
-            getstr = str(self.GC.GetValues["InstalledGames"]).strip("['']")
+        elif "rgame" == self.GetEvent:
+            getstr = str(self.GetValues["InstalledGames"]).strip("['']")
 
-            if len(self.GC.GetValues["InstalledGames"]) > 0:
+            if len(self.GetValues["InstalledGames"]) > 0:
                 id = getstr.split("  -  ")
                 RemoveLEGame = f"legendary uninstall '{id[1]}' -y"
                 os.system(f"rm -r {id[0]}")
                 
                 Thread(target=self.LERemoveGames, args=[RemoveLEGame]).start()
 
-        elif "refgame" == self.GC.GetEvent:
+        elif "refgame" == self.GetEvent:
             self.updateLEGListbox_Installed()
 
 
