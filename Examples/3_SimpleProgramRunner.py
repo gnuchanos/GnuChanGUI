@@ -9,8 +9,6 @@ from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 
 
 # Extra Lib
-
-
 #Thread(target=DownloadVideo, args=[]).start()
 class SimpleProgramRunner:
     def __init__(self) -> None:
@@ -49,8 +47,6 @@ class SimpleProgramRunner:
             # Extra List
             "code", "deluge", "fdm",
             "nemo",
-
-
         ]
 
 
@@ -60,13 +56,7 @@ class SimpleProgramRunner:
                 self.GC.GInput(SetValue="input",  xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0)) 
             ],
             [self.GC.GHSep(Color=self.CGC.FColors3)],
-            [self.GC.GListBox(SetValue="software", LFont="Sans, 14", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True)],
-            [self.GC.GHSep(Color=self.CGC.FColors3)],
-            [
-                self.GC.GPush(self.CGC.BGColor),
-                self.GC.GButton(Text="Run Program", TFont="Sans, 20"),
-                self.GC.GPush(self.CGC.BGColor),
-            ],
+            [self.GC.GListBox(SetValue="software", LFont="Sans, 30", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True)],
             [self.GC.GHSep(Color=self.CGC.FColors3)],
         ]
 
@@ -74,6 +64,7 @@ class SimpleProgramRunner:
             [self.GC.GColumn(winColumnLayout_List=self.middleThings, xStretch=True, yStretch=True)],
             [self.GC.GText(SetText="The program calls Linux commands, but there is no error message. Please check the Python file for more information.", TFont="Sans, 13", xStretch=True) ]
         ]
+        
 
         self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
 
@@ -106,8 +97,10 @@ class SimpleProgramRunner:
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         
         # Run Program In Line
-        if self.GC.enter in self.GC.CurrentKey:
+        if self.GC.enter == self.GC.CurrentKey:
             _commandInput = str(self.GC.GetValues["input"])
+            _Select = str(self.GC.GetValues["software"]).strip("[]''")
+
             if len(_commandInput) > 0:
                 if "brave" == _commandInput:
                     os.popen("brave --password-store=basic")
@@ -115,10 +108,7 @@ class SimpleProgramRunner:
                     Thread(target=self.RunThis, args=[_commandInput]).start()
                 self.GC.closeWindow = True
 
-        # Run Program In List
-        elif self.GC.GetEvent == "Run Program":
-            _Select = str(self.GC.GetValues["software"]).strip("[]''")
-            if _Select != "":
+            elif _Select != "":
                 Thread(target=self.RunThis, args=[_Select]).start()
                 self.GC.closeWindow = True
 

@@ -55,23 +55,20 @@ gc.GetWindow[].update() = update everything in window
 
 
 new keyboard event example
-self.GC.d == self.GC.CurrentKey # this is hold 
+self.d == self.CurrentKey # this is hold 
 
 # sorry but i don't like windows or mac this is only for gnu/linux if you you windows or mac use old
 from GnuChanGUI import GKeyboard as GK
 
-if self.GC.GetEvent == GK().w:
+if self.GetEvent == GK().w:
     print("this is old keyboard event i can't remove in source kod right now")
 
 
 
 
-self.GC.num2 == self.GC.CurrentKey
+self.num2 == self.CurrentKey
 
 >gc is class name
-
-gc = GnuChanGUI(Title="", Size=(250, 600), resizable=False, finalize=True)
-Themecolors().GnuChanOS
 
 
 
@@ -93,24 +90,26 @@ window["button"].update(gc.window["text"].get())   --> text name change button n
 ```
 
 ```
+
 """
 this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
 # Don't do like this from lib import * for gnchangui
-from GnuChanGUI import GnuChanGUI, os, Thread
-from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-from GnuChanGUI import GKeyboard
-
+from GnuChanGUI import GnuChanGUI, os, Thread, GTime
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GCanvas, GVector2
+from GnuChanGUI import GKeyboard as GK
 
 # Extra Lib
 # #Thread(target=DownloadVideo, args=[]).start()
 
+# note this is test Place
 
-class DefaultExample:
-    def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
+class DefaultExample(GnuChanGUI):
+    def __init__(self, Title="Defaul Title", Size=(300, 300), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2):
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
@@ -118,28 +117,31 @@ class DefaultExample:
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            
+            [self.GCanvas(SetValue="canvas", xStretch=True, yStretch=True)]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.KYB = GKeyboard(window=self.GC)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
         # Call Function Here
 
-
-
+        # update window/getvalue
 
         # Call Function Here
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
         #if self.KYB.Return == self.GC.GetEvent -> Press key
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
+        
         pass
+
+
 
     def BeforeExit(self):
         print("Exit")
 
 if __name__ == "__main__":
-    DefaultExample()
+    gc = DefaultExample()
+
+
 ```

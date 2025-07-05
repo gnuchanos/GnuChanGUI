@@ -89,7 +89,7 @@ class SimpleMusicPlayer:
                 self.GC.GetWindow["mp3"].update(self.musicPlay.SoundFileList)
             except Exception as ERR:
                 print (f"{ERR}")
-        
+
         if self.GC.GetEvent == "Play Music":
             if not self.start:
                 self.musicPlay.PlaySound_SingleChannel(SoundPath=self.GC.GetValues["mp3"][0])

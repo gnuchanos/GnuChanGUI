@@ -25,7 +25,7 @@ python -m venv ./venv
 """
 
 """
-Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working with Thread(target=Create, args=[]).start(). 
+Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working with Thread(target=Create, args=[]).start()
 The GUI is freezing, and you can only close the program using the task manager.
 """
 
@@ -415,7 +415,7 @@ class Themecolors:
 
 # i hope this become better one day
 class GnuChanGUI:
-    def __init__(self, Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920/2, winPosY=1080/2) -> None:
+    def __init__(self, Title: str = "Defaul Title", Size: tuple = (800, 600), resizable: bool = False, finalize: bool = True, winPosX: float = 1920/2, winPosY: float = 1080/2) -> None:
         self.size = Size
         self.title = Title
         self.resizable = resizable
@@ -622,7 +622,7 @@ class GnuChanGUI:
         self.GetWindow = Window(
             self.title, 
             layout=self.layout, size=self.size, keep_on_top=KeepOnTop, resizable=self.resizable,
-            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(self.WinPosX-self.size[0]/2, self.WinPosY-self.size[0]/2),
+            finalize=self.finalize, right_click_menu=rightClickMenu, return_keyboard_events=True, margins=(0, 0), location=(self.WinPosX-self.size[0]/2, self.WinPosY-self.size[1]/2),
             no_titlebar=Borderless
         )
         self.GetWindow.finalize()
@@ -1210,11 +1210,17 @@ class GVector2:
 """
 
 class GCanvas:
-    def __init__(self, Window: Window, CanvasValue: str) -> None:
-        self.GWindow = Window
-        self.Canvas = self.GWindow[CanvasValue].Widget # widget
+    def __init__(self, GWindow: str, CanvasValue: str) -> None:
+        self.GWindow = GWindow[CanvasValue]
+        self.Canvas = self.GWindow.Widget # widget
         self.CanvasID = self.Canvas.winfo_id()         # widget ID
         self.DrawList = {}
+
+        self.Canvas = self.GWindow.TKCanvas
+
+        width = self.Canvas.winfo_width()
+        height = self.Canvas.winfo_height()
+        self.Size = GVector2(width, height)
 
         self.KeepDraw = True
 
@@ -1747,11 +1753,16 @@ class GMixer:
 
 
 # Popup Message Window
-class GMessage:
+class GMessage(GnuChanGUI):
     def __init__(self, 
-                 WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20, 
-                 WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
-                 WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False ) -> None:
+        Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2,
+        WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20, 
+        WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
+        WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False 
+    ):
+
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
 
         self.WindowTitle      = WindowTitle
         self.windowText       = WindowText
@@ -1761,7 +1772,6 @@ class GMessage:
         self.WindowTextBackgroundColor = WindowTBC
         self.ButtonLayoutBackgroundColor = ButtonLBC
 
-        self.GC = GnuChanGUI(Title=self.WindowTitle, Size=self.WindowSize, resizable=self.WindowResizable, finalize=True)
         Themecolors().GnuChanOS        # you can change theme color
         self.CGC = GnuChanOSColor()
 
@@ -1771,27 +1781,27 @@ class GMessage:
         # main window layout you can use column and frame in here
         self.button = [
             [
-                self.GC.GPush(self.CGC.FColors11),
-                self.GC.GButton(Text = "Exit"),
-                self.GC.GPush(self.CGC.FColors11),
+                self.GPush(self.CGC.FColors11),
+                self.GButton(Text = "Exit"),
+                self.GPush(self.CGC.FColors11),
             ]
         ]
 
         self.Layout = [
-            [self.GC.GMultiline(
+            [self.GMultiline(
                 InText=self.windowText, TFont=self.TextFont, TPosition="center", 
                 xStretch=True, yStretch=True, BColor=self.WindowTextBackgroundColor, ReadOnly=True
             )],
-            [self.GC.GColumn(winColumnLayout_List=self.button, BColor=self.ButtonLayoutBackgroundColor, xStretch=True)]
+            [self.GColumn(winColumnLayout_List=self.button, BColor=self.ButtonLayoutBackgroundColor, xStretch=True)]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
 
     def Update(self):
-        if self.GC.GetEvent == "exit":
-            self.GC.closeWindow = True
+        if self.GetEvent == "exit":
+            self.closeWindow = True
 
     def BeforeExit(self):
         print(f"{self.WindowTitle} is closed")

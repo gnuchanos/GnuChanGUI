@@ -13,9 +13,11 @@ from GnuChanGUI import GTimer
 
 
 #Thread(target=DownloadVideo, args=[]).start()
-class SimpleTimer:
-    def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title="Simple Timer!", Size=(700, 228), resizable=False, finalize=True)
+class SimpleTimer(GnuChanGUI):
+    def __init__(self, Title = "Defaul Title", Size = (600, 300), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
+
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
@@ -25,32 +27,32 @@ class SimpleTimer:
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            [self.GC.GText(SetValue="timer", xStretch=True, BColor=self.CGC.SColors0, TPosition="center", TFont="Sans, 60")],
+            [self.GText(SetValue="timer", xStretch=True, BColor=self.CGC.SColors0, TPosition="center", TFont="Sans, 60")],
             [
-                self.GC.GButton(Text="Start Timer", SetValue="start", xStretch=True),
-                self.GC.GButton(Text="Clear Timer", SetValue="clear", xStretch=True),
+                self.GButton(Text="Start Timer", SetValue="start", xStretch=True),
+                self.GButton(Text="Clear Timer", SetValue="clear", xStretch=True),
             ],
-            [self.GC.GText(SetText="This Is Simple Timer Example", xStretch=True, yStretch=True, TPosition="center")]
+            [self.GText(SetText="This Is Simple Timer Example", xStretch=True, yStretch=True, TPosition="center")]
         ]
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
 
         # Call Function Here
         self.StartTimer = GTimer()
 
         # Call Function Here
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         
-        if self.GC.GetEvent == "start":
+        if self.GetEvent == "start":
             self.StartTimer.TimerStarts = True
-        elif self.GC.GetEvent == "clear":
+        elif self.GetEvent == "clear":
             self.StartTimer.TimerStarts = False
 
-        self.GC.GetWindow["timer"].update(self.StartTimer.StringTime)
+        self.GetWindow["timer"].update(self.StartTimer.StringTime)
 
 
 
