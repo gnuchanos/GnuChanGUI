@@ -83,10 +83,10 @@ GRadio     -> RText
 
 
 if "Button" == gc.GetEvent:
-    gc.window["Button"].update(gc.GetValues["ButtonNameChanger"])
+    gc.GetWindow["Button"].update(gc.GetValues["ButtonNameChanger"])
 
-window["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
-window["button"].update(gc.window["text"].get())   --> text name change button name
+GetWindow["button"].update(button_color = ("#9d4edd","#5a189a")) --> Change button color
+GetWindow["button"].update(gc.GetWindow["text"].get())   --> text name change button name
 ```
 
 ```
