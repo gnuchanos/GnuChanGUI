@@ -450,6 +450,16 @@ class GnuChanGUI:
         # f"{gc.PathPythonFile}/music.mp3" or diffrent file
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
+        self.num0 = "0:48"
+        self.num1 = "1:49"
+        self.num2 = "2:50"
+        self.num3 = "3:51"
+        self.num4 = "4:52"
+        self.num5 = "5:53"
+        self.num6 = "6:54"
+        self.num7 = "7:55"
+        self.num8 = "8:56"
+        self.num9 = "9:57"
 
         self.a = "A:97"
         self.b = "B:98"
@@ -478,16 +488,23 @@ class GnuChanGUI:
         self.y = "Y:121"
         self.z = "Z:122"
 
-        self.num0 = "0:None"
-        self.num1 = "1:None"
-        self.num2 = "2:None"
-        self.num3 = "3:None"
-        self.num4 = "4:None"
-        self.num5 = "<65437>:65437"
-        self.num6 = "6:None"
-        self.num7 = "7:None"
-        self.num8 = "8:None"
-        self.num9 = "9:None"
+        self.numpad0 = "0:None"
+        self.numpad1 = "1:None"
+        self.numpad2 = "2:None"
+        self.numpad3 = "3:None"
+        self.numpad4 = "4:None"
+        self.numpad5 = "<65437>:65437"
+        self.numpad6 = "6:None"
+        self.numpad7 = "7:None"
+        self.numpad8 = "8:None"
+        self.numpad9 = "9:None"
+
+        self.kp_add = "Keypad_Plus:65451"
+        self.kp_subtract = "Keypad_Minus:65453"
+        self.kp_multiply = "Keypad_Multiply:65450"
+        self.kp_divide = "Keypad_Divide:65455"
+        self.kp_enter = "Keypad_Enter:65421"
+        self.kp_decimal = "Keypad_Decimal:65454"
 
         self.space = "Space:32"
         self.enter = "Enter:65293"
@@ -539,24 +556,6 @@ class GnuChanGUI:
         self.num_lock = "Num_Lock:65407"
         self.print_screen = "Print_Screen:65377"
         self.pause = "Pause:65299"
-
-        self.kp_0 = "Keypad_0:65438"
-        self.kp_1 = "Keypad_1:65436"
-        self.kp_2 = "Keypad_2:65433"
-        self.kp_3 = "Keypad_3:65435"
-        self.kp_4 = "Keypad_4:65430"
-        self.kp_5 = "Keypad_5:65437"
-        self.kp_6 = "Keypad_6:65432"
-        self.kp_7 = "Keypad_7:65429"
-        self.kp_8 = "Keypad_8:65431"
-        self.kp_9 = "Keypad_9:65434"
-
-        self.kp_add = "Keypad_Plus:65451"
-        self.kp_subtract = "Keypad_Minus:65453"
-        self.kp_multiply = "Keypad_Multiply:65450"
-        self.kp_divide = "Keypad_Divide:65455"
-        self.kp_enter = "Keypad_Enter:65421"
-        self.kp_decimal = "Keypad_Decimal:65454"
 
         self.media_play_pause = "Media_Play_Pause:179"
         self.media_volume_mute = "Media_Volume_Mute:173"
@@ -1258,13 +1257,13 @@ class GMixer:
 # Popup Message Window
 class GMessage(GnuChanGUI):
     def __init__(self, 
-        Title="Defaul Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2,
+        WindowTitle="Default Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2,
         WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20, 
         WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
-        WindowTitle="Default Title", WindowSize=(700, 300), WindowResizable = False 
+        WindowSize=(700, 300), WindowResizable = False 
     ):
 
-        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+        super().__init__(WindowTitle, Size, resizable, finalize, winPosX, winPosY)
 
 
         self.WindowTitle      = WindowTitle

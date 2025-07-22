@@ -98,7 +98,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread, GTime
-from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GCanvas, GVector2
+from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GMessage
 from GnuChanGUI import GKeyboard as GK
 
 # Extra Lib
@@ -114,10 +114,18 @@ class DefaultExample(GnuChanGUI):
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
 
+        # old keyboard event
+        self.Key = GK()
+
 
         # main window layout you can use column and frame in here
         self.Layout = [
-            [self.GCanvas(SetValue="canvas", xStretch=True, yStretch=True)]
+            [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text")],
+            [
+                self.GHSep(),
+                self.GButton(Text="button", SetValue="click"),
+                self.GHSep()
+            ]
         ]
 
         self.GWindow(SetMainWindowLayout_List=self.Layout)
@@ -132,9 +140,17 @@ class DefaultExample(GnuChanGUI):
         #if self.KYB.Return == self.GC.GetEvent -> Press key
         #self.GC.GetEvent == "event" -> window event
         #self.GC.GetWindow["text"].update("this text") -> update window objects
-        
-        pass
 
+        # keyboard example
+        if self.Key.Return == self.GetEvent:
+            GMessage(WindowTitle="old version keyboard event", WindowText="message YEY")
+        
+        if self.CurrentKey == self.space:
+            GMessage(WindowTitle="new version keyboard event", WindowText="message YEY")
+
+        # button and change text example
+        if "click" == self.GetEvent:
+            self.GetWindow["text"].update("button pressed")
 
 
     def BeforeExit(self):
@@ -142,6 +158,5 @@ class DefaultExample(GnuChanGUI):
 
 if __name__ == "__main__":
     gc = DefaultExample()
-
 
 ```
