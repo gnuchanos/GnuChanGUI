@@ -6,6 +6,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread
 from GnuChanGUI import GnuChanOSColor, Themecolors
+from GnuChanGUI import GMessage
 
 # Extra Lib
 #Thread(target=DownloadVideo, args=[]).start()
@@ -16,13 +17,12 @@ from GnuChanGUI import GnuChanOSColor, Themecolors
 yt-dlp --extract-audio --audio-format mp3 -o "/path/to/output_folder/%(title)s.%(ext)s" <YouTube_URL>
 
 # Video Download
-yt-dlp -f "bestvideo[ext=mp4][height=1080]+bestaudio[ext=m4a]/best[ext=mp4][height=1080]" -o "/path/to/output_folder/%(title)s_1080p.mp4" <YouTube_URL>
+yt-dlp -F "bestvideo[ext=mp4][height=1080]+bestaudio[ext=m4a]/best[ext=mp4][height=1080]" -o "/path/to/output_folder/%(title)s_1080p.mp4" <YouTube_URL>
+yt-dlp -F "bestvideo[ext=mp4][height=720]+bestaudio[ext=m4a]/best[ext=mp4][height=720]"   -o "/path/to/output_folder/%(title)s_720p.mp4" <YouTube_URL>
+yt-dlp -F "bestvideo[ext=mp4][height=480]+bestaudio[ext=m4a]/best[ext=mp4][height=480]"   -o "/path/to/output_folder/%(title)s_480p.mp4" <YouTube_URL>
+yt-dlp -F "bestvideo[ext=mp4][height=240]+bestaudio[ext=m4a]/best[ext=mp4][height=240]"   -o "/path/to/output_folder/%(title)s_240p.mp4" <YouTube_URL>
 
-yt-dlp -f "bestvideo[ext=mp4][height=720]+bestaudio[ext=m4a]/best[ext=mp4][height=720]"   -o "/path/to/output_folder/%(title)s_720p.mp4" <YouTube_URL>
-
-yt-dlp -f "bestvideo[ext=mp4][height=480]+bestaudio[ext=m4a]/best[ext=mp4][height=480]"   -o "/path/to/output_folder/%(title)s_480p.mp4" <YouTube_URL>
-
-yt-dlp -f "bestvideo[ext=mp4][height=240]+bestaudio[ext=m4a]/best[ext=mp4][height=240]"   -o "/path/to/output_folder/%(title)s_240p.mp4" <YouTube_URL>
+# Video Shorts
 
 """
 
@@ -43,13 +43,32 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
         self.y360  = "bestvideo[ext=mp4][height=360]+bestaudio[ext=m4a]/best[ext=mp4][height=360]"
         self.y240  = "bestvideo[ext=mp4][height=240]+bestaudio[ext=m4a]/best[ext=mp4][height=240]"
 
+        self.s1080 = "bestvideo[ext=mp4][height=1920]/best[ext=mp4][height=1920]/best"
+        self.s720 = "bestvideo[ext=mp4][width=720][height=1280]+bestaudio[ext=m4a]/best[ext=mp4][width=720][height=1280]"
+        self.s480 = "bestvideo[ext=mp4][width=480][height=854]+bestaudio[ext=m4a]/best[ext=mp4][width=480][height=854]"
+        self.s360 = "bestvideo[ext=mp4][width=360][height=640]+bestaudio[ext=m4a]/best[ext=mp4][width=360][height=640]"
+        self.s240 = "bestvideo[ext=mp4][width=240][height=426]+bestaudio[ext=m4a]/best[ext=mp4][width=240][height=426]"
+
+
+
+
+
+
         self.Quality = ""
         self.Path    = ""
         self.Link    = ""
+        self.Shorts = False
         
         self.VideoSettingsLayout = [
             [self.GText(SetText="Video Quality Settings", xStretch=True, TPosition="center", BColor=self.C.FColors1)],
             [self.GText(SetText="Warning If Video Don't Have 1080 You can't Download Please Open In Terminal For Control Error Log!", xStretch=True, TFont="Sans, 15")],
+            [
+
+                self.GPush(),
+                self.GButton(Text="Enable Short Only", SetValue="shorts"),
+                self.GPush()
+
+            ],
             [
                 self.GPush(),
                 self.GRadio(RText="Very High(1080)", groupID="video", SetValue="1080"),
@@ -129,6 +148,14 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
         if self.GetEvent in ("1080", "720", "480", "360", "240"):
             self.Quality = self.GetEvent
 
+        elif self.GetEvent == "shorts":
+            if self.Shorts:
+                self.Shorts = False
+                self.GetWindow["shorts"].Update("Enable Short Only")
+            else:
+                self.Shorts = True
+                self.GetWindow["shorts"].Update("Disable Short Only")
+
         elif self.GetEvent == "path_video":
             try:
                 self.Path = self.GetFolderPath(defaultPATH=f"{os.path.expanduser("~")}", noWindow=True, noTitleBar=True)
@@ -161,28 +188,49 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
                 if len(self.Quality) > 0:
                     self.Link = f"{self.GetValues["vlink_video"]}"
                     _DownloadThis = ""
-                    if len(self.Path) > 0:
-                        if len(self.Path) > 0:
-                            if self.Quality == "1080":
-                                _DownloadThis = self.y1080
-                            elif self.Quality == "720":
-                                _DownloadThis = self.y720
-                            elif self.Quality == "480":
-                                _DownloadThis = self.y480
-                            elif self.Quality == "360":
-                                _DownloadThis = self.y360
-                            elif self.Quality == "240":
-                                _DownloadThis = self.y240
-                            
-                            if len(self.Link) > 0:
-                                _DownloadNow = f"{self.yt} -f '{_DownloadThis}' -o '{self.Path}/%(title)s_{self.Quality}p.mp4' '{self.Link}'"
-                                Thread(target=self.DownloadVideo, args=[_DownloadNow]).start()
-                                os.popen("notify-send -t 7000 -u low \"Video Download Starting..! Maybe Check Terminal\"")
-                                print(_DownloadNow)
+
+                    if "shorts" in self.Link and not self.Shorts:
+                        GMessage(WindowTitle="Warning", WindowText="You can't Download yotube shorts with normal way you must enable short")
                     else:
-                        print("Empy Path")
+                        if len(self.Path) > 0:
+                            if len(self.Path) > 0:
+                                if self.Quality == "1080":
+                                    if self.Shorts:
+                                        _DownloadThis = self.s1080
+                                    else:
+                                        _DownloadThis = self.y1080
+                                elif self.Quality == "720":
+                                    if self.Shorts:
+                                        _DownloadThis = self.s720
+                                    else:
+                                        _DownloadThis = self.y720
+                                elif self.Quality == "480":
+                                    if self.Shorts:
+                                        _DownloadThis = self.s480
+                                    else:
+                                        _DownloadThis = self.y480
+                                elif self.Quality == "360":
+                                    if self.Shorts:
+                                        _DownloadThis = self.s360
+                                    else:
+                                        _DownloadThis = self.y360
+                                elif self.Quality == "240":
+                                    if self.Shorts:
+                                        _DownloadThis = self.s240
+                                    else:
+                                        _DownloadThis = self.y240
+                                
+                                if len(self.Link) > 0:
+                                    _DownloadNow = f"{self.yt} -f '{_DownloadThis}' -o '{self.Path}/%(title)s_{self.Quality}p.mp4' '{self.Link}'"
+                                    print(_DownloadNow)
+                                    Thread(target=self.DownloadVideo, args=[_DownloadNow]).start()
+                                    os.popen("notify-send -t 7000 -u low \"Video Download Starting..! Maybe Check Terminal\"")
+                                    print(_DownloadNow)
+                        else:
+                            GMessage(WindowTitle="Warning", WindowText="You forget write directory path")
+
             except Exception as ERR:
-                print(ERR)
+                GMessage(WindowTitle="Warning", WindowText=ERR)
         
         # Music Download
         elif self.GetEvent == "path_mp3":
@@ -198,7 +246,7 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
                                 _musicList.append(i)
                         self.GetWindow["out_music"].update(_musicList)
             except Exception as ERR:
-                print(ERR)
+                GMessage(WindowTitle="Warning", WindowText=ERR)
 
         elif self.GetEvent == "Download_mp3":
             _dwn = self.GetValues["vlink_music"]
@@ -225,6 +273,7 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
 
     def BeforeExit(self):
         print("Exit")
+        os.system("killall yt-dlp")
 
 if __name__ == "__main__":
     gc = SimpleVideoAndMusicDownload()

@@ -191,11 +191,17 @@ class SimpleTextEditor(GnuChanGUI):
         ######### Settings #########
         if self.GetEvent == "Save Settings":
             self.FontSize_Change(WindowValue=_defaultTextValue, FontSize=int(self.GetValues["fontSize"]))
-            if len(str(self.GetValues["tcolor"]).strip(" ")) > 0:
-                self.TextColor_Change(WindowValue=_defaultTextValue, Color=str(self.GetValues["tcolor"]).strip(" "))
-            if len(str(self.GetValues["bcolor"]).strip(" ")) > 0:
-                self.BackgroundColor_Change(WindowValue=_defaultTextValue, Color=str(self.GetValues["bcolor"]).strip(" "))
-            GMessage(wmTitle="Danger!", Text=f"This is ERR")
+           
+            try:
+                if len(str(self.GetValues["tcolor"]).strip(" ")) > 0:
+                    self.TextColor_Change(WindowValue=_defaultTextValue, Color=str(self.GetValues["tcolor"]).strip(" "))
+                if len(str(self.GetValues["bcolor"]).strip(" ")) > 0:
+                    self.BackgroundColor_Change(WindowValue=_defaultTextValue, Color=str(self.GetValues["bcolor"]).strip(" "))
+            except Exception as ERR:
+                GMessage(WindowTitle="DANGER!!!", WindowText=ERR)
+
+
+
             print(self.GetValues["tcolor"])
             print(self.GetValues["bcolor"])
             print(_defaultTextValue)
