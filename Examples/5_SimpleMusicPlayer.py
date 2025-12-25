@@ -99,12 +99,12 @@ class SimpleMusicPlayer(GnuChanGUI):
         elif self.GetEvent == "Stop Music":
             self.musicPlay.StopSound()
 
-        elif self.GetEvent == "Next Music":
+        elif self.GetEvent == "Next Music" or self.numpad1 == self.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.NextSound_SingleChannel()
                 self.GetWindow["musicName"].update(self.musicPlay.MusicName)
 
-        elif self.GetEvent == "Previous Music":
+        elif self.GetEvent == "Previous Music" or self.numpad2 == self.CurrentKey:
             if not self.start:
                 _musicName = self.musicPlay.PreviousSound_SingleChannel()
                 self.GetWindow["musicName"].update(self.musicPlay.MusicName)
