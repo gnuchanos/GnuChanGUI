@@ -6,7 +6,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 # Don't do like this from lib import * for gnchangui
 from GnuChanGUI import GnuChanGUI, os, Thread, GTime
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GMessage
-from GnuChanGUI import GKeyboard as GK
+from GnuChanGUI import GKeyboard_Winows as GK_Windolf
 
 # Extra Lib
 # #Thread(target=DownloadVideo, args=[]).start()
@@ -14,7 +14,7 @@ from GnuChanGUI import GKeyboard as GK
 # note this is test Place
 
 class DefaultExample(GnuChanGUI):
-    def __init__(self, Title="Defaul Title", Size=(300, 300), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2):
+    def __init__(self, Title="Defaul Title", Size=(600, 300), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2):
         super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
 
         Themecolors().GnuChanOS        # you can change theme color
@@ -22,12 +22,14 @@ class DefaultExample(GnuChanGUI):
         self.CGC = GnuChanOSColor()    # gnuchanos colors
 
         # old keyboard event
-        self.Key = GK()
+        self.Key_Windolf = GK_Windolf()
 
 
         # main window layout you can use column and frame in here
         self.Layout = [
             [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text")],
+            [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text2")],
+            [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text3")],
             [
                 self.GHSep(),
                 self.GButton(Text="button", SetValue="click"),
@@ -44,17 +46,21 @@ class DefaultExample(GnuChanGUI):
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def Update(self):
-        #if self.KYB.Return == self.GC.GetEvent -> Press key
-        #self.GC.GetEvent == "event" -> window event
-        #self.GC.GetWindow["text"].update("this text") -> update window objects
+        #self.GetEvent == "event" -> window event
+        #self.GetWindow["text"].update("this text") -> update window objects
 
         # keyboard example
-        if self.Key.Return == self.GetEvent:
+        if self.CurrentKey == self.Enter:
             GMessage(WindowTitle="old version keyboard event", WindowText="message YEY")
-        
-        if self.CurrentKey == self.space:
-            GMessage(WindowTitle="new version keyboard event", WindowText="message YEY")
 
+        # keyboard example WINDOLF
+        if self.CurrentKey == self.Key_Windolf.NumpadAdd:
+            GMessage(WindowTitle="old version keyboard event", WindowText="message YEY")
+
+
+        print(self.CurrentKey, " : ", self.Key_Windolf.NumpadAdd)
+
+      
         # button and change text example
         if "click" == self.GetEvent:
             self.GetWindow["text"].update("button pressed")

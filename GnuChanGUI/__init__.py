@@ -32,6 +32,9 @@ class GTime:
     def __init__(self):
         self.last_time = time.perf_counter()
         self.FPS = 60
+    
+    def Ready(self):
+        self.last_time = time.perf_counter()
 
     def DeltaTime(self):
         now = time.perf_counter()
@@ -45,125 +48,112 @@ class GTime:
 
         return delta
 
-# Warning You can use this gnu/linux, Windows/Spyware/garbage or mac/spyware
-# if you use gnu/linux use GnuChanGUI().num2 == GnuChanGUI().CurrentKey
-class GKeyboard:
+
+# this is for spywareDOS  -> self.CurrentKey == self.space (from pynput import keyboard) i don't want to embed in main class
+class GKeyboard_Winows:
     def __init__(self) -> None:
-        # all keyboard keys
-        self.f1 = "F1:67"
-        self.f2 = "F2:68"
-        self.f3 = "F3:69"
-        self.f4 = "F4:70"
-        self.f5 = "F5:71"
-        self.f6 = "F6:72"
-        self.f7 = "F7:73"
-        self.f8 = "F8:74"
-        self.f9 = "F9:75"
-        self.f10 = "F10:76"
-        self.f11 = "F11:95"
-        self.f12 = "F12:96"
+        # Function keys
+        self.F1  = "F1:112"
+        self.F2  = "F2:113"
+        self.F3  = "F3:114"
+        self.F4  = "F4:115"
+        self.F5  = "F5:116"
+        self.F6  = "F6:117"
+        self.F7  = "F7:118"
+        self.F8  = "F8:119"
+        self.F9  = "F9:120"
+        self.F10 = "F10:121"
+        self.F11 = "F11:122"
+        self.F12 = "F12:123"
 
-        self._1 = "1:10"
-        self._2 = "2:11"
-        self._3 = "3:12"
-        self._4 = "4:13"
-        self._5 = "5:14"
-        self._6 = "6:15"
-        self._7 = "7:16"
-        self._8 = "8:17"
-        self._9 = "9:18"
-        self._0 = "0:19"
+        # Numbers (top row)
+        self.Number_0 = "0:48"
+        self.Number_1 = "1:49"
+        self.Number_2 = "2:50"
+        self.Number_3 = "3:51"
+        self.Number_4 = "4:52"
+        self.Number_5 = "5:53"
+        self.Number_6 = "6:54"
+        self.Number_7 = "7:55"
+        self.Number_8 = "8:56"
+        self.Number_9 = "9:57"
 
-        self.q = "q:24"
-        self.w = "w:25"
-        self.e = "e:26"
-        self.r = "r:27"
-        self.t = "t:28"
-        self.y = "y:29"
-        self.u = "u:30"
-        self.o = "o:32"
-        self.p = "p:33"
-        self.a = "a:38"
-        self.s = "s:39"
-        self.d = "d:40"
-        self.f = "f:41"
-        self.g = "g:42"
-        self.h = "h:43"
-        self.j = "j:44"
-        self.k = "k:45"
-        self.l = "l:46"
-        self.z = "z:52"
-        self.x = "x:53"
-        self.c = "c:54"
-        self.v = "v:55"
-        self.b = "b:56"
-        self.n = "n:57"
-        self.m = "w:58"
-        self.i = "i:48"
+        # Letters (A–Z)
+        self.A = "A:65"
+        self.B = "B:66"
+        self.C = "C:67"
+        self.D = "D:68"
+        self.E = "E:69"
+        self.F = "F:70"
+        self.G = "G:71"
+        self.H = "H:72"
+        self.I = "I:73"
+        self.J = "J:74"
+        self.K = "K:75"
+        self.L = "L:76"
+        self.M = "M:77"
+        self.N = "N:78"
+        self.O = "O:79"
+        self.P = "P:80"
+        self.Q = "Q:81"
+        self.R = "R:82"
+        self.S = "S:83"
+        self.T = "T:84"
+        self.U = "U:85"
+        self.V = "V:86"
+        self.W = "W:87"
+        self.X = "X:88"
+        self.Y = "Y:89"
+        self.Z = "Z:90"
 
-        self.Super_L = "Super_L:133"
-        self.quotedbl = "quotedbl:49"
-        self.asterisk = "asterisk:20"
-        self.minus = "minus:21"
-        self.BackSpace = "BackSpace:22"
-        self.Tab = "Tab:23"
-        self.idotless = "idotless:31"
-        self.gbreve = "gbreve:34"
-        self.udiaeresis = "udiaeresis:35"
-        self.Caps_Lock = "Caps_Lock:66"
-        self.scedilla = "scedilla:47"
-        self.comma = "comma:51"
-        self.Shift_L = "Shift_L:50"
-        self.less = "less:94"
-        self.Odiaeresis = "Odiaeresis:59"
-        self.Ccedilla = "Ccedilla:60"
-        self.period = "period:61"
-        self.Shift_R = "Shift_R:62"
-        self.Control_L = "Control_L:37"
-        self.Alt_L = "Alt_L:64"
-        self.space = "space:65"
-        self.ISO_Level3_Shift = "ISO_Level3_Shift:108"
-        self.Super_R = "Super_R:134"
-        self.Menu = "Menu:135"
-        self.Control_R = "Control_R:105"
-        self.Up = "Up:111"
-        self.Left = "Left:113"
-        self.Down = "Down:116"
-        self.Right = "Right:114"
-        self.KP_Delete = "KP_Delete:91"
-        self.Delete = "Delete:119"
-        self.Insert = "Insert:118"
-        self.Home = "Home:110"
-        self.End = "End:115"
-        self.Next = "Next:117"
-        self.Prior = "Prior:112"
-        self.Return = "Return:36"
+        # Control keys
+        self.Backspace = "Backspace:8"
+        self.Tab       = "Tab:9"
+        self.Enter     = "Enter:13"
+        self.Shift     = "Shift:160"
+        self.LeftShit  = "Shift_r:161"
+        self.Control   = "Control:162"
+        self.ControlR  = "Ctrl_r:163"
+        self.Alt       = "Alt_l:164"
+        self.AltGR     = "Alt_gr:165"
+        self.CapsLock  = "CapsLock:20"
+        self.Escape    = "Escape:27"
+        self.Space     = "Space:32"
 
-        self.KP_Insert = "KP_Insert:90"
-        self.KP_End = "KP_End:87"
-        self.KP_Down = "KP_Down:88"
-        self.KP_Next = "KP_Next:89"
-        self.KP_Enter = "KP_Enter:104"
-        self.KP_Add = "KP_Add:86"
-        self.KP_Right = "KP_Right:85"
-        self.KP_Begin = "KP_Begin:84"
-        self.KP_Left = "KP_Left:83"
-        self.KP_Home = "KP_Home:79"
-        self.KP_Up = "KP_Up:80"
-        self.KP_Prior = "KP_Prior:81"
-        self.KP_Subtract = "KP_Subtract:82"
-        self.KP_Multiply = "KP_Multiply:63"
-        self.KP_Divide = "KP_Divide:106"
-        self.Num_Lock = "Num_Lock:77"
+        # Arrow keys
+        self.Left  = "Left:37"
+        self.Up    = "Up:38"
+        self.Right = "Right:39"
+        self.Down  = "Down:40"
 
-# Warning You can use this gnu/linux, Windows/Spyware/garbage or mac/spyware
-# if you use gnu/linux use GnuChanGUI().num2 == GnuChanGUI().CurrentKey
+        # Navigation
+        self.PrintScreen = "Print_screen:44"
+        self.ScrollLock = "Scroll_lock:145"
+        self.Insert = "Insert:45"
+        self.Delete = "Delete:46"
+        self.Home   = "Home:36"
+        self.End    = "End:35"
+        self.PageUp = "PageUp:33"
+        self.PageDown = "PageDown:34"
+
+        # Numpad
+        self.NumLock = "Num_Lock:144"
+        self.Numpad0 = "<96>:96"
+        self.Numpad1 = "<97>:97"
+        self.Numpad2 = "<98>:98"
+        self.Numpad3 = "<99>:99"
+        self.Numpad4 = "<100>:100"
+        self.Numpad5 = "<101>:101"
+        self.Numpad6 = "<102>:102"
+        self.Numpad7 = "<103>:103"
+        self.Numpad8 = "<104>:104"
+        self.Numpad9 = "<105>:105"
+        self.NumpadMultiply = "*:106"
+        self.NumpadAdd      = "+:107"
+        self.NumpadSubtract = "-:109"
+        self.NumpadDivide   = "/:111"
 
 
-# Keyboard event / Colors / ready theme and gui class
-# Simple timer System works in diffrent thread
-# pygame mixer for sound
-# simple warning window
 
 
 # more colors
@@ -427,6 +417,9 @@ class GnuChanGUI:
         self.fontSize = 15
         self.font = f"{self.fontName}, {self.fontSize}"
 
+        self.UpdateMissing = False
+        self.ExitBeforeMissing = False
+
         self.code = """
         Example for window layout
             self.Layout = [
@@ -440,6 +433,7 @@ class GnuChanGUI:
         self.GetEvent = None
         self.GetValues = None
         self.closeWindow = False
+        self.TKroot = ""
 
         # don't remove ),<--)
         self.ImagesType = [("PNG (*.png)", "*.png"), ("JPEG (*.jpg)", "*.jpg")]
@@ -450,119 +444,119 @@ class GnuChanGUI:
         # f"{gc.PathPythonFile}/music.mp3" or diffrent file
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
-        self.num0 = "0:48"
-        self.num1 = "1:49"
-        self.num2 = "2:50"
-        self.num3 = "3:51"
-        self.num4 = "4:52"
-        self.num5 = "5:53"
-        self.num6 = "6:54"
-        self.num7 = "7:55"
-        self.num8 = "8:56"
-        self.num9 = "9:57"
+        self.Num0 = "0:48"
+        self.Num1 = "1:49"
+        self.Num2 = "2:50"
+        self.Num3 = "3:51"
+        self.Num4 = "4:52"
+        self.Num5 = "5:53"
+        self.Num6 = "6:54"
+        self.Num7 = "7:55"
+        self.Num8 = "8:56"
+        self.Num9 = "9:57"
 
-        self.a = "A:97"
-        self.b = "B:98"
-        self.c = "C:99"
-        self.d = "D:100"
-        self.e = "E:101"
-        self.f = "F:102"
-        self.g = "G:103"
-        self.h = "H:104"
-        self.i = "I:105"
-        self.j = "J:106"
-        self.k = "K:107"
-        self.l = "L:108"
-        self.m = "M:109"
-        self.n = "N:110"
-        self.o = "O:111"
-        self.p = "P:112"
-        self.q = "Q:113"
-        self.r = "R:114"
-        self.s = "S:115"
-        self.t = "T:116"
-        self.u = "U:117"
-        self.v = "V:118"
-        self.w = "W:119"
-        self.x = "X:120"
-        self.y = "Y:121"
-        self.z = "Z:122"
+        self.A = "A:97"
+        self.B = "B:98"
+        self.C = "C:99"
+        self.D = "D:100"
+        self.E = "E:101"
+        self.F = "F:102"
+        self.G = "G:103"
+        self.H = "H:104"
+        self.I = "I:105"
+        self.J = "J:106"
+        self.K = "K:107"
+        self.L = "L:108"
+        self.M = "M:109"
+        self.N = "N:110"
+        self.O = "O:111"
+        self.P = "P:112"
+        self.Q = "Q:113"
+        self.R = "R:114"
+        self.S = "S:115"
+        self.T = "T:116"
+        self.U = "U:117"
+        self.V = "V:118"
+        self.W = "W:119"
+        self.X = "X:120"
+        self.Y = "Y:121"
+        self.Z = "Z:122"
 
-        self.numpad0 = "0:None"
-        self.numpad1 = "1:None"
-        self.numpad2 = "2:None"
-        self.numpad3 = "3:None"
-        self.numpad4 = "4:None"
-        self.numpad5 = "<65437>:65437"
-        self.numpad6 = "6:None"
-        self.numpad7 = "7:None"
-        self.numpad8 = "8:None"
-        self.numpad9 = "9:None"
+        self.Numpad0 = "0:None"
+        self.Numpad1 = "1:None"
+        self.Numpad2 = "2:None"
+        self.Numpad3 = "3:None"
+        self.Numpad4 = "4:None"
+        self.Numpad5 = "<65437>:65437"
+        self.Numpad6 = "6:None"
+        self.Numpad7 = "7:None"
+        self.Numpad8 = "8:None"
+        self.Numpad9 = "9:None"
 
-        self.kp_add = "Keypad_Plus:65451"
-        self.kp_subtract = "Keypad_Minus:65453"
-        self.kp_multiply = "Keypad_Multiply:65450"
-        self.kp_divide = "Keypad_Divide:65455"
-        self.kp_enter = "Keypad_Enter:65421"
-        self.kp_decimal = "Keypad_Decimal:65454"
+        self.Kp_add = "Keypad_Plus:65451"
+        self.Kp_subtract = "Keypad_Minus:65453"
+        self.Kp_multiply = "Keypad_Multiply:65450"
+        self.Kp_divide = "Keypad_Divide:65455"
+        self.Kp_enter = "Keypad_Enter:65421"
+        self.Kp_decimal = "Keypad_Decimal:65454"
 
-        self.space = "Space:32"
-        self.enter = "Enter:65293"
-        self.tab = "Tab:65289" 
-        self.backspace = "Backspace:65288"
-        self.comma = "Comma:44"
-        self.period = "Period:46"
-        self.slash = "Slash:47"
-        self.backslash = "Backslash:92"
-        self.semicolon = "Semicolon:59"
-        self.quote = "Quote:39"
-        self.minus = "Minus:45"
-        self.equal = "Equal:61"
-        self.left_bracket = "Left_Bracket:91"
-        self.right_bracket = "Right_Bracket:93"
-        self.grave = "Grave:96"
+        self.Space = "Space:32"
+        self.Enter = "Enter:65293"
+        self.Tab = "Tab:65289" 
+        self.Backspace = "Backspace:65288"
+        self.Comma = "Comma:44"
+        self.Period = "Period:46"
+        self.Slash = "Slash:47"
+        self.Backslash = "Backslash:92"
+        self.Semicolon = "Semicolon:59"
+        self.Quote = "Quote:39"
+        self.Minus = "Minus:45"
+        self.Equal = "Equal:61"
+        self.Left_bracket = "Left_Bracket:91"
+        self.Right_bracket = "Right_Bracket:93"
+        self.Grave = "Grave:96"
 
-        self.f1 = "F1:65470"
-        self.f2 = "F2:65471"
-        self.f3 = "F3:65472"
-        self.f4 = "F4:65473"
-        self.f5 = "F5:65474"
-        self.f6 = "F6:65475"
-        self.f7 = "F7:65476"
-        self.f8 = "F8:65477"
-        self.f9 = "F9:65478"
-        self.f10 = "F10:65479"
-        self.f11 = "F11:65480"
-        self.f12 = "F12:65481"
+        self.F1 = "F1:65470"
+        self.F2 = "F2:65471"
+        self.F3 = "F3:65472"
+        self.F4 = "F4:65473"
+        self.F5 = "F5:65474"
+        self.F6 = "F6:65475"
+        self.F7 = "F7:65476"
+        self.F8 = "F8:65477"
+        self.F9 = "F9:65478"
+        self.F10 = "F10:65479"
+        self.F11 = "F11:65480"
+        self.F12 = "F12:65481"
 
-        self.up = "Up:65362"
-        self.down = "Down:65364"
-        self.left = "Left:65361"
-        self.right = "Right:65363"
+        self.Up = "Up:65362"
+        self.Down = "Down:65364"
+        self.Left = "Left:65361"
+        self.Right = "Right:65363"
 
-        self.ctrl_l = "Ctrl_L:65507"
-        self.ctrl_r = "Ctrl_R:65508"
-        self.alt_l = "Alt_L:65513"
-        self.alt_r = "Alt_R:65514"
-        self.shift_l = "Shift_L:65505"
-        self.shift_r = "Shift_R:65506"
-        self.caps_lock = "Caps_Lock:65509"
-        self.esc = "Esc:65307"
-        self.delete = "Delete:65535"
-        self.home = "Home:65360"
-        self.end = "End:65367"
-        self.page_up = "Page_Up:65365"
-        self.page_down = "Page_Down:65366"
-        self.num_lock = "Num_Lock:65407"
-        self.print_screen = "Print_Screen:65377"
-        self.pause = "Pause:65299"
+        self.Ctrl_l = "Ctrl_L:65507"
+        self.Ctrl_r = "Ctrl_R:65508"
+        self.Alt_l = "Alt_L:65513"
+        self.Alt_r = "Alt_R:65514"
+        self.Shift_l = "Shift_L:65505"
+        self.Shift_r = "Shift_R:65506"
+        self.Caps_lock = "Caps_Lock:65509"
+        self.Esc = "Esc:65307"
+        self.Delete = "Delete:65535"
+        self.Home = "Home:65360"
+        self.End = "End:65367"
+        self.Page_up = "Page_Up:65365"
+        self.Page_down = "Page_Down:65366"
+        self.Num_lock = "Num_Lock:65407"
+        self.Print_screen = "Print_Screen:65377"
+        self.Pause = "Pause:65299"
 
-        self.media_play_pause = "Media_Play_Pause:179"
-        self.media_volume_mute = "Media_Volume_Mute:173"
-        self.media_volume_up = "Media_Volume_Up:175"
-        self.media_volume_down = "Media_Volume_Down:174"
-        self.media_previous = "Media_Previous:177"
-        self.media_next = "Media_Next:176"
+        self.Media_play_pause = "Media_Play_Pause:179"
+        self.Media_volume_mute = "Media_Volume_Mute:173"
+        self.Media_volume_up = "Media_Volume_Up:175"
+        self.Media_volume_down = "Media_Volume_Down:174"
+        self.Media_previous = "Media_Previous:177"
+        self.Media_next = "Media_Next:176"
 
         self.CurrentKey = ""
         self.pressing = False
@@ -570,7 +564,7 @@ class GnuChanGUI:
         self.PressTimer = 1
         self.PressWait  = False
 
-        self.Time = GTime()
+        self.delta = GTime()
 
         threading.Thread(target=self.listen, daemon=True).start()
 
@@ -624,36 +618,80 @@ class GnuChanGUI:
             no_titlebar=Borderless
         )
         self.GetWindow.finalize()
+
+        self.TKroot = self.GetWindow.TKroot
+        self.TKroot.bind("<FocusIn>", lambda e: self.TKroot.focus_force())
+
         # this is new for close window good way
         return self.GetWindow
         """
         window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
         """
 
-    def SetUpdate(self, Update: str = "", exitBEFORE: str = "", TimeOUT: int = 100):
+    def WindowONTOP(self, Transparant):
+        self.TKroot.overrideredirect(True)
+        self.TKroot.attributes("-topmost", True)
+        self.TKroot.attributes("-toolwindow", True) #hide from alt+tab
+        if Transparant > 1:
+            Transparant = 1
+        self.TKroot.attributes("-alpha", Transparant)
+
+    def StillONTOP_UnderUpdate(self):
+        self.TKroot.lift()
+        self.TKroot.attributes("-topmost", True)
+
+
+    def WindowONBOTTOM(self, Transparant):
+        self.TKroot.overrideredirect(True)
+        self.TKroot.attributes("-topmost", False)
+        self.TKroot.attributes("-toolwindow", True) #hide from alt+tab
+        if Transparant > 1:
+            Transparant = 1
+        self.TKroot.attributes("-alpha", Transparant)
+
+    def StillONBOTTOM_UnderUpdate(self):
+        self.TKroot.lift()
+        self.TKroot.attributes("-topmost", False)
+        self.TKroot.lower()
+
+    def SetUpdate(self, Update = None, exitBEFORE = None, TimeOUT: int = 100):
         while True:
             self.GetEvent, self.GetValues = self.GetWindow.read(timeout=TimeOUT)
             if self.GetEvent in (WIN_CLOSED, "Exit"):
-                try:
-                    if exitBEFORE != "":
-                        exitBEFORE()
-                except Exception as ERR:
-                    print(ERR, "if you do not add extra functions for exitBEFORE. it's in .update()")
+                if exitBEFORE != None:
+                    exitBEFORE()
                 break
-            if self.closeWindow:
-                try:
-                    if exitBEFORE != "":
-                        exitBEFORE()
-                except Exception as ERR:
-                    print(ERR, "if you do not add extra functions for exitBEFORE. it's in .update()")
-                break
-            if Update != "":
+
+            elif self.closeWindow:
+                if exitBEFORE != None:
+                    exitBEFORE()
+                    break
+                else:
+                    self.ExitBeforeMissing = True
+                    break
+
+            if Update != None:
                 Update()
-        self.GetWindow.close() # if loop finish wnidow close
+            else:
+                self.UpdateMissing = True
+                break
+            
+
+        self.CloseNow
     
     @property
     def CloseNow(self):
+        print(self.ExitBeforeMissing, " : ", self.UpdateMissing)
+
+        if self.ExitBeforeMissing:
+            GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
+
+        elif self.UpdateMissing:
+            GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
+
         self.GetWindow.close()
+
+
 
     def GTitleBar(self, title: str = "Window Title", icon: str = None, font: str = "Sans, 12", tcolor: str = None, bcolor: str = None):
         return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)
