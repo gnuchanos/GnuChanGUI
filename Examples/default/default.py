@@ -3,10 +3,15 @@ this lgpl3+ 4.61.0.206 Unreleased version
 fun it's a serious goal of the project. if we're not having fun while making stuff, when something's not right!
 """
 
-# Don't do like this from lib import * for gnchangui
-from GnuChanGUI import GnuChanGUI, os, Thread, GTime
-from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GMessage
-from GnuChanGUI import GKeyboard_Winows as GK_Windolf
+try:
+    # Don't do like this from lib import * for gnchangui
+    from GnuChanGUI import GnuChanGUI, os, Thread, GTime
+    from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GMessage
+    from GnuChanGUI import GKeyboard_Winows, GTime
+    
+except ImportError as e:
+    raise ImportError("you need install GnuChanGUI") from e
+
 
 # Extra Lib
 # #Thread(target=DownloadVideo, args=[]).start()
@@ -22,7 +27,7 @@ class DefaultExample(GnuChanGUI):
         self.CGC = GnuChanOSColor()    # gnuchanos colors
 
         # old keyboard event
-        self.Key_Windolf = GK_Windolf()
+        self.Key_Windolf = GKeyboard_Winows()
 
 
         # main window layout you can use column and frame in here
@@ -37,13 +42,24 @@ class DefaultExample(GnuChanGUI):
             ]
         ]
 
-        self.GWindow(SetMainWindowLayout_List=self.Layout)
-        # Call Function Here
 
-        # update window/getvalue
+
+
+
+        # note don't call self.getwindow here
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
+        # Call Function Here not outside
+
+
+
+
+
+
+
 
         # Call Function Here
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        # note don't call self.getwindow here
 
     def Update(self):
         #self.GetEvent == "event" -> window event

@@ -127,7 +127,7 @@ class SimpleTextEditor(GnuChanGUI):
             [ self.GColumn(winColumnLayout_List=self.settingsWin, xStretch=True, SetValue="settings", BColor=GColors().purple7) ],
         ]
 
-        self.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.GWindow(SetMainWindowLayout_List=self.Layout, KeepOnTop=False)
 
 
         # Call Function Here
@@ -215,10 +215,10 @@ class SimpleTextEditor(GnuChanGUI):
             self.GetWindow["settings"].hide_row()
         
         # Press Key For This
-        elif self.f1 in self.CurrentKey:
+        elif self.F1 in self.CurrentKey:
             self.GetWindow["settings"].update(visible=True)
             self.GetWindow["settings"].unhide_row()
-        elif self.f2 in self.CurrentKey:
+        elif self.F2 in self.CurrentKey:
             self.GetWindow["settings"].update(visible=False)
             self.GetWindow["settings"].hide_row()
         

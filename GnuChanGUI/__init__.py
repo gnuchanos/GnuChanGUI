@@ -620,7 +620,6 @@ class GnuChanGUI:
         self.GetWindow.finalize()
 
         self.TKroot = self.GetWindow.TKroot
-        self.TKroot.bind("<FocusIn>", lambda e: self.TKroot.focus_force())
 
         # this is new for close window good way
         return self.GetWindow
@@ -640,7 +639,6 @@ class GnuChanGUI:
         self.TKroot.lift()
         self.TKroot.attributes("-topmost", True)
 
-
     def WindowONBOTTOM(self, Transparant):
         self.TKroot.overrideredirect(True)
         self.TKroot.attributes("-topmost", False)
@@ -653,6 +651,9 @@ class GnuChanGUI:
         self.TKroot.lift()
         self.TKroot.attributes("-topmost", False)
         self.TKroot.lower()
+
+    def DisableMouseClick(self):
+        self.TKroot.bind("<FocusIn>", lambda e: self.TKroot.focus_force())
 
     def SetUpdate(self, Update = None, exitBEFORE = None, TimeOUT: int = 100):
         while True:
