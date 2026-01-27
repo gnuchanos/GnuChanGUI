@@ -10,9 +10,10 @@ from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 
 # Extra Lib
 #Thread(target=DownloadVideo, args=[]).start()
-class SimpleProgramRunner:
-    def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)
+class SimpleProgramRunner(GnuChanGUI):
+    def __init__( self, Title="Followers Control Center", Size=(1600, 900), resizable=True, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2 ):
+        super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
+
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors
@@ -52,25 +53,25 @@ class SimpleProgramRunner:
 
         self.middleThings = [
             [ 
-                self.GC.GText(SetText="> ", BColor=self.CGC.FColors0, EmptySpace=(0, 0)), 
-                self.GC.GInput(SetValue="input",  xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0)) 
+                self.GText(SetText="> ", BColor=self.CGC.FColors0, EmptySpace=(0, 0)), 
+                self.GInput(SetValue="input",  xStretch=True, BColor=self.CGC.FColors0, EmptySpace=(0, 0)) 
             ],
-            [self.GC.GHSep(Color=self.CGC.FColors3)],
-            [self.GC.GListBox(SetValue="software", LFont="Sans, 30", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True)],
-            [self.GC.GHSep(Color=self.CGC.FColors3)],
+            [self.GHSep(Color=self.CGC.FColors3)],
+            [self.GListBox(SetValue="software", LFont="Sans, 30", LPosition="center", xStretch=True, yStretch=True, noScroolBar=True)],
+            [self.GHSep(Color=self.CGC.FColors3)],
         ]
 
         self.Layout = [ 
-            [self.GC.GColumn(winColumnLayout_List=self.middleThings, xStretch=True, yStretch=True)],
-            [self.GC.GText(SetText="The program calls Linux commands, but there is no error message. Please check the Python file for more information.", TFont="Sans, 13", xStretch=True) ]
+            [self.GColumn(winColumnLayout_List=self.middleThings, xStretch=True, yStretch=True)],
+            [self.GText(SetText="The program calls Linux commands, but there is no error message. Please check the Python file for more information.", TFont="Sans, 13", xStretch=True) ]
         ]
         
 
-        self.GC.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.GWindow(SetMainWindowLayout_List=self.Layout)
 
 
         # Call Function Here
-        self.GC.GListBoxBorderSize(WindowValue="software", Border=0)
+        self.GBorder(WindowValue="software", Border=0, Color=self.C.black)
 
         self.SoftwareListActive = []
 
@@ -82,11 +83,11 @@ class SimpleProgramRunner:
                 if not i in self._ReadyPrograms:
                     self._ReadyPrograms.append(i)
         self._ReadyPrograms.sort()
-        self.GC.GetWindow["software"].update(self._ReadyPrograms)
+        self.GetWindow["software"].update(self._ReadyPrograms)
 
 
         # Call Function Here
-        self.GC.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
+        self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def RunThis(self, Command: str):
         os.system(Command)
@@ -97,20 +98,20 @@ class SimpleProgramRunner:
         #self.GC.GetWindow["text"].update("this text") -> update window objects
         
         # Run Program In Line
-        if self.GC.enter == self.GC.CurrentKey:
-            _commandInput = str(self.GC.GetValues["input"])
-            _Select = str(self.GC.GetValues["software"]).strip("[]''")
+        if self.Enter == self.CurrentKey:
+            _commandInput = str(self.GetValues["input"])
+            _Select = str(self.GetValues["software"]).strip("[]''")
 
             if len(_commandInput) > 0:
                 if "brave" == _commandInput:
                     os.popen("brave --password-store=basic")
                 else:
                     Thread(target=self.RunThis, args=[_commandInput]).start()
-                self.GC.closeWindow = True
+                self.closeWindow = True
 
             elif _Select != "":
                 Thread(target=self.RunThis, args=[_Select]).start()
-                self.GC.closeWindow = True
+                self.closeWindow = True
 
     def BeforeExit(self):
         print("Exit")

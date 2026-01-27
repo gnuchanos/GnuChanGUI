@@ -33,8 +33,6 @@ class DefaultExample(GnuChanGUI):
         # main window layout you can use column and frame in here
         self.Layout = [
             [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text")],
-            [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text2")],
-            [self.GText(SetText="text", TPosition='c', xStretch=True, yStretch=True, SetValue="text3")],
             [
                 self.GHSep(),
                 self.GButton(Text="button", SetValue="click"),
@@ -74,9 +72,6 @@ class DefaultExample(GnuChanGUI):
             GMessage(WindowTitle="old version keyboard event", WindowText="message YEY")
 
 
-        print(self.CurrentKey, " : ", self.Key_Windolf.NumpadAdd)
-
-      
         # button and change text example
         if "click" == self.GetEvent:
             self.GetWindow["text"].update("button pressed")

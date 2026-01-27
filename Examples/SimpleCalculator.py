@@ -40,7 +40,7 @@ class SimpleCalculator:
 
 
         # Call Function Here
-        self.GC.GListBoxBorderSize(WindowValue="output", Border=0)
+        self.GC.GBorder(WindowValue="output", Border=0, Color=self.C.black)
 
         # Variables
         self.Number0: str = ""

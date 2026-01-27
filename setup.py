@@ -8,7 +8,7 @@ setup(
     author_email="gnuchanos@email.com",
     packages=["GnuChanGUI"],
     install_requires=[
-        "pygame",
+        #"pygame",
         "Pillow",
         "shapely",
         "pynput"

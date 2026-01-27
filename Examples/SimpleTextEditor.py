@@ -72,13 +72,13 @@ class SimpleTextEditor(GnuChanGUI):
 
         self.win0 = [
                 [ self.GMultiline(SetValue="text0", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=self.C.purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GText(SetText="File Path Here", SetValue="text0_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
         self.win1 = [
                 [ self.GMultiline(SetValue="text1", xStretch=True, yStretch=True, TFont=f"Sans, {str(self.TextFont)}", 
-                                NoScroolBar=False, BColor=self.C.purple8, Border=2) 
+                                NoScroolBar=False, BColor=self.C.purple8) 
                 ],
                 [ self.GText(SetText="File Path Here", SetValue="text1_path", TFont=f"Sans, {str(self.TextFont)}", xStretch=True)]
             ]
@@ -138,7 +138,7 @@ class SimpleTextEditor(GnuChanGUI):
 
         for i in ("text0", "text1", "text2", "text3", "text4", "text5", "text6"):
             self.GMultilineTabSpace(WindowValue=i, TFont=f"Sans, {str(self.TextFont)}")
-            self.AddNewBorderWithColor(WindowValue=i, Color=self.CGC.FColors5, BorderSize=5)
+            self.GBorder(WindowValue=i, Border=5, Color=self.CGC.FColors5)
 
         # Call Function Here
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)

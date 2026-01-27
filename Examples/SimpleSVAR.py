@@ -200,7 +200,7 @@ class SimpleRecordAndLivestream(GnuChanGUI):
 
 
         # Call Function Here
-        self.GListBoxBorderSize(WindowValue="videos", Border=0)
+        self.GBorder(WindowValue="videos", Border=0, Color=self.C.black)
 
         # Timer for Record and Livestream
         self.StartRecordORStream = False

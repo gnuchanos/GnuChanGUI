@@ -682,8 +682,6 @@ class GnuChanGUI:
     
     @property
     def CloseNow(self):
-        print(self.ExitBeforeMissing, " : ", self.UpdateMissing)
-
         if self.ExitBeforeMissing:
             GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
 
@@ -724,10 +722,7 @@ class GnuChanGUI:
     def GetGTextValue(self, GTextValue: str):
         return self.GetWindow[GTextValue].get()
 
-    # Not Working      -> GSelection
-    # Working          -> GIncreaseSelection
-    # Working          -> GSlider
-    # Not Working      -> GProgressBar
+
     def AddNewBorderWithColor(self, WindowValue: str, Color: str, BorderSize: int):
         _mw = self.GetWindow[WindowValue].Widget
         _mw.config(highlightbackground=Color, highlightcolor=Color, highlightthickness=BorderSize)
@@ -743,8 +738,17 @@ class GnuChanGUI:
 
     # ekstra options
     # This setting only works under GWindow. "this is tk"
-    def GListBoxBorderSize(self, Border: int, WindowValue: str):
-        return self.GetWindow[WindowValue].Widget.configure(borderwidth=Border, relief=tk.GROOVE)
+    def GBorder(self, WindowValue: str, Border: int, Color: str):
+        _Q = self.GetWindow[WindowValue].Widget
+
+        _Q.config(
+            highlightthickness  = Border,
+            highlightbackground = Color,
+            highlightcolor      = Color
+        )
+
+    def GListboxReturnIndex(self, WindowValue: str):
+        return self.GetWindow[WindowValue].Values.index(self.GetValues[WindowValue][0])
 
     def GSelectionBorderSize(self, Border: str, WindowValue: str, borderColor: str, highlightcolor: str):
         combo = self.GetWindow[WindowValue]
@@ -756,6 +760,12 @@ class GnuChanGUI:
         tabs = (2*char, 'left', 4*char, 'left')
         multiline = self.GetWindow[WindowValue]
         multiline.Widget.configure(tabs=tabs)
+
+
+
+
+
+
 
     # this can change visible true or false but also change layer position! i don't know how to fix for now or never
     # Don't Forget to Pin Object or Index Can Change
@@ -992,12 +1002,12 @@ class GnuChanGUI:
     # multiLine widget
     def GMultiline (
             self, InText="", TFont=None, SetValue=None, Size=(None, None), Visible=True, TPosition="left", EnableEvent=True, WriteOnly=False, WrapLines=True,
-            xStretch=False, yStretch=False, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None, Border=0
+            xStretch=False, yStretch=False, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None
         ):
 
         return Multiline(
                 default_text=InText, font=TFont, key=SetValue, size=Size, focus=Focus, justification=TPosition, visible=Visible, disabled=ReadOnly, 
-                expand_x=xStretch, expand_y=yStretch, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=Border,
+                expand_x=xStretch, expand_y=yStretch, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=0,
                 autoscroll=True, auto_size_text=True, enable_events=EnableEvent, write_only=WriteOnly, wrap_lines=WrapLines
         )
         """
@@ -1188,6 +1198,7 @@ class GnuChanGUI:
 
 
 
+
 # Simple Timer
 class GTimer:
     def __init__(self) -> None:
@@ -1225,11 +1236,11 @@ class GTimer:
 
 # pygame mixer for play sound
 class GMixer:
-    def __init__(self, MaxChannelLimit=5) -> None:
+    def __init__(self, SoundFileList: list = [], MaxChannelLimit: int = 5) -> None:
         global pygame
         import pygame.mixer
         self.MaxChannelLimit = MaxChannelLimit
-        self.SoundFileList = []
+        self.SoundFileList = SoundFileList
         self.SoundIndex = 0
         self.Volume = 1
         self.SoundLength = 0
@@ -1240,6 +1251,11 @@ class GMixer:
 
         pygame.mixer.init()
         pygame.mixer.set_num_channels(self.MaxChannelLimit)
+
+    def SinglePlay(self, SoundPath):
+        pygame.mixer.music.load(SoundPath)
+        pygame.mixer.music.set_volume(self.Volume)
+        pygame.mixer.music.play()        
 
     def PlaySound_MultiChannelNoLoop(self,  SoundPath="", ChannelID=0):
         _play = False
@@ -1296,8 +1312,9 @@ class GMixer:
 # Popup Message Window
 class GMessage(GnuChanGUI):
     def __init__(self, 
-        WindowTitle="Default Title", Size=(800, 600), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2,
-        WindowText = "Default Text", WindowTextFont = "Sans", WindowTextFontSize = 20, 
+        WindowTitle="Default Title", WindowText = "Default Text", 
+        Size=(800, 600), resizable=False, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2,
+        WindowTextFont = "Sans", WindowTextFontSize = 20, 
         WindowTBC = GnuChanOSColor().FColors1, ButtonLBC = GnuChanOSColor().FColors5,
         WindowSize=(700, 300), WindowResizable = False 
     ):
@@ -1320,20 +1337,11 @@ class GMessage(GnuChanGUI):
 
 
         # main window layout you can use column and frame in here
-        self.button = [
-            [
-                self.GPush(self.CGC.FColors11),
-                self.GButton(Text = "Exit"),
-                self.GPush(self.CGC.FColors11),
-            ]
-        ]
-
         self.Layout = [
             [self.GMultiline(
                 InText=self.windowText, TFont=self.TextFont, TPosition="center", 
                 xStretch=True, yStretch=True, BColor=self.WindowTextBackgroundColor, ReadOnly=True
             )],
-            [self.GColumn(winColumnLayout_List=self.button, BColor=self.ButtonLayoutBackgroundColor, xStretch=True)]
         ]
 
         self.GWindow(SetMainWindowLayout_List=self.Layout)
@@ -1341,8 +1349,10 @@ class GMessage(GnuChanGUI):
 
 
     def Update(self):
-        if self.GetEvent == "exit":
+        if "Exit" == self.GetEvent:
             self.closeWindow = True
 
     def BeforeExit(self):
         print(f"{self.WindowTitle} is closed")
+
+

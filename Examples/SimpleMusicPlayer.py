@@ -60,7 +60,7 @@ class SimpleMusicPlayer(GnuChanGUI):
 
         # Call Function Here
         self.GetWindow["input"].update("Music")
-        self.GListBoxBorderSize(WindowValue="mp3", Border=0)
+        self.GBorder(WindowValue="mp3", Border=0, Color=self.C.black)
 
         self.musicPlay = GMixer()
 
