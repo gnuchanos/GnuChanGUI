@@ -1255,7 +1255,12 @@ class GMixer:
     def SinglePlay(self, SoundPath):
         pygame.mixer.music.load(SoundPath)
         pygame.mixer.music.set_volume(self.Volume)
-        pygame.mixer.music.play()        
+        pygame.mixer.music.play()
+
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.unload()
+            time.sleep(1)
+            return True
 
     def PlaySound_MultiChannelNoLoop(self,  SoundPath="", ChannelID=0):
         _play = False
