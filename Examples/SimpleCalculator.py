@@ -14,7 +14,7 @@ from numpy import number
 #Thread(target=DownloadVideo, args=[]).start()
 class SimpleCalculator:
     def __init__(self) -> None:
-        self.GC = GnuChanGUI(Title=" UwU ", Size=(500, 655), resizable=False, finalize=True)
+        self.GC = GnuChanGUI(Title="Simple Calculator A an B", Size=(500, 655), resizable=False, finalize=True)
         Themecolors().GnuChanOS        # you can change theme color
         self.C = GColors()             # all color in here
         self.CGC = GnuChanOSColor()    # gnuchanos colors

@@ -27,8 +27,6 @@ class RobloxAccountCheck:
         except requests.exceptions.RequestException as e:
             print(f"Connection error: {e}")
         
-        print(self.r)
-
         try:
             self.u = requests.get(f"https://users.roblox.com/v1/users/{ID}").json()
             #time.sleep(1)
@@ -56,7 +54,12 @@ class RobloxAccountCheck:
     def AddInUsersTextListBox(self):
         _list = []
         for i in self.UserIDS:
-            _list.append(f"[Final Follower: {self.Users[i]["FinalFollower"]}] [ID: {self.Users[i]["ID"]}] [Follower: {self.Users[i]["Follower"]}] [Name: {self.Users[i]["Name"]}] [Is Banned: {self.Users[i]["IsBanned"]}]")
+            if i not in _list:
+                _list.append(f"[Final Follower: {self.Users[i]["FinalFollower"]}] [ID: {self.Users[i]["ID"]}] [Follower: {self.Users[i]["Follower"]}] [Name: {self.Users[i]["Name"]}] [Is Banned: {self.Users[i]["IsBanned"]}]")
+
+            print(f"ADD USER: {i} - Follower: {self.Users[i]["Follower"]}")
+
+        
 
         return _list
 
@@ -75,9 +78,9 @@ class RobloxAccountCheck:
 
     def RemoveUser(self, ID: str):
         if str(ID) in self.UserIDS:
-            self.Users.pop(str(ID), None)
-            self.UserIDS.remove(str(ID))
-        
+            if ID in self.UserIDS:
+                self.Users.pop(str(ID), None)
+                self.UserIDS.remove(str(ID))
         self.SaveUsers()
 
     def SaveUsers(self):
@@ -92,20 +95,22 @@ class RobloxAccountCheck:
             json.dump(self.Users, f, indent=4)
 
     def LoadUsers(self):
-        _File = os.path.join(self.CurrentPath, "users.gc")
+        self.UserIDS = []
 
+        _File = os.path.join(self.CurrentPath, "users.gc")
         with open(_File, "r", encoding="utf-8") as f:
             self.Users = json.load(f)
 
         for i in self.Users.keys():
             if i not in self.UserIDS:
                 self.UserIDS.append(i)
-
         self.UpdateUsersData()
         
 
     def UpdateUsersData(self):
         for i in self.UserIDS:
+            time.sleep(5)
+
             try:
                 self.r = requests.get(f"https://friends.roblox.com/v1/users/{i}/followers/count").json()
                 #time.sleep(1)
@@ -134,9 +139,12 @@ class RobloxAccountCheck:
             self.SaveUsers()
 
     def _CheckIfFinish(self):
-        time.sleep(1)
+        time.sleep(5)
 
         while not self.StopChecking:
+            self.LoadUsers()
+
+            time.sleep(40)
             for i in self.UserIDS:
                 time.sleep(5)
 
@@ -152,40 +160,16 @@ class RobloxAccountCheck:
                     self.Users[str(i)]["IsComplete"] = True
                     print(f"| Finish -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
                     time.sleep(1)
+                    self.SaveUsers()
 
                     # Play
 
                 else:
                     if self.Debug:
-                        print(f"| SEO -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
-
+                        pass
+                        # print(f"| SEO -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
+                        
 
             
 
 
-RAC = RobloxAccountCheck()
-
-class GUI:
-    def __init__(self):
-        self.System = RobloxAccountCheck()
-        
-
-        self.System.LoadUsers()
-    
-    def Main(self):
-        self.System.AddNew(ID=2597993363, FinalFollower=5300) 
-        #self.System.AddNew(ID=9549362351, FinalFollower=5000)
-
-    def Update(self):
-        while True:
-            self.System._CheckIfFinish(Debug=True)
-
-
-
-
-            time.sleep(60)
-
-if __name__ == "__main__":
-    GC = GUI()
-    GC.Main()
-    GC.Update()

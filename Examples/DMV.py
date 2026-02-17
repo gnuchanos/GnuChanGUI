@@ -28,7 +28,7 @@ yt-dlp -F "bestvideo[ext=mp4][height=240]+bestaudio[ext=m4a]/best[ext=mp4][heigh
 
 
 class SimpleVideoAndMusicDownload(GnuChanGUI):
-    def __init__(self, Title = "Defaul Title", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+    def __init__(self, Title = "Simple Video And Music Download", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
         super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
 
         Themecolors().GnuChanOS
@@ -127,8 +127,8 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
         self.GWindow(SetMainWindowLayout_List=self.Layout)
 
         # Settings
-        self.GListBoxBorderSize(WindowValue="out_video", Border=0)
-        self.GListBoxBorderSize(WindowValue="out_music", Border=0)
+        self.GBorder(WindowValue="out_video", Border=0, Color=self.C.FColors9)
+        self.GBorder(WindowValue="out_music", Border=0, Color=self.C.FColors9)
 
         # Call Func
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)

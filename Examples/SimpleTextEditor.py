@@ -13,7 +13,7 @@ from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 
 #Thread(target=DownloadVideo, args=[]).start()
 class SimpleTextEditor(GnuChanGUI):
-    def __init__(self, Title = "Defaul Title", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+    def __init__(self, Title = "Simple Text Editor", Size = (1600, 900), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
         super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
 
         Themecolors().GnuChanOS        # you can change theme color

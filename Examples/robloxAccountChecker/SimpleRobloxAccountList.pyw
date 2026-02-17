@@ -1,21 +1,17 @@
-import time
-
-from CheckAccount import RobloxAccountCheck
-
-try:
-    from GnuChanGUI import (
-        GnuChanGUI, os, Thread,
-        GnuChanOSColor, GColors, Themecolors, GMessage,
-        GKeyboard_Winows
-    )
-except ImportError as e:
-    raise ImportError(e) from e
-
-
 # Extra Lib
 # #Thread(target=DownloadVideo, args=[]).start()
 
 # note this is test Place
+
+import time
+from CheckAccount import RobloxAccountCheck
+try:
+    from GnuChanGUI import GnuChanGUI
+    from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GKeyboard_Winows, Themecolors, os, Thread
+
+except ImportError as e:
+    raise ImportError(e) from e
+
 
 class DefaultExample(GnuChanGUI):
     def __init__( self, Title="Followers Control Center", Size=(1600, 900), resizable=True, finalize=True, winPosX=1920 / 2, winPosY=1080 / 2 ):
@@ -42,6 +38,7 @@ class DefaultExample(GnuChanGUI):
                 self.GButton(Text="Update Data", SetValue="refresh"),
                 self.GButton(Text="Open Note", SetValue="load"),
                 self.GButton(Text="Save Note", SetValue="save"),
+                self.GButton(Text="Copy Account Link", SetValue="copylink"),
                 self.GPush(BColor=self.CGC.SColors0),
             ],
             [
@@ -79,9 +76,13 @@ class DefaultExample(GnuChanGUI):
         # Call Function Here not outside
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
+    def _CopyLink(self):
+        pass
+
     def _Load(self):
         try:
             self.System.LoadUsers()
+            time.sleep(1)
             self._UsersText = self.System.AddInUsersTextListBox()
             self.GetWindow["list"].Update(self._UsersText)
 
@@ -92,10 +93,12 @@ class DefaultExample(GnuChanGUI):
         self.System._CheckIfFinish()
 
     def _Update(self):
+        time.sleep(30)
         while self.UpdateNotClose:
             self.System.UpdateUsersData()
             self._Load()
-            time.sleep(10)
+            print('-'*30)
+            time.sleep(30)
 
     def _UpdateClickUpdate(self):
         self.System.UpdateUsersData()
@@ -111,7 +114,6 @@ class DefaultExample(GnuChanGUI):
             self._UsersText.pop(_lisboxIndex)
 
             Thread(target=self._UpdateClickUpdate, args=[]).start()
-            Thread(target=self._Load, args=[]).start()
 
         except Exception as ERR:
             print(ERR)
@@ -152,13 +154,13 @@ class DefaultExample(GnuChanGUI):
 
     def Update(self):
 
-        if self.GetEvent == "add":
+        if "add" == self.GetEvent:
             Thread(target=self._ADD, args=[]).start()
 
-        elif self.GetEvent == "refresh":
+        elif "refresh" == self.GetEvent:
             Thread(target=self._UpdateClickUpdate).start()
 
-        elif self.GetEvent == "remove":
+        elif "remove" == self.GetEvent:
             Thread(target=self.RemoveUser).start()
 
         elif "save" == self.GetEvent:

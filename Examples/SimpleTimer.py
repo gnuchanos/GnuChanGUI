@@ -14,7 +14,7 @@ from GnuChanGUI import GTimer
 
 #Thread(target=DownloadVideo, args=[]).start()
 class SimpleTimer(GnuChanGUI):
-    def __init__(self, Title = "Defaul Title", Size = (600, 300), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
+    def __init__(self, Title = "Simple Timer", Size = (600, 300), resizable = False, finalize = True, winPosX = 1920 / 2, winPosY = 1080 / 2):
         super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
 
 

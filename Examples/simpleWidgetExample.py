@@ -19,7 +19,7 @@ except ImportError as e:
 # note this is test Place
 
 class DefaultExample(GnuChanGUI):
-    def __init__(self, Title="Defaul Title", Size=(280, 110), resizable=False, finalize=True, winPosX=280/2+10, winPosY=70):
+    def __init__(self, Title="Simple Widget1", Size=(280, 110), resizable=False, finalize=True, winPosX=280/2+10, winPosY=70):
         super().__init__(Title, Size, resizable, finalize, winPosX, winPosY)
 
         Themecolors().GnuChanOS        # you can change theme color

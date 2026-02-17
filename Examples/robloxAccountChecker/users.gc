@@ -1,52 +1,22 @@
 {
-    "9549362351": {
-        "ID": 9549362351,
-        "Name": "arihure_desu",
-        "DisplayName": "koutiki",
-        "Follower": 1406,
+    "3026233161": {
+        "ID": 3026233161,
+        "Name": "ZaltyIG",
+        "DisplayName": "Zalty",
+        "Follower": 10000,
         "IsBanned": false,
         "Notes": "",
-        "FinalFollower": 3000,
+        "FinalFollower": 17600,
         "IsComplete": false
     },
-    "8294535076": {
-        "ID": 8294535076,
-        "Name": "Dollybella812",
-        "DisplayName": "Spy",
-        "Follower": 3423,
+    "6102052130": {
+        "ID": 6102052130,
+        "Name": "Kto2wie",
+        "DisplayName": "lovecurse",
+        "Follower": 1527,
         "IsBanned": false,
         "Notes": "",
-        "FinalFollower": 5100,
-        "IsComplete": false
-    },
-    "409920729": {
-        "ID": 409920729,
-        "Name": "alendkardo",
-        "DisplayName": "zkys",
-        "Follower": 2633,
-        "IsBanned": false,
-        "Notes": "",
-        "FinalFollower": 5200,
-        "IsComplete": false
-    },
-    "2597993363": {
-        "ID": 2597993363,
-        "Name": "Akatusuki56",
-        "DisplayName": "Werko",
-        "Follower": 2613,
-        "IsBanned": false,
-        "Notes": "",
-        "FinalFollower": 5400,
-        "IsComplete": false
-    },
-    "572281188": {
-        "ID": 572281188,
-        "Name": "itzzyoki",
-        "DisplayName": "\u79c1\u30c6\u30a3\u30fc\u30ba\u30ba\u30e8\u30ad",
-        "Follower": 175,
-        "IsBanned": false,
-        "Notes": "",
-        "FinalFollower": 3000,
+        "FinalFollower": 10000,
         "IsComplete": false
     }
 }
