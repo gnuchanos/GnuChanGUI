@@ -6,6 +6,9 @@ from gtts import gTTS
 from threading import Thread
 from GnuChanGUI import GMixer
 
+os.add_dll_directory(r"C:\Program Files (x86)\VideoLAN\VLC")
+
+import vlc
 
 
 class RobloxAccountCheck:
@@ -55,9 +58,9 @@ class RobloxAccountCheck:
         _list = []
         for i in self.UserIDS:
             if i not in _list:
-                _list.append(f"[Final Follower: {self.Users[i]["FinalFollower"]}] [ID: {self.Users[i]["ID"]}] [Follower: {self.Users[i]["Follower"]}] [Name: {self.Users[i]["Name"]}] [Is Banned: {self.Users[i]["IsBanned"]}]")
+                _list.append(f'[Job Is Done: {self.Users[i]["IsComplete"]}] [ID: {self.Users[i]["ID"]}] [Final Follower: {self.Users[i]["FinalFollower"]}] [Follower: {self.Users[i]["Follower"]}] [Name: {self.Users[i]["Name"]}] [Is Banned: {self.Users[i]["IsBanned"]}]')
 
-            print(f"ADD USER: {i} - Follower: {self.Users[i]["Follower"]}")
+            print(f'ADD USER: {i} - Follower: {self.Users[i]["Follower"]}')
 
         
 
@@ -104,6 +107,7 @@ class RobloxAccountCheck:
         for i in self.Users.keys():
             if i not in self.UserIDS:
                 self.UserIDS.append(i)
+
         self.UpdateUsersData()
         
 
@@ -139,26 +143,26 @@ class RobloxAccountCheck:
             self.SaveUsers()
 
     def _CheckIfFinish(self):
-        time.sleep(5)
-
         while not self.StopChecking:
-            self.LoadUsers()
-
-            time.sleep(40)
+            time.sleep(70)
             for i in self.UserIDS:
-                time.sleep(5)
-
                 if self.StopChecking:
                     break
                 
-                if self.Users[str(i)]["Follower"] >= self.Users[str(i)]["FinalFollower"] and not self.Users[str(i)]["IsComplete"]:
+                if self.Users[str(i)]["Follower"] >= self.Users[str(i)]["FinalFollower"]:
                     _Text = f"{self.Users[str(i)]["Name"]}'s order is completed."
                     myobj = gTTS(text=_Text, lang="en", slow=False)
                     _File = os.path.join(self.CurrentPath, "welcome.mp3")
                     myobj.save(_File)
 
-                    self.Users[str(i)]["IsComplete"] = True
-                    print(f"| Finish -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
+                    if not self.Users[str(i)]["IsComplete"]:
+                        self.Users[str(i)]["IsComplete"] = True
+                        player = vlc.MediaPlayer(_File)
+                        player.play()
+
+                    if self.Debug:
+                        print(f"| Finish -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
+
                     time.sleep(1)
                     self.SaveUsers()
 
@@ -166,10 +170,11 @@ class RobloxAccountCheck:
 
                 else:
                     if self.Debug:
-                        pass
-                        # print(f"| SEO -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
-                        
+                        print(f"| SEO -----| ID: {self.Users[str(i)]["ID"]} | Name: {self.Users[str(i)]["Name"]} | Current Follower {self.Users[str(i)]["Follower"]} | Final Goal: {self.Users[str(i)]["FinalFollower"]}")
 
-            
+                    self.Users[str(i)]["IsComplete"] = False
+
+
+                time.sleep(5)            
 
 

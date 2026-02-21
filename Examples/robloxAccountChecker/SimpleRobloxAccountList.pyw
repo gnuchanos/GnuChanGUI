@@ -4,7 +4,10 @@
 # note this is test Place
 
 import time
+import pyperclip
+
 from CheckAccount import RobloxAccountCheck
+
 try:
     from GnuChanGUI import GnuChanGUI
     from GnuChanGUI import GnuChanOSColor, GColors, Themecolors, GKeyboard_Winows, Themecolors, os, Thread
@@ -39,6 +42,7 @@ class DefaultExample(GnuChanGUI):
                 self.GButton(Text="Open Note", SetValue="load"),
                 self.GButton(Text="Save Note", SetValue="save"),
                 self.GButton(Text="Copy Account Link", SetValue="copylink"),
+                self.GButton(Text="Copy Account ID", SetValue="copyid"),
                 self.GPush(BColor=self.CGC.SColors0),
             ],
             [
@@ -77,7 +81,27 @@ class DefaultExample(GnuChanGUI):
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
     def _CopyLink(self):
-        pass
+        try:
+            _PlaceHolderUser = str(self.GetValues["list"]).split(" ")
+            _READYID = _PlaceHolderUser[5].strip("]")
+
+            pyperclip.copy(f"https://www.roblox.com/users/{_READYID}/profile")
+
+        except Exception as ERR:
+            print(ERR)
+
+    def _CopyID(self):
+        try:
+            _PlaceHolderUser = str(self.GetValues["list"]).split(" ")
+            _READYID = _PlaceHolderUser[5].strip("]")
+
+            print(_READYID)
+
+            pyperclip.copy(_READYID)
+
+        except Exception as ERR:
+            print(ERR)
+
 
     def _Load(self):
         try:
@@ -90,24 +114,26 @@ class DefaultExample(GnuChanGUI):
             print(ERR)
 
     def _CheckIfFinish(self):
-        self.System._CheckIfFinish()
+        if self.System._CheckIfFinish():
+            self._Load()
 
     def _Update(self):
-        time.sleep(30)
+        time.sleep(60)
         while self.UpdateNotClose:
             self.System.UpdateUsersData()
             self._Load()
             print('-'*30)
-            time.sleep(30)
+            time.sleep(60)
 
     def _UpdateClickUpdate(self):
         self.System.UpdateUsersData()
+        time.sleep(1)
         self._Load()
 
     def RemoveUser(self):
         try:
             _PlaceHolderUser = str(self.GetValues["list"]).split(" ")
-            _READYID = _PlaceHolderUser[4].strip("]")
+            _READYID = _PlaceHolderUser[5].strip("]")
             self.System.RemoveUser(ID=_READYID)
 
             _lisboxIndex = self.GListboxReturnIndex(WindowValue="list")
@@ -133,7 +159,7 @@ class DefaultExample(GnuChanGUI):
     def SaveNote(self):
         try:
             _PlaceHolderUser = str(self.GetValues["list"]).split(" ")
-            _READYID = _PlaceHolderUser[4].strip("]")
+            _READYID = _PlaceHolderUser[5].strip("]")
 
             _Text = self.GetValues["note"]
             self.System.Users[_READYID]["Notes"] = _Text
@@ -145,7 +171,7 @@ class DefaultExample(GnuChanGUI):
     def LoadNote(self):
         try:
             _PlaceHolderUser = str(self.GetValues["list"]).split(" ")
-            _READYID = _PlaceHolderUser[4].strip("]")
+            _READYID = _PlaceHolderUser[5].strip("]")
             self.GetWindow["note"].Update(self.System.Users[_READYID]["Notes"])
 
         except Exception as ERR:
@@ -153,7 +179,6 @@ class DefaultExample(GnuChanGUI):
 
 
     def Update(self):
-
         if "add" == self.GetEvent:
             Thread(target=self._ADD, args=[]).start()
 
@@ -168,11 +193,16 @@ class DefaultExample(GnuChanGUI):
 
         elif "load" == self.GetEvent:
             Thread(target=self.LoadNote).start()
+        
+        elif "copylink" == self.GetEvent:
+            Thread(target=self._CopyLink).start()
+
+        elif "copyid" == self.GetEvent:
+            Thread(target=self._CopyID).start()
 
     def BeforeExit(self):
         self.System.StopChecking = True
         self.UpdateNotClose = False
-
         print("Exit")
 
 
