@@ -1046,8 +1046,8 @@ class GnuChanGUI:
                     gc.GetWindow["text"].update("half life 3 ?????")
         """
 
-    def GRadio(self, RText=None, TFont="Sans, 20", groupID=None, SetValue=None, CEvent=True, EmptySpace=(None, None), TColor=None, BColor=None):
-        return Radio(text=RText, font=TFont, group_id=groupID, key=SetValue, enable_events=CEvent, pad=EmptySpace, text_color=TColor, background_color=BColor)
+    def GRadio(self, RText=None, TFont="Sans, 20", defaultSelect=False, groupID=None, SetValue=None, CEvent=True, EmptySpace=(None, None), TColor=None, BColor=None):
+        return Radio(text=RText, font=TFont, group_id=groupID, key=SetValue, enable_events=CEvent, pad=EmptySpace, text_color=TColor, background_color=BColor, default=defaultSelect)
         """
         layout = [
             [
