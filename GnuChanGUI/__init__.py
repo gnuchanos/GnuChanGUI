@@ -975,6 +975,17 @@ class GnuChanGUI:
                 gc.GetWindow["text"].update(gc.GetValues["List"])
             """
 
+    def GTable(
+            self, TableLists:list=[], SetValue: str = None, CollonsPosition: str = None, TPosition: str = "left", TFont: str = "Sans, 20", Visible: bool = True,
+            xStretch: bool = False, yStretch: bool = False, TColor: str = None, BColor: str = None,
+            VisibleRows: int = 10, 
+               ):
+
+        return Table(
+            values=TableLists, key=SetValue, cols_justification=CollonsPosition, justification=TPosition, font=TFont, visible=Visible, enable_events=True,
+            num_rows=VisibleRows,
+        )
+
     # input widget
     def GInput (
             self, InText="", TFont="Sans, 20", SetValue=None, Size=(None, None), Focus=True, TPosition="left", Visible=True, 
