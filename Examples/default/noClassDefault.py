@@ -9,7 +9,6 @@ from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 from GnuChanGUI import GKeyboard, GMessage
 
 
-
 # Extra Lib
 
 gc = GnuChanGUI(Title=" UwU ", Size=(1024, 655), resizable=True, finalize=True)

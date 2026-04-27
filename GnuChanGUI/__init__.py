@@ -661,7 +661,7 @@ class GnuChanGUI:
             if self.GetEvent in (WIN_CLOSED, "Exit"):
                 if exitBEFORE != None:
                     exitBEFORE()
-                break
+                    break
 
             elif self.closeWindow:
                 if exitBEFORE != None:
@@ -689,8 +689,6 @@ class GnuChanGUI:
             GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
 
         self.GetWindow.close()
-
-
 
     def GTitleBar(self, title: str = "Window Title", icon: str = None, font: str = "Sans, 12", tcolor: str = None, bcolor: str = None):
         return Titlebar(title=title, icon=icon, font=font, text_color=tcolor, background_color=bcolor)

@@ -49,11 +49,6 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
         self.s360 = "bestvideo[ext=mp4][width=360][height=640]+bestaudio[ext=m4a]/best[ext=mp4][width=360][height=640]"
         self.s240 = "bestvideo[ext=mp4][width=240][height=426]+bestaudio[ext=m4a]/best[ext=mp4][width=240][height=426]"
 
-
-
-
-
-
         self.Quality = ""
         self.Path    = ""
         self.Link    = ""
@@ -124,7 +119,7 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
         ]
 
         # Create Window -> self.GC.window[]
-        self.GWindow(SetMainWindowLayout_List=self.Layout)
+        self.GWindow(SetMainWindowLayout_List=self.Layout, KeepOnTop=False)
 
         # Settings
         self.GBorder(WindowValue="out_video", Border=0, Color=self.C.FColors9)
@@ -135,12 +130,22 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
     
     def DownloadVideo(self, Download: str):
         os.system(Download)
-        os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
+
+        if "posix" in os.name:
+            os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
+        else:
+            Message(WindowTitle="DANGER DANGER!!!", WindowText="Video Download Finish Control Output Dir..!")
+
         self.GetWindow["vlink_video"].update("")
 
     def DownloadMusic(self, Download: str):
         os.system(Download)
-        os.popen("notify-send -t 3500 -u low \"Video Download Finish Control Output Dir..!\"")
+
+        if "posix" in os.name:
+            os.popen("notify-send -t 3500 -u low \"Music Download Finish Control Output Dir..!\"")
+        else:
+            GMessage(WindowTitle="DANGER DANGER!!!", WindowText="Music Download Finish Control Output Dir..!")
+
         self.GetWindow["vlink_music"].update("")
 
     def Update(self):
@@ -221,10 +226,13 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
                                         _DownloadThis = self.y240
                                 
                                 if len(self.Link) > 0:
-                                    _DownloadNow = f"{self.yt} -f '{_DownloadThis}' -o '{self.Path}/%(title)s_{self.Quality}p.mp4' '{self.Link}'"
+                                    _DownloadNow = f"{self.yt} -f '{_DownloadThis}' -o '{self.Path}/%(title)s_{self.Quality}p.mp4' {self.Link}"
                                     print(_DownloadNow)
                                     Thread(target=self.DownloadVideo, args=[_DownloadNow]).start()
-                                    os.popen("notify-send -t 7000 -u low \"Video Download Starting..! Maybe Check Terminal\"")
+
+                                    if "posix" in os.name:
+                                        os.popen("notify-send -t 7000 -u low \"Video Download Starting..! Maybe Check Terminal\"")
+
                                     print(_DownloadNow)
                         else:
                             GMessage(WindowTitle="Warning", WindowText="You forget write directory path")
@@ -254,9 +262,25 @@ class SimpleVideoAndMusicDownload(GnuChanGUI):
                 _flags = "--extract-audio --audio-format mp3 -o"
                 _Path        = f"{self.Path}/%(title)s.%(ext)s.mp3"
                 _link        = _dwn
-                _DownloadNow = f"{self.yt} {_flags} '{_Path}' '{_link}'"
+                _Path        = f'"{_Path}"'
+                _DownloadNow = ""
+
+                if "nt" in os.name:
+                    if not os.path.exists(os.path.expanduser("C:\\ffmpeg\\bin")):
+                        GMessage(WindowTitle="DANGER DANGER!!!", WindowText="Missing C:\\ffmpeg\\bin")
+
+                    _DownloadNow = f"{self.yt}.exe --ffmpeg-location C:\\ffmpeg\\bin {_flags} {_Path} {_link}"
+
+                    _TMPDIR = os.getcwd()
+                    if not os.path.exists(os.path.join(_TMPDIR, "yt-dlp.exe")):
+                        GMessage(WindowTitle="DANGER DANGER!!!", WindowText="you need yt-dlp.exe in same folder with .py")
+                        return
+
+                elif "posix" in os.name:
+                    _DownloadNow = f"{self.yt} {_flags} {_Path} {_link}"
+                    os.popen("notify-send -t 7000 -u low \"Music Download Starting..! Maybe Check Terminal\"")
+
                 Thread(target=self.DownloadMusic, args=[_DownloadNow]).start()
-                os.popen("notify-send -t 7000 -u low \"Music Download Starting..! Maybe Check Terminal\"")
                 print(_DownloadNow)
 
         

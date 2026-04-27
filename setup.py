@@ -11,7 +11,8 @@ setup(
         "pygame-ce",
         "Pillow",
         "shapely",
-        "pynput"
+        "pynput",
+        "psutil"
     ],
 
 )
