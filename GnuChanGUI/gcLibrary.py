@@ -1,29 +1,27 @@
 #!/usr/bin/python3
 
-version = __version__ = "4.61.0.206 Unreleased"
-# this is lgpl3+ 4.61.0.206 Unreleased version and this is hobby project not for money
+from .version import __version__, __version_full__
+
+version = __version_full__
+# this is lgpl3+ hobby project not for money
 
 _change_log = """
     
 
     """
 
-__version__ = version.split()[0]  # For PEP 396 and PEP 345
-
-# The shortened version of version
 try:
-    ver = version.split(' ')[0]
-except:
-    ver = ''
+    ver = __version__
+except Exception:
+    ver = ""
 
-# __version__ = version
-
-port = 'GnuChanGUI'
+port = "GnuChanGUI"
 
 
 # all of the tkinter involved imports
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 from tkinter.colorchooser import askcolor
 from tkinter import ttk
 # import tkinter.scrolledtext as tkst
@@ -166,38 +164,25 @@ def running_replit():
 # count = (count + (MAX - 1)) % MAX           # Decrement - roll over to MAX from 0
 # count = (count + 1) % MAX                   # Increment to MAX then roll over to 0
 
-"""
-    Welcome to the "core" GnuChanGUI code....
-
-    It's a mess.... really... it's a mess internally... it's the external-facing interfaces that
-    are not a mess.  The Elements and the methods for them are well-designed.
-    PEP8 - this code is far far from PEP8 compliant. 
-    It was written PRIOR to learning that PEP8 existed. 
-
-    I'll be honest.... started learning Python in Nov 2017, started writing GnuChanGUI in Feb 2018.
-    Released GnuChanGUI in July 2018.  I knew so little about Python that my parameters were all named
-    using CamelCase.  DOH!  Someone on Reddit set me straight on that.  So overnight I renamed all of the
-    parameters to lower case.  Unfortunately, the internal naming conventions have been set.  Mixing them
-    with PEP8 at this moment would be even MORE confusing.
-
-    Code I write now, outside GnuChanGUI, IS PEP8 compliant.  
-
-    The variable and function naming in particular are not compliant.  There is
-    liberal use of CamelVariableAndFunctionNames, but for anything externally facing, there are aliases
-    available for all functions.  If you've got a serious enough problem with 100% PEP8 compliance
-    that you'll pass on this package, then that's your right and I invite you to do so.  However, if
-    perhaps you're a practical thinker where it's the results that matter, then you'll have no
-    trouble with this code base.  There is consisency however.  
-
-    I truly hope you get a lot of enjoyment out of using GnuChanGUI.  It came from good intentions.
-"""
-
 # ----====----====----==== Constants the user CAN safely change ====----====----====----#
 
-# Base64 encoded GIF file
-DEFAULT_BASE64_ICON = b'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'
+# Default window icon: logo.png next to this module (base64 bytes for tk.PhotoImage(data=...))
+_GNUCHAN_GUI_ROOT = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_WINDOW_ICON_FILE = os.path.join(_GNUCHAN_GUI_ROOT, 'logo.png')
+
+
 
 DEFAULT_BASE64_ICON_16_BY_16 = b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVDhPVZNbSFRRFIb35YwXItBIGtDsiqENEUTRjJlZkJggPSUYBD0UhULElE6hBY6ID/ZSpD1IDxaCEPhUaFLRQyWRNxIJe8syMxCjMCbB07fOsaMt+GftvWf//7/2Whyt1sTei/fCpDqQBTrGOi9Myrk7URwhnQUfQLeOvErJuUQgADlK6gObvAOl5sHx0doHljwARFRiCpxG5J1sjPxALiYNgn9kiQ3gafdYUYzseCd+FICX7sShw7LR++q6cl3XHaXQHFdOJLxFsJtvKHnbUr1nqp01hhStpXAzo7TZZXOjJ+9orT9pY74aY3ZobZZYW8D/GpjM19Ob088fmJxW2tkC4AJt17Oeg2MLrHX6jXWes16w1sbBkrFWBTB2nTLpv5VJg7wGNhRDwCS0tR1cbECkidwMQohAdoScqiz8/FCZUKlPCgSWlQ71elOI1fcco9hCXp1kS7dX3u+qVOm2L4nW8qE4Neetvl8v83NOb++9703BcUI/cU3imuWV7JedKtv5LdFaMRzHLW+N+zJoVDZzRLj6SFNfPlMYwy5bDiRcCojmz15tKx+6hKPv7LvjrG/Q2RoOwjSyzNDlahyzA2dAJeNtFcMHA2cfLn24STNr6P4I728jJ7hvf/lEGuaXLnkRAp0PyFK+hlyLSJGyGWnKyeBi2oJU0IPIjNd15uuL2f2PJgueQBKhVRETCgNeYU+xaeEpnWaw8cQPRM7g/McT8eF0De9u7P+49TqXF7no98BDEEkdvvXem8LAtfJniFRB/A5XeiAiG2+/icgHVQUW5d5KyAhl3M2y+U+ysv1FDukyKGQW3Y+vHJWvU7mz8RJSPZgDd3H2RqiUUn8BSQuaBvGjGpsAAAAASUVORK5CYII='
+
+
+_default_logo_b64 = None
+try:
+    import base64 as _b64_logo
+    with open(DEFAULT_WINDOW_ICON_FILE, 'rb') as _logo_fp:
+        _default_logo_b64 = _b64_logo.standard_b64encode(_logo_fp.read())
+except Exception:
+    pass
+DEFAULT_BASE64_ICON = _default_logo_b64 if _default_logo_b64 is not None else DEFAULT_BASE64_ICON_16_BY_16
 
 DEFAULT_BASE64_LOADING_GIF = b'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'
 
@@ -746,6 +731,21 @@ class ToolTip:
         if self.tipwindow:
             self.tipwindow.destroy()
         self.tipwindow = None
+
+
+def _alias_key(key, k):
+    """PySimpleGUI uyumluluğu: `key` ve `k` aynı anlama gelir; `key` önceliklidir."""
+    return key if key is not None else k
+
+
+def _alias_pad(pad, p):
+    """`pad` / `p` kısayolu; `pad` önceliklidir."""
+    return pad if pad is not None else p
+
+
+def _alias_size(size, s):
+    """`size` / `s` kısayolu; gerçek boyut verilmişse `size` kullanılır."""
+    return size if size != (None, None) else s
 
 
 # ---------------------------------------------------------------------- #
@@ -1837,9 +1837,9 @@ class Input(Element):
         # type: tk.Entry
         self.TKEntry = self.Widget = None
 
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -2072,9 +2072,9 @@ class Combo(Element):
         self.BindReturnKey = bind_return_key
         bg = background_color if background_color else DEFAULT_INPUT_ELEMENTS_COLOR
         fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
         if button_background_color is None:
@@ -2330,9 +2330,9 @@ class OptionMenu(Element):
         self.Disabled = disabled
         bg = background_color if background_color else DEFAULT_INPUT_ELEMENTS_COLOR
         fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -2541,9 +2541,9 @@ class Listbox(Element):
         
         self.NoScrollbar = no_scrollbar
         self.HorizontalScroll = horizontal_scroll
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
         self.justification = justification
@@ -2845,9 +2845,9 @@ class Radio(Element):
             self.CircleBackgroundColor = circle_color
         self.ChangeSubmits = change_submits or enable_events
         self.EncodedRadioValue = None
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -3054,9 +3054,9 @@ class Checkbox(Element):
         else:
             self.CheckboxBackgroundColor = checkbox_color
         self.ChangeSubmits = change_submits or enable_events
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -3244,9 +3244,9 @@ class Spin(Element):
 
         bg = background_color if background_color else DEFAULT_INPUT_ELEMENTS_COLOR
         fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -3401,7 +3401,7 @@ class Multiline(Element):
                  size=(None, None), s=(None, None), auto_size_text=None, background_color=None, text_color=None, selected_text_color=None, selected_background_color=None, horizontal_scroll=False, change_submits=False,
                  enable_events=False, do_not_clear=True, key=None, k=None, write_only=False, auto_refresh=False, reroute_stdout=False, reroute_stderr=False, reroute_cprint=False, echo_stdout_stderr=False, focus=False, font=None, pad=None, p=None, tooltip=None, justification=None, no_scrollbar=False, wrap_lines=None,
                  sbar_trough_color=None, sbar_background_color=None, sbar_arrow_color=None, sbar_width=None, sbar_arrow_width=None, sbar_frame_color=None, sbar_relief=None,
-                 expand_x=False, expand_y=False, rstrip=True, right_click_menu=None, visible=True, metadata=None):
+                 expand_x=False, expand_y=False, expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, rstrip=True, right_click_menu=None, visible=True, metadata=None):
         """
         :param default_text:                 Initial text to show
         :type default_text:                  (Any)
@@ -3504,7 +3504,6 @@ class Multiline(Element):
         self.Focus = focus
         self.do_not_clear = do_not_clear
         fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
-        fg = text_color if text_color is not None else DEFAULT_INPUT_TEXT_COLOR
         self.selected_text_color = selected_text_color
         self.selected_background_color = selected_background_color
         self.Autoscroll = autoscroll
@@ -3522,14 +3521,17 @@ class Multiline(Element):
         self.tags = set()
         self.WriteOnly = write_only
         self.AutoRefresh = auto_refresh
-        key = key if key is not None else k
+        key = _alias_key(key, k)
         self.reroute_cprint = reroute_cprint
         self.echo_stdout_stderr = echo_stdout_stderr
         self.Justification = 'left' if justification is None else justification
         self.justification_tag = self.just_center_tag = self.just_left_tag = self.just_right_tag = None
-        pad = pad if pad is not None else p
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
+        self.expand_weight_x = expand_weight_x
+        self.expand_weight_y = expand_weight_y
+        self.expand_weight_row = expand_weight_row
         self.rstrip = rstrip
         self.wrap_lines = wrap_lines
         self.reroute_stdout = reroute_stdout
@@ -3537,7 +3539,7 @@ class Multiline(Element):
         self.no_scrollbar = no_scrollbar
         self.hscrollbar = None      # The horizontal scrollbar
         self.auto_scroll_only_at_bottom = autoscroll_only_at_bottom
-        sz = size if size != (None, None) else s
+        sz = _alias_size(size, s)
 
         super().__init__(ELEM_TYPE_INPUT_MULTILINE, size=sz, auto_size_text=auto_size_text, background_color=bg,
                          text_color=fg, key=key, pad=pad, tooltip=tooltip, font=font or DEFAULT_FONT, visible=visible, metadata=metadata,
@@ -3862,7 +3864,8 @@ class Text(Element):
     """
 
     def __init__(self, text='', size=(None, None), s=(None, None), auto_size_text=None, click_submits=False, enable_events=False, relief=None, font=None,
-                 text_color=None, background_color=None, border_width=None, justification=None, pad=None, p=None, key=None, k=None, right_click_menu=None, expand_x=False, expand_y=False, grab=None,
+                 text_color=None, background_color=None, border_width=None, justification=None, pad=None, p=None, key=None, k=None, right_click_menu=None, expand_x=False, expand_y=False,
+                 expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, grab=None,
                  tooltip=None, visible=True, metadata=None):
         """
         :param text:             The text to display. Can include /n to achieve multiple lines.  Will convert (optional) parameter into a string
@@ -3926,11 +3929,14 @@ class Text(Element):
         self.TKRightClickMenu = None
         self.BorderWidth = border_width
         self.Grab = grab
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
+        self.expand_weight_x = expand_weight_x
+        self.expand_weight_y = expand_weight_y
+        self.expand_weight_row = expand_weight_row
 
         super().__init__(ELEM_TYPE_TEXT, auto_size_text=auto_size_text, size=sz, background_color=bg, font=font if font else DEFAULT_FONT,
                          text_color=self.TextColor, pad=pad, key=key, tooltip=tooltip, visible=visible, metadata=metadata)
@@ -4271,10 +4277,10 @@ class StatusBar(Element):
         # type: tk.Label
         self.TKText = self.Widget = None
         
-        key = key if key is not None else k
+        key = _alias_key(key, k)
         self.RightClickMenu = right_click_menu
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -4510,7 +4516,7 @@ class Output(Multiline):
         """
 
 
-        super().__init__(size=size, s=s, background_color=background_color, autoscroll_only_at_bottom=autoscroll_only_at_bottom, text_color=text_color, pad=pad, p=p, echo_stdout_stderr=echo_stdout_stderr, font=font, tooltip=tooltip, wrap_lines=wrap_lines, horizontal_scroll=horizontal_scroll, key=key, k=k, right_click_menu=right_click_menu, write_only=True, reroute_stdout=True, reroute_stderr=True, reroute_cprint=True, autoscroll=True, auto_refresh=True, expand_x=expand_x, expand_y=expand_y, visible=visible, metadata=metadata, sbar_trough_color=sbar_trough_color, sbar_background_color=sbar_background_color, sbar_arrow_color=sbar_arrow_color, sbar_width=sbar_width, sbar_arrow_width=sbar_arrow_width, sbar_frame_color=sbar_frame_color, sbar_relief=sbar_relief)
+        super().__init__(size=size, s=s, background_color=background_color, autoscroll_only_at_bottom=autoscroll_only_at_bottom, text_color=text_color, pad=pad, p=p, echo_stdout_stderr=echo_stdout_stderr, font=font, tooltip=tooltip, wrap_lines=wrap_lines, horizontal_scroll=horizontal_scroll, key=_alias_key(key, k), right_click_menu=right_click_menu, write_only=True, reroute_stdout=True, reroute_stderr=True, reroute_cprint=True, autoscroll=True, auto_refresh=True, expand_x=expand_x, expand_y=expand_y, visible=visible, metadata=metadata, sbar_trough_color=sbar_trough_color, sbar_background_color=sbar_background_color, sbar_arrow_color=sbar_arrow_color, sbar_width=sbar_width, sbar_arrow_width=sbar_arrow_width, sbar_frame_color=sbar_frame_color, sbar_relief=sbar_relief)
 
 
 
@@ -4690,7 +4696,7 @@ class Button(Element):
                     else:
                         _key = _key.replace('\\'+MENU_SHORTCUT_CHARACTER, MENU_SHORTCUT_CHARACTER)
         else:
-            _key = key if key is not None else k
+            _key = _alias_key(key, k)
         if highlight_colors is not None:
             self.HighlightColors = highlight_colors
         else:
@@ -4702,11 +4708,11 @@ class Button(Element):
             self.MouseOverColors = (self.ButtonColor[1], self.ButtonColor[0])
         else:
             self.MouseOverColors = (theme_button_color()[1], theme_button_color()[0])
-        pad = pad if pad is not None else p
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
-        sz = size if size != (None, None) else s
+        sz = _alias_size(size, s)
         super().__init__(ELEM_TYPE_BUTTON, size=sz, font=font, pad=pad, key=_key, tooltip=tooltip, visible=visible, metadata=metadata)
         return
 
@@ -5217,9 +5223,9 @@ class ButtonMenu(Element):
         self.part_of_custom_menubar = False
         self.custom_menubar_key = None
         # self.temp_size = size if size != (NONE, NONE) else
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -5432,9 +5438,9 @@ class ProgressBar(Element):
         self.BorderWidth = border_width if border_width else DEFAULT_PROGRESS_BAR_BORDER_WIDTH
         self.Relief = relief if relief else DEFAULT_PROGRESS_BAR_RELIEF
         self.BarExpired = False
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
         self.size_px = size_px
@@ -5607,9 +5613,9 @@ class Image(Element):
         self.zoom = int(zoom) if zoom is not None else None
 
         self.Source = filename if filename is not None else data
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -5865,9 +5871,9 @@ class Canvas(Element):
         self._TKCanvas = self.Widget = canvas
         self.RightClickMenu = right_click_menu
         self.BorderWidth = border_width
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -5901,6 +5907,35 @@ class Canvas(Element):
         if visible is not None:
             self._visible = visible
 
+    def erase(self):
+        """
+        Remove all drawn items on the canvas (tk delete('all')). Widget stays; use for full-frame redraw.
+        For moving sprites prefer delete(item_id) on each item instead of erase+redraw every frame (less flicker).
+        """
+        if not self._widget_was_created():
+            return
+        if self._this_elements_window_closed():
+            return
+        try:
+            if self._TKCanvas is not None:
+                self._TKCanvas.delete('all')
+        except Exception:
+            pass
+
+    def focus_canvas(self):
+        """Give keyboard focus to this canvas so KeyPress bindings work without clicking the title bar first."""
+        if not self._widget_was_created():
+            return
+        if self._this_elements_window_closed():
+            return
+        try:
+            if self._TKCanvas is not None:
+                self._TKCanvas.focus_set()
+        except Exception:
+            pass
+
+    Erase = erase
+    FocusCanvas = focus_canvas
 
     @property
     def tk_canvas(self):
@@ -5997,8 +6032,8 @@ class Graph(Element):
         self.RightClickMenu = right_click_menu
         self.FloatValues = float_values
         self.BorderWidth = border_width
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
         self.motion_events = motion_events
@@ -6691,7 +6726,7 @@ class Frame(Element):
 
     def __init__(self, title, layout, title_color=None, background_color=None, title_location=None,
                  relief=DEFAULT_FRAME_RELIEF, size=(None, None), s=(None, None), font=None, pad=None, p=None, border_width=None, key=None, k=None,
-                 tooltip=None, right_click_menu=None, expand_x=False, expand_y=False, grab=None, visible=True, element_justification='left', vertical_alignment=None, metadata=None):
+                 tooltip=None, right_click_menu=None, expand_x=False, expand_y=False, expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, grab=None, visible=True, element_justification='left', vertical_alignment=None, metadata=None):
         """
         :param title:                 text that is displayed as the Frame's "label" or title
         :type title:                  (str)
@@ -6763,11 +6798,14 @@ class Frame(Element):
         self.Widget = None  # type: tk.LabelFrame
         self.Grab = grab
         self.Layout(layout)
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
+        self.expand_weight_x = expand_weight_x
+        self.expand_weight_y = expand_weight_y
+        self.expand_weight_row = expand_weight_row
 
         super().__init__(ELEM_TYPE_FRAME, background_color=background_color, text_color=title_color, size=sz,
                          font=font, pad=pad, key=key, tooltip=tooltip, visible=visible, metadata=metadata)
@@ -6929,8 +6967,8 @@ class VerticalSeparator(Element):
         :param k:     Same as the Key. You can use either k or key. Which ever is set will be used.
         :type k:      str | int | tuple | object
         """
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
         self.expand_x = None
         self.expand_y = None
         self.Orientation = 'vertical'  # for now only vertical works
@@ -6969,8 +7007,8 @@ class HorizontalSeparator(Element):
         self.color = color if color is not None else theme_text_color()
         self.expand_x = True
         self.expand_y = None
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
 
         super().__init__(ELEM_TYPE_SEPARATOR, pad=pad, key=key)
 
@@ -7005,8 +7043,8 @@ class Sizegrip(Element):
         """
 
         bg = background_color if background_color is not None else theme_background_color()
-        pad = pad if pad is not None else p
-        key = key if key is not None else k
+        pad = _alias_pad(pad, p)
+        key = _alias_key(key, k)
 
 
         super().__init__(ELEM_TYPE_SIZEGRIP, background_color=bg,key=key, pad=pad)
@@ -7102,8 +7140,8 @@ class Tab(Element):
         self.RightClickMenu = right_click_menu
         self.ContainerElemementNumber = Window._GetAContainerNumber()
         self.ElementJustification = element_justification
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -7276,7 +7314,7 @@ class TabGroup(Element):
 
     def __init__(self, layout, tab_location=None, title_color=None, tab_background_color=None, selected_title_color=None, selected_background_color=None,
                  background_color=None, focus_color=None, font=None, change_submits=False, enable_events=False, pad=None, p=None, border_width=None, tab_border_width=None, theme=None, key=None, k=None,
-                 size=(None, None), s=(None, None), tooltip=None, right_click_menu=None, expand_x=False, expand_y=False, visible=True, metadata=None):
+                 size=(None, None), s=(None, None), tooltip=None, right_click_menu=None, expand_x=False, expand_y=False, expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, visible=True, metadata=None):
         """
         :param layout:                    Layout of Tabs. Different than normal layouts. ALL Tabs should be on first row
         :type layout:                     List[List[Tab]]
@@ -7358,11 +7396,14 @@ class TabGroup(Element):
         self.TabBorderWidth = tab_border_width
         self.FocusColor = focus_color
 
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
+        self.expand_weight_x = expand_weight_x
+        self.expand_weight_y = expand_weight_y
+        self.expand_weight_row = expand_weight_row
 
         self.Layout(layout)
 
@@ -7690,12 +7731,12 @@ class Slider(Element):
         self.TickInterval = tick_interval
         self.DisableNumericDisplay = disable_number_display
         self.TroughColor = trough_color or DEFAULT_SCROLLBAR_COLOR
-        sz = size if size != (None, None) else s
+        sz = _alias_size(size, s)
         temp_size = sz
         if temp_size == (None, None):
             temp_size = (20, 20) if self.Orientation.startswith('h') else (8, 20)
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -7936,7 +7977,7 @@ class Column(Element):
 
     def __init__(self, layout, background_color=None, size=(None, None), s=(None, None), size_subsample_width=1, size_subsample_height=2, pad=None, p=None, scrollable=False,
                  vertical_scroll_only=False, right_click_menu=None, key=None, k=None, visible=True, justification=None, element_justification=None,
-                 vertical_alignment=None, grab=None, expand_x=None, expand_y=None, metadata=None,
+                 vertical_alignment=None, grab=None, expand_x=None, expand_y=None, expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, metadata=None,
                  sbar_trough_color=None, sbar_background_color=None, sbar_arrow_color=None, sbar_width=None, sbar_arrow_width=None,
                  sbar_frame_color=None, sbar_relief=None):
         """
@@ -8018,13 +8059,16 @@ class Column(Element):
         self.ElementJustification = element_justification
         self.Justification = justification
         self.VerticalAlignment = vertical_alignment
-        key = key if key is not None else k
+        key = _alias_key(key, k)
         self.Grab = grab
         self.expand_x = expand_x
         self.expand_y = expand_y
+        self.expand_weight_x = expand_weight_x
+        self.expand_weight_y = expand_weight_y
+        self.expand_weight_row = expand_weight_row
         self.Layout(layout)
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.size_subsample_width = size_subsample_width
         self.size_subsample_height = size_subsample_height
 
@@ -8248,9 +8292,9 @@ class Pane(Element):
         bg = background_color if background_color is not None else DEFAULT_BACKGROUND_COLOR
 
         self.Rows = [pane_list]
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -8577,9 +8621,9 @@ class Menu(Element):
         self.Widget = self.TKMenu = None
 
         self.MenuItemChosen = None
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
 
         super().__init__(ELEM_TYPE_MENUBAR, background_color=self.BackgroundColor, text_color=self.TextColor, size=sz, pad=pad, key=key, visible=visible,
                          font=font, metadata=metadata)
@@ -8847,9 +8891,9 @@ class Table(Element):
         self.RightClickMenu = right_click_menu
         self.RowColors = row_colors
         self.tree_ids = []  # ids returned when inserting items into table - will use to delete colors
-        key = key if key is not None else k
-        sz = size if size != (None, None) else s
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        sz = _alias_size(size, s)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -9229,8 +9273,8 @@ class Tree(Element):
         self.IconList = {}
         self.IdToKey = {'': ''}
         self.KeyToID = {'': ''}
-        key = key if key is not None else k
-        pad = pad if pad is not None else p
+        key = _alias_key(key, k)
+        pad = _alias_pad(pad, p)
         self.expand_x = expand_x
         self.expand_y = expand_y
 
@@ -9733,7 +9777,7 @@ class Window:
                  auto_close_duration=DEFAULT_AUTOCLOSE_TIME, icon=None, force_toplevel=False,
                  alpha_channel=None, return_keyboard_events=True, use_default_focus=True, text_justification=None,
                  no_titlebar=False, grab_anywhere=False, grab_anywhere_using_control=True, keep_on_top=None, resizable=False, disable_close=False,
-                 disable_minimize=False, right_click_menu=None, transparent_color=None, debugger_enabled=True,
+                 disable_minimize=False, right_click_menu=None, transparent_color=None, debugger_enabled=False,
                  right_click_menu_background_color=None, right_click_menu_text_color=None, right_click_menu_disabled_text_color=None, right_click_menu_selected_colors=(None, None),
                  right_click_menu_font=None, right_click_menu_tearoff=False,
                  finalize=False, element_justification='left', ttk_theme=None, use_ttk_buttons=None, modal=False, enable_close_attempted_event=False, enable_window_config_events=False,
@@ -10469,22 +10513,23 @@ class Window:
         :rtype:             Tuple[(Any), Dict[Any, Any], List[Any], None]
         """
 
-        if Window._floating_debug_window_build_needed is True:
-            Window._floating_debug_window_build_needed = False
-            _Debugger.debugger._build_floating_window()
+        if self.DebuggerEnabled:
+            if Window._floating_debug_window_build_needed is True:
+                Window._floating_debug_window_build_needed = False
+                _Debugger.debugger._build_floating_window()
 
-        if Window._main_debug_window_build_needed is True:
-            Window._main_debug_window_build_needed = False
-            _Debugger.debugger._build_main_debugger_window()
+            if Window._main_debug_window_build_needed is True:
+                Window._main_debug_window_build_needed = False
+                _Debugger.debugger._build_main_debugger_window()
 
-        # ensure called only 1 time through a single read cycle
-        if not Window._read_call_from_debugger:
-            _refresh_debugger()
+            # ensure called only 1 time through a single read cycle
+            if not Window._read_call_from_debugger:
+                _refresh_debugger()
 
-        # if the user has not added timeout and a debug window is open, then set a timeout for them so the debugger continuously refreshes
-        if _debugger_window_is_open() and not Window._read_call_from_debugger:
-            if timeout is None or timeout > 3000:
-                timeout = 100
+            # if the user has not added timeout and a debug window is open, then set a timeout for them so the debugger continuously refreshes
+            if _debugger_window_is_open() and not Window._read_call_from_debugger:
+                if timeout is None or timeout > 3000:
+                    timeout = 100
 
 
         while True:
@@ -13172,7 +13217,7 @@ def MenubarCustom(menu_definition, disabled_text_color=None, bar_font=None, font
     bar_text = bar_text_color if bar_text_color is not None else theme_button_color()[1]
     menu_bg = background_color if background_color is not None else bar_text
     menu_text = text_color if text_color is not None else bar_bg
-    pad = pad if pad is not None else p
+    pad = _alias_pad(pad, p)
 
     row = []
     for menu in menu_definition:
@@ -13188,9 +13233,9 @@ def MenubarCustom(menu_definition, disabled_text_color=None, bar_font=None, font
         button_menu = ButtonMenu(text, menu, border_width=0, button_color=(bar_text, bar_bg), key=text, pad=(0, 0), disabled=disabled, font=bar_font,
                                  item_font=font, disabled_text_color=disabled_text_color, text_color=menu_text, background_color=menu_bg, tearoff=tearoff)
         button_menu.part_of_custom_menubar = True
-        button_menu.custom_menubar_key = key if key is not None else k
+        button_menu.custom_menubar_key = _alias_key(key, k)
         row += [button_menu]
-    return Column([row], pad=pad, background_color=bar_bg, expand_x=True, key=key if key is not None else k)
+    return Column([row], pad=pad, background_color=bar_bg, expand_x=True, key=_alias_key(key, k))
 
 
 # -------------------------  FOLDER BROWSE Element lazy function  ------------------------- #
@@ -13245,7 +13290,7 @@ def FolderBrowse(button_text='Browse', target=(ThisRow, -1), initial_folder=None
     return Button(button_text=button_text, button_type=BUTTON_TYPE_BROWSE_FOLDER, target=target,
                   initial_folder=initial_folder, tooltip=tooltip, size=size, s=s, auto_size_button=auto_size_button,
                   disabled=disabled, button_color=button_color, change_submits=change_submits,
-                  enable_events=enable_events, font=font, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  enable_events=enable_events, font=font, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  FILE BROWSE Element lazy function  ------------------------- #
@@ -13303,7 +13348,7 @@ def FileBrowse(button_text='Browse', target=(ThisRow, -1), file_types=FILE_TYPES
     return Button(button_text=button_text, button_type=BUTTON_TYPE_BROWSE_FILE, target=target, file_types=file_types,
                   initial_folder=initial_folder, tooltip=tooltip, size=size, s=s, auto_size_button=auto_size_button,
                   change_submits=change_submits, enable_events=enable_events, disabled=disabled,
-                  button_color=button_color, font=font, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  button_color=button_color, font=font, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  FILES BROWSE Element (Multiple file selection) lazy function  ------------------------- #
@@ -13364,7 +13409,7 @@ def FilesBrowse(button_text='Browse', target=(ThisRow, -1), file_types=FILE_TYPE
     button = Button(button_text=button_text, button_type=BUTTON_TYPE_BROWSE_FILES, target=target, file_types=file_types,
                     initial_folder=initial_folder, change_submits=change_submits, enable_events=enable_events,
                     tooltip=tooltip, size=size, s=s, auto_size_button=auto_size_button,
-                    disabled=disabled, button_color=button_color, font=font, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                    disabled=disabled, button_color=button_color, font=font, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
     button._files_delimiter = files_delimiter
     return button
 
@@ -13425,7 +13470,7 @@ def FileSaveAs(button_text='Save As...', target=(ThisRow, -1), file_types=FILE_T
     return Button(button_text=button_text, button_type=BUTTON_TYPE_SAVEAS_FILE, target=target, file_types=file_types,
                   initial_folder=initial_folder, default_extension=default_extension, tooltip=tooltip, size=size, s=s, disabled=disabled,
                   auto_size_button=auto_size_button, button_color=button_color, change_submits=change_submits,
-                  enable_events=enable_events, font=font, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  enable_events=enable_events, font=font, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  SAVE AS Element lazy function  ------------------------- #
@@ -13484,7 +13529,7 @@ def SaveAs(button_text='Save As...', target=(ThisRow, -1), file_types=FILE_TYPES
     return Button(button_text=button_text, button_type=BUTTON_TYPE_SAVEAS_FILE, target=target, file_types=file_types,
                   initial_folder=initial_folder, default_extension=default_extension, tooltip=tooltip, size=size, s=s, disabled=disabled,
                   auto_size_button=auto_size_button, button_color=button_color, change_submits=change_submits,
-                  enable_events=enable_events, font=font, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  enable_events=enable_events, font=font, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  SAVE BUTTON Element lazy function  ------------------------- #
@@ -13533,7 +13578,7 @@ def Save(button_text='Save', size=(None, None), s=(None, None), auto_size_button
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  SUBMIT BUTTON Element lazy function  ------------------------- #
@@ -13582,7 +13627,7 @@ def Submit(button_text='Submit', size=(None, None), s=(None, None), auto_size_bu
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  OPEN BUTTON Element lazy function  ------------------------- #
@@ -13632,7 +13677,7 @@ def Open(button_text='Open', size=(None, None), s=(None, None), auto_size_button
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  OK BUTTON Element lazy function  ------------------------- #
@@ -13681,7 +13726,7 @@ def OK(button_text='OK', size=(None, None), s=(None, None), auto_size_button=Non
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  YES BUTTON Element lazy function  ------------------------- #
@@ -13730,7 +13775,7 @@ def Ok(button_text='Ok', size=(None, None), s=(None, None), auto_size_button=Non
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  CANCEL BUTTON Element lazy function  ------------------------- #
@@ -13779,7 +13824,7 @@ def Cancel(button_text='Cancel', size=(None, None), s=(None, None), auto_size_bu
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  QUIT BUTTON Element lazy function  ------------------------- #
@@ -13828,7 +13873,7 @@ def Quit(button_text='Quit', size=(None, None), s=(None, None), auto_size_button
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  Exit BUTTON Element lazy function  ------------------------- #
@@ -13877,7 +13922,7 @@ def Exit(button_text='Exit', size=(None, None), s=(None, None), auto_size_button
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  YES BUTTON Element lazy function  ------------------------- #
@@ -13926,7 +13971,7 @@ def Yes(button_text='Yes', size=(None, None), s=(None, None), auto_size_button=N
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  NO BUTTON Element lazy function  ------------------------- #
@@ -13975,7 +14020,7 @@ def No(button_text='No', size=(None, None), s=(None, None), auto_size_button=Non
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  NO BUTTON Element lazy function  ------------------------- #
@@ -14024,7 +14069,7 @@ def Help(button_text='Help', size=(None, None), s=(None, None), auto_size_button
     """
     return Button(button_text=button_text, button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  NO BUTTON Element lazy function  ------------------------- #
@@ -14076,11 +14121,12 @@ def Debug(button_text='', size=(None, None), s=(None, None), auto_size_button=No
     """
 
 
-    user_key = key if key is not None else k if k is not None else button_text
+    _merged = _alias_key(key, k)
+    user_key = button_text if _merged is None else _merged
 
     return Button(button_text='', button_type=BUTTON_TYPE_READ_FORM, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=theme_button_color(), font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=user_key, k=k, visible=visible, image_data=PSG_DEBUGGER_LOGO,
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=user_key, visible=visible, image_data=PSG_DEBUGGER_LOGO,
                   image_subsample=2, border_width=0, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
@@ -14142,7 +14188,7 @@ def SimpleButton(button_text, image_filename=None, image_data=None, image_size=(
                   image_data=image_data, image_size=image_size, image_subsample=image_subsample,
                   border_width=border_width, tooltip=tooltip, disabled=disabled, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  CLOSE BUTTON Element lazy function  ------------------------- #
@@ -14204,7 +14250,7 @@ def CloseButton(button_text, image_filename=None, image_data=None, image_size=(N
                   image_data=image_data, image_size=image_size, image_subsample=image_subsample,
                   border_width=border_width, tooltip=tooltip, disabled=disabled, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 CButton = CloseButton
@@ -14267,7 +14313,7 @@ def ReadButton(button_text, image_filename=None, image_data=None, image_size=(No
                   image_data=image_data, image_size=image_size, image_subsample=image_subsample,
                   border_width=border_width, tooltip=tooltip, size=size, s=s, disabled=disabled,
                   auto_size_button=auto_size_button, button_color=button_color, font=font,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 ReadFormButton = ReadButton
@@ -14333,7 +14379,7 @@ def RealtimeButton(button_text, image_filename=None, image_data=None, image_size
                   image_data=image_data, image_size=image_size, image_subsample=image_subsample,
                   border_width=border_width, tooltip=tooltip, disabled=disabled, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  Dummy BUTTON Element lazy function  ------------------------- #
@@ -14401,7 +14447,7 @@ def DummyButton(button_text, image_filename=None, image_data=None, image_size=(N
                   image_data=image_data, image_size=image_size, image_subsample=image_subsample,
                   border_width=border_width, tooltip=tooltip, size=size, s=s, auto_size_button=auto_size_button,
                   button_color=button_color, font=font, disabled=disabled, bind_return_key=bind_return_key, focus=focus,
-                  pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
 
 
 # -------------------------  Calendar Chooser Button lazy function  ------------------------- #
@@ -14490,7 +14536,7 @@ def CalendarButton(button_text, target=(ThisRow, -1), close_when_date_chosen=Tru
                     image_filename=image_filename, image_data=image_data, image_size=image_size,
                     image_subsample=image_subsample, border_width=border_width, tooltip=tooltip, size=size, s=s,
                     auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled, enable_events=enable_events,
-                    bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                    bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
     button.calendar_close_when_chosen = close_when_date_chosen
     button.calendar_default_date_M_D_Y = default_date_m_d_y
     button.calendar_locale = locale
@@ -14570,7 +14616,7 @@ def ColorChooserButton(button_text, target=(ThisRow, -1), image_filename=None, i
                   image_filename=image_filename, image_data=image_data, image_size=image_size,
                   image_subsample=image_subsample, border_width=border_width, tooltip=tooltip, size=size, s=s,
                   auto_size_button=auto_size_button, button_color=button_color, font=font, disabled=disabled,
-                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=key, k=k, visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
+                  bind_return_key=bind_return_key, focus=focus, pad=pad, p=p, key=_alias_key(key, k), visible=visible, metadata=metadata, expand_x=expand_x, expand_y=expand_y)
     button.default_color = default_color
     return button
 
@@ -15369,6 +15415,149 @@ def _make_ttk_scrollbar(element, orientation, window):
 #
 #     root.mainloop()
 
+def _append_row_placement(row_placements, element, widget, padx, pady, expand, fill, anchor=None):
+    """Defer a row child's pack/grid until the row is complete (see expand_weight_x / expand_weight_y)."""
+    row_placements.append({
+        'element': element,
+        'widget': widget,
+        'padx': padx,
+        'pady': pady,
+        'expand': expand,
+        'fill': fill,
+        'anchor': anchor,
+    })
+
+
+def _apply_packform_row_placements(tk_row_frame, row_placements):
+    """
+    If any element in the row sets expand_weight_x or expand_weight_y, use grid + column/row weights
+    so horizontal/vertical extra space is distributed in ratio (not equal split like pack expand).
+    """
+    if not row_placements:
+        return
+    use_wx = any(getattr(op['element'], 'expand_weight_x', None) is not None for op in row_placements)
+    use_wy = any(getattr(op['element'], 'expand_weight_y', None) is not None for op in row_placements)
+    if not use_wx and not use_wy:
+        for op in row_placements:
+            w = op['widget']
+            padx, pady = op['padx'], op['pady']
+            exp, fil = op['expand'], op['fill']
+            an = op.get('anchor')
+            if an is not None:
+                w.pack(side=tk.LEFT, anchor=an, padx=padx, pady=pady, expand=exp, fill=fil)
+            else:
+                w.pack(side=tk.LEFT, padx=padx, pady=pady, expand=exp, fill=fil)
+        return
+
+    col_weights = []
+    max_rw = 0
+    for col, op in enumerate(row_placements):
+        el = op['element']
+        wx = getattr(el, 'expand_weight_x', None)
+        if wx is None:
+            wx = 1 if getattr(el, 'expand_x', False) else 0
+        else:
+            wx = max(0, int(wx))
+        tk_row_frame.columnconfigure(col, weight=wx)
+        col_weights.append(wx)
+
+        wy = getattr(el, 'expand_weight_y', None)
+        if wy is None:
+            wy = 1 if getattr(el, 'expand_y', False) else 0
+        else:
+            wy = max(0, int(wy))
+        max_rw = max(max_rw, wy)
+    tk_row_frame.rowconfigure(0, weight=max_rw)
+
+    for col, op in enumerate(row_placements):
+        w = op['widget']
+        padx, pady = op['padx'], op['pady']
+        exp, fil = op['expand'], op['fill']
+        wx = col_weights[col]
+
+        if wx > 0 and exp:
+            sticky = tk.NSEW if fil == tk.BOTH else (tk.EW if fil == tk.X else tk.NS if fil == tk.Y else tk.NSEW)
+        elif exp and fil == tk.X:
+            sticky = tk.EW
+        elif exp and fil == tk.Y:
+            sticky = tk.NS
+        elif fil == tk.X:
+            sticky = tk.EW
+        elif fil == tk.Y:
+            sticky = tk.NS
+        else:
+            an = op.get('anchor')
+            if an == tk.SW:
+                sticky = tk.SW
+            elif an == tk.SE:
+                sticky = tk.SE
+            elif an == tk.S:
+                sticky = tk.S
+            elif an in (tk.N, tk.CENTER):
+                sticky = tk.N
+            else:
+                sticky = tk.NW
+        w.grid(row=0, column=col, sticky=sticky, padx=padx, pady=pady)
+
+
+def _apply_packform_vertical_row_stack(containing_frame, deferred_vertical_rows):
+    """
+    Stack layout rows (tk_row_frame) in containing_frame. Default: pack TOP like classic behavior.
+
+    If any element in the form sets expand_weight_row, use grid + rowconfigure weights so extra
+    vertical space is shared by ratio between rows (same idea as expand_weight_x in a row).
+    """
+    if not deferred_vertical_rows:
+        return
+    form_uses_row_weights = any(
+        any(getattr(e, 'expand_weight_row', None) is not None for e in op['flex_row'])
+        for op in deferred_vertical_rows
+    )
+    if not form_uses_row_weights:
+        for op in deferred_vertical_rows:
+            tf = op['tk_row_frame']
+            tf.pack(side=tk.TOP, anchor=op['anchor'], padx=0, pady=0,
+                    expand=op['row_should_expand'], fill=op['row_fill_direction'])
+        return
+
+    containing_frame.grid_columnconfigure(0, weight=1)
+    for i, op in enumerate(deferred_vertical_rows):
+        flex_row = op['flex_row']
+        explicit = [getattr(e, 'expand_weight_row', None) for e in flex_row]
+        explicit = [x for x in explicit if x is not None]
+        if explicit:
+            rw = max(max(0, int(x)) for x in explicit)
+        elif op['row_should_expand']:
+            rw = 1
+        else:
+            rw = 0
+        containing_frame.grid_rowconfigure(i, weight=rw)
+
+        fil = op['row_fill_direction']
+        exp = op['row_should_expand']
+        if rw > 0 and exp and fil == tk.BOTH:
+            sticky = tk.NSEW
+        elif rw > 0 and exp and fil == tk.X:
+            sticky = tk.EW
+        elif rw > 0 and exp and fil == tk.Y:
+            sticky = tk.NS
+        elif fil == tk.BOTH:
+            sticky = tk.NSEW
+        elif fil == tk.X:
+            sticky = tk.EW
+        elif fil == tk.Y:
+            sticky = tk.NS
+        else:
+            an = op['anchor']
+            if an in ('n', tk.N):
+                sticky = tk.N
+            elif an in ('ne', tk.NE):
+                sticky = tk.NE
+            else:
+                sticky = tk.NW
+        op['tk_row_frame'].grid(row=i, column=0, sticky=sticky, padx=0, pady=0)
+
+
 # @_timeit
 def PackFormIntoFrame(form, containing_frame, toplevel_form):
     """
@@ -15546,6 +15735,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
     tclversion_detailed = tkinter.Tcl().eval('info patchlevel')
 
+    deferred_vertical_rows = []
 
     # --------------------------------------------------------------------------- #
     # ****************  Use FlexForm to build the tkinter window ********** ----- #
@@ -15560,6 +15750,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
         # *********** -------  Loop through ELEMENTS  ------- ***********#
         # *********** Make TK Row                             ***********#
         tk_row_frame = tk.Frame(containing_frame)
+        row_placements = []
         row_should_expand = False
         row_fill_direction = tk.NONE
 
@@ -15693,9 +15884,9 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                         anchor = tk.CENTER
                     if element.VerticalAlignment.lower().startswith('b'):
                         anchor = tk.S
-                    element.TKColFrame.pack(side=tk.LEFT, anchor=anchor, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                    _append_row_placement(row_placements, element, element.TKColFrame, elementpad[0], elementpad[1], expand, fill, anchor)
                 else:
-                    element.TKColFrame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                    _append_row_placement(row_placements, element, element.TKColFrame, elementpad[0], elementpad[1], expand, fill)
 
                 # element.TKColFrame.pack(side=side, padx=elementpad[0], pady=elementpad[1], expand=True, fill='both')
                 if element.visible is False:
@@ -15735,7 +15926,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                                                   highlightbackground=pane.BackgroundColor,
                                                   highlightcolor=pane.BackgroundColor)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.PanedWindow.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.PanedWindow, elementpad[0], elementpad[1], expand, fill)
                 # element.PanedWindow.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=True, fill='both')
                 if element.visible is False:
                     element._pack_forget_save_settings()
@@ -15787,7 +15978,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if element.TextColor != COLOR_SYSTEM_DEFAULT and element.TextColor is not None:
                     tktext_label.configure(fg=element.TextColor)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                tktext_label.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, tktext_label, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # tktext_label.pack_forget()
@@ -15913,7 +16104,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                     tkbutton.configure(wraplength=wraplen)  # set wrap to width of widget
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
 
-                tkbutton.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, tkbutton, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # tkbutton.pack_forget()
@@ -16063,7 +16254,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
                 element.TKButton = tkbutton  # not used yet but save the TK button in case
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                tkbutton.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, tkbutton, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # tkbutton.pack_forget()
@@ -16149,7 +16340,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if width != 0:
                     tkbutton.configure(wraplength=wraplen + 10)  # set wrap to width of widget
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                tkbutton.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, tkbutton, elementpad[0], elementpad[1], expand, fill)
 
                 menu_def = element.MenuDefinition
 
@@ -16220,7 +16411,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 # element.pack_keywords = {'side':tk.LEFT, 'padx':elementpad[0], 'pady':elementpad[1], 'expand':False, 'fill':tk.NONE }
                 # element.TKEntry.pack(**element.pack_keywords)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKEntry.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKEntry, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKEntry.pack_forget()
@@ -16312,7 +16503,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                     element.TKCombo.configure(height=element.Size[1])
                 element.TKCombo['values'] = element.Values
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKCombo.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKCombo, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKCombo.pack_forget()
@@ -16359,7 +16550,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                     element.TKOptionMenu.configure(fg=element.TextColor)
                     element.TKOptionMenu['menu'].config(fg=element.TextColor)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKOptionMenu.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKOptionMenu, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKOptionMenu.pack_forget()
@@ -16455,7 +16646,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
 
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element_frame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=fill, expand=expand)
+                _append_row_placement(row_placements, element, element_frame, elementpad[0], elementpad[1], expand, fill)
                 element.TKListbox.pack(side=tk.LEFT, fill=fill, expand=expand)
                 if element.visible is False:
                     element._pack_forget_save_settings(alternate_widget=element_frame)
@@ -16535,7 +16726,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 #     element.TKText.vbar.config(troughcolor=DEFAULT_SCROLLBAR_COLOR)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
 
-                element.element_frame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=fill, expand=expand)
+                _append_row_placement(row_placements, element, element.element_frame, elementpad[0], elementpad[1], expand, fill)
                 element.Widget.pack(side=tk.LEFT, fill=fill, expand=expand)
 
                 if element.visible is False:
@@ -16600,7 +16791,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if element.TextColor != COLOR_SYSTEM_DEFAULT:
                     element.TKCheckbutton.config(highlightcolor=element.TextColor)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKCheckbutton.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKCheckbutton, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKCheckbutton.pack_forget()
@@ -16636,7 +16827,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                                                       ttk_theme=toplevel_form.TtkTheme, key=element.Key, style_name=style_name)
                 element.Widget = element.TKProgressBar.TKProgressBarForReal
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKProgressBar.TKProgressBarForReal.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKProgressBar.TKProgressBarForReal, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings(alternate_widget=element.TKProgressBar.TKProgressBarForReal)
                     # element.TKProgressBar.TKProgressBarForReal.pack_forget()
@@ -16682,7 +16873,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if element.Disabled:
                     element.TKRadio['state'] = 'disabled'
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKRadio.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKRadio, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKRadio.pack_forget()
@@ -16710,7 +16901,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if element.wrap is True:
                     element.Widget.configure(wrap=True)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKSpinBox.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.TKSpinBox, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element.TKSpinBox.pack_forget()
@@ -16768,7 +16959,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 element.tktext_label.image = photo
                 # tktext_label.configure(anchor=tk.NW, image=photo)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.tktext_label.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element.tktext_label, elementpad[0], elementpad[1], expand, fill)
 
                 if element.visible is False:
                     element._pack_forget_save_settings()
@@ -16794,7 +16985,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if element.BackgroundColor is not None and element.BackgroundColor != COLOR_SYSTEM_DEFAULT:
                     element._TKCanvas.configure(background=element.BackgroundColor, highlightthickness=0)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element._TKCanvas.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element._TKCanvas, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element._TKCanvas.pack_forget()
@@ -16815,12 +17006,11 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 element._TKCanvas2 = element.Widget = tk.Canvas(tk_row_frame, width=width, height=height,
                                                                 bd=border_depth)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element._TKCanvas2.pack(side=tk.LEFT, expand=expand, fill=fill)
                 element._TKCanvas2.addtag_all('mytag')
                 if element.BackgroundColor is not None and element.BackgroundColor != COLOR_SYSTEM_DEFAULT:
                     element._TKCanvas2.configure(background=element.BackgroundColor, highlightthickness=0)
                     # element._TKCanvas.configure(background=element.BackgroundColor, highlightthickness=0)
-                element._TKCanvas2.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element._TKCanvas2, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # element._TKCanvas2.pack_forget()
@@ -16884,9 +17074,9 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                         anchor = tk.CENTER
                     if element.VerticalAlignment.lower().startswith('b'):
                         anchor = tk.S
-                    labeled_frame.pack(side=tk.LEFT, anchor=anchor, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                    _append_row_placement(row_placements, element, labeled_frame, elementpad[0], elementpad[1], expand, fill, anchor)
                 else:
-                    labeled_frame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                    _append_row_placement(row_placements, element, labeled_frame, elementpad[0], elementpad[1], expand, fill)
 
                 if element.Size != (None, None):
                     labeled_frame.config(width=element.Size[0], height=element.Size[1])
@@ -17021,7 +17211,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 PackFormIntoFrame(element, toplevel_form.TKroot, toplevel_form)
 
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                element.TKNotebook.pack(anchor=tk.SW, side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=fill, expand=expand)
+                _append_row_placement(row_placements, element, element.TKNotebook, elementpad[0], elementpad[1], expand, fill, tk.SW)
 
                 if element.ChangeSubmits:
                     element.TKNotebook.bind('<<NotebookTabChanged>>', element._TabGroupSelectHandler)
@@ -17066,7 +17256,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 if text_color not in (None, COLOR_SYSTEM_DEFAULT):
                     tkscale.configure(fg=text_color)
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
-                tkscale.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, tkscale, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings()
                     # tkscale.pack_forget()
@@ -17272,7 +17462,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
                 element.TKTreeview.pack(side=tk.LEFT, padx=0, pady=0, expand=expand, fill=fill)
-                frame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, frame, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings(alternate_widget=element.element_frame)       # seems like it should be the frame if following other elements conventions
                     # element.TKTreeview.pack_forget()
@@ -17453,7 +17643,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
                 element.TKTreeview.pack(side=tk.LEFT, padx=0, pady=0, expand=expand, fill=fill)
-                element_frame.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], expand=expand, fill=fill)
+                _append_row_placement(row_placements, element, element_frame, elementpad[0], elementpad[1], expand, fill)
                 if element.visible is False:
                     element._pack_forget_save_settings(alternate_widget=element.element_frame)       # seems like it should be the frame if following other elements conventions
                     # element.TKTreeview.pack_forget()
@@ -17485,9 +17675,9 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 expand, fill, row_should_expand, row_fill_direction = _add_expansion(element, row_should_expand, row_fill_direction)
 
                 if element.Orientation.startswith('h'):
-                    separator.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=tk.X, expand=True)
+                    _append_row_placement(row_placements, element, separator, elementpad[0], elementpad[1], True, tk.X)
                 else:
-                    separator.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=tk.Y, expand=False)
+                    _append_row_placement(row_placements, element, separator, elementpad[0], elementpad[1], False, tk.Y)
                 element.Widget.configure(style=style_name)  # IMPORTANT!  Apply the style
             # -------------------------  SizeGrip placement element  ------------------------- #
             elif element_type == ELEM_TYPE_SIZEGRIP:
@@ -17557,7 +17747,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                     tktext_label.configure(background=element.BackgroundColor)
                 if element.TextColor != COLOR_SYSTEM_DEFAULT and element.TextColor is not None:
                     tktext_label.configure(fg=element.TextColor)
-                tktext_label.pack(side=tk.LEFT, padx=elementpad[0], pady=elementpad[1], fill=tk.X, expand=True)
+                _append_row_placement(row_placements, element, tktext_label, elementpad[0], elementpad[1], True, tk.X)
                 row_fill_direction = tk.X
                 if element.visible is False:
                     element._pack_forget_save_settings()
@@ -17571,6 +17761,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
         # ............................DONE WITH ROW pack the row of widgets ..........................#
         # done with row, pack the row of widgets
+        _apply_packform_row_placements(tk_row_frame, row_placements)
         # tk_row_frame.grid(row=row_num+2, sticky=tk.NW, padx=DEFAULT_MARGINS[0])
 
         anchor = 'nw'
@@ -17602,10 +17793,17 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
         #     AddMenuItem(top_menu, menu[1], form)
         #     tk_row_frame.bind('<Button-3>', form._RightClickMenuCallback)
 
-        tk_row_frame.pack(side=tk.TOP, anchor=anchor, padx=0, pady=0, expand=row_should_expand, fill=row_fill_direction)
+        deferred_vertical_rows.append({
+            'tk_row_frame': tk_row_frame,
+            'flex_row': flex_row,
+            'row_should_expand': row_should_expand,
+            'row_fill_direction': row_fill_direction,
+            'anchor': anchor,
+        })
         if form.BackgroundColor is not None and form.BackgroundColor != COLOR_SYSTEM_DEFAULT:
             tk_row_frame.configure(background=form.BackgroundColor)
 
+    _apply_packform_vertical_row_stack(containing_frame, deferred_vertical_rows)
     return
 
 
@@ -21073,13 +21271,39 @@ def popup_yes_no(*args, title=None, button_color=None, background_color=None, te
 #   The popup_get_____ functions - Will return user input                     #
 ##############################################################################
 
+
+def _linux_tk_filedialog_configure_hidden(root, show_hidden=True):
+    """
+    On Linux, Tk's native file/folder dialogs default to ::tk::dialog::file::showHiddenVar=1,
+    so dotfiles are listed. This aligns behavior with other platforms / GnuChanGUI window path.
+
+    :param show_hidden: If True, show the "hidden files" checkbox and start with dotfiles hidden
+                        (user can enable). If False, hide the checkbox and keep dotfiles hidden.
+    """
+    if not running_linux() or root is None:
+        return
+    try:
+        try:
+            root.tk.call('tk_getOpenFile', '-foobarbaz')
+        except tk.TclError:
+            pass
+        if show_hidden:
+            root.tk.call('set', '::tk::dialog::file::showHiddenBtn', '1')
+            root.tk.call('set', '::tk::dialog::file::showHiddenVar', '0')
+        else:
+            root.tk.call('set', '::tk::dialog::file::showHiddenBtn', '0')
+            root.tk.call('set', '::tk::dialog::file::showHiddenVar', '0')
+    except (tk.TclError, Exception):
+        pass
+
+
 # --------------------------- popup_get_folder ---------------------------
 
 
 def popup_get_folder(message, title=None, default_path='', no_window=False, size=(None, None), button_color=None,
                      background_color=None, text_color=None, icon=None, font=None, no_titlebar=False,
                      grab_anywhere=False, keep_on_top=None, location=(None, None), relative_location=(None, None), initial_folder=None, image=None, modal=True, history=False,
-                     history_setting_filename=None):
+                     history_setting_filename=None, show_hidden=True):
     """
     Display popup with text entry field and browse button so that a folder can be chosen.
 
@@ -21123,6 +21347,8 @@ def popup_get_folder(message, title=None, default_path='', no_window=False, size
     :type history:                   bool
     :param history_setting_filename: Filename to use for the User Settings. Will store list of previous entries in this settings file
     :type history_setting_filename:  (str)
+    :param show_hidden:              Linux only: controls Tk native folder dialog listing of dotfiles. True = checkbox to show hidden, starts hidden. False = no checkbox, dotfiles hidden.
+    :type show_hidden:               bool
     :return:                         string representing the path chosen, None if cancelled or window closed with X
     :rtype:                          str | None
     """
@@ -21157,7 +21383,8 @@ def popup_get_folder(message, title=None, default_path='', no_window=False, size
             root.withdraw()
         except:
             pass
-        folder_name = tk.filedialog.askdirectory(initialdir=initial_folder)  # show the 'get folder' dialog box
+        _linux_tk_filedialog_configure_hidden(root, show_hidden)
+        folder_name = tk.filedialog.askdirectory(initialdir=initial_folder, parent=root)  # show the 'get folder' dialog box
 
         root.destroy()
 
@@ -21188,7 +21415,9 @@ def popup_get_folder(message, title=None, default_path='', no_window=False, size
 
     window = Window(title=title or message, layout=layout, icon=icon, auto_size_text=True, button_color=button_color,
                     font=font, background_color=background_color, no_titlebar=no_titlebar, grab_anywhere=grab_anywhere, keep_on_top=keep_on_top,
-                    location=location, relative_location=relative_location, modal=modal)
+                    location=location, relative_location=relative_location, modal=modal, finalize=True)
+
+    _linux_tk_filedialog_configure_hidden(window.TKroot, show_hidden)
 
     while True:
         event, values = window.read()
@@ -21275,7 +21504,7 @@ def popup_get_file(message, title=None, default_path='', default_extension='', s
     :type modal:                     bool
     :param history:                  If True then enable a "history" feature that will display previous entries used. Uses settings filename provided or default if none provided
     :type history:                   bool
-    :param show_hidden:              If True then enables the checkbox in the system dialog to select hidden files to be shown
+    :param show_hidden:              Linux: Tk lists dotfiles by default. True = show "hidden files" checkbox, list starts without dotfiles. False = no checkbox, dotfiles stay hidden. Other OS: ignored where not applicable.
     :type show_hidden:               bool
     :param history_setting_filename: Filename to use for the User Settings. Will store list of previous entries in this settings file
     :type history_setting_filename:  (str)
@@ -21315,20 +21544,7 @@ def popup_get_file(message, title=None, default_path='', default_extension='', s
         except:
             pass
 
-        if show_hidden is False:
-            try:
-                # call a dummy dialog with an impossible option to initialize the file
-                # dialog without really getting a dialog window; this will throw a
-                # TclError, so we need a try...except :
-                try:
-                    root.tk.call('tk_getOpenFile', '-foobarbaz')
-                except tk.TclError:
-                    pass
-                # now set the magic variables accordingly
-                root.tk.call('set', '::tk::dialog::file::showHiddenBtn', '1')
-                root.tk.call('set', '::tk::dialog::file::showHiddenVar', '0')
-            except:
-                pass
+        _linux_tk_filedialog_configure_hidden(root, show_hidden)
 
         if root and icon is not None:
             _set_icon_for_tkinter_window(root, icon=icon)
@@ -21426,10 +21642,7 @@ def popup_get_file(message, title=None, default_path='', default_extension='', s
     window = Window(title=title or message, layout=layout, icon=icon, auto_size_text=True, button_color=button_color,
                     font=font, background_color=background_color, no_titlebar=no_titlebar, grab_anywhere=grab_anywhere, keep_on_top=keep_on_top, location=location, relative_location=relative_location, modal=modal, finalize=True)
 
-    if running_linux() and show_hidden is True:
-        window.TKroot.tk.eval('catch {tk_getOpenFile -badoption}')  # dirty hack to force autoloading of Tk's file dialog code
-        window.TKroot.setvar('::tk::dialog::file::showHiddenBtn', 1)  # enable the "show hidden files" checkbox (it's necessary)
-        window.TKroot.setvar('::tk::dialog::file::showHiddenVar', 0)  # start with the hidden files... well... hidden
+    _linux_tk_filedialog_configure_hidden(window.TKroot, show_hidden)
 
     while True:
         event, values = window.read()
@@ -21940,29 +22153,22 @@ def popup_error_with_traceback(title, *messages, emoji=None):
 def _error_popup_with_traceback(title, *args, emoji=None):
     if SUPPRESS_ERROR_POPUPS:
         return
-    trace_details = traceback.format_stack()
-    error_message = ''
-    file_info_GnuChanGUI = None
-    for line in reversed(trace_details):
-        if __file__ not in line:
-            file_info_GnuChanGUI = line.split(",")[0]
-            error_message = line
+    libpath = os.path.normcase(os.path.abspath(__file__))
+    filename = None
+    line_num = None
+    for frame_info in inspect.stack()[1:]:
+        try:
+            fp = os.path.normcase(os.path.abspath(frame_info.filename))
+        except Exception:
+            fp = os.path.normcase(frame_info.filename)
+        if fp != libpath:
+            filename = frame_info.filename
+            line_num = frame_info.lineno
             break
-    if file_info_GnuChanGUI is None:
-        _error_popup_with_code(title, None, None,  'Did not find your traceback info', *args,emoji=emoji)
+    if filename is None:
+        _error_popup_with_code(title, None, None, 'Did not find caller location (stack only inside GnuChanGUI)', *args, emoji=emoji)
         return
-
-    error_parts = None
-    if error_message != '':
-        error_parts = error_message.split(', ')
-        if len(error_parts) < 4:
-            error_message = error_parts[0] + '\n' + error_parts[1] + '\n' + ''.join(error_parts[2:])
-    if error_parts is None:
-        print('*** Error popup attempted but unable to parse error details ***')
-        print(trace_details)
-        return
-    filename = error_parts[0][error_parts[0].index('File ') + 5:]
-    line_num = error_parts[1][error_parts[1].index('line ') + 5:]
+    error_message = 'File "{}", line {}'.format(filename, line_num)
     _error_popup_with_code(title, filename, line_num, error_message, *args, emoji=emoji)
 
 
@@ -21983,16 +22189,27 @@ def _error_popup_with_code(title, filename, line_num, *args,  emoji=None):
     """
     editor_filename = execute_get_editor()
     emoji_data = emoji if emoji is not None else _random_error_emoji()
-    layout = [[Text('ERROR'), Text(title)],
-              [Image(data=emoji_data)]]
     lines = []
+    fallback_chunks = [str(title)]
+    if filename is not None and line_num is not None:
+        fallback_chunks.append('Location: {} line {}'.format(filename, line_num))
     for msg in args:
         if isinstance(msg, Exception):
+            tb = msg.__traceback__
+            tb_lineno = tb.tb_lineno if tb else '?'
             lines += [[f'Additional Exception info pased in by GnuChanGUI or user: Error type is: {type(msg).__name__}']]
-            lines += [[f'In file {__file__} Line number {msg.__traceback__.tb_lineno}']]
+            lines += [[f'In file {__file__} Line number {tb_lineno}']]
             lines += [[f'{msg}']]
+            fallback_chunks.append('{}: {}'.format(type(msg).__name__, msg))
+            fallback_chunks.append('(library {} line {})'.format(__file__, tb_lineno))
         else:
             lines += [str(msg).split('\n')]
+            fallback_chunks.append(str(msg))
+    fallback_text = '\n\n'.join(fallback_chunks)
+    head = [[Text('ERROR'), Text(title)]]
+    if emoji_data:
+        head.append([Image(data=emoji_data)])
+    layout = head
     max_line_len = 0
     for line in lines:
         max_line_len = max(max_line_len, max([len(s) for s in line]))
@@ -22001,10 +22218,32 @@ def _error_popup_with_code(title, filename, line_num, *args,  emoji=None):
     layout += [[Button('Close'), Button('Take me to error', disabled=True if not editor_filename else False), Button('Kill Application', button_color='white on red')]]
     if not editor_filename:
         layout += [[Text('Configure editor in the Global settings to enable "Take me to error" feature')]]
-    window = Window(title, layout, keep_on_top=True)
+    try:
+        window = Window(title, layout, keep_on_top=True)
+    except Exception as e:
+        print('*** GnuChanGUI error window failed: {} ***'.format(e))
+        print(fallback_text)
+        try:
+            messagebox.showerror(str(title)[:200], fallback_text[:8000])
+        except Exception as e2:
+            print('*** tkinter messagebox failed: {} ***'.format(e2))
+        return
 
     while True:
-        event, values = window.read()
+        try:
+            event, values = window.read()
+        except Exception as e:
+            print('*** GnuChanGUI error window read failed: {} ***'.format(e))
+            print(fallback_text)
+            try:
+                messagebox.showerror(str(title)[:200], fallback_text[:8000])
+            except Exception:
+                pass
+            try:
+                window.close()
+            except Exception:
+                pass
+            return
         if event in ('Close', WIN_CLOSED):
             break
         if event == 'Kill Application':
@@ -23689,25 +23928,6 @@ class _Debugger:
         window.Close()
         theme(old_theme)
 
-
-    '''
-        ######                            #######
-        #     # #    # # #      #####     #       #       ####    ##   ##### # #    #  ####
-        #     # #    # # #      #    #    #       #      #    #  #  #    #   # ##   # #    #
-        ######  #    # # #      #    #    #####   #      #    # #    #   #   # # #  # #
-        #     # #    # # #      #    #    #       #      #    # ######   #   # #  # # #  ###
-        #     # #    # # #      #    #    #       #      #    # #    #   #   # #   ## #    #
-        ######   ####  # ###### #####     #       ######  ####  #    #   #   # #    #  ####
-    
-        #     #
-        #  #  # # #    # #####   ####  #    #
-        #  #  # # ##   # #    # #    # #    #
-        #  #  # # # #  # #    # #    # #    #
-        #  #  # # #  # # #    # #    # # ## #
-        #  #  # # #   ## #    # #    # ##  ##
-         ## ##  # #    # #####   ####  #    #
-    '''
-
     def _build_floating_window(self, location=(None, None)):
         """
 
@@ -23841,6 +24061,8 @@ def _refresh_debugger():
     :return: return code False if user closed the main debugger window.
     :rtype:  (bool)
     """
+    if not _debugger_window_is_open() and not any(getattr(w, 'DebuggerEnabled', False) for w in Window._active_windows):
+        return
     if _Debugger.debugger is None:
         _Debugger.debugger = _Debugger()
     debugger = _Debugger.debugger
@@ -24071,8 +24293,10 @@ EMOJI_BASE64_JASON = EMOJI_BASE64_WIZARD
 EMOJI_BASE64_TANAY = EMOJI_BASE64_JEDI
 
 def _random_error_emoji():
-    c = random.choice(EMOJI_BASE64_SAD_LIST)
-    return c
+    non_empty = [x for x in EMOJI_BASE64_SAD_LIST if x]
+    if non_empty:
+        return random.choice(non_empty)
+    return DEFAULT_BASE64_ICON_16_BY_16
 
 def _random_happy_emoji():
     c = random.choice(EMOJI_BASE64_HAPPY_LIST)
@@ -24100,52 +24324,6 @@ RED_X_BASE64 = b''
 
 GREEN_CHECK_BASE64 = b''
 
-
-
-# this is change later
-__upgrade_server_ip = 'upgradeapi.GnuChanGUI.com'
-__upgrade_server_port = '5353'
-
-
-def __send_dict(ip, port, dict_to_send):
-    """
-    Send a dictionary to the upgrade server and get back a dictionary in response
-    :param ip:           ip address of the upgrade server
-    :type ip:            str
-    :param port:         port number
-    :type port:          int | str
-    :param dict_to_send: dictionary of items to send
-    :type dict_to_send:  dict
-    :return:             dictionary that is the reply
-    :rtype:              dict
-    """
-
-    # print(f'sending dictionary to ip {ip} port {port}')
-    try:
-        # Create a socket object
-        s = socket.socket()
-
-        s.settimeout(5.0)       # set a 5 second timeout
-
-        # connect to the server on local computer
-        s.connect((ip , int(port)))
-        # send a python dictionary
-        s.send(json.dumps(dict_to_send).encode())
-
-        # receive data from the server
-        reply_data = s.recv(1024).decode()
-        # close the connection
-        s.close()
-    except Exception as e:
-        # print(f'Error sending to server:', e)
-        # print(f'payload:\n', dict_to_send)
-        reply_data = e
-    try:
-        data_dict = json.loads(reply_data)
-    except Exception as e:
-        # print(f'UPGRADE THREAD - Error decoding reply {reply_data} as a dictionary. Error = {e}')
-        data_dict = {}
-    return data_dict
 
 def __show_previous_upgrade_information():
     """
@@ -24200,85 +24378,9 @@ def __show_previous_upgrade_information():
     window.close()
 
 
-def __get_linux_distribution():
-    line_tuple = ('Linux Distro', 'Unknown', 'No lines Found in //etc//os-release')
-    try:
-        with open('/etc/os-release') as f:
-            data = f.read()
-        lines = data.split('\n')
-        for line in lines:
-            if line.startswith('PRETTY_NAME'):
-                line_split = line.split('=')[1].strip('"')
-                line_tuple = tuple(line_split.split(' '))
-                return line_tuple
-    except:
-        line_tuple = ('Linux Distro', 'Exception','Error reading//processing //etc//os-release')
-
-    return line_tuple
-
-
-def __perform_upgrade_check_thread():
-    # print(f'Upgrade thread...seen = {GnuChanGUI_user_settings.get("-upgrade info seen-", False)}')
-    try:
-        if running_trinket():
-            os_name = 'Trinket'
-            os_ver = __get_linux_distribution()
-        elif running_replit():
-            os_name = 'REPL.IT'
-            os_ver = __get_linux_distribution()
-        elif running_windows():
-            os_name = 'Windows'
-            os_ver = platform.win32_ver()
-        elif running_linux():
-            os_name = 'Linux'
-            os_ver = __get_linux_distribution()
-        elif running_mac():
-            os_name = 'Mac'
-            os_ver = platform.mac_ver()
-        else:
-            os_name = 'Other'
-            os_ver = ''
-
-        psg_ver = version
-        framework_ver = framework_version
-        python_ver = sys.version
-
-        upgrade_dict = {
-            'OSName' : str(os_name),
-            'OSVersion' : str(os_ver),
-            'PythonVersion' : str(python_ver),
-            'PSGVersion' : str(psg_ver),
-            'FrameworkName' : 'tkinter',
-            'FrameworkVersion' : str(framework_ver),
-        }
-        reply_data = __send_dict(__upgrade_server_ip, __upgrade_server_port, upgrade_dict)
-
-        recommended_version = reply_data.get('SuggestedVersion', '')
-        message1 = reply_data.get('Message1', '')
-        message2 = reply_data.get('Message2', '')
-        severity_level = reply_data.get('SeverityLevel', '')
-        # If any part of the reply has changed from the last reply, overwrite the data and set flags so user will be informed
-        if (message1 or message2) and not running_trinket():
-            if GnuChanGUI_user_settings.get('-upgrade message 1-', '') != message1 or \
-               GnuChanGUI_user_settings.get('-upgrade message 2-', '') != message2 or \
-               GnuChanGUI_user_settings.get('-upgrade recommendation-', '') != recommended_version or \
-               GnuChanGUI_user_settings.get('-severity level-', '') != severity_level:
-                # Save the data to the settings file
-                GnuChanGUI_user_settings['-upgrade info seen-'] = False
-                GnuChanGUI_user_settings['-upgrade info available-'] = True
-                GnuChanGUI_user_settings['-upgrade message 1-'] = message1
-                GnuChanGUI_user_settings['-upgrade message 2-'] = message2
-                GnuChanGUI_user_settings['-upgrade recommendation-'] = recommended_version
-                GnuChanGUI_user_settings['-severity level-'] = severity_level
-    except Exception as e:
-        reply_data = {}
-        # print('Upgrade server error', e)
-    # print(f'Upgrade Reply = {reply_data}')
-
 def __perform_upgrade_check():
-    # For now, do not show data returned. Still testing and do not want to "SPAM" users with any popups
-    __show_previous_upgrade_information()
-    threading.Thread(target=lambda: __perform_upgrade_check_thread(), daemon=True).start()
+    """Automatic remote upgrade check disabled (no background telemetry)."""
+    return
 
 
 
@@ -25846,9 +25948,6 @@ if _mac_should_set_alpha_to_99():
     set_options(alpha_channel=0.99)
 
 
-__perform_upgrade_check()
-
-
 # -------------------------------- ENTRY POINT IF RUN STANDALONE -------------------------------- #
 if __name__ == '__main__':
     # To execute the upgrade from command line, type:
@@ -25863,4 +25962,3 @@ if __name__ == '__main__':
         exit(0)
     main()
     exit(0)
-#25424909a31c4fa789f5aa4e210e7e07d412560195dc21abe678b68a3b4bdb2a8a78651d8613daaded730bc2a31adc02ba8b99717fff701cda8ae13c31f1dcee9da8837908626f1c5cc81e7a34d3b9cd032dba190647564bba72d248ad6b83e30c8abc057f3f1b1fb3a2ca853069de936f3f53522fd4732b743268e0fcde54577a05880f2057efe6bbd6349f77d6c002544f38e24db40ab84f3dde4a4b8b31e84480db31656fb74ae0c01a7af0b35ac66cf8a0fbb8ca85685fea075608c7862da6635511d0e5403c4a637138324ce1fb1308b765cba53863ddf7b01ca4fc988932b03c4a8403a72b8105f821913f02925218dbecf1e089bd32e78667939503f2abfd89b37fa293927e30550d441f21dc68273d2d07ed910f6a69bc8c792015eb623ada7e65347cf0389cf2a1696a7ccf88098a4fb4bfa44e88fac2a94a44e25b010355e48d483d896c58eb771ef47e01066156f9344750b487e176ca0642601951f096d4c03045aa8f912d475dbe04b82c6ddf1ac3adbf815aef4ca2c6add058c2789b66a9abd875f334752ec1bde11b9b56e334823304b6cc3fadf7daae277c982ebc7eadb726a33e2740d075ad082b9c20304c4a53228d6f05357c40903a78113aea4e6169e1a5351866f7a9ffc6666eb08a31bfb84d90cb3002f7ebf87871988b88a7b8a52d36a1a7dd826360b5c6ad922829d9f73d204f09d1b9ad9ffd8d

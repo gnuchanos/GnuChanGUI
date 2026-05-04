@@ -1,18 +1,14 @@
 from .gcLibrary import *
 from .gcLibrary import __version__
+from .version import __version_full__
 
-from PIL import Image, ImageTk
-import os, random, math
+import os
+import random
+import math
+import threading
+import time
 from threading import Thread
-
-# Is Program Running
-import psutil as p
-import time
-
-# Better Keyboard Event
-from pynput import keyboard
-
-import time
+from contextlib import contextmanager
 
 """
 pip install  git+https://github.com/gnuchanos/gnuchangui
@@ -587,6 +583,10 @@ class GnuChanGUI:
 
 
     def listen(self):
+        try:
+            from pynput import keyboard
+        except ImportError:
+            return
         with keyboard.Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()
 
@@ -597,7 +597,7 @@ class GnuChanGUI:
         
         if self.PressWait:
             if self.PressTimer > 0:
-                self.PressTimer -= 1 * self.Time.DeltaTime()
+                self.PressTimer -= 1 * self.delta.DeltaTime()
             else:
                 self.PressTimer = 1
                 self.PressWait = False
@@ -683,10 +683,15 @@ class GnuChanGUI:
     @property
     def CloseNow(self):
         if self.ExitBeforeMissing:
-            GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
-
+            GMessage(
+                WindowTitle="Warning",
+                WindowText="closeWindow=True iken exitBEFORE verilmedi. SetUpdate(..., exitBEFORE=sizin_fonksiyon) ekleyin.",
+            )
         elif self.UpdateMissing:
-            GMessage(WindowTitle="Warning", WindowText="Missing exitBEFORE Fuction in .update()")
+            GMessage(
+                WindowTitle="Warning",
+                WindowText="SetUpdate cagrilirken Update=None. Dongu icin Update=sizin_fonksiyon verin.",
+            )
 
         self.GetWindow.close()
 
@@ -774,35 +779,45 @@ class GnuChanGUI:
         else:
             self.GetWindow[WindowValue].hide_row()
 
-    # Experimantal -> GCanvas Class
+    # Canvas: ham tk.Canvas; cizim icin .TKCanvas veya oyun icin asagidaki GCanvas sinifi (erase, focus_canvas)
     def GCanvas(
-        self, SetValue: str, BColor: str = "black", xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0, 
-        Size: tuple = (None, None), EmptySpace: tuple = (None, None)
-    ): 
-        
-        return Canvas(
-            key=SetValue, background_color=BColor, expand_x=xStretch, expand_y=yStretch, visible=Visible, border_width=border, size=Size, pad=EmptySpace
+        self, SetValue: str, BColor: str = "black", xStretch: bool = False, yStretch: bool = False, Visible: bool = True, border: int = 0,
+        Size: tuple = (None, None), EmptySpace: tuple = (None, None), tooltip: str = None, rclickMenu=None, metadata=None,
+    ):
+
+        return GCanvas(
+            SetValue, BColor, xStretch, yStretch, Visible, border, Size, EmptySpace,
+            tooltip=tooltip, rclickMenu=rclickMenu, metadata=metadata,
         )
     """
-    This is not finish yet!
-    but you can draw someting in canvas use GCanvas Class
+    2D oyun / sahne (Raylib-benzeri GCanvas API):
+    - Sahne nesneleri: BeginScene2D / DrawRectangle / DrawCircle / DrawLine / DrawText / DrawRectanglePro
+    - Toplu: LoadSceneBatch([{'kind':'rectangle','name':'p','x':0,'y':0,'w':40,'h':40,'fill':'teal'}, ...])
+    - Secim: PickSceneObject(px,py), SelectSceneObject(name), SelectedSceneObjects(), MoveSceneObject(name,dx,dy)
+    - Temizlik: ClearScene2D() veya UnloadSceneObject(name)
+    - Tus (Raylib): cv.EnableSceneInput(); Update icinde cv.InputBeginFrame() sonra cv.IsKeyDown("w")
+    - Ham tk: erase(), after_ms, kisa read timeout
 
-    self.Layout = [
-        [self.GC.GCanvas(SetValue="canvas", xStretch=True, yStretch=True)]
-    ]
-    
-    self.Canvas = GCanvas(CanvasValue="canvas", Window=self.GC.GetWindow)
+    self.Layout = [[self.GCanvas(SetValue="cv", Size=(48, 24), xStretch=True, yStretch=True)]]
+    self.GWindow(...)
+    cv = self.GetWindow["cv"]
+    with cv.BeginScene2D():
+        cv.DrawRectangle("zemin", 0, 0, 400, 300, fill="#1a1a2e", outline="")
+        cv.DrawCircle("oyuncu", 100, 80, 12, fill="orange")
+    cv.EnableSceneInput()
+    # Secim ornegi (tik canvas'ta odak icin EnableSceneInput ile cakisirsa click_to_focus=False kullanin):
+    # cv.bind_canvas("<Button-1>", lambda e: cv.SelectSceneObject(cv.PickSceneObject(e.x, e.y)))
     """
 
     # window widgets
     def GFrame(
             self, GFText=None, InsideWindowLayout=[[]], SetValue=None, InfoWindow=None, Border=1, TFont="Sans, 20", Size=(None, None), 
-            xStretch=False, yStretch=False, EmptySpace=(None, None), TColor=None, BColor=None, Visible=True
+            xStretch=False, yStretch=False, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, EmptySpace=(None, None), TColor=None, BColor=None, Visible=True
         ): 
         
         return Frame(
             title=GFText, layout=InsideWindowLayout, key=SetValue, border_width=Border, tooltip=InfoWindow, font=TFont, size=Size, pad=EmptySpace, 
-            expand_x=xStretch, expand_y=yStretch, title_color=TColor, background_color=BColor, visible=Visible 
+            expand_x=xStretch, expand_y=yStretch, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, title_color=TColor, background_color=BColor, visible=Visible 
         )
     
     #self.GC.GText(SetText="   ") -> make space is fine for GFrame
@@ -846,9 +861,9 @@ class GnuChanGUI:
     gc.GWindow(SetMainWindowLayout_List=layout)
     """
 
-    def GColumn(self, winColumnLayout_List=None, Size=(None, None), xStretch=None, yStretch=None, EmptySpace=(None, None), Visible=True, SetValue=None, BColor=None):
+    def GColumn(self, winColumnLayout_List=None, Size=(None, None), xStretch=None, yStretch=None, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, EmptySpace=(None, None), Visible=True, SetValue=None, BColor=None):
         return Column(
-            layout=winColumnLayout_List, key=SetValue, size=Size, expand_x=xStretch, expand_y=yStretch, pad=EmptySpace, visible=Visible, background_color=BColor
+            layout=winColumnLayout_List, key=SetValue, size=Size, expand_x=xStretch, expand_y=yStretch, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, pad=EmptySpace, visible=Visible, background_color=BColor
         )
         """
         c = GColors()
@@ -880,11 +895,12 @@ class GnuChanGUI:
     # create Gtab and create GTap Group
     def GTabGroup(
             self, TabGroupLayout=None, SetValue=None, TFont="Sans, 20",
-            BColor=None, TBColor=GnuChanOSColor().SColors3, TColor=None, STColor=GnuChanOSColor().TColor, SBColor=GnuChanOSColor().SColors0, Size=(None, None), TBorder=0, Border=0
+            BColor=None, TBColor=GnuChanOSColor().SColors3, TColor=None, STColor=GnuChanOSColor().TColor, SBColor=GnuChanOSColor().SColors0, Size=(None, None), TBorder=0, Border=0,
+            xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None
         ): 
         
         return TabGroup(
-            layout=TabGroupLayout, key=SetValue, expand_x=True, expand_y=True, size=Size,
+            layout=TabGroupLayout, key=SetValue, expand_x=True, expand_y=True, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, size=Size,
             background_color=BColor, selected_background_color=SBColor, tab_background_color=TBColor, enable_events=True,
             title_color=TColor, selected_title_color=STColor, font=TFont, tab_border_width=TBorder, border_width=Border
         )
@@ -919,10 +935,10 @@ class GnuChanGUI:
     # text widget
     def GText(
             self, SetText="", TFont="Sans, 20", SetValue=None, Size=(None, None), TPosition="left", 
-            xStretch=False, yStretch=False, EmptySpace=(None), TColor=None, BColor=None, border=None 
+            xStretch=False, yStretch=False, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, EmptySpace=(None), TColor=None, BColor=None, border=None 
         ): 
         
-        return Text(text=SetText, font=TFont, key=SetValue, size=Size, justification=TPosition, expand_x=xStretch, expand_y=yStretch,  pad=EmptySpace, 
+        return Text(text=SetText, font=TFont, key=SetValue, size=Size, justification=TPosition, expand_x=xStretch, expand_y=yStretch, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, pad=EmptySpace, 
             text_color=TColor, background_color=BColor, border_width=border
         )
         """
@@ -983,6 +999,23 @@ class GnuChanGUI:
             values=TableLists, key=SetValue, cols_justification=CollonsPosition, justification=TPosition, font=TFont, visible=Visible, enable_events=True,
             num_rows=VisibleRows,
         )
+        """
+        rows = [
+            [ "Elma",  "12", "Stok" ],
+            [ "Armut", "5",  "Stok" ],
+            [ "Uzum",  "0",  "Tukendi" ],
+        ]
+        layout = [
+            [gc.GTable(TableLists=rows, SetValue="tbl", VisibleRows=5, xStretch=True)],
+            [gc.GButton(Text="Secimi goster", SetValue="btn")],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                print(gc.GetValues.get("tbl"))
+        """
 
     # input widget
     def GInput (
@@ -1011,12 +1044,12 @@ class GnuChanGUI:
     # multiLine widget
     def GMultiline (
             self, InText="", TFont=None, SetValue=None, Size=(None, None), Visible=True, TPosition="left", EnableEvent=True, WriteOnly=False, WrapLines=True,
-            xStretch=False, yStretch=False, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None
+            xStretch=False, yStretch=False, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None
         ):
 
         return Multiline(
                 default_text=InText, font=TFont, key=SetValue, size=Size, focus=Focus, justification=TPosition, visible=Visible, disabled=ReadOnly, 
-                expand_x=xStretch, expand_y=yStretch, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=0,
+                expand_x=xStretch, expand_y=yStretch, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=0,
                 autoscroll=True, auto_size_text=True, enable_events=EnableEvent, write_only=WriteOnly, wrap_lines=WrapLines
         )
         """
@@ -1054,6 +1087,8 @@ class GnuChanGUI:
                 if gc.GetValues["hl3"]:
                     gc.GetWindow["text"].update("half life 3 ?????")
         """
+
+    GCheckBox = GCheackBox
 
     def GRadio(self, RText=None, TFont="Sans, 20", defaultSelect=False, groupID=None, SetValue=None, CEvent=True, EmptySpace=(None, None), TColor=None, BColor=None):
         return Radio(text=RText, font=TFont, group_id=groupID, key=SetValue, enable_events=CEvent, pad=EmptySpace, text_color=TColor, background_color=BColor, default=defaultSelect)
@@ -1136,7 +1171,20 @@ class GnuChanGUI:
         return Slider(
                 range=MaxRange, key=SetValue, default_value=DefaultValue, orientation=SDirection, font=TFont, size=Size, pad=EmptySpace, 
                 text_color=TColor, background_color=BColor, expand_x=xStretch, visible=Visible
-        )   
+        )
+        """
+        layout = [
+            [gc.GSlider(MaxRange=(0, 100), DefaultValue=20, SDirection="h", SetValue="slider", xStretch=True)],
+            [gc.GText(SetText="Slider degeri", TextValue="text", xStretch=True, TPosition="center")],
+            [gc.GButton(Text="Oku", xStretch=True, SetValue="button")]
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "button":
+                gc.GetWindow["text"].update(str(gc.GetValues["slider"]))
+        """
 
     def GProgressBar(self, MaxRange=None, SetValue=None, Visible=True, PDirection="h", xStretch=True):
         return ProgressBar(max_value=MaxRange, key=SetValue, visible=Visible, orientation=PDirection, expand_x=xStretch)
@@ -1157,34 +1205,321 @@ class GnuChanGUI:
                 gc.GetWindow["pro"].update(gc.GetValues["slider"])
         """
 
+    def GImage(
+            self, SetValue=None, filename=None, data=None, source=None, Size=(None, None), EmptySpace=(None, None),
+            BColor=None, subsample=None, zoom=None, rclickMenu=None, xStretch=False, yStretch=False, Visible=True,
+            ActiveEvent=False,
+        ):
+        return Image(
+            source=source, filename=filename, data=data, background_color=BColor, size=Size, pad=EmptySpace,
+            key=SetValue, subsample=subsample, zoom=zoom, right_click_menu=rclickMenu,
+            expand_x=xStretch, expand_y=yStretch, visible=Visible, enable_events=ActiveEvent,
+        )
+        """
+        # Dosya yolu (paket yanindaki logo.png gibi) veya data= ile ham / base64 goruntu
+        layout = [
+            [gc.GImage(SetValue="pic", filename="logo.png", xStretch=True)],
+            [gc.GButton(Text="Yenile", SetValue="btn")]
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+        """
+
+    def GGraph(
+            self, SetValue, canvas_size, graph_bottom_left, graph_top_right, BColor=None, EmptySpace=(None, None),
+            enable_events=False, drag_submits=False, motion_events=False, rclickMenu=None,
+            xStretch=False, yStretch=False, Visible=True, float_values=False, border_width=0,
+        ):
+        return Graph(
+            canvas_size, graph_bottom_left, graph_top_right,
+            background_color=BColor, pad=EmptySpace, enable_events=enable_events,
+            drag_submits=drag_submits, motion_events=motion_events, key=SetValue,
+            right_click_menu=rclickMenu, expand_x=xStretch, expand_y=yStretch,
+            visible=Visible, float_values=float_values, border_width=border_width,
+        )
+        """
+        layout = [
+            [gc.GGraph(
+                "graf", (400, 200), (0, 0), (200, 100),
+                enable_events=False, xStretch=True, yStretch=True,
+            )],
+            [gc.GButton(Text="Cizgi ciz", SetValue="btn")]
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                gc.GetWindow["graf"].erase()
+                gc.GetWindow["graf"].draw_line((10, 10), (180, 90), color="steel blue", width=3)
+        """
+
+    def GOutput(
+            self, SetValue=None, Size=(None, None), EmptySpace=(None, None), BColor=None, TColor=None,
+            xStretch=False, yStretch=False, Visible=True, rclickMenu=None, wrap_lines=None, horizontal_scroll=None,
+        ):
+        return Output(
+            size=Size, pad=EmptySpace, background_color=BColor, text_color=TColor, key=SetValue,
+            right_click_menu=rclickMenu, expand_x=xStretch, expand_y=yStretch, visible=Visible,
+            wrap_lines=wrap_lines, horizontal_scroll=horizontal_scroll,
+        )
+        """
+        # stdout / stderr bu alana yonlenir; finalize sonrasi print kullanin
+        layout = [
+            [gc.GOutput(SetValue="out", Size=(70, 12), xStretch=True, yStretch=True)],
+            [gc.GButton(Text="print dene", SetValue="btn")]
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                print("Merhaba Output")
+        """
+
+    def GPane(
+            self, PaneColumns, SetValue=None, BColor=None, Size=(None, None), EmptySpace=(None, None),
+            Orientation="vertical", show_handle=True, relief=None, handle_size=None, Border=None,
+            xStretch=None, yStretch=None, Visible=True,
+        ):
+        pane_kw = dict(
+            pane_list=PaneColumns,
+            background_color=BColor,
+            size=Size,
+            pad=EmptySpace,
+            orientation=Orientation,
+            show_handle=show_handle,
+            handle_size=handle_size,
+            border_width=Border,
+            key=SetValue,
+            expand_x=xStretch,
+            expand_y=yStretch,
+            visible=Visible,
+        )
+        if relief is not None:
+            pane_kw["relief"] = relief
+        return Pane(**pane_kw)
+        """
+        sol = gc.GColumn([[gc.GText(SetText="Sol panel", xStretch=True)]], xStretch=True, yStretch=True)
+        sag = gc.GColumn([[gc.GText(SetText="Sag panel", xStretch=True)]], xStretch=True, yStretch=True)
+        layout = [
+            [gc.GPane(
+                PaneColumns=[sol, sag],
+                Orientation="horizontal",
+                SetValue="pane",
+                xStretch=True,
+                yStretch=True,
+                Size=(None, 12),
+            )]
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+        """
+
+    def GTree(
+            self, TreeDATA=None, headings=None, SetValue=None, TFont="Sans, 20", Visible=True,
+            xStretch=False, yStretch=False, EmptySpace=(None, None), TColor=None, BColor=None,
+            ActiveEvent=True, num_rows=10, tree_kwargs=None,
+        ):
+        kw = dict(
+            data=TreeDATA,
+            headings=headings,
+            key=SetValue,
+            font=TFont,
+            visible=Visible,
+            pad=EmptySpace,
+            text_color=TColor,
+            background_color=BColor,
+            enable_events=ActiveEvent,
+            num_rows=num_rows,
+            expand_x=xStretch,
+            expand_y=yStretch,
+        )
+        if tree_kwargs:
+            kw.update(tree_kwargs)
+        return Tree(**kw)
+        """
+        td = gc.GTreeData()
+        td.insert("", "n1", "Klasor", ["Aciklama A", "Deger 1"])
+        td.insert("n1", "n2", "Alt oge", ["Aciklama B", "Deger 2"])
+
+        layout = [
+            [gc.GTree(
+                TreeDATA=td,
+                headings=["Aciklama", "Deger"],
+                SetValue="tree",
+                xStretch=True,
+                yStretch=True,
+                num_rows=8,
+            )],
+            [gc.GButton(Text="Secimi oku", SetValue="btn")],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                print(gc.GetValues.get("tree"))
+        """
+
+    def GTreeData(self):
+        return TreeData()
+        """
+        td = gc.GTreeData()
+        td.insert("", "anahtar1", "Gorunen metin", ["kolon1", "kolon2"])
+        td.insert("anahtar1", "anahtar2", "Cocuk", ["a", "b"])
+        # td nesnesini gc.GTree(TreeDATA=td, headings=[...], ...) ile kullanin
+        """
+
+    def GOptionMenu(
+            self, ListValues, DefaultValue=None, SetValue=None, TFont="Sans, 20", Size=(None, None),
+            EmptySpace=(None, None), Visible=True, Disabled=False, TColor=None, BColor=None,
+            xStretch=False, yStretch=False,
+        ):
+        return OptionMenu(
+            ListValues,
+            default_value=DefaultValue,
+            key=SetValue,
+            font=TFont,
+            size=Size,
+            pad=EmptySpace,
+            visible=Visible,
+            disabled=Disabled,
+            text_color=TColor,
+            background_color=BColor,
+            expand_x=xStretch,
+            expand_y=yStretch,
+        )
+        """
+        layout = [
+            [gc.GOptionMenu([ "Bir", "Iki", "Uc" ], DefaultValue="Bir", SetValue="opt", xStretch=True)],
+            [gc.GText(SetText="Secim", TextValue="lbl", xStretch=True, TPosition="center")],
+            [gc.GButton(Text="Goster", SetValue="btn")],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                gc.GetWindow["lbl"].update(str(gc.GetValues["opt"]))
+        """
+
+    def GStatusBar(
+            self, SetText="", SetValue=None, TFont="Sans, 20", Size=(None, None), EmptySpace=(None, None),
+            TColor=None, BColor=None, TPosition="left", ActiveEvent=False, Visible=True,
+            xStretch=False, yStretch=False, rclickMenu=None, relief=None,
+        ):
+        sb_kw = dict(
+            text=SetText,
+            size=Size,
+            font=TFont,
+            key=SetValue,
+            pad=EmptySpace,
+            text_color=TColor,
+            background_color=BColor,
+            justification=TPosition,
+            enable_events=ActiveEvent,
+            visible=Visible,
+            expand_x=xStretch,
+            expand_y=yStretch,
+            right_click_menu=rclickMenu,
+        )
+        if relief is not None:
+            sb_kw["relief"] = relief
+        return StatusBar(**sb_kw)
+        """
+        layout = [
+            [gc.GText(SetText="Ust", xStretch=True)],
+            [gc.GStatusBar(SetText="Hazir", SetValue="sb", xStretch=True)],
+            [gc.GButton(Text="Durumu guncelle", SetValue="btn")],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            if gc.GetEvent == "btn":
+                gc.GetWindow["sb"].update("Guncellendi: " + str(int(time.time()))[-4:])
+        """
+
+    def GButtonMenu(
+            self, Text, menu_def, SetValue=None, TFont="Sans, 20", EmptySpace=(None, None),
+            tcolor=None, bcolor=None, Disabled=False, Visible=True, xStretch=False, yStretch=False,
+            tearoff=False, Border=None, tooltip=None, bImage=None,
+        ):
+        return ButtonMenu(
+            Text,
+            menu_def,
+            key=SetValue,
+            font=TFont,
+            pad=EmptySpace,
+            text_color=tcolor,
+            background_color=bcolor,
+            disabled=Disabled,
+            visible=Visible,
+            expand_x=xStretch,
+            expand_y=yStretch,
+            tearoff=tearoff,
+            border_width=Border,
+            tooltip=tooltip,
+            image_filename=bImage,
+        )
+        """
+        menu_def = [ "Menu", [ "Dosya Ac", "Kaydet", "---", "Cikis" ] ]
+        layout = [
+            [gc.GButtonMenu("Islemler", menu_def, SetValue="bmenu", xStretch=False)],
+            [gc.GText(SetText="Son secilen menu ogesi", TextValue="lbl", xStretch=True)],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+
+        def update():
+            ev = gc.GetEvent
+            if ev in ("Dosya Ac", "Kaydet", "Cikis"):
+                gc.GetWindow["lbl"].update(ev)
+        """
+
+    def GSizegrip(self, SetValue=None, BColor=None, EmptySpace=None):
+        if EmptySpace is None:
+            EmptySpace = (0, 0)
+        return Sizegrip(background_color=BColor, pad=EmptySpace, key=SetValue)
+        """
+        # Pencereyi GnuChanGUI(..., resizable=True) ile acin; fare ile yeniden boyutlandirma sag-alt tutamac
+        layout = [
+            [gc.GText(SetText="Icerik", xStretch=True, yStretch=True)],
+            [gc.GPush(), gc.GSizegrip()],
+        ]
+
+        gc.GWindow(SetMainWindowLayout_List=layout)
+        """
+
     # this is can change in the future
     def GetFilePath(
         self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
-        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3, showHidden=True,
         ):
 
         return popup_get_file(
             default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
-            button_color=buttonColor, background_color=bcolor
+            button_color=buttonColor, background_color=bcolor, show_hidden=showHidden,
         )
 
     def GetFileForSave(
         self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False, fileTypes=[("All files (*.*)", "*.*")],
-        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3, showHidden=True,
         ):
 
         return popup_get_file(
             save_as=True, default_path=defaultPATH, message=message,  no_window=noWindow, file_types=fileTypes, no_titlebar=noTitleBar, title=title,
-            button_color=buttonColor, background_color=bcolor
+            button_color=buttonColor, background_color=bcolor, show_hidden=showHidden,
         )
 
     def GetFolderPath(
         self, defaultPATH=str(os.path.expanduser("~")), message="", title="", noWindow=True, noTitleBar=False,
-        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3
+        bcolor=GnuChanOSColor().FColors1, buttonColor = GnuChanOSColor().FColors3, showHidden=True,
         ):
 
         return popup_get_folder(default_path=defaultPATH, message=message,  no_window=noWindow, no_titlebar=noTitleBar, title=title,
-                              button_color=buttonColor, background_color=bcolor)
+                              button_color=buttonColor, background_color=bcolor, show_hidden=showHidden)
 
     # GFrame, xStretch and yStretch not working with pin
     # GColumn, it's same in here not working xStretch and yStretch
@@ -1370,3 +1705,554 @@ class GMessage(GnuChanGUI):
         print(f"{self.WindowTitle} is closed")
 
 
+
+
+class RlSceneObject:
+    """
+    Sahnedeki tek mantiksal nesne (Raylib tarzinda: isim + sinir kutusu + tk id listesi).
+    """
+
+    __slots__ = ("name", "kind", "item_ids", "bbox", "tag", "user_data", "visible")
+
+    def __init__(self, name, kind, item_ids, bbox, tag=None, user_data=None):
+        self.name = name
+        self.kind = kind
+        self.item_ids = list(item_ids)
+        self.bbox = bbox
+        self.tag = tag
+        self.user_data = user_data
+        self.visible = True
+
+
+class GCanvas(Canvas):
+    """
+    gcLibrary.Canvas alt sinifi + Raylib-benzeri 2D sahne ve tus (yalnizca tk).
+    Tus: EnableSceneInput() -> her kare InputBeginFrame(); IsKeyDown / IsKeyPressed / IsKeyReleased.
+    Sahne: BeginScene2D, Draw*, PickSceneObject, SelectSceneObject, LoadSceneBatch, ClearScene2D.
+    Ham tk: TKCanvas, bind_canvas (ileri duzey), after_ms, pixel_dimensions.
+    """
+
+    def __init__(
+        self,
+        SetValue: str,
+        BColor: str = "black",
+        xStretch: bool = False,
+        yStretch: bool = False,
+        Visible: bool = True,
+        border: int = 0,
+        Size: tuple = (None, None),
+        EmptySpace: tuple = (None, None),
+        tooltip: str = None,
+        rclickMenu=None,
+        metadata=None,
+    ):
+        super().__init__(
+            canvas=None,
+            background_color=BColor,
+            size=Size,
+            pad=EmptySpace,
+            key=SetValue,
+            expand_x=xStretch,
+            expand_y=yStretch,
+            visible=Visible,
+            border_width=border,
+            tooltip=tooltip,
+            right_click_menu=rclickMenu,
+            metadata=metadata,
+        )
+        self._rl_objects = {}
+        self._rl_order = []
+        self._rl_item_owner = {}
+        self._rl_selection = set()
+        self._rl_batch_depth = 0
+        # Raylib-benzeri tus (sadece tk; pynput / bind_canvas sart degil)
+        self._rl_keys_down = set()
+        self._rl_keys_snapshot = frozenset()
+        self._rl_pressed_this_frame = frozenset()
+        self._rl_released_this_frame = frozenset()
+        self._rl_input_installed = False
+        self._rl_input_grab_default = True
+        self._rl_input_click_focus = True
+
+    # --- Raylib-benzeri sahne etiketi (tk tags) ---
+    @staticmethod
+    def _rl_canvas_tag(name):
+        return "_rlscn_" + str(name).replace(" ", "\u00a0")
+
+    _RL_KEY_ALIAS = {
+        "up": "Up",
+        "down": "Down",
+        "left": "Left",
+        "right": "Right",
+        "space": "space",
+        "return": "Return",
+        "escape": "Escape",
+        "tab": "Tab",
+    }
+
+    @classmethod
+    def _canonical_keysym(cls, keysym):
+        if not keysym:
+            return ""
+        s = str(keysym)
+        lk = s.lower()
+        if lk in cls._RL_KEY_ALIAS:
+            return cls._RL_KEY_ALIAS[lk]
+        if len(s) == 1 and s.isalpha():
+            return s.lower()
+        return s
+
+    def _rl_canvas(self):
+        c = self.TKCanvas
+        if c is None or not self._widget_was_created():
+            return None
+        return c
+
+    def EnableSceneInput(self, grab_focus=True, click_to_focus=True):
+        """
+        Canvas tuslarini kutuphane icinde yonetir (tk KeyPress/Release).
+        Oyun dongusunde once InputBeginFrame(), sonra IsKeyDown / IsKeyPressed kullanin.
+        """
+        self._rl_input_grab_default = grab_focus
+        self._rl_input_click_focus = click_to_focus
+        self._rl_try_install_input()
+        if grab_focus:
+            self.grab_focus()
+
+    def DisableSceneInput(self):
+        """Tk baglarini kaldir (odak/tus takibi durur)."""
+        c = self._rl_canvas()
+        if c is not None and self._rl_input_installed:
+            for seq in ("<KeyPress>", "<KeyRelease>", "<FocusOut>", "<Button-1>"):
+                try:
+                    c.unbind(seq)
+                except Exception:
+                    pass
+        self._rl_input_installed = False
+        self._rl_keys_down.clear()
+        self._rl_keys_snapshot = frozenset()
+        self._rl_pressed_this_frame = frozenset()
+        self._rl_released_this_frame = frozenset()
+
+    def _rl_try_install_input(self):
+        if self._rl_input_installed:
+            return
+        c = self._rl_canvas()
+        if c is None:
+            return
+        c.bind("<KeyPress>", self._rl_on_key_press)
+        c.bind("<KeyRelease>", self._rl_on_key_release)
+        c.bind("<FocusOut>", self._rl_on_focus_out)
+        if self._rl_input_click_focus:
+            c.bind("<Button-1>", self._rl_on_click_focus)
+        self._rl_input_installed = True
+
+    def _rl_on_key_press(self, event):
+        ks = getattr(event, "keysym", None)
+        if ks:
+            self._rl_keys_down.add(self._canonical_keysym(ks))
+
+    def _rl_on_key_release(self, event):
+        ks = getattr(event, "keysym", None)
+        if ks:
+            self._rl_keys_down.discard(self._canonical_keysym(ks))
+
+    def _rl_on_focus_out(self, event):
+        self._rl_keys_down.clear()
+
+    def _rl_on_click_focus(self, event):
+        if self._rl_input_grab_default:
+            self.grab_focus()
+
+    def InputBeginFrame(self):
+        """
+        Kare basi cagirin: IsKeyPressed / IsKeyReleased icin kenar bilgisi guncellenir.
+        Widget henuz yoksa baglanti bir sonraki karede kurulur.
+        """
+        self._rl_try_install_input()
+        down = set(self._rl_keys_down)
+        self._rl_pressed_this_frame = frozenset(down - self._rl_keys_snapshot)
+        self._rl_released_this_frame = frozenset(self._rl_keys_snapshot - down)
+        self._rl_keys_snapshot = frozenset(down)
+
+    def IsKeyDown(self, key):
+        """Raylib IsKeyDown: tus su an basili mi (canvas odakliyken)."""
+        return self._canonical_keysym(key) in self._rl_keys_down
+
+    def IsKeyPressed(self, key):
+        """Raylib IsKeyPressed: bu karede yeni basildi mi (InputBeginFrame sonrasi)."""
+        return self._canonical_keysym(key) in self._rl_pressed_this_frame
+
+    def IsKeyReleased(self, key):
+        """Bu karede birakildi mi."""
+        return self._canonical_keysym(key) in self._rl_released_this_frame
+
+    def _rl_bbox_union(self, bbox_a, bbox_b):
+        if bbox_a is None:
+            return bbox_b
+        if bbox_b is None:
+            return bbox_a
+        return (
+            min(bbox_a[0], bbox_b[0]),
+            min(bbox_a[1], bbox_b[1]),
+            max(bbox_a[2], bbox_b[2]),
+            max(bbox_a[3], bbox_b[3]),
+        )
+
+    def _rl_register(self, name, kind, item_ids, bbox, tag=None, user_data=None, replace=True):
+        if replace and name in self._rl_objects:
+            self.RemoveSceneObject(name)
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        tcanvas = self._rl_canvas_tag(name)
+        for iid in item_ids:
+            try:
+                c.addtag_withtag(tcanvas, iid)
+            except Exception:
+                pass
+            self._rl_item_owner[iid] = name
+        obj = RlSceneObject(name, kind, item_ids, bbox, tag=tag, user_data=user_data)
+        self._rl_objects[name] = obj
+        if name not in self._rl_order:
+            self._rl_order.append(name)
+        return obj
+
+    @contextmanager
+    def BeginScene2D(self):
+        """Toplu ekleme / senkron blok (Raylib BeginMode2D hissi); icinde Draw* cagirin."""
+        self._rl_batch_depth += 1
+        try:
+            yield self
+        finally:
+            self._rl_batch_depth -= 1
+
+    def EndScene2D(self):
+        """BeginScene2D ile simetri; with kullanmiyorsaniz batch sonunda cagirin (derinligi azaltir)."""
+        if self._rl_batch_depth > 0:
+            self._rl_batch_depth -= 1
+
+    def ClearScene2D(self):
+        """Sahnedeki tum kayitli nesneleri siler (tk + ic kayit)."""
+        for name in list(self._rl_order):
+            self.RemoveSceneObject(name)
+        self._rl_selection.clear()
+
+    def RemoveSceneObject(self, name):
+        """Tek nesneyi sahneden ve canvas'tan kaldir."""
+        c = self._rl_canvas()
+        tag = self._rl_canvas_tag(name)
+        if c is not None:
+            try:
+                c.delete(tag)
+            except Exception:
+                pass
+        obj = self._rl_objects.pop(name, None)
+        if obj is not None:
+            for iid in obj.item_ids:
+                self._rl_item_owner.pop(iid, None)
+        if name in self._rl_order:
+            self._rl_order.remove(name)
+        self._rl_selection.discard(name)
+
+    def GetSceneObject(self, name):
+        return self._rl_objects.get(name)
+
+    def AllSceneObjects(self):
+        """Cizim sirasina gore RlSceneObject listesi."""
+        return [self._rl_objects[n] for n in self._rl_order if n in self._rl_objects]
+
+    # --- Raylib Draw* benzeri: cizer + sahneye kaydeder ---
+    def DrawRectangle(self, name, x, y, rect_w, rect_h, *, tag=None, user_data=None, **kw):
+        """rect_w / rect_h: dikdortgen boyutu (tk 'width' cizgi kalinligi **kw ile verilir, isim cakismasin)."""
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        ttag = self._rl_canvas_tag(name)
+        iid = c.create_rectangle(x, y, x + rect_w, y + rect_h, tags=(ttag,), **kw)
+        bbox = (x, y, x + rect_w, y + rect_h)
+        return self._rl_register(name, "rectangle", (iid,), bbox, tag=tag, user_data=user_data)
+
+    def DrawCircle(self, name, center_x, center_y, radius, *, tag=None, user_data=None, **kw):
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        r = float(radius)
+        x1, y1 = center_x - r, center_y - r
+        x2, y2 = center_x + r, center_y + r
+        ttag = self._rl_canvas_tag(name)
+        iid = c.create_oval(x1, y1, x2, y2, tags=(ttag,), **kw)
+        bbox = (x1, y1, x2, y2)
+        return self._rl_register(name, "circle", (iid,), bbox, tag=tag, user_data=user_data)
+
+    def DrawLine(self, name, x1, y1, x2, y2, *, tag=None, user_data=None, **kw):
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        ttag = self._rl_canvas_tag(name)
+        iid = c.create_line(x1, y1, x2, y2, tags=(ttag,), **kw)
+        bbox = (min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
+        return self._rl_register(name, "line", (iid,), bbox, tag=tag, user_data=user_data)
+
+    def DrawText(self, name, x, y, text, *, tag=None, user_data=None, **kw):
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        ttag = self._rl_canvas_tag(name)
+        iid = c.create_text(x, y, text=text, tags=(ttag,), **kw)
+        try:
+            bx1, by1, bx2, by2 = c.bbox(iid)
+            bbox = (bx1, by1, bx2, by2)
+        except Exception:
+            bbox = (x, y, x, y)
+        return self._rl_register(name, "text", (iid,), bbox, tag=tag, user_data=user_data)
+
+    def DrawRectanglePro(self, name, x, y, rect_w, rect_h, origin_x, origin_y, rotation_deg, *, tag=None, user_data=None, **kw):
+        """
+        Dikdortgen + donme (origin gore); tk'da tek polygon ile yaklasim.
+        rotation_deg: derece, saat yonu pozitif.
+        """
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        rad = math.radians(rotation_deg)
+        cr, sr = math.cos(rad), math.sin(rad)
+        corners = ((0, 0), (rect_w, 0), (rect_w, rect_h), (0, rect_h))
+        pts = []
+        minx = miny = float("inf")
+        maxx = maxy = float("-inf")
+        for cx, cy in corners:
+            lx, ly = cx - origin_x, cy - origin_y
+            wx = x + lx * cr - ly * sr
+            wy = y + lx * sr + ly * cr
+            pts.extend((wx, wy))
+            minx, maxx = min(minx, wx), max(maxx, wx)
+            miny, maxy = min(miny, wy), max(maxy, wy)
+        ttag = self._rl_canvas_tag(name)
+        iid = c.create_polygon(*pts, tags=(ttag,), **kw)
+        bbox = (minx, miny, maxx, maxy)
+        return self._rl_register(name, "rectangle_pro", (iid,), bbox, tag=tag, user_data=user_data)
+
+    def LoadSceneBatch(self, specs):
+        """
+        Toplu nesne: her oge sozluk.
+        Zorunlu: 'kind' ('rectangle'|'circle'|'line'|'text'|'rectangle_pro'), 'name'.
+        Ornek: {'kind':'rectangle','name':'a','x':0,'y':0,'w':32,'h':32,'fill':'gray'}
+        """
+        out = []
+        with self.BeginScene2D():
+            for sp in specs:
+                kind = sp.get("kind")
+                name = sp.get("name")
+                if not kind or name is None:
+                    continue
+                kw = {k: v for k, v in sp.items() if k not in ("kind", "name", "tag", "user_data")}
+                tag = sp.get("tag")
+                ud = sp.get("user_data")
+                if kind == "rectangle":
+                    o = self.DrawRectangle(
+                        name, kw.pop("x"), kw.pop("y"), kw.pop("w"), kw.pop("h"), tag=tag, user_data=ud, **kw
+                    )
+                elif kind == "circle":
+                    o = self.DrawCircle(
+                        name, kw.pop("cx"), kw.pop("cy"), kw.pop("r"), tag=tag, user_data=ud, **kw
+                    )
+                elif kind == "line":
+                    o = self.DrawLine(
+                        name, kw.pop("x1"), kw.pop("y1"), kw.pop("x2"), kw.pop("y2"), tag=tag, user_data=ud, **kw
+                    )
+                elif kind == "text":
+                    o = self.DrawText(
+                        name, kw.pop("x"), kw.pop("y"), kw.pop("text"), tag=tag, user_data=ud, **kw
+                    )
+                elif kind == "rectangle_pro":
+                    o = self.DrawRectanglePro(
+                        name,
+                        kw.pop("x"),
+                        kw.pop("y"),
+                        kw.pop("w"),
+                        kw.pop("h"),
+                        kw.pop("origin_x", 0),
+                        kw.pop("origin_y", 0),
+                        kw.pop("rotation_deg", 0),
+                        tag=tag,
+                        user_data=ud,
+                        **kw
+                    )
+                else:
+                    o = None
+                if o is not None:
+                    out.append(o)
+        return out
+
+    # --- Secim / vurus testi (Raylib CheckCollision / GetGesture hissi) ---
+    def PickSceneObject(self, px, py):
+        """Verilen canvas pikselinde en ustteki sahne nesnesinin adi veya None."""
+        c = self._rl_canvas()
+        if c is None:
+            return None
+        try:
+            ids = c.find_overlapping(px, py, px, py)
+        except Exception:
+            return None
+        for iid in reversed(ids):
+            owner = self._rl_item_owner.get(iid)
+            if owner is not None:
+                return owner
+        return None
+
+    def QuerySceneRect(self, x1, y1, x2, y2):
+        """Dikdortgenle kesisen tum sahne nesne isimleri (ustten alta sirali)."""
+        c = self._rl_canvas()
+        if c is None:
+            return []
+        xa, xb = (x1, x2) if x1 <= x2 else (x2, x1)
+        ya, yb = (y1, y2) if y1 <= y2 else (y2, y1)
+        try:
+            ids = c.find_overlapping(xa, ya, xb, yb)
+        except Exception:
+            return []
+        seen = set()
+        ordered = []
+        for iid in reversed(ids):
+            owner = self._rl_item_owner.get(iid)
+            if owner and owner not in seen:
+                seen.add(owner)
+                ordered.append(owner)
+        return ordered
+
+    def SelectSceneObject(self, name, additive=False):
+        """Nesneyi sec; additive False ise onceki secim temizlenir."""
+        if not additive:
+            self._rl_selection.clear()
+        if name in self._rl_objects:
+            self._rl_selection.add(name)
+
+    def DeselectAllSceneObjects(self):
+        self._rl_selection.clear()
+
+    def ToggleSelectSceneObject(self, name):
+        if name in self._rl_selection:
+            self._rl_selection.discard(name)
+        elif name in self._rl_objects:
+            self._rl_selection.add(name)
+
+    def SelectedSceneObjects(self):
+        """Secili nesne isimleri (tuple)."""
+        return tuple(self._rl_selection)
+
+    def SelectedSceneObjectRefs(self):
+        """Secili RlSceneObject listesi."""
+        return [self._rl_objects[n] for n in self._rl_selection if n in self._rl_objects]
+
+    def IsSceneObjectSelected(self, name):
+        return name in self._rl_selection
+
+    def MoveSceneObject(self, name, dx, dy):
+        """Sahne nesnesini piksel ote (tk move)."""
+        obj = self._rl_objects.get(name)
+        c = self._rl_canvas()
+        if obj is None or c is None:
+            return
+        for iid in obj.item_ids:
+            try:
+                c.move(iid, dx, dy)
+            except Exception:
+                pass
+        if obj.bbox:
+            obj.bbox = (obj.bbox[0] + dx, obj.bbox[1] + dy, obj.bbox[2] + dx, obj.bbox[3] + dy)
+
+    def SetSceneObjectVisible(self, name, visible):
+        obj = self._rl_objects.get(name)
+        c = self._rl_canvas()
+        if obj is None or c is None:
+            return
+        st = "normal" if visible else "hidden"
+        for iid in obj.item_ids:
+            try:
+                c.itemconfigure(iid, state=st)
+            except Exception:
+                pass
+        obj.visible = bool(visible)
+
+    # RaylibUnload* benzeri kisa isimler
+    UnloadSceneObject = RemoveSceneObject
+    UnloadAllSceneObjects = ClearScene2D
+
+    def bind_canvas(self, sequence, callback, add=""):
+        """Alt tk.Canvas uzerinde bind (Window/Element bind ile karismasin diye ayri isim)."""
+        c = self.TKCanvas
+        if c is None:
+            return
+        c.bind(sequence, callback, add=add)
+
+    def unbind_canvas(self, sequence):
+        c = self.TKCanvas
+        if c is None:
+            return
+        try:
+            c.unbind(sequence)
+        except Exception:
+            pass
+
+    def after_ms(self, ms, callback):
+        """
+        Pencere kokunde tk.after(ms, callback). GWindow + finalize sonrasi calisir.
+        Donen id ile after_cancel() iptal edin.
+        """
+        if self.ParentForm is None:
+            return None
+        root = getattr(self.ParentForm, "TKroot", None)
+        if root is None:
+            return None
+        try:
+            return root.after(int(ms), callback)
+        except Exception:
+            return None
+
+    def after_cancel(self, after_id):
+        if after_id is None:
+            return
+        root = getattr(self.ParentForm, "TKroot", None) if self.ParentForm else None
+        if root is None:
+            return
+        try:
+            root.after_cancel(after_id)
+        except Exception:
+            pass
+
+    def pixel_dimensions(self):
+        """Gercek tk canvas genislik/yukseklik (piksel); henuz yoksa (0, 0)."""
+        if not self._widget_was_created():
+            return (0, 0)
+        c = self.TKCanvas
+        if c is None:
+            return (0, 0)
+        try:
+            c.update_idletasks()
+            return (int(c.winfo_width()), int(c.winfo_height()))
+        except Exception:
+            return (0, 0)
+
+    def delete_item(self, *item_ids):
+        """create_* ile donen bir veya daha cok item id silinir."""
+        c = self.TKCanvas
+        if c is None:
+            return
+        for iid in item_ids:
+            try:
+                c.delete(iid)
+            except Exception:
+                pass
+
+    def delete_tag(self, tag):
+        """Etikete bagli tum ogeler silinir (tk delete tag)."""
+        c = self.TKCanvas
+        if c is None:
+            return
+        try:
+            c.delete(tag)
+        except Exception:
+            pass
+
+    grab_focus = Canvas.focus_canvas

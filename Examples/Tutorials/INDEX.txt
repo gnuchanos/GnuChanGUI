@@ -1,0 +1,25 @@
+GnuChanGUI — Tutorial ornekleri (parca parca)
+============================================
+
+Temel sablon:  Examples/Consept/default/default.py
+Her part_XX dosyasi ayni sinif yapisini kullanir; sadece Layout ve Update icerigi degisir.
+
+  part01_window_text_button.py   — default ile ayni fikir (metin, dugme, ayirici)
+  part02_input_multiline.py      — GInput, GMultiline, GetValues
+  part03_listbox_table.py        — GListBox, GTable
+  part04_selection_controls.py   — GCheackBox, GRadio, GSelection, GIncreaseSelection
+  part05_slider_progress.py      — GSlider + GProgressBar
+  part06_column_tabs.py          — GColumn, GTabGroup / GTab
+  part07_menu_statusbar.py       — GMenu, GStatusBar, GButtonMenu
+  part08_canvas_scene2d.py       — GCanvas, BeginScene2D, DrawRectangle, DrawText
+  part09_layout_expand_weights.py — xStretch_weight / yStretch_weight (satirda orantili genislik)
+
+Calistirma (proje kokunden):
+  python Examples/Tutorials/part02_input_multiline.py
+  python Examples/Tutorials/part09_layout_expand_weights.py
+  python Examples/expand_weights_demo.py   — part09 ile ayni pencere (kisa yol)
+
+Genisleme (stretch) odakli kisa ornek (yatay xStretch_weight + dikey yStretch_row_weight):
+  python Examples/genisleme_stretch_ornek.py
+
+Tam oyun/canvas: Examples/33-gcanvas-pong-example/pong.py
