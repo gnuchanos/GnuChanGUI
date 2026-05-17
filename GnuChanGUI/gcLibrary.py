@@ -17,6 +17,41 @@ except Exception:
 
 port = "GnuChanGUI"
 
+# ============================================================================
+# Global Keyboard System (Tkinter based)
+# ============================================================================
+
+_keys_held = {}      # Tuşlar devam ettiği sürece True
+_keys_pressed = {}   # Bu frame'de basılan tuşlar (next frame reset)
+
+def IsKey_Hold(key_str):
+    """Tuş şu anda basılı mı? (devam eden basış)"""
+    return _keys_held.get(key_str, False)
+
+def IsKey_Pressed(key_str):
+    """Tuş bu frame'de basıldı mı? (tek shot)"""
+    return _keys_pressed.get(key_str, False)
+
+def IsKey_Released(key_str):
+    """Tuş basılı DEĞİL mi?"""
+    return not _keys_held.get(key_str, False)
+
+def _register_key_press(key_str):
+    """İç: tuş basıldı"""
+    if not _keys_held.get(key_str, False):
+        # İlk basış = pressed event
+        _keys_pressed[key_str] = True
+    _keys_held[key_str] = True
+
+def _register_key_release(key_str):
+    """İç: tuş bırakıldı"""
+    _keys_held[key_str] = False
+
+def _clear_pressed_keys():
+    """İç: frame bitince pressed state'i reset et"""
+    global _keys_pressed
+    _keys_pressed = {}
+
 
 # all of the tkinter involved imports
 import tkinter as tk
@@ -5464,10 +5499,9 @@ class ProgressBar(Element):
             return False
         self.TKProgressBar.Update(current_count, max=max)
         try:
-            self.ParentForm.TKroot.update()
+            self.ParentForm.TKroot.update_idletasks()
         except:
             Window._DecrementOpenCount()
-            # _my_windows.Decrement()
             return False
         return True
 
@@ -5520,10 +5554,8 @@ class ProgressBar(Element):
             self.TKProgressBar.Update(current_count, max=max)
 
         try:
-            self.ParentForm.TKroot.update()
+            self.ParentForm.TKroot.update_idletasks()
         except:
-            # Window._DecrementOpenCount()
-            # _my_windows.Decrement()
             return False
         return True
 
@@ -5753,6 +5785,8 @@ class Image(Element):
             self.TotalAnimatedFrames = len(self.AnimatedFrames)
             self.LastFrameTime = time.time()
             self.CurrentFrameNumber = -1  # start at -1 because it is incremented before every frame is shown
+            if self.TotalAnimatedFrames == 0:
+                return
         # show the frame
 
         now = time.time()
@@ -5798,20 +5832,19 @@ class Image(Element):
 
         # read a frame
         while True:
-            if type(source) is not bytes:
-                try:
-                    self.image = tk.PhotoImage(file=source, format='gif -index %i' % (self.frame_num))
-                    self.frame_num += 1
-                except:
-                    self.frame_num = 0
-            else:
-                try:
-                    self.image = tk.PhotoImage(data=source, format='gif -index %i' % (self.frame_num))
-                    self.frame_num += 1
-                except:
-                    self.frame_num = 0
-            if self.frame_num:
+            try:
+                if type(source) is not bytes:
+                    frame = tk.PhotoImage(file=source, format='gif -index %i' % (self.frame_num))
+                else:
+                    frame = tk.PhotoImage(data=source, format='gif -index %i' % (self.frame_num))
+                self.image = frame
+                self.frame_num += 1
                 break
+            except Exception:
+                if self.frame_num == 0:
+                    return
+                self.frame_num = 0
+                continue
 
         try:  # needed in case the window was closed with an "X"
             self.tktext_label.configure(image=self.image, width=self.image.width(), heigh=self.image.height())
@@ -7619,6 +7652,138 @@ class TabGroup(Element):
             tab_element.TooltipObject = ToolTip(tab_element.TKFrame, text=tab_element.Tooltip, timeout=DEFAULT_TOOLTIP_TIME)
         _add_right_click_menu(tab_element, form)
 
+    def remove_tab(self, identifier):
+        """
+        Remove a tab from the TabGroup.
+        Identifier may be an integer index, a tab `Key`, or a `Tab` element instance.
+        """
+        if not self._widget_was_created():
+            return
+
+        # Resolve the Tab element from the identifier
+        tab_element = None
+
+        if isinstance(identifier, Element) and getattr(identifier, 'Type', None) == ELEM_TYPE_TAB:
+            tab_element = identifier
+        else:
+            # If integer, treat as index
+            try:
+                if isinstance(identifier, int):
+                    tabs = list(self.TKNotebook.tabs())
+                    if identifier < 0 or identifier >= len(tabs):
+                        return
+                    tab_name = tabs[identifier]
+                    widget = self.TKNotebook.nametowidget(tab_name)
+                    # find matching element
+                    for row in self.Rows:
+                        for el in row:
+                            if getattr(el, 'TKFrame', None) is widget:
+                                tab_element = el
+                                break
+                        if tab_element is not None:
+                            break
+                else:
+                    # treat as key
+                    form = self.ParentForm
+                    if form is not None and identifier in getattr(form, 'AllKeysDict', {}):
+                        tab_element = form.AllKeysDict.get(identifier)
+                    else:
+                        # try to find by title or key within rows
+                        for row in self.Rows:
+                            for el in row:
+                                if el.Key == identifier or el.Title == identifier:
+                                    tab_element = el
+                                    break
+                            if tab_element is not None:
+                                break
+            except Exception:
+                return
+
+        if tab_element is None:
+            return
+
+        # Forget the tab widget from the notebook
+        try:
+            self.TKNotebook.forget(tab_element.TKFrame)
+        except Exception:
+            pass
+
+        # Remove from Rows
+        try:
+            for row in list(self.Rows):
+                if tab_element in row:
+                    row.remove(tab_element)
+                    if len(row) == 0:
+                        try:
+                            self.Rows.remove(row)
+                        except Exception:
+                            pass
+                    break
+        except Exception:
+            pass
+
+        # Remove from parent form key dicts
+        try:
+            form = self.ParentForm
+            if form is not None:
+                if tab_element.Key in getattr(form, 'AllKeysDict', {}):
+                    try:
+                        del form.AllKeysDict[tab_element.Key]
+                    except Exception:
+                        pass
+                # Rebuild the tab_index_to_key mapping from remaining tabs
+                self.tab_index_to_key = {}
+                try:
+                    tabs = list(self.TKNotebook.tabs())
+                    for idx, tab_name in enumerate(tabs):
+                        widget = self.TKNotebook.nametowidget(tab_name)
+                        # find element for this widget
+                        found_key = None
+                        for v in form.AllKeysDict.values():
+                            if getattr(v, 'TKFrame', None) is widget:
+                                found_key = v.Key
+                                # update TabID
+                                try:
+                                    v.TabID = idx
+                                except Exception:
+                                    pass
+                                break
+                        if found_key is None:
+                            # fallback: try to match by widget string
+                            for row in self.Rows:
+                                for el in row:
+                                    if getattr(el, 'TKFrame', None) is widget:
+                                        found_key = el.Key
+                                        try:
+                                            el.TabID = idx
+                                        except Exception:
+                                            pass
+                                        break
+                                if found_key is not None:
+                                    break
+                        if found_key is not None:
+                            self.tab_index_to_key[idx] = found_key
+
+                except Exception:
+                    pass
+                # Rebuild AllKeysDict to ensure consistency
+                try:
+                    form._BuildKeyDict()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        # Clear references on tab element
+        try:
+            tab_element.ParentNotebook = None
+            tab_element.TKFrame = None
+            tab_element.TabID = None
+        except Exception:
+            pass
+
+        return
+
 
     def update(self, visible=None):
         """
@@ -7649,6 +7814,7 @@ class TabGroup(Element):
     FindKeyFromTabName = find_key_from_tab_name
     Get = get
     Layout = layout
+    RemoveTab = remove_tab
 
 
 # ---------------------------------------------------------------------- #
@@ -9066,7 +9232,10 @@ class Table(Element):
         self.last_clicked_position = (row, column)
 
         # update the rows being selected if appropriate
-        self.ParentForm.TKroot.update()
+        try:
+            self.ParentForm.TKroot.update_idletasks()
+        except:
+            pass
         # self.TKTreeview.()
         selections = self.TKTreeview.selection()
         if self.right_click_selects and len(selections) <= 1:
@@ -9639,6 +9808,8 @@ class _TimerPeriodic:
         self.key = key
         self.id = _TimerPeriodic.id_counter
         _TimerPeriodic.id_counter += 1
+        self.running = False
+        self.stop_event = threading.Event()
         self.start()
 
 
@@ -9689,17 +9860,19 @@ class _TimerPeriodic:
         """
 
         if not self.running:            # if timer has been cancelled, abort
-            del _TimerPeriodic.active_timers[self.id]
+            _TimerPeriodic.active_timers.pop(self.id, None)
             return
         while True:
-            time.sleep(self.frequency_ms/1000)
+            if self.stop_event.wait(self.frequency_ms/1000):
+                _TimerPeriodic.active_timers.pop(self.id, None)
+                return
             if not self.running:        # if timer has been cancelled, abort
-                del _TimerPeriodic.active_timers[self.id]
+                _TimerPeriodic.active_timers.pop(self.id, None)
                 return
             self.window.write_event_value(self.key, self.id)
 
             if not self.repeating:      # if timer does not repeat, then exit thread
-                del _TimerPeriodic.active_timers[self.id]
+                _TimerPeriodic.active_timers.pop(self.id, None)
                 return
 
 
@@ -9719,6 +9892,10 @@ class _TimerPeriodic:
         Stops a timer
         """
         self.running = False
+        try:
+            self.stop_event.set()
+        except Exception:
+            pass
 
 
 
@@ -9746,6 +9923,7 @@ class Window:
     _window_that_exited = None
 
     # type: tk.Tk()    # (may be the hidden root or a window's root)
+    _tk_thread = None  # type: threading.Thread
     _root_running_mainloop = None
     _timeout_key = None
     _TKAfterID = None  # timer that is used to run reads with timeouts
@@ -17155,7 +17333,7 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
 
                 element.ParentNotebook = form.TKNotebook
                 element.TabID = form.TabCount
-                form.tab_index_to_key[element.TabID] = element.key      # has a list of the tabs in the notebook and their associated key
+                form.tab_index_to_key[element.TabID] = element.Key      # has a list of the tabs in the notebook and their associated key
                 form.TabCount += 1
                 if element.BackgroundColor not in (COLOR_SYSTEM_DEFAULT, None):
                     element.TKFrame.configure(background=element.BackgroundColor, highlightbackground=element.BackgroundColor, highlightcolor=element.BackgroundColor)
@@ -17813,6 +17991,13 @@ def _get_hidden_master_root():
     """
 
     # if one is already made, then skip making another
+    if Window._tk_thread is None:
+        Window._tk_thread = threading.current_thread()
+    elif threading.current_thread() is not Window._tk_thread:
+        warnings.warn(
+            'Tkinter hidden master root was previously initialized in thread %r; creating the hidden master root from a different thread %r may be unsafe.' % (
+                Window._tk_thread, threading.current_thread()),
+            RuntimeWarning)
     if Window.hidden_master_root is None:
         Window._IncrementOpenCount()
         Window.hidden_master_root = tk.Tk()
@@ -17932,6 +18117,13 @@ def StartupTK(window):
     # ow = _my_windows.NumOpenWindows
     ow = Window.NumOpenWindows
     # print('Starting TK open Windows = {}'.format(ow))
+    if Window._tk_thread is None:
+        Window._tk_thread = threading.current_thread()
+    elif threading.current_thread() is not Window._tk_thread:
+        warnings.warn(
+            'Tkinter GUI was previously initialized in thread %r; creating a new window from a different thread %r may be unsafe.' % (
+                Window._tk_thread, threading.current_thread()),
+            RuntimeWarning)
     if ENABLE_TK_WINDOWS:
         root = tk.Tk()
     elif not ow and not window.ForceTopLevel:

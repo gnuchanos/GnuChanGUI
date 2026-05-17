@@ -7,7 +7,8 @@ import os
 
 from GnuChanGUI import GnuChanGUI, GMessage
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
-
+from GnuChanGUI import threading
+from GnuChanGUI.gcLibrary import IsKey_Hold, IsKey_Pressed
 
 class SimpleTextEditor(GnuChanGUI):
     def __init__(
@@ -66,7 +67,7 @@ class SimpleTextEditor(GnuChanGUI):
             ],
         ]
 
-        def _tab_body(n):
+        def _CreateTab(n):
             return [
                 [
                     self.GMultiline(
@@ -88,26 +89,24 @@ class SimpleTextEditor(GnuChanGUI):
                 ],
             ]
 
-        self.win0 = _tab_body(0)
-        self.win1 = _tab_body(1)
-        self.win2 = _tab_body(2)
-        self.win3 = _tab_body(3)
-        self.win4 = _tab_body(4)
-        self.win5 = _tab_body(5)
-        self.win6 = _tab_body(6)
+
+
+        # Index ile (0-based):
+        # self.GRemoveTab('tabG', 0)          # İlk tabı sil
+
+        # Key ile:
+        # self.GRemoveTab('tabG', 'tab5')     # 'tab5' key'li tabı sil
+
+        # Başlık ile:
+        # self.GRemoveTab('tabG', 'TAB-5')    # 'TAB-5' başlıklı tabı sil
+
 
         self.Layout = [
             [self.GMenuForTheme(self.menu, TFont="Sans, 15", TColor=None, BColor=None)],
             [
                 self.GTabGroup(
                     TabGroupLayout=[
-                        [self.GTab(Text="TAB-0", TabLayout=self.win0, SetValue="tab0")],
-                        [self.GTab(Text="TAB-1", TabLayout=self.win1, SetValue="tab1")],
-                        [self.GTab(Text="TAB-2", TabLayout=self.win2, SetValue="tab2")],
-                        [self.GTab(Text="TAB-3", TabLayout=self.win3, SetValue="tab3")],
-                        [self.GTab(Text="TAB-4", TabLayout=self.win4, SetValue="tab4")],
-                        [self.GTab(Text="TAB-5", TabLayout=self.win5, SetValue="tab5")],
-                        [self.GTab(Text="TAB-6", TabLayout=self.win6, SetValue="tab6")],
+                        [self.GTab(Text="TAB-0", TabLayout=_CreateTab(0), SetValue="tab0")]
                     ],
                     SetValue="tabG",
                     Border=0,
@@ -125,59 +124,24 @@ class SimpleTextEditor(GnuChanGUI):
 
         self.GWindow(SetMainWindowLayout_List=self.Layout, KeepOnTop=False)
 
+        
+
         self.GetWindow["settings"].update(visible=False)
         self.GetWindow["settings"].hide_row()
 
-        for i in ("text0", "text1", "text2", "text3", "text4", "text5", "text6"):
-            self.GMultilineTabSpace(WindowValue=i, TFont=f"Sans, {str(self.TextFont)}")
-            self.GBorder(WindowValue=i, Border=5, Color=self.CGC.FColors5)
+        # for i in ("text0", "text1", "text2", "text3", "text4", "text5", "text6"):
+        #     self.GMultilineTabSpace(WindowValue=i, TFont=f"Sans, {str(self.TextFont)}")
+        #     self.GBorder(WindowValue=i, Border=5, Color=self.CGC.FColors5)
 
-        self._install_editor_shortcuts()
+
+        for i in range(1, 5):
+            self.GAddTab("tabG", f"TAB-{i}", _CreateTab(i))
+
+
+
         self.SetUpdate(Update=self.Update, exitBEFORE=self.BeforeExit)
 
-    def _multiline_tk(self, idx):
-        el = self.GetWindow[f"text{idx}"]
-        return el.TKText if el.TKText is not None else el.Widget
 
-    def _install_editor_shortcuts(self):
-        """Kombinasyon tuslari: Tk bind (pynput CurrentKey tek tus)."""
-
-        def mark_save(_event=None):
-            self._shortcut_save = True
-            return "break"
-
-        def mark_save_as(_event=None):
-            self._shortcut_save_as = True
-            return "break"
-
-        def mark_open(_event=None):
-            self._shortcut_open = True
-            return "break"
-
-        for i in range(7):
-            w = self._multiline_tk(i)
-            if w is None:
-                continue
-            w.bind("<Control-s>", mark_save)
-            w.bind("<Control-S>", mark_save)
-            w.bind("<Control-Shift-S>", mark_save_as)
-            w.bind("<Control-Shift-s>", mark_save_as)
-            w.bind("<Control-o>", mark_open)
-            w.bind("<Control-O>", mark_open)
-
-        def f1_show(_event=None):
-            self._pending_show_settings = True
-            return "break"
-
-        def f2_hide(_event=None):
-            self._pending_hide_settings = True
-            return "break"
-
-        try:
-            self.TKroot.bind("<F1>", f1_show)
-            self.TKroot.bind("<F2>", f2_hide)
-        except Exception:
-            pass
 
     def _action_open_file(self):
         ActiveTab = self.GetValues["tabG"]
@@ -199,6 +163,7 @@ class SimpleTextEditor(GnuChanGUI):
             if not _ThisPath or _ThisPath == "File Path Here":
                 GMessage(WindowTitle="Kaydet", WindowText="Once dosya yolu secin veya Save As kullanin.")
                 return
+
             with open(_ThisPath, "w", encoding="utf-8") as _Value:
                 _Value.write(_GetText)
         except Exception as ERR:
@@ -213,16 +178,28 @@ class SimpleTextEditor(GnuChanGUI):
             with open(_ThisPath, "w", encoding="utf-8") as _GetValue:
                 _GetValue.write(_GetText)
                 self.GetWindow[f"text{suf}_path"].update(_ThisPath)
+
         except Exception as ERR:
             print(ERR)
 
     def Update(self):
+
+        if IsKey_Hold(self.W):
+            print("W is being held down")
+        
+        if IsKey_Pressed(self.S):
+            print("S was just pressed")
+        else:
+            print("S is not currently pressed")
+
         if self._shortcut_open:
             self._shortcut_open = False
             self._action_open_file()
+
         if self._shortcut_save:
             self._shortcut_save = False
             self._action_save_file()
+
         if self._shortcut_save_as:
             self._shortcut_save_as = False
             self._action_save_as_file()
@@ -231,6 +208,7 @@ class SimpleTextEditor(GnuChanGUI):
             self._pending_show_settings = False
             self.GetWindow["settings"].update(visible=True)
             self.GetWindow["settings"].unhide_row()
+
         if self._pending_hide_settings:
             self._pending_hide_settings = False
             self.GetWindow["settings"].update(visible=False)
@@ -302,4 +280,4 @@ Not: pynput ile CurrentKey tek tus icindir; kombinasyonlar Tk bind ile cozulur.
 
 
 if __name__ == "__main__":
-    SimpleTextEditor()
+    threading.Thread(target=SimpleTextEditor, args=[]).start()

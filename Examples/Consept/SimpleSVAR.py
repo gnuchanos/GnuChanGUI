@@ -4,7 +4,7 @@ fun it's a serious goal of the project. if we're not having fun while making stu
 """
 
 # Don't do like this from lib import * for gnchangui
-from GnuChanGUI import GnuChanGUI, os, Thread, time
+from GnuChanGUI import GnuChanGUI, os, threading, time
 from GnuChanGUI import GnuChanOSColor, GColors, Themecolors
 
 
@@ -317,11 +317,11 @@ class SimpleRecordAndLivestream(GnuChanGUI):
 
                         if self.DisableMicrophone:
                             _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} -a $(pactl get-default-sink).monitor {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
-                            Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+                            threading.Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
                             print(self.DisableMicrophone)
                         else:
                             _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {_VideoPath}"
-                            Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
+                            threading.Thread(target=self.StartScreenRecord, args=[_FullCommand]).start()
                             print(self.DisableMicrophone)
 
                         self.GetWindow["video_name"].update(self.VideoName)
@@ -339,7 +339,7 @@ class SimpleRecordAndLivestream(GnuChanGUI):
                     _deskMic = f"-a {self.MicrophoneName}{self.MonutorID} "
                     _DesktopID = f"-w {self.GetValues["mID"]}"
                     _FullCommand = f"{self.GSR} {_DesktopID} {self.Codecs} {_deskMic} {self.Fps} {self.VideoQuality} {self.SoundQuality} {self.StreamKey}"
-                    Thread(target=self.StartLiveStream, args=[_FullCommand]).start()
+                    threading.Thread(target=self.StartLiveStream, args=[_FullCommand]).start()
                     print(_FullCommand)
 
         elif self.GetEvent == "Save Stream Key":

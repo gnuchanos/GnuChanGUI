@@ -1,3 +1,5 @@
+from tkinter import font
+
 from .gcLibrary import *
 from .gcLibrary import __version__
 from .version import __version_full__
@@ -7,7 +9,7 @@ import random
 import math
 import threading
 import time
-from threading import Thread
+
 from contextlib import contextmanager
 
 """
@@ -23,6 +25,7 @@ python -m venv ./venv
 Warning 0: popup_get_file('Select a file to open', no_window=True) isn't working with Thread(target=Create, args=[]).start()
 The GUI is freezing, and you can only close the program using the task manager.
 """
+
 
 class GTime:
     def __init__(self):
@@ -43,114 +46,6 @@ class GTime:
                 time.sleep(frame_duration - delta)
 
         return delta
-
-
-# this is for spywareDOS  -> self.CurrentKey == self.space (from pynput import keyboard) i don't want to embed in main class
-class GKeyboard_Winows:
-    def __init__(self) -> None:
-        # Function keys
-        self.F1  = "F1:112"
-        self.F2  = "F2:113"
-        self.F3  = "F3:114"
-        self.F4  = "F4:115"
-        self.F5  = "F5:116"
-        self.F6  = "F6:117"
-        self.F7  = "F7:118"
-        self.F8  = "F8:119"
-        self.F9  = "F9:120"
-        self.F10 = "F10:121"
-        self.F11 = "F11:122"
-        self.F12 = "F12:123"
-
-        # Numbers (top row)
-        self.Number_0 = "0:48"
-        self.Number_1 = "1:49"
-        self.Number_2 = "2:50"
-        self.Number_3 = "3:51"
-        self.Number_4 = "4:52"
-        self.Number_5 = "5:53"
-        self.Number_6 = "6:54"
-        self.Number_7 = "7:55"
-        self.Number_8 = "8:56"
-        self.Number_9 = "9:57"
-
-        # Letters (A–Z)
-        self.A = "A:65"
-        self.B = "B:66"
-        self.C = "C:67"
-        self.D = "D:68"
-        self.E = "E:69"
-        self.F = "F:70"
-        self.G = "G:71"
-        self.H = "H:72"
-        self.I = "I:73"
-        self.J = "J:74"
-        self.K = "K:75"
-        self.L = "L:76"
-        self.M = "M:77"
-        self.N = "N:78"
-        self.O = "O:79"
-        self.P = "P:80"
-        self.Q = "Q:81"
-        self.R = "R:82"
-        self.S = "S:83"
-        self.T = "T:84"
-        self.U = "U:85"
-        self.V = "V:86"
-        self.W = "W:87"
-        self.X = "X:88"
-        self.Y = "Y:89"
-        self.Z = "Z:90"
-
-        # Control keys
-        self.Backspace = "Backspace:8"
-        self.Tab       = "Tab:9"
-        self.Enter     = "Enter:13"
-        self.Shift     = "Shift:160"
-        self.LeftShit  = "Shift_r:161"
-        self.Control   = "Control:162"
-        self.ControlR  = "Ctrl_r:163"
-        self.Alt       = "Alt_l:164"
-        self.AltGR     = "Alt_gr:165"
-        self.CapsLock  = "CapsLock:20"
-        self.Escape    = "Escape:27"
-        self.Space     = "Space:32"
-
-        # Arrow keys
-        self.Left  = "Left:37"
-        self.Up    = "Up:38"
-        self.Right = "Right:39"
-        self.Down  = "Down:40"
-
-        # Navigation
-        self.PrintScreen = "Print_screen:44"
-        self.ScrollLock = "Scroll_lock:145"
-        self.Insert = "Insert:45"
-        self.Delete = "Delete:46"
-        self.Home   = "Home:36"
-        self.End    = "End:35"
-        self.PageUp = "PageUp:33"
-        self.PageDown = "PageDown:34"
-
-        # Numpad
-        self.NumLock = "Num_Lock:144"
-        self.Numpad0 = "<96>:96"
-        self.Numpad1 = "<97>:97"
-        self.Numpad2 = "<98>:98"
-        self.Numpad3 = "<99>:99"
-        self.Numpad4 = "<100>:100"
-        self.Numpad5 = "<101>:101"
-        self.Numpad6 = "<102>:102"
-        self.Numpad7 = "<103>:103"
-        self.Numpad8 = "<104>:104"
-        self.Numpad9 = "<105>:105"
-        self.NumpadMultiply = "*:106"
-        self.NumpadAdd      = "+:107"
-        self.NumpadSubtract = "-:109"
-        self.NumpadDivide   = "/:111"
-
-
-
 
 # more colors
 class GColors:
@@ -396,8 +291,6 @@ class Themecolors:
                                         'BORDER': border, 'SLIDER_DEPTH': slider_depth, 'PROGRESS_DEPTH': progress_depth}
         theme(themeName)
 
-
-
 # i hope this become better one day
 class GnuChanGUI:
     def __init__(self, Title: str = "Defaul Title", Size: tuple = (800, 600), resizable: bool = False, finalize: bool = True, winPosX: float = 1920/2, winPosY: float = 1080/2) -> None:
@@ -440,169 +333,97 @@ class GnuChanGUI:
         # f"{gc.PathPythonFile}/music.mp3" or diffrent file
         self.PathPythonFile = os.path.dirname(os.path.abspath(__file__))
 
-        self.Num0 = "0:48"
-        self.Num1 = "1:49"
-        self.Num2 = "2:50"
-        self.Num3 = "3:51"
-        self.Num4 = "4:52"
-        self.Num5 = "5:53"
-        self.Num6 = "6:54"
-        self.Num7 = "7:55"
-        self.Num8 = "8:56"
-        self.Num9 = "9:57"
+        # Keyboard
+        self.bindings = {}  # Store bindings: {bind_string: callback}
+        self.enabled = True
 
-        self.A = "A:97"
-        self.B = "B:98"
-        self.C = "C:99"
-        self.D = "D:100"
-        self.E = "E:101"
-        self.F = "F:102"
-        self.G = "G:103"
-        self.H = "H:104"
-        self.I = "I:105"
-        self.J = "J:106"
-        self.K = "K:107"
-        self.L = "L:108"
-        self.M = "M:109"
-        self.N = "N:110"
-        self.O = "O:111"
-        self.P = "P:112"
-        self.Q = "Q:113"
-        self.R = "R:114"
-        self.S = "S:115"
-        self.T = "T:116"
-        self.U = "U:117"
-        self.V = "V:118"
-        self.W = "W:119"
-        self.X = "X:120"
-        self.Y = "Y:121"
-        self.Z = "Z:122"
+        # Letters
+        self.A = 'a'
+        self.B = 'b'
+        self.C = 'c'
+        self.D = 'd'
+        self.E = 'e'
+        self.F = 'f'
+        self.G = 'g'
+        self.H = 'h'
+        self.I = 'i'
+        self.J = 'j'
+        self.K = 'k'
+        self.L = 'l'
+        self.M = 'm'
+        self.N = 'n'
+        self.O = 'o'
+        self.P = 'p'
+        self.Q = 'q'
+        self.R = 'r'
+        self.S = 's'
+        self.T = 't'
+        self.U = 'u'
+        self.V = 'v'
+        self.W = 'w'
+        self.X = 'x'
+        self.Y = 'y'
+        self.Z = 'z'
 
-        self.Numpad0 = "0:None"
-        self.Numpad1 = "1:None"
-        self.Numpad2 = "2:None"
-        self.Numpad3 = "3:None"
-        self.Numpad4 = "4:None"
-        self.Numpad5 = "<65437>:65437"
-        self.Numpad6 = "6:None"
-        self.Numpad7 = "7:None"
-        self.Numpad8 = "8:None"
-        self.Numpad9 = "9:None"
+        # Numbers
+        self.ZERO = '0'
+        self.ONE = '1'
+        self.TWO = '2'
+        self.THREE = '3'
+        self.FOUR = '4'
+        self.FIVE = '5'
+        self.SIX = '6'
+        self.SEVEN = '7'
+        self.EIGHT = '8'
+        self.NINE = '9'
 
-        self.Kp_add = "Keypad_Plus:65451"
-        self.Kp_subtract = "Keypad_Minus:65453"
-        self.Kp_multiply = "Keypad_Multiply:65450"
-        self.Kp_divide = "Keypad_Divide:65455"
-        self.Kp_enter = "Keypad_Enter:65421"
-        self.Kp_decimal = "Keypad_Decimal:65454"
+        # Function keys
+        self.F1 = 'F1'
+        self.F2 = 'F2'
+        self.F3 = 'F3'
+        self.F4 = 'F4'
+        self.F5 = 'F5'
+        self.F6 = 'F6'
+        self.F7 = 'F7'
+        self.F8 = 'F8'
+        self.F9 = 'F9'
+        self.F10 = 'F10'
+        self.F11 = 'F11'
+        self.F12 = 'F12'
 
-        self.Space = "Space:32"
-        self.Enter = "Enter:65293"
-        self.Tab = "Tab:65289" 
-        self.Backspace = "Backspace:65288"
-        self.Comma = "Comma:44"
-        self.Period = "Period:46"
-        self.Slash = "Slash:47"
-        self.Backslash = "Backslash:92"
-        self.Semicolon = "Semicolon:59"
-        self.Quote = "Quote:39"
-        self.Minus = "Minus:45"
-        self.Equal = "Equal:61"
-        self.Left_bracket = "Left_Bracket:91"
-        self.Right_bracket = "Right_Bracket:93"
-        self.Grave = "Grave:96"
+        # Navigation / editing
+        self.ENTER = 'Return'
+        self.ESCAPE = 'Escape'
+        self.SPACE = 'space'
+        self.TAB = 'Tab'
+        self.BACKSPACE = 'BackSpace'
+        self.DELETE = 'Delete'
+        self.INSERT = 'Insert'
+        self.HOME = 'Home'
+        self.END = 'End'
+        self.PAGE_UP = 'Prior'
+        self.PAGE_DOWN = 'Next'
+        self.LEFT = 'Left'
+        self.RIGHT = 'Right'
+        self.UP = 'Up'
+        self.DOWN = 'Down'
 
-        self.F1 = "F1:65470"
-        self.F2 = "F2:65471"
-        self.F3 = "F3:65472"
-        self.F4 = "F4:65473"
-        self.F5 = "F5:65474"
-        self.F6 = "F6:65475"
-        self.F7 = "F7:65476"
-        self.F8 = "F8:65477"
-        self.F9 = "F9:65478"
-        self.F10 = "F10:65479"
-        self.F11 = "F11:65480"
-        self.F12 = "F12:65481"
+        # Modifier keys (use inside key sequences)
+        self.CONTROL = 'Control'
+        self.SHIFT = 'Shift'
+        self.ALT = 'Alt'
+        self.META = 'Meta'
 
-        self.Up = "Up:65362"
-        self.Down = "Down:65364"
-        self.Left = "Left:65361"
-        self.Right = "Right:65363"
-
-        self.Ctrl_l = "Ctrl_L:65507"
-        self.Ctrl_r = "Ctrl_R:65508"
-        self.Alt_l = "Alt_L:65513"
-        self.Alt_r = "Alt_R:65514"
-        self.Shift_l = "Shift_L:65505"
-        self.Shift_r = "Shift_R:65506"
-        self.Caps_lock = "Caps_Lock:65509"
-        self.Esc = "Esc:65307"
-        self.Delete = "Delete:65535"
-        self.Home = "Home:65360"
-        self.End = "End:65367"
-        self.Page_up = "Page_Up:65365"
-        self.Page_down = "Page_Down:65366"
-        self.Num_lock = "Num_Lock:65407"
-        self.Print_screen = "Print_Screen:65377"
-        self.Pause = "Pause:65299"
-
-        self.Media_play_pause = "Media_Play_Pause:179"
-        self.Media_volume_mute = "Media_Volume_Mute:173"
-        self.Media_volume_up = "Media_Volume_Up:175"
-        self.Media_volume_down = "Media_Volume_Down:174"
-        self.Media_previous = "Media_Previous:177"
-        self.Media_next = "Media_Next:176"
-
-        self.CurrentKey = ""
-        self.pressing = False
-
-        self.PressTimer = 1
-        self.PressWait  = False
-
-        self.delta = GTime()
-
-        threading.Thread(target=self.listen, daemon=True).start()
-
-    def on_press(self, key):
-        code = getattr(key, 'vk', getattr(getattr(key, 'value', None), 'vk', 'N/A'))
-        try:
-            if hasattr(key, 'char') and key.char is not None:
-                key_name = key.char.upper()
-            else:
-                key_name = str(key).replace('Key.', '').capitalize()
-        except AttributeError:
-            key_name = str(key).replace('Key.', '')
-
-        self.CurrentKey = f"{key_name}:{code}"
-        self.pressing = True
-
-    def on_release(self, key):
-        self.pressing = False
-        self.CurrentKey = ""
-
-
-    def listen(self):
-        try:
-            from pynput import keyboard
-        except ImportError:
-            return
-        with keyboard.Listener(on_press=self.on_press, on_release=self.on_release) as listener:
-            listener.join()
-
-    def KeyPressed(self, Key: str):
-        if Key == self.CurrentKey and not self.PressWait:
-            self.PressWait = True
-            return True
-        
-        if self.PressWait:
-            if self.PressTimer > 0:
-                self.PressTimer -= 1 * self.delta.DeltaTime()
-            else:
-                self.PressTimer = 1
-                self.PressWait = False
-  
-    
+        # Common combos
+        self.CTRL_A = 'Control-a'
+        self.CTRL_C = 'Control-c'
+        self.CTRL_V = 'Control-v'
+        self.CTRL_X = 'Control-x'
+        self.CTRL_Z = 'Control-z'
+        self.CTRL_S = 'Control-s'
+        self.CTRL_O = 'Control-o'
+        self.CTRL_SHIFT_S = 'Control-Shift-S'
+        self.CTRL_ALT_DELETE = 'Control-Alt-Delete'
 
     # Create Window
     def GWindow(self, SetMainWindowLayout_List = None, rightClickMenu = None, KeepOnTop = True, Borderless = False):
@@ -626,6 +447,126 @@ class GnuChanGUI:
         """
         window have right click menu --> ["menu", ["inMenu1", "inMenu2"]]
         """
+
+    def IsWindowReady(self):
+        pass
+
+    def IsWindowFullscreen(self):
+        pass
+
+    def IsWindowHidden(self):
+        pass
+
+    def IsWindowMinimized(self):
+        pass
+
+    def IsWindowMaximized(self):
+        pass
+
+    def IsWindowFocused(self):
+        pass
+
+    def IsWindowResized(self):
+        pass
+
+    def IsWindowState(self, flag):
+        pass
+
+    def SetWindowState(self, flags):
+        pass
+
+    def ClearWindowState(self, flags):
+        pass
+
+    def ToggleFullscreen(self):
+        pass
+
+    def ToggleBorderlessWindowed(self):
+        pass
+
+    def MaximizeWindow(self):
+        pass
+
+    def MinimizeWindow(self):
+        pass
+
+    def RestoreWindow(self):
+        pass
+
+    def SetWindowIcon(self, image):
+        pass
+
+    def SetWindowIcons(self, images, count):
+        pass
+
+    def SetWindowTitle(self, title):
+        pass
+
+    def SetWindowPosition(self, x, y):
+        pass
+
+    def SetWindowMonitor(self, monitor):
+        pass
+
+    def SetWindowMinSize(self, width, height):
+        pass
+
+    def SetWindowMaxSize(self, width, height):
+        pass
+
+    def SetWindowSize(self, width, height):
+        pass
+
+    def SetWindowOpacity(self, opacity):
+        pass
+
+    def SetWindowFocused(self):
+        pass
+
+    def GetWindowHandle(self):
+        pass
+
+    def GetScreenWidth(self):
+        pass
+
+    def GetScreenHeight(self):
+        pass
+
+    def GetRenderWidth(self):
+        pass
+
+    def GetRenderHeight(self):
+        pass
+
+    def GetMonitorCount(self):
+        pass
+
+    def GetCurrentMonitor(self):
+        pass
+
+    def GetMonitorPosition(self, monitor):
+        pass
+
+    def GetMonitorWidth(self, monitor):
+        pass
+
+    def GetMonitorHeight(self, monitor):
+        pass
+
+    def GetMonitorPhysicalWidth(self, monitor):
+        pass
+
+    def GetMonitorPhysicalHeight(self, monitor):
+        pass
+
+    def GetMonitorRefreshRate(self, monitor):
+        pass
+
+    def GetWindowPosition(self):
+        pass
+
+    def GetWindowScaleDPI(self):
+        pass
 
     def WindowONTOP(self, Transparant):
         self.TKroot.overrideredirect(True)
@@ -655,9 +596,10 @@ class GnuChanGUI:
     def DisableMouseClick(self):
         self.TKroot.bind("<FocusIn>", lambda e: self.TKroot.focus_force())
 
-    def SetUpdate(self, Update = None, exitBEFORE = None, TimeOUT: int = 100):
+    def SetUpdate(self, Update: callable = None, exitBEFORE: callable = None, TimeOUT: int = 100):
         while True:
             self.GetEvent, self.GetValues = self.GetWindow.read(timeout=TimeOUT)
+            
             if self.GetEvent in (WIN_CLOSED, "Exit"):
                 if exitBEFORE != None:
                     exitBEFORE()
@@ -765,11 +707,6 @@ class GnuChanGUI:
         multiline.Widget.configure(tabs=tabs)
 
 
-
-
-
-
-
     # this can change visible true or false but also change layer position! i don't know how to fix for now or never
     # Don't Forget to Pin Object or Index Can Change
     def GVisible(self, WindowValue: str , show: bool):
@@ -785,7 +722,7 @@ class GnuChanGUI:
         Size: tuple = (None, None), EmptySpace: tuple = (None, None), tooltip: str = None, rclickMenu=None, metadata=None,
     ):
 
-        return GCanvas(
+        return Canvas(
             SetValue, BColor, xStretch, yStretch, Visible, border, Size, EmptySpace,
             tooltip=tooltip, rclickMenu=rclickMenu, metadata=metadata,
         )
@@ -1225,6 +1162,29 @@ class GnuChanGUI:
         gc.GWindow(SetMainWindowLayout_List=layout)
         """
 
+    def GImageGif(
+            self, SetValue=None, filename=None, data=None, source=None, Size=(None, None), EmptySpace=(None, None),
+            BColor=None, subsample=None, zoom=None, rclickMenu=None, xStretch=False, yStretch=False, Visible=True,
+            ActiveEvent=False,
+        ):
+        """Create an Image element for an animated GIF.
+
+        Use the returned element's update_animation() or update_animation_no_buffering() methods to advance frames.
+        """
+        return Image(
+            source=source, filename=filename, data=data, background_color=BColor, size=Size, pad=EmptySpace,
+            key=SetValue, subsample=subsample, zoom=zoom, right_click_menu=rclickMenu,
+            expand_x=xStretch, expand_y=yStretch, visible=Visible, enable_events=ActiveEvent,
+        )
+
+        """
+        layout = [
+            [gc.GImageGif(SetValue="gif", filename="anim.gif", xStretch=True)]
+        ]
+
+        GetWindow["gif"].update_animation("anim.gif", time_between_frames=100)
+        """
+
     def GGraph(
             self, SetValue, canvas_size, graph_bottom_left, graph_top_right, BColor=None, EmptySpace=(None, None),
             enable_events=False, drag_submits=False, motion_events=False, rclickMenu=None,
@@ -1540,7 +1500,43 @@ class GnuChanGUI:
     def ReturnGlistboxIndex(self, List: list, GlistboxValue: str):
         return List.index(self.GetValues[GlistboxValue][0])
 
+    def GAddTab(self, tab_group_key, tab_title, tab_layout):
+        try:
+            # Get the TabGroup element
+            tab_group = self.GetWindow[tab_group_key]
+            if tab_group is None:
+                print(f"Error: TabGroup with key '{tab_group_key}' not found")
+                return None
+            
+            # Create a new Tab element
+            new_tab = Tab(title=tab_title, layout=tab_layout, key=None)
+            
+            # Use the TabGroup's add_tab method
+            tab_group.add_tab(new_tab)
+            
+            print(f"Tab '{tab_title}' added successfully to '{tab_group_key}'")
+            return new_tab
+        except Exception as e:
+            print(f"Error adding tab: {e}")
+            return None
 
+    def GRemoveTab(self, tab_group_key, tab_identifier):
+        try:
+            # Get the TabGroup element
+            tab_group = self.GetWindow[tab_group_key]
+            if tab_group is None:
+                print(f"Error: TabGroup with key '{tab_group_key}' not found")
+                return False
+            
+            # Use the TabGroup's remove_tab method
+            tab_group.remove_tab(tab_identifier)
+            
+            identifier_str = str(tab_identifier)
+            print(f"Tab '{identifier_str}' removed successfully from '{tab_group_key}'")
+            return True
+        except Exception as e:
+            print(f"Error removing tab: {e}")
+            return False
 
 
 # Simple Timer
@@ -1554,7 +1550,7 @@ class GTimer:
         self.TimerStarts = False
         self.KillThreads = False
 
-        self.gcT = Thread(target=self.Go, args=[]).start()
+        self.gcT = threading.Thread(target=self.Go, args=[]).start()
         
 
     def Go(self):
@@ -1707,552 +1703,230 @@ class GMessage(GnuChanGUI):
 
 
 
-class RlSceneObject:
-    """
-    Sahnedeki tek mantiksal nesne (Raylib tarzinda: isim + sinir kutusu + tk id listesi).
-    """
+# for game development
+class GVector2:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+    
+    @property
+    def get(self):
+        return (self.x, self.y)
 
-    __slots__ = ("name", "kind", "item_ids", "bbox", "tag", "user_data", "visible")
+class GColor_RGBA:
+    def __init__(self, r=0, g=0, b=0, a=255):
+        self.r = r
+        self.g = g
+        self.b = b
+        self.a = a
 
-    def __init__(self, name, kind, item_ids, bbox, tag=None, user_data=None):
-        self.name = name
-        self.kind = kind
-        self.item_ids = list(item_ids)
-        self.bbox = bbox
-        self.tag = tag
-        self.user_data = user_data
-        self.visible = True
+    @property
+    def get(self):
+        # convert RGBA to hex color string
+        return f"#{self.r:02X}{self.g:02X}{self.b:02X}{self.a:02X}"
+
+class GColor_HEX:
+    def __init__(self, HVS: str):
+        # tk color string to "#FF0000"
+        self.HVS = HVS
+
+    @property
+    def get(self):
+        return self.HVS
+
+class GCamera2D:
+    def __init__(self, offset: GVector2, target: GVector2, rotation: float, zoom: float, origin: GVector2):
+        self.offset = offset
+        self.target = target
+        self.rotation = rotation
+        self.zoom = zoom
+        self.origin = origin
+
+class GFont:
+    def BuildFont(self, FontName: str, FontSize: int):
+        if FontName not in font.families():
+            raise ValueError(f"Font '{FontName}' not found in system fonts")
+
+        return f"{FontName}, {FontSize}"
+
+    def customFont(self, FontPath: str, FontSize: int):
+        if not os.path.isfile(FontPath):
+            raise FileNotFoundError(f"Font file not found: {FontPath}")
+
+        _FONT = font.Font(file=FontPath, size=FontSize)
+
+        return _FONT
 
 
-class GCanvas(Canvas):
-    """
-    gcLibrary.Canvas alt sinifi + Raylib-benzeri 2D sahne ve tus (yalnizca tk).
-    Tus: EnableSceneInput() -> her kare InputBeginFrame(); IsKeyDown / IsKeyPressed / IsKeyReleased.
-    Sahne: BeginScene2D, Draw*, PickSceneObject, SelectSceneObject, LoadSceneBatch, ClearScene2D.
-    Ham tk: TKCanvas, bind_canvas (ileri duzey), after_ms, pixel_dimensions.
-    """
+class GGameCanvas(Canvas):
+    def __init__(self, SetValue=None, Size=(None, None), EmptySpace=(None, None), BColor=None, xStretch=False, yStretch=False, Visible=True):
+        super().__init__(size=Size, pad=EmptySpace, background_color=BColor, key=SetValue, expand_x=xStretch, expand_y=yStretch, visible=Visible)
 
-    def __init__(
-        self,
-        SetValue: str,
-        BColor: str = "black",
-        xStretch: bool = False,
-        yStretch: bool = False,
-        Visible: bool = True,
-        border: int = 0,
-        Size: tuple = (None, None),
-        EmptySpace: tuple = (None, None),
-        tooltip: str = None,
-        rclickMenu=None,
-        metadata=None,
-    ):
-        super().__init__(
-            canvas=None,
-            background_color=BColor,
-            size=Size,
-            pad=EmptySpace,
-            key=SetValue,
-            expand_x=xStretch,
-            expand_y=yStretch,
-            visible=Visible,
-            border_width=border,
-            tooltip=tooltip,
-            right_click_menu=rclickMenu,
-            metadata=metadata,
+        from PIL import Image, ImageTk
+
+        if PIL not in sys.modules:
+            raise ImportError("PIL (Pillow) library is required for GGameCanvas. Please install it with 'pip install Pillow'.")
+
+        self.Image = Image
+        self.ImageTk = ImageTk
+
+        self.Entities = {} # dict entitiy {type, value, visible}
+        self.uiEntities = {} # dict ui entitiy {type, value, visible}
+        self.closeWindow = False
+
+    # how to draw 2D
+    def ClearBackground(self, color: GColor_HEX):
+        # Set background color for canvas
+        self.configure(background=color.get)
+
+    def BeginDrawing(self, Entitys: callable = None, ClearColor: GColor_HEX = "#000000"):
+        # Setup canvas (framebuffer) to start drawin canvas
+        if Entitys == None:
+            warnings.warn("Entitys is None, no entities to draw")
+
+        if ClearColor != None:
+            warnings.warn("ClearColor is not None, but you didn't provide ClearColor, so it will be ignored")
+
+        Entitys() # call entitys function to update entities before drawing
+        self.ClearBackground(ClearColor) # clear background with color
+
+    def BeginMode2D(self, camera: GCamera2D, Entitys: callable = None):
+        # Begin 2D mode with custom camera (2D)
+        if Entitys == None:
+            warnings.warn("Entitys is None, no entities to draw")
+        
+        Entitys() # call entitys function to update entities before drawing
+
+    def EndMode2D(self):
+        self.uiEntities.clear()
+
+
+    def EndDrawing(self):
+        self.Entities.clear()
+        self.delete("all")
+
+
+    def GetCanvasWidth(self):
+        # Get current screen width
+        self.update_idletasks() # update canvas to get correct width
+        return self.winfo_width()
+
+    def GetCanvasHeight(self):
+        # Get current screen height
+        self.update_idletasks() # update canvas to get correct height
+        return self.winfo_height()
+
+    # keyboard and mouse input
+    def IsKeyPressed(key: str, GnuChanGUI: GnuChanGUI):
+        # Check if a key has been pressed once
+        return GnuChanGUI.GetEvent == key
+
+    def IsKeyPressedRepeat(key: str, GnuChanGUI: GnuChanGUI):
+        # Check if a key has been pressed again
+        return GnuChanGUI.GetEvent == key
+
+    def IsKeyDown(key: str, GnuChanGUI: GnuChanGUI):
+        # Check if a key is being pressed
+        return GnuChanGUI.GetEvent == key
+
+    def IsKeyReleased(key: str, GnuChanGUI: GnuChanGUI):
+        # Check if a key has been released once
+        return GnuChanGUI.GetEvent == key
+
+    def IsKeyUp(key: str, GnuChanGUI: GnuChanGUI):
+        # Check if a key is NOT being pressed
+        return GnuChanGUI.GetEvent != key
+
+    # entitiys un tk canvas elementleri gibi dusunulebilir ama bu entitiyler sadece canvas icinde gosterilir ve hareket ederler
+    def CreateText(self, text: str, fontAndSize: str, posX: int, posY: int, color: GColor_HEX):
+        self.Entities[text] = {"type": "text", "value": text, "visible": True}
+
+    def CreateTextPro(self, text: str, fontAndSize: GFont, position: GVector2, origin: GVector2, rotation: float, spacing: int, color: GColor_RGBA):
+        self.Entities[text] = {"type": "text", "value": text, "visible": True}
+
+    def CreateLine(self, startPos: GVector2, endPos: GVector2, color: GColor_HEX, thickness: int):
+        self.Entities[f"line_{id(startPos)}_{id(endPos)}"] = {"type": "line", "value": (startPos, endPos), "visible": True}
+
+    def CreateCircle(self, center: GVector2, radius: int, color: GColor_HEX, thickness: int):
+        self.Entities[f"circle_{id(center)}_{radius}"] = {"type": "circle", "value": (center, radius), "visible": True}
+
+    def CreateRectangle(self, position: GVector2, scale: GVector2, rotation: float, color: GColor_HEX, thickness: int, fill=False, fillColor: GColor_HEX = None):
+        self.Entities[f"rectangle_{id(position)}_{scale.x}_{scale.y}"] = {"type": "rectangle", "value": (position, scale, rotation, fill, fillColor), "visible": True}
+
+    def CreateSprite(self, imagePath: str, position: GVector2, rotation: float, scale: float, color: GColor_RGBA):
+        self.Entities[f"sprite_{id(position)}"] = {"type": "sprite", "value": (imagePath, position, rotation, scale, color), "visible": True}
+
+    # Draw functions, these functions will be called in BeginDrawing and BeginMode2D, you can update entities in these functions before drawing
+    # entitiys un tk canvas elementleri gibi dusunulebilir ama bu entitiyler sadece canvas icinde gosterilir ve hareket ederler
+    def DrawText(self, text: str, fontAndSize: str, posX: int, posY: int, color: GColor_HEX):
+        self.create_text(posX, posY, text=text, font=fontAndSize, fill=color.get)
+        self.Entities[text] = {"type": "text", "value": text, "visible": True}
+
+    def DrawTextPro(self, text: str, fontAndSize: GFont, position: GVector2, origin: GVector2, rotation: float, spacing: int, color: GColor_RGBA):
+        # text drawing with custom font, rotation and spacing
+        self.create_text(position.get, text=text, font=fontAndSize, fill=color.get)
+        self.Entities[text] = {"type": "text", "value": text, "visible": True}
+
+    def DrawLine(self, startPos: GVector2, endPos: GVector2, color: GColor_HEX, thickness: int):
+        self.create_line(startPos.get, endPos.get, fill=color.get, width=thickness)
+        self.Entities[f"line_{id(startPos)}_{id(endPos)}"] = {"type": "line", "value": (startPos, endPos), "visible": True}
+
+    def DrawCircle(self, center: GVector2, radius: int, color: GColor_HEX, thickness: int):
+        self.create_oval(
+            center.x - radius, center.y - radius, center.x + radius, center.y + radius,
+            outline=color.get, width=thickness
         )
-        self._rl_objects = {}
-        self._rl_order = []
-        self._rl_item_owner = {}
-        self._rl_selection = set()
-        self._rl_batch_depth = 0
-        # Raylib-benzeri tus (sadece tk; pynput / bind_canvas sart degil)
-        self._rl_keys_down = set()
-        self._rl_keys_snapshot = frozenset()
-        self._rl_pressed_this_frame = frozenset()
-        self._rl_released_this_frame = frozenset()
-        self._rl_input_installed = False
-        self._rl_input_grab_default = True
-        self._rl_input_click_focus = True
+        self.Entities[f"circle_{id(center)}_{radius}"] = {"type": "circle", "value": (center, radius), "visible": True}
 
-    # --- Raylib-benzeri sahne etiketi (tk tags) ---
-    @staticmethod
-    def _rl_canvas_tag(name):
-        return "_rlscn_" + str(name).replace(" ", "\u00a0")
-
-    _RL_KEY_ALIAS = {
-        "up": "Up",
-        "down": "Down",
-        "left": "Left",
-        "right": "Right",
-        "space": "space",
-        "return": "Return",
-        "escape": "Escape",
-        "tab": "Tab",
-    }
-
-    @classmethod
-    def _canonical_keysym(cls, keysym):
-        if not keysym:
-            return ""
-        s = str(keysym)
-        lk = s.lower()
-        if lk in cls._RL_KEY_ALIAS:
-            return cls._RL_KEY_ALIAS[lk]
-        if len(s) == 1 and s.isalpha():
-            return s.lower()
-        return s
-
-    def _rl_canvas(self):
-        c = self.TKCanvas
-        if c is None or not self._widget_was_created():
-            return None
-        return c
-
-    def EnableSceneInput(self, grab_focus=True, click_to_focus=True):
-        """
-        Canvas tuslarini kutuphane icinde yonetir (tk KeyPress/Release).
-        Oyun dongusunde once InputBeginFrame(), sonra IsKeyDown / IsKeyPressed kullanin.
-        """
-        self._rl_input_grab_default = grab_focus
-        self._rl_input_click_focus = click_to_focus
-        self._rl_try_install_input()
-        if grab_focus:
-            self.grab_focus()
-
-    def DisableSceneInput(self):
-        """Tk baglarini kaldir (odak/tus takibi durur)."""
-        c = self._rl_canvas()
-        if c is not None and self._rl_input_installed:
-            for seq in ("<KeyPress>", "<KeyRelease>", "<FocusOut>", "<Button-1>"):
-                try:
-                    c.unbind(seq)
-                except Exception:
-                    pass
-        self._rl_input_installed = False
-        self._rl_keys_down.clear()
-        self._rl_keys_snapshot = frozenset()
-        self._rl_pressed_this_frame = frozenset()
-        self._rl_released_this_frame = frozenset()
-
-    def _rl_try_install_input(self):
-        if self._rl_input_installed:
-            return
-        c = self._rl_canvas()
-        if c is None:
-            return
-        c.bind("<KeyPress>", self._rl_on_key_press)
-        c.bind("<KeyRelease>", self._rl_on_key_release)
-        c.bind("<FocusOut>", self._rl_on_focus_out)
-        if self._rl_input_click_focus:
-            c.bind("<Button-1>", self._rl_on_click_focus)
-        self._rl_input_installed = True
-
-    def _rl_on_key_press(self, event):
-        ks = getattr(event, "keysym", None)
-        if ks:
-            self._rl_keys_down.add(self._canonical_keysym(ks))
-
-    def _rl_on_key_release(self, event):
-        ks = getattr(event, "keysym", None)
-        if ks:
-            self._rl_keys_down.discard(self._canonical_keysym(ks))
-
-    def _rl_on_focus_out(self, event):
-        self._rl_keys_down.clear()
-
-    def _rl_on_click_focus(self, event):
-        if self._rl_input_grab_default:
-            self.grab_focus()
-
-    def InputBeginFrame(self):
-        """
-        Kare basi cagirin: IsKeyPressed / IsKeyReleased icin kenar bilgisi guncellenir.
-        Widget henuz yoksa baglanti bir sonraki karede kurulur.
-        """
-        self._rl_try_install_input()
-        down = set(self._rl_keys_down)
-        self._rl_pressed_this_frame = frozenset(down - self._rl_keys_snapshot)
-        self._rl_released_this_frame = frozenset(self._rl_keys_snapshot - down)
-        self._rl_keys_snapshot = frozenset(down)
-
-    def IsKeyDown(self, key):
-        """Raylib IsKeyDown: tus su an basili mi (canvas odakliyken)."""
-        return self._canonical_keysym(key) in self._rl_keys_down
-
-    def IsKeyPressed(self, key):
-        """Raylib IsKeyPressed: bu karede yeni basildi mi (InputBeginFrame sonrasi)."""
-        return self._canonical_keysym(key) in self._rl_pressed_this_frame
-
-    def IsKeyReleased(self, key):
-        """Bu karede birakildi mi."""
-        return self._canonical_keysym(key) in self._rl_released_this_frame
-
-    def _rl_bbox_union(self, bbox_a, bbox_b):
-        if bbox_a is None:
-            return bbox_b
-        if bbox_b is None:
-            return bbox_a
-        return (
-            min(bbox_a[0], bbox_b[0]),
-            min(bbox_a[1], bbox_b[1]),
-            max(bbox_a[2], bbox_b[2]),
-            max(bbox_a[3], bbox_b[3]),
+    def DrawRectangle(self, position: GVector2, scale: GVector2, rotation: float, color: GColor_HEX, thickness: int, fill=False, fillColor: GColor_HEX = None):
+        self.create_rectangle(
+            position.x, position.y, position.x + scale.x, position.y + scale.y,
+            outline=color.get, width=thickness
         )
+        self.Entities[f"rectangle_{id(position)}_{scale.x}_{scale.y}"] = {"type": "rectangle", "value": (position, scale, rotation, fill, fillColor), "visible": True}
 
-    def _rl_register(self, name, kind, item_ids, bbox, tag=None, user_data=None, replace=True):
-        if replace and name in self._rl_objects:
-            self.RemoveSceneObject(name)
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        tcanvas = self._rl_canvas_tag(name)
-        for iid in item_ids:
-            try:
-                c.addtag_withtag(tcanvas, iid)
-            except Exception:
-                pass
-            self._rl_item_owner[iid] = name
-        obj = RlSceneObject(name, kind, item_ids, bbox, tag=tag, user_data=user_data)
-        self._rl_objects[name] = obj
-        if name not in self._rl_order:
-            self._rl_order.append(name)
-        return obj
-
-    @contextmanager
-    def BeginScene2D(self):
-        """Toplu ekleme / senkron blok (Raylib BeginMode2D hissi); icinde Draw* cagirin."""
-        self._rl_batch_depth += 1
+    def DrawSprite(self, imagePath: str, position: GVector2, rotation: float, scale: float, color: GColor_RGBA):
+        #  Image, ImageTk for rotate and scale, better optimization needed for large images and many sprites
         try:
-            yield self
-        finally:
-            self._rl_batch_depth -= 1
+            img = self.Image.open(imagePath)
+            img = img.resize((int(img.width * scale), int(img.height * scale)), self.Image.ANTIALIAS)
+            img = img.rotate(rotation, expand=True)
+            tk_img = self.ImageTk.PhotoImage(img)
+            self.create_image(position.get, image=tk_img, anchor="center")
+            self.Entities[f"sprite_{id(position)}"] = {"type": "sprite", "value": (imagePath, position, rotation, scale, color), "visible": True}
 
-    def EndScene2D(self):
-        """BeginScene2D ile simetri; with kullanmiyorsaniz batch sonunda cagirin (derinligi azaltir)."""
-        if self._rl_batch_depth > 0:
-            self._rl_batch_depth -= 1
+        except Exception as e:
+            print(f"Error loading sprite: {e}")
+        
+        
+    # draw all
+    def EntitiyDraw(self):
+        for i in self.Entities:
+            entity = self.Entities[i]
+            if entity["visible"]:
+                if entity["type"] == "text":
+                    self.DrawText(entity["value"], "Sans, 20", 100, 100, GColor_HEX("#FFFFFF"))
+                elif entity["type"] == "line":
+                    startPos, endPos = entity["value"]
+                    self.DrawLine(startPos, endPos, GColor_HEX("#FFFFFF"), 1)
+                elif entity["type"] == "circle":
+                    center, radius = entity["value"]
+                    self.DrawCircle(center, radius, GColor_HEX("#FFFFFF"), 1)
+                elif entity["type"] == "rectangle":
+                    position, scale, rotation, fill, fillColor = entity["value"]
+                    self.DrawRectangle(position, scale, rotation, GColor_HEX("#FFFFFF"), 1, fill=fill, fillColor=fillColor)
+                elif entity["type"] == "sprite":
+                    imagePath, position, rotation, scale, color = entity["value"]
+                    self.DrawSprite(imagePath, position, rotation, scale, color)
 
-    def ClearScene2D(self):
-        """Sahnedeki tum kayitli nesneleri siler (tk + ic kayit)."""
-        for name in list(self._rl_order):
-            self.RemoveSceneObject(name)
-        self._rl_selection.clear()
 
-    def RemoveSceneObject(self, name):
-        """Tek nesneyi sahneden ve canvas'tan kaldir."""
-        c = self._rl_canvas()
-        tag = self._rl_canvas_tag(name)
-        if c is not None:
-            try:
-                c.delete(tag)
-            except Exception:
-                pass
-        obj = self._rl_objects.pop(name, None)
-        if obj is not None:
-            for iid in obj.item_ids:
-                self._rl_item_owner.pop(iid, None)
-        if name in self._rl_order:
-            self._rl_order.remove(name)
-        self._rl_selection.discard(name)
+    # game start in here
+    def run(self, Update: callable, Draw: callable):
+        while not self.closeWindow:
+            Update() # update game logic
+            Draw() # draw everything
 
-    def GetSceneObject(self, name):
-        return self._rl_objects.get(name)
+        # must clean
+        self.clear()
+        
 
-    def AllSceneObjects(self):
-        """Cizim sirasina gore RlSceneObject listesi."""
-        return [self._rl_objects[n] for n in self._rl_order if n in self._rl_objects]
-
-    # --- Raylib Draw* benzeri: cizer + sahneye kaydeder ---
-    def DrawRectangle(self, name, x, y, rect_w, rect_h, *, tag=None, user_data=None, **kw):
-        """rect_w / rect_h: dikdortgen boyutu (tk 'width' cizgi kalinligi **kw ile verilir, isim cakismasin)."""
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        ttag = self._rl_canvas_tag(name)
-        iid = c.create_rectangle(x, y, x + rect_w, y + rect_h, tags=(ttag,), **kw)
-        bbox = (x, y, x + rect_w, y + rect_h)
-        return self._rl_register(name, "rectangle", (iid,), bbox, tag=tag, user_data=user_data)
-
-    def DrawCircle(self, name, center_x, center_y, radius, *, tag=None, user_data=None, **kw):
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        r = float(radius)
-        x1, y1 = center_x - r, center_y - r
-        x2, y2 = center_x + r, center_y + r
-        ttag = self._rl_canvas_tag(name)
-        iid = c.create_oval(x1, y1, x2, y2, tags=(ttag,), **kw)
-        bbox = (x1, y1, x2, y2)
-        return self._rl_register(name, "circle", (iid,), bbox, tag=tag, user_data=user_data)
-
-    def DrawLine(self, name, x1, y1, x2, y2, *, tag=None, user_data=None, **kw):
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        ttag = self._rl_canvas_tag(name)
-        iid = c.create_line(x1, y1, x2, y2, tags=(ttag,), **kw)
-        bbox = (min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
-        return self._rl_register(name, "line", (iid,), bbox, tag=tag, user_data=user_data)
-
-    def DrawText(self, name, x, y, text, *, tag=None, user_data=None, **kw):
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        ttag = self._rl_canvas_tag(name)
-        iid = c.create_text(x, y, text=text, tags=(ttag,), **kw)
-        try:
-            bx1, by1, bx2, by2 = c.bbox(iid)
-            bbox = (bx1, by1, bx2, by2)
-        except Exception:
-            bbox = (x, y, x, y)
-        return self._rl_register(name, "text", (iid,), bbox, tag=tag, user_data=user_data)
-
-    def DrawRectanglePro(self, name, x, y, rect_w, rect_h, origin_x, origin_y, rotation_deg, *, tag=None, user_data=None, **kw):
-        """
-        Dikdortgen + donme (origin gore); tk'da tek polygon ile yaklasim.
-        rotation_deg: derece, saat yonu pozitif.
-        """
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        rad = math.radians(rotation_deg)
-        cr, sr = math.cos(rad), math.sin(rad)
-        corners = ((0, 0), (rect_w, 0), (rect_w, rect_h), (0, rect_h))
-        pts = []
-        minx = miny = float("inf")
-        maxx = maxy = float("-inf")
-        for cx, cy in corners:
-            lx, ly = cx - origin_x, cy - origin_y
-            wx = x + lx * cr - ly * sr
-            wy = y + lx * sr + ly * cr
-            pts.extend((wx, wy))
-            minx, maxx = min(minx, wx), max(maxx, wx)
-            miny, maxy = min(miny, wy), max(maxy, wy)
-        ttag = self._rl_canvas_tag(name)
-        iid = c.create_polygon(*pts, tags=(ttag,), **kw)
-        bbox = (minx, miny, maxx, maxy)
-        return self._rl_register(name, "rectangle_pro", (iid,), bbox, tag=tag, user_data=user_data)
-
-    def LoadSceneBatch(self, specs):
-        """
-        Toplu nesne: her oge sozluk.
-        Zorunlu: 'kind' ('rectangle'|'circle'|'line'|'text'|'rectangle_pro'), 'name'.
-        Ornek: {'kind':'rectangle','name':'a','x':0,'y':0,'w':32,'h':32,'fill':'gray'}
-        """
-        out = []
-        with self.BeginScene2D():
-            for sp in specs:
-                kind = sp.get("kind")
-                name = sp.get("name")
-                if not kind or name is None:
-                    continue
-                kw = {k: v for k, v in sp.items() if k not in ("kind", "name", "tag", "user_data")}
-                tag = sp.get("tag")
-                ud = sp.get("user_data")
-                if kind == "rectangle":
-                    o = self.DrawRectangle(
-                        name, kw.pop("x"), kw.pop("y"), kw.pop("w"), kw.pop("h"), tag=tag, user_data=ud, **kw
-                    )
-                elif kind == "circle":
-                    o = self.DrawCircle(
-                        name, kw.pop("cx"), kw.pop("cy"), kw.pop("r"), tag=tag, user_data=ud, **kw
-                    )
-                elif kind == "line":
-                    o = self.DrawLine(
-                        name, kw.pop("x1"), kw.pop("y1"), kw.pop("x2"), kw.pop("y2"), tag=tag, user_data=ud, **kw
-                    )
-                elif kind == "text":
-                    o = self.DrawText(
-                        name, kw.pop("x"), kw.pop("y"), kw.pop("text"), tag=tag, user_data=ud, **kw
-                    )
-                elif kind == "rectangle_pro":
-                    o = self.DrawRectanglePro(
-                        name,
-                        kw.pop("x"),
-                        kw.pop("y"),
-                        kw.pop("w"),
-                        kw.pop("h"),
-                        kw.pop("origin_x", 0),
-                        kw.pop("origin_y", 0),
-                        kw.pop("rotation_deg", 0),
-                        tag=tag,
-                        user_data=ud,
-                        **kw
-                    )
-                else:
-                    o = None
-                if o is not None:
-                    out.append(o)
-        return out
-
-    # --- Secim / vurus testi (Raylib CheckCollision / GetGesture hissi) ---
-    def PickSceneObject(self, px, py):
-        """Verilen canvas pikselinde en ustteki sahne nesnesinin adi veya None."""
-        c = self._rl_canvas()
-        if c is None:
-            return None
-        try:
-            ids = c.find_overlapping(px, py, px, py)
-        except Exception:
-            return None
-        for iid in reversed(ids):
-            owner = self._rl_item_owner.get(iid)
-            if owner is not None:
-                return owner
-        return None
-
-    def QuerySceneRect(self, x1, y1, x2, y2):
-        """Dikdortgenle kesisen tum sahne nesne isimleri (ustten alta sirali)."""
-        c = self._rl_canvas()
-        if c is None:
-            return []
-        xa, xb = (x1, x2) if x1 <= x2 else (x2, x1)
-        ya, yb = (y1, y2) if y1 <= y2 else (y2, y1)
-        try:
-            ids = c.find_overlapping(xa, ya, xb, yb)
-        except Exception:
-            return []
-        seen = set()
-        ordered = []
-        for iid in reversed(ids):
-            owner = self._rl_item_owner.get(iid)
-            if owner and owner not in seen:
-                seen.add(owner)
-                ordered.append(owner)
-        return ordered
-
-    def SelectSceneObject(self, name, additive=False):
-        """Nesneyi sec; additive False ise onceki secim temizlenir."""
-        if not additive:
-            self._rl_selection.clear()
-        if name in self._rl_objects:
-            self._rl_selection.add(name)
-
-    def DeselectAllSceneObjects(self):
-        self._rl_selection.clear()
-
-    def ToggleSelectSceneObject(self, name):
-        if name in self._rl_selection:
-            self._rl_selection.discard(name)
-        elif name in self._rl_objects:
-            self._rl_selection.add(name)
-
-    def SelectedSceneObjects(self):
-        """Secili nesne isimleri (tuple)."""
-        return tuple(self._rl_selection)
-
-    def SelectedSceneObjectRefs(self):
-        """Secili RlSceneObject listesi."""
-        return [self._rl_objects[n] for n in self._rl_selection if n in self._rl_objects]
-
-    def IsSceneObjectSelected(self, name):
-        return name in self._rl_selection
-
-    def MoveSceneObject(self, name, dx, dy):
-        """Sahne nesnesini piksel ote (tk move)."""
-        obj = self._rl_objects.get(name)
-        c = self._rl_canvas()
-        if obj is None or c is None:
-            return
-        for iid in obj.item_ids:
-            try:
-                c.move(iid, dx, dy)
-            except Exception:
-                pass
-        if obj.bbox:
-            obj.bbox = (obj.bbox[0] + dx, obj.bbox[1] + dy, obj.bbox[2] + dx, obj.bbox[3] + dy)
-
-    def SetSceneObjectVisible(self, name, visible):
-        obj = self._rl_objects.get(name)
-        c = self._rl_canvas()
-        if obj is None or c is None:
-            return
-        st = "normal" if visible else "hidden"
-        for iid in obj.item_ids:
-            try:
-                c.itemconfigure(iid, state=st)
-            except Exception:
-                pass
-        obj.visible = bool(visible)
-
-    # RaylibUnload* benzeri kisa isimler
-    UnloadSceneObject = RemoveSceneObject
-    UnloadAllSceneObjects = ClearScene2D
-
-    def bind_canvas(self, sequence, callback, add=""):
-        """Alt tk.Canvas uzerinde bind (Window/Element bind ile karismasin diye ayri isim)."""
-        c = self.TKCanvas
-        if c is None:
-            return
-        c.bind(sequence, callback, add=add)
-
-    def unbind_canvas(self, sequence):
-        c = self.TKCanvas
-        if c is None:
-            return
-        try:
-            c.unbind(sequence)
-        except Exception:
-            pass
-
-    def after_ms(self, ms, callback):
-        """
-        Pencere kokunde tk.after(ms, callback). GWindow + finalize sonrasi calisir.
-        Donen id ile after_cancel() iptal edin.
-        """
-        if self.ParentForm is None:
-            return None
-        root = getattr(self.ParentForm, "TKroot", None)
-        if root is None:
-            return None
-        try:
-            return root.after(int(ms), callback)
-        except Exception:
-            return None
-
-    def after_cancel(self, after_id):
-        if after_id is None:
-            return
-        root = getattr(self.ParentForm, "TKroot", None) if self.ParentForm else None
-        if root is None:
-            return
-        try:
-            root.after_cancel(after_id)
-        except Exception:
-            pass
-
-    def pixel_dimensions(self):
-        """Gercek tk canvas genislik/yukseklik (piksel); henuz yoksa (0, 0)."""
-        if not self._widget_was_created():
-            return (0, 0)
-        c = self.TKCanvas
-        if c is None:
-            return (0, 0)
-        try:
-            c.update_idletasks()
-            return (int(c.winfo_width()), int(c.winfo_height()))
-        except Exception:
-            return (0, 0)
-
-    def delete_item(self, *item_ids):
-        """create_* ile donen bir veya daha cok item id silinir."""
-        c = self.TKCanvas
-        if c is None:
-            return
-        for iid in item_ids:
-            try:
-                c.delete(iid)
-            except Exception:
-                pass
-
-    def delete_tag(self, tag):
-        """Etikete bagli tum ogeler silinir (tk delete tag)."""
-        c = self.TKCanvas
-        if c is None:
-            return
-        try:
-            c.delete(tag)
-        except Exception:
-            pass
-
-    grab_focus = Canvas.focus_canvas
