@@ -1929,4 +1929,12 @@ class GGameCanvas(Canvas):
         # must clean
         self.clear()
         
+    def test(self):
+        # this is just a test function to show how to use GGameCanvas, you can remove it
+        self.BeginDrawing()
+        self.DrawText("Hello World", "Sans, 20", 100, 100, GColor_HEX("#FFFFFF"))
+        self.DrawLine(GVector2(50, 50), GVector2(150, 150), GColor_HEX("#FF0000"), 2)
+        self.DrawCircle(GVector2(200, 200), 50, GColor_HEX("#00FF00"), 3)
+        self.DrawRectangle(GVector2(300, 300), GVector2(100, 50), 0, GColor_HEX("#0000FF"), 4, fill=True, fillColor=GColor_HEX("#0000FF"))
+        self.EndDrawing()
 
