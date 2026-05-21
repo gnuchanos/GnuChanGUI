@@ -981,13 +981,13 @@ class GnuChanGUI:
     # multiLine widget
     def GMultiline (
             self, InText="", TFont=None, SetValue=None, Size=(None, None), Visible=True, TPosition="left", EnableEvent=True, WriteOnly=False, WrapLines=True,
-            xStretch=False, yStretch=False, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None
+            xStretch=False, yStretch=False, xStretch_weight=None, yStretch_weight=None, yStretch_row_weight=None, Focus=True, ReadOnly=False, NoScroolBar=True, EmptySpace=(None, None), TColor=None, BColor=None, EnableUndo=True
         ):
 
         return Multiline(
                 default_text=InText, font=TFont, key=SetValue, size=Size, focus=Focus, justification=TPosition, visible=Visible, disabled=ReadOnly, 
                 expand_x=xStretch, expand_y=yStretch, expand_weight_x=xStretch_weight, expand_weight_y=yStretch_weight, expand_weight_row=yStretch_row_weight, no_scrollbar=NoScroolBar, text_color=TColor, background_color=BColor, pad=EmptySpace, border_width=0,
-                autoscroll=True, auto_size_text=True, enable_events=EnableEvent, write_only=WriteOnly, wrap_lines=WrapLines
+                autoscroll=True, auto_size_text=True, enable_events=EnableEvent, write_only=WriteOnly, wrap_lines=WrapLines, undo=EnableUndo
         )
         """
         layout = [
@@ -1237,24 +1237,16 @@ class GnuChanGUI:
                 print("Merhaba Output")
         """
 
-    def GPane(
+    def GPanel(
             self, PaneColumns, SetValue=None, BColor=None, Size=(None, None), EmptySpace=(None, None),
             Orientation="vertical", show_handle=True, relief=None, handle_size=None, Border=None,
             xStretch=None, yStretch=None, Visible=True,
         ):
-        pane_kw = dict(
-            pane_list=PaneColumns,
-            background_color=BColor,
-            size=Size,
-            pad=EmptySpace,
-            orientation=Orientation,
-            show_handle=show_handle,
-            handle_size=handle_size,
-            border_width=Border,
-            key=SetValue,
-            expand_x=xStretch,
-            expand_y=yStretch,
-            visible=Visible,
+        pane_kw = dict( 
+            pane_list=PaneColumns,  background_color=BColor, size=Size, pad=EmptySpace,
+            orientation=Orientation, show_handle=show_handle, handle_size=handle_size,
+            border_width=Border, key=SetValue,
+            expand_x=xStretch, expand_y=yStretch, visible=Visible,
         )
         if relief is not None:
             pane_kw["relief"] = relief
@@ -1282,18 +1274,9 @@ class GnuChanGUI:
             ActiveEvent=True, num_rows=10, tree_kwargs=None,
         ):
         kw = dict(
-            data=TreeDATA,
-            headings=headings,
-            key=SetValue,
-            font=TFont,
-            visible=Visible,
-            pad=EmptySpace,
-            text_color=TColor,
-            background_color=BColor,
-            enable_events=ActiveEvent,
-            num_rows=num_rows,
-            expand_x=xStretch,
-            expand_y=yStretch,
+            data=TreeDATA, headings=headings, key=SetValue, font=TFont, visible=Visible,
+            pad=EmptySpace, text_color=TColor, background_color=BColor, enable_events=ActiveEvent,
+            num_rows=num_rows, expand_x=xStretch, expand_y=yStretch,
         )
         if tree_kwargs:
             kw.update(tree_kwargs)
@@ -1337,18 +1320,9 @@ class GnuChanGUI:
             xStretch=False, yStretch=False,
         ):
         return OptionMenu(
-            ListValues,
-            default_value=DefaultValue,
-            key=SetValue,
-            font=TFont,
-            size=Size,
-            pad=EmptySpace,
-            visible=Visible,
-            disabled=Disabled,
-            text_color=TColor,
-            background_color=BColor,
-            expand_x=xStretch,
-            expand_y=yStretch,
+            ListValues, default_value=DefaultValue, key=SetValue, font=TFont, size=Size,
+            pad=EmptySpace,  visible=Visible, disabled=Disabled, text_color=TColor,
+            background_color=BColor, expand_x=xStretch, expand_y=yStretch,
         )
         """
         layout = [
@@ -1370,19 +1344,9 @@ class GnuChanGUI:
             xStretch=False, yStretch=False, rclickMenu=None, relief=None,
         ):
         sb_kw = dict(
-            text=SetText,
-            size=Size,
-            font=TFont,
-            key=SetValue,
-            pad=EmptySpace,
-            text_color=TColor,
-            background_color=BColor,
-            justification=TPosition,
-            enable_events=ActiveEvent,
-            visible=Visible,
-            expand_x=xStretch,
-            expand_y=yStretch,
-            right_click_menu=rclickMenu,
+            text=SetText, size=Size, font=TFont, key=SetValue, pad=EmptySpace, text_color=TColor,
+            background_color=BColor, justification=TPosition, enable_events=ActiveEvent, visible=Visible,
+            expand_x=xStretch, expand_y=yStretch, right_click_menu=rclickMenu,
         )
         if relief is not None:
             sb_kw["relief"] = relief
@@ -1407,21 +1371,10 @@ class GnuChanGUI:
             tearoff=False, Border=None, tooltip=None, bImage=None,
         ):
         return ButtonMenu(
-            Text,
-            menu_def,
-            key=SetValue,
-            font=TFont,
-            pad=EmptySpace,
-            text_color=tcolor,
-            background_color=bcolor,
-            disabled=Disabled,
-            visible=Visible,
-            expand_x=xStretch,
-            expand_y=yStretch,
-            tearoff=tearoff,
-            border_width=Border,
-            tooltip=tooltip,
-            image_filename=bImage,
+            Text, menu_def, key=SetValue, font=TFont, pad=EmptySpace, text_color=tcolor,
+            background_color=bcolor, disabled=Disabled, visible=Visible, expand_x=xStretch, expand_y=yStretch,
+            tearoff=tearoff, border_width=Border,
+            tooltip=tooltip, image_filename=bImage,
         )
         """
         menu_def = [ "Menu", [ "Dosya Ac", "Kaydet", "---", "Cikis" ] ]

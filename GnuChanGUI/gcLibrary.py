@@ -49,8 +49,7 @@ def _register_key_release(key_str):
 
 def _clear_pressed_keys():
     """İç: frame bitince pressed state'i reset et"""
-    global _keys_pressed
-    _keys_pressed = {}
+    _keys_pressed.clear()
 
 
 # all of the tkinter involved imports
@@ -68,8 +67,8 @@ from uuid import uuid4
 tclversion_detailed = tkinter.Tcl().eval('info patchlevel')
 framework_version = tclversion_detailed
 
+import importlib
 import time
-import pickle
 import calendar
 import datetime
 import textwrap
@@ -81,46 +80,75 @@ import traceback
 import difflib
 import copy
 import pprint
-try:  # Because Raspberry Pi is still on 3.4....it's not critical if this module isn't imported on the Pi
-    from typing import List, Any, Union, Tuple, Dict, SupportsAbs, Optional  # because this code has to run on 2.7 can't use real type hints.  Must do typing only in comments
-except:
-    print('*** Skipping import of Typing module. "pip3 install typing" to remove this warning ***')
 import random
 import warnings
 from math import floor
 from math import fabs
 from functools import wraps
+from typing import Any, List, Dict, Optional, TYPE_CHECKING
 
-try:  # Because Raspberry Pi is still on 3.4....
-    # from subprocess import run, PIPE, Popen
-    import subprocess
-except Exception as e:
-    print('** Import error {} **'.format(e))
+if TYPE_CHECKING:
+    import configparser
 
 import threading
 import itertools
-import json
-import configparser
 import queue
 
 try:
     import webbrowser
-
     webbrowser_available = True
 except:
     webbrowser_available = False
+
 # used for github upgrades
-import urllib.request
-import urllib.error
-import urllib.parse
-import pydoc
-from urllib import request
 import os
 import sys
 import re
 import tempfile
-import ctypes
 import platform
+
+
+def _lazy_import(module_name, alias=None):
+    """Import a module only when it is actually needed."""
+    if alias is None:
+        alias = module_name.split('.')[-1]
+    module = globals().get(alias)
+    if module is None:
+        module = importlib.import_module(module_name)
+        globals()[alias] = module
+    return module
+
+
+def _lazy_import_pickle():
+    return _lazy_import('pickle')
+
+
+def _lazy_import_subprocess():
+    return _lazy_import('subprocess')
+
+
+def _lazy_import_json():
+    return _lazy_import('json')
+
+
+def _lazy_import_configparser():
+    return _lazy_import('configparser')
+
+
+def _lazy_import_pydoc():
+    return _lazy_import('pydoc')
+
+
+def _lazy_import_ctypes():
+    return _lazy_import('ctypes')
+
+
+def _lazy_import_urllib_parse():
+    return _lazy_import('urllib.parse', 'urllib_parse')
+
+
+def _lazy_import_urllib_request():
+    return _lazy_import('urllib.request', 'request')
 
 pil_import_attempted = pil_imported = False
 
@@ -512,9 +540,9 @@ def rgb(red, green, blue):
     :return:      A single RGB String in the format "#RRGGBB" where each pair is a hex number.
     :rtype:       (str)
     """
-    red = min(int(red), 255) if red > 0 else 0
-    blue = min(int(blue), 255) if blue > 0 else 0
-    green = min(int(green), 255) if green > 0 else 0
+    red = max(0, min(255, int(red)))
+    green = max(0, min(255, int(green)))
+    blue = max(0, min(255, int(blue)))
     return '#%02x%02x%02x' % (red, green, blue)
 
 
@@ -637,22 +665,6 @@ ttk_part_overrides_from_options = TTKPartOverrides()
 
 
 # -------------------------  tkinter BASIC cursors... there are some OS dependent ones too  ------------------------- #
-TKINTER_CURSORS = ['X_cursor', 'arrow', 'based_arrow_down', 'based_arrow_up', 'boat',
-                   'bogosity', 'bottom_left_corner', 'bottom_right_corner', 'bottom_side',
-                   'bottom_tee', 'box_spiral', 'center_ptr', 'circle', 'clock',
-                   'coffee_mug', 'cross', 'cross_reverse', 'crosshair', 'diamond_cross',
-                   'dot', 'dotbox', 'double_arrow', 'draft_large', 'draft_small', 'draped_box',
-                   'exchange', 'fleur', 'gobbler', 'gumby', 'hand1', 'hand2', 'heart',
-                   'icon', 'iron_cross', 'left_ptr', 'left_side', 'left_tee', 'leftbutton',
-                   'll_angle', 'lr_angle', 'man', 'middlebutton', 'mouse', 'pencil', 'pirate',
-                   'plus', 'question_arrow', 'right_ptr', 'right_side', 'right_tee',
-                   'rightbutton', 'rtl_logo', 'sailboat', 'sb_down_arrow', 'sb_h_double_arrow',
-                   'sb_left_arrow', 'sb_right_arrow', 'sb_up_arrow', 'sb_v_double_arrow',
-                   'shuttle', 'sizing', 'spider', 'spraycan', 'star', 'target', 'tcross',
-                   'top_left_arrow', 'top_left_corner', 'top_right_corner', 'top_side', 'top_tee',
-                   'trek', 'ul_angle', 'umbrella', 'ur_angle', 'watch', 'xterm']
-
-
 TKINTER_CURSORS = ['X_cursor', 'arrow', 'based_arrow_down', 'based_arrow_up', 'boat', 'bogosity', 'bottom_left_corner', 'bottom_right_corner', 'bottom_side', 'bottom_tee', 'box_spiral', 'center_ptr', 'circle', 'clock', 'coffee_mug', 'cross', 'cross_reverse', 'crosshair', 'diamond_cross', 'dot', 'dotbox', 'double_arrow', 'draft_large', 'draft_small', 'draped_box', 'exchange', 'fleur', 'gobbler', 'gumby', 'hand1', 'hand2', 'heart', 'ibeam', 'icon', 'iron_cross', 'left_ptr', 'left_side', 'left_tee', 'leftbutton', 'll_angle', 'lr_angle', 'man', 'middlebutton', 'mouse', 'no', 'none', 'pencil', 'pirate', 'plus', 'question_arrow', 'right_ptr', 'right_side', 'right_tee', 'rightbutton', 'rtl_logo', 'sailboat', 'sb_down_arrow', 'sb_h_double_arrow', 'sb_left_arrow', 'sb_right_arrow', 'sb_up_arrow', 'sb_v_double_arrow', 'shuttle', 'size', 'size_ne_sw', 'size_ns', 'size_nw_se', 'size_we', 'sizing', 'spider', 'spraycan', 'star', 'starting', 'target', 'tcross', 'top_left_arrow', 'top_left_corner', 'top_right_corner', 'top_side', 'top_tee', 'trek', 'ul_angle', 'umbrella', 'uparrow', 'ur_angle', 'wait', 'watch', 'xterm']
 # -------------------------  tkinter key codes for bindings  ------------------------- #
 
@@ -896,13 +908,7 @@ class Element():
         ## TTK Scrollbar Settings
         self.ttk_part_overrides = TTKPartOverrides(sbar_trough_color=sbar_trough_color, sbar_background_color=sbar_background_color, sbar_arrow_color=sbar_arrow_color, sbar_width=sbar_width, sbar_arrow_width=sbar_arrow_width, sbar_frame_color=sbar_frame_color, sbar_relief=sbar_relief)
 
-        PSG_THEME_PART_FUNC_MAP = {PSG_THEME_PART_BACKGROUND: theme_background_color,
-                                       PSG_THEME_PART_BUTTON_BACKGROUND: theme_button_color_background,
-                                       PSG_THEME_PART_BUTTON_TEXT: theme_button_color_text,
-                                       PSG_THEME_PART_INPUT_BACKGROUND: theme_input_background_color,
-                                       PSG_THEME_PART_INPUT_TEXT: theme_input_text_color,
-                                       PSG_THEME_PART_TEXT: theme_text_color,
-                                       PSG_THEME_PART_SLIDER: theme_slider_color}
+        PSG_THEME_PART_FUNC_MAP = _get_psg_theme_part_func_map()
 
         # class Theme_Parts():
         #     PSG_THEME_PART_FUNC_MAP = {PSG_THEME_PART_BACKGROUND: theme_background_color,
@@ -3434,7 +3440,7 @@ class Multiline(Element):
 
     def __init__(self, default_text='', enter_submits=False, disabled=False, autoscroll=False, autoscroll_only_at_bottom=False, border_width=None,
                  size=(None, None), s=(None, None), auto_size_text=None, background_color=None, text_color=None, selected_text_color=None, selected_background_color=None, horizontal_scroll=False, change_submits=False,
-                 enable_events=False, do_not_clear=True, key=None, k=None, write_only=False, auto_refresh=False, reroute_stdout=False, reroute_stderr=False, reroute_cprint=False, echo_stdout_stderr=False, focus=False, font=None, pad=None, p=None, tooltip=None, justification=None, no_scrollbar=False, wrap_lines=None,
+                 enable_events=False, do_not_clear=True, key=None, k=None, write_only=False, auto_refresh=False, reroute_stdout=False, reroute_stderr=False, reroute_cprint=False, echo_stdout_stderr=False, focus=False, font=None, pad=None, p=None, tooltip=None, justification=None, no_scrollbar=False, wrap_lines=None, undo=True,
                  sbar_trough_color=None, sbar_background_color=None, sbar_arrow_color=None, sbar_width=None, sbar_arrow_width=None, sbar_frame_color=None, sbar_relief=None,
                  expand_x=False, expand_y=False, expand_weight_x=None, expand_weight_y=None, expand_weight_row=None, rstrip=True, right_click_menu=None, visible=True, metadata=None):
         """
@@ -3504,6 +3510,8 @@ class Multiline(Element):
         :type no_scrollbar:                  (bool)
         :param wrap_lines:                   If True, the lines will be wrapped automatically. Other parms affect this setting, but this one will override them all. Default is it does nothing and uses previous settings for wrapping.
         :type wrap_lines:                    (bool)
+        :param undo:                         If True then Ctrl+Z/Ctrl+Y undo/redo shortcuts are enabled for this Multiline element.
+        :type undo:                          (bool)
         :param sbar_trough_color:           Scrollbar color of the trough
         :type sbar_trough_color:            (str)
         :param sbar_background_color:       Scrollbar color of the background of the arrow buttons at the ends AND the color of the "thumb" (the thing you grab and slide). Switches to arrow color when mouse is over
@@ -3569,6 +3577,7 @@ class Multiline(Element):
         self.expand_weight_row = expand_weight_row
         self.rstrip = rstrip
         self.wrap_lines = wrap_lines
+        self.UndoEnabled = undo
         self.reroute_stdout = reroute_stdout
         self.reroute_stderr = reroute_stderr
         self.no_scrollbar = no_scrollbar
@@ -3721,6 +3730,35 @@ class Multiline(Element):
             return value.rstrip()
         return value
 
+    def undo(self, event=None):
+        """Undo the last edit in this Multiline element."""
+        if not self._widget_was_created() or self._this_elements_window_closed():
+            return
+        try:
+            if self.Disabled is not True:
+                self.TKText.edit_undo()
+        except tk.TclError:
+            pass
+        if event is not None:
+            return 'break'
+
+    def redo(self, event=None):
+        """Redo the last undone edit in this Multiline element."""
+        if not self._widget_was_created() or self._this_elements_window_closed():
+            return
+        try:
+            if self.Disabled is not True:
+                self.TKText.edit_redo()
+        except tk.TclError:
+            pass
+        if event is not None:
+            return 'break'
+
+    def _MultilineUndoHandler(self, event):
+        return self.undo(event)
+
+    def _MultilineRedoHandler(self, event):
+        return self.redo(event)
 
     def print(self, *args, end=None, sep=None, text_color=None, background_color=None, justification=None, font=None, colors=None, t=None, b=None, c=None,
               autoscroll=True):
@@ -3884,6 +3922,8 @@ class Multiline(Element):
 
     Get = get
     Update = update
+    Undo = undo
+    Redo = redo
 
 
 ML = Multiline
@@ -11236,6 +11276,7 @@ class Window:
             for key in remove_these:
                 del values[key]
             with open(filename, 'wb') as sf:
+                pickle = _lazy_import_pickle()
                 pickle.dump(values, sf)
         except:
             print('*** Error saving Window contents to disk ***')
@@ -11249,6 +11290,7 @@ class Window:
         """
         try:
             with open(filename, 'rb') as df:
+                pickle = _lazy_import_pickle()
                 self.Fill(pickle.load(df))
         except:
             print('*** Error loading form to disk ***')
@@ -16846,7 +16888,8 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 element.element_frame = element_frame = tk.Frame(tk_row_frame)
 
                 # if element.no_scrollbar:
-                element.TKText = element.Widget = tk.Text(element_frame, width=width, height=height,  bd=bd, font=font, relief=RELIEF_SUNKEN)
+                element.TKText = element.Widget = tk.Text(element_frame, width=width, height=height,  bd=bd, font=font, relief=RELIEF_SUNKEN,
+                                                        undo=element.UndoEnabled, autoseparators=True, maxundo=-1)
                 # else:
                 #     element.TKText = element.Widget = tk.scrolledtext.ScrolledText(element_frame, width=width, height=height, bd=bd, font=font, relief=RELIEF_SUNKEN)
 
@@ -16890,6 +16933,14 @@ def PackFormIntoFrame(form, containing_frame, toplevel_form):
                 element.TKText.tag_configure("center", justify='center')
                 element.TKText.tag_configure("left", justify='left')
                 element.TKText.tag_configure("right", justify='right')
+
+                if element.UndoEnabled:
+                    element.TKText.bind('<Control-z>', lambda event, em=element: em._MultilineUndoHandler(event))
+                    element.TKText.bind('<Control-Z>', lambda event, em=element: em._MultilineUndoHandler(event))
+                    element.TKText.bind('<Control-y>', lambda event, em=element: em._MultilineRedoHandler(event))
+                    element.TKText.bind('<Control-Y>', lambda event, em=element: em._MultilineRedoHandler(event))
+                    element.TKText.bind('<Control-Shift-z>', lambda event, em=element: em._MultilineRedoHandler(event))
+                    element.TKText.bind('<Control-Shift-Z>', lambda event, em=element: em._MultilineRedoHandler(event))
 
                 if element.Justification.startswith('l'):
                     element.TKText.tag_add("left", 1.0, "end")
@@ -19434,6 +19485,7 @@ def set_options(icon=None, button_color=None, element_size=(None, None), button_
 
     if dpi_awareness is True:
         if running_windows():
+            ctypes = _lazy_import_ctypes()
             if platform.release() == "7":
                 ctypes.windll.user32.SetProcessDPIAware()
             elif platform.release() == "8" or platform.release() == "10":
@@ -20073,6 +20125,24 @@ def theme_button_color_text():
     :rtype:  (str)
     """
     return theme_button_color()[0]
+
+
+def _get_psg_theme_part_func_map():
+    """Cache and return the PSG theme part function mapping."""
+    global _PSG_THEME_PART_FUNC_MAP
+    try:
+        return _PSG_THEME_PART_FUNC_MAP
+    except NameError:
+        _PSG_THEME_PART_FUNC_MAP = {
+            PSG_THEME_PART_BACKGROUND: theme_background_color,
+            PSG_THEME_PART_BUTTON_BACKGROUND: theme_button_color_background,
+            PSG_THEME_PART_BUTTON_TEXT: theme_button_color_text,
+            PSG_THEME_PART_INPUT_BACKGROUND: theme_input_background_color,
+            PSG_THEME_PART_INPUT_TEXT: theme_input_text_color,
+            PSG_THEME_PART_TEXT: theme_text_color,
+            PSG_THEME_PART_SLIDER: theme_slider_color,
+        }
+        return _PSG_THEME_PART_FUNC_MAP
 
 
 def theme_progress_bar_color(color=None):
@@ -22414,6 +22484,7 @@ def _error_popup_with_code(title, filename, line_num, *args,  emoji=None):
         window = Window(title, layout, keep_on_top=True)
     except Exception as e:
         print('*** GnuChanGUI error window failed: {} ***'.format(e))
+        traceback.print_exc()
         print(fallback_text)
         try:
             messagebox.showerror(str(title)[:200], fallback_text[:8000])
@@ -22456,6 +22527,7 @@ def _process_thread(*args):
     global __shell_process__
 
     # start running the command with arugments
+    subprocess = _lazy_import_subprocess()
     try:
         __shell_process__ = subprocess.run(args, shell=True, stdout=subprocess.PIPE)
     except Exception as e:
@@ -22599,6 +22671,7 @@ class UserSettings:
         # self.retain_config_comments = retain_config_comments
         self.convert_bools = convert_bools_and_none
         if use_config_file:
+            configparser = _lazy_import_configparser()
             self.config = configparser.ConfigParser()
             self.config.optionxform = str
             # self.config_dict = {}
@@ -22791,10 +22864,21 @@ class UserSettings:
         elif self.filename is not None:
             filename = self.filename
         else:
-            if not self.use_config_file:
-                filename = os.path.splitext(os.path.basename(sys.modules["__main__"].__file__))[0] + '.json'
+            main_filename = None
+            if hasattr(sys.modules.get("__main__"), '__file__'):
+                main_filename = sys.modules["__main__"].__file__
+            elif sys.argv and sys.argv[0]:
+                main_filename = sys.argv[0]
+
+            if main_filename:
+                base_name = os.path.splitext(os.path.basename(main_filename))[0]
             else:
-                filename = os.path.splitext(os.path.basename(sys.modules["__main__"].__file__))[0] + '.ini'
+                base_name = 'python_command'
+
+            if not self.use_config_file:
+                filename = base_name + '.json'
+            else:
+                filename = base_name + '.ini'
 
         if path is None:
             if self.path is not None:
@@ -22877,6 +22961,7 @@ class UserSettings:
                 os.makedirs(self.path)
             with open(self.full_filename, 'w') as f:
                 if not self.use_config_file:
+                    json = _lazy_import_json()
                     json.dump(self.dict, f)
                 else:
                     self.config.write(f)
@@ -22957,6 +23042,7 @@ class UserSettings:
             if os.path.exists(self.full_filename):
                 with open(self.full_filename, 'r') as f:
                     if not self.use_config_file:        # if using json
+                        json = _lazy_import_json()
                         self.dict = json.load(f)
                     else:                               # if using a config file
                         self.config.read_file(f)
@@ -23378,6 +23464,7 @@ def execute_command_subprocess(command, *args, wait=False, cwd=None, pipe_output
     :return:                         Popen object
     :rtype:                          (subprocess.Popen)
     """
+    subprocess = _lazy_import_subprocess()
     if stdin is None:
         stdin = subprocess.DEVNULL
     try:
@@ -23504,9 +23591,14 @@ def execute_editor(file_to_edit, line_number=None):
     """
     if file_to_edit is not None and len(file_to_edit) != 0 and file_to_edit[0] not in ('\"', "\'") and ' ' in file_to_edit:
         file_to_edit = '"' + file_to_edit + '"'
-    GnuChanGUI_user_settings.load()        # Refresh the settings just in case they've changed via another program
+    try:
+        GnuChanGUI_user_settings.load()        # Refresh the settings just in case they've changed via another program
+    except Exception:
+        pass
     editor_program = GnuChanGUI_user_settings.get('-editor program-', None)
-    if editor_program is not None:
+    if not editor_program:
+        editor_program = os.environ.get('EDITOR', '')
+    if editor_program:
         format_string = GnuChanGUI_user_settings.get('-editor format string-', None)
         # if no format string, then just launch the editor with the filename
         if not format_string or line_number is None:
@@ -23516,7 +23608,7 @@ def execute_editor(file_to_edit, line_number=None):
             # print('final command line = ', command)
             sp = execute_command_subprocess(editor_program, command)
     else:
-        print('No editor has been configured in the global settings')
+        print('No editor has been configured in the global settings or EDITOR environment variable')
         sp = None
     return sp
 
@@ -23533,6 +23625,7 @@ def execute_get_results(subprocess_id, timeout=None):
     :rtype:               (str | None , str | None)
     """
 
+    subprocess = _lazy_import_subprocess()
     out_decoded = err_decoded = None
     if subprocess_id is not None:
         try:
@@ -23649,12 +23742,19 @@ def execute_get_editor():
     :return: Path to the editor
     :rtype:  str
     """
+    try:
+        GnuChanGUI_user_settings.load()
+    except Exception:
+        pass
     try:  # in case running with old version of GnuChanGUI that doesn't have a global PSG settings path
         global_editor = GnuChanGUI_user_settings.get('-editor program-')
-    except:
+    except Exception:
         global_editor = ''
 
-    return user_settings_get_entry('-editor program-', global_editor)
+    editor = user_settings_get_entry('-editor program-', global_editor)
+    if not editor:
+        editor = os.environ.get('EDITOR', '')
+    return editor.strip() if isinstance(editor, str) else editor
 
 
 '''
@@ -23902,13 +24002,10 @@ class _Debugger:
             try:
                 result = eval('{}'.format(cmd), myglobals, mylocals)
             except Exception as e:
-                if sys.version_info[0] < 3:
-                    result = 'Not available in Python 2'
-                else:
-                    try:
-                        result = exec('{}'.format(cmd), myglobals, mylocals)
-                    except Exception as e:
-                        result = 'Exception {}\n'.format(e)
+                try:
+                    result = exec('{}'.format(cmd), myglobals, mylocals)
+                except Exception as e:
+                    result = 'Exception {}\n'.format(e)
 
             self.watcher_window.Element('-OUTPUT-').Update('{}\n'.format(result), append=True, autoscroll=True)
         # BUTTON - DETAIL
@@ -24691,8 +24788,9 @@ def _github_issue_post_make_github_link(title, body):
     GnuChanGUI_issues = "{}/issues/new?".format(GnuChanGUI_url)
 
     # Fix body cuz urllib can't do it smfh
+    urllib_parse = _lazy_import_urllib_parse()
     getVars = {'title': str(title), 'body': str(body)}
-    return (GnuChanGUI_issues + urllib.parse.urlencode(getVars).replace("%5Cn", "%0D"))
+    return (GnuChanGUI_issues + urllib_parse.urlencode(getVars).replace("%5Cn", "%0D"))
 
 
 #########################################################################################################
@@ -25053,6 +25151,7 @@ def _copy_files_from_github():
 
     # download the files
     downloaded = []
+    request = _lazy_import_urllib_request()
     for file in files:
         with request.urlopen(github_url + file) as response:
             with open(os.path.join(path, file), 'wb') as f:
@@ -25226,11 +25325,8 @@ def _global_settings_get_ttk_scrollbar_info():
     Each scrollbar setting is stored with a key that's a TUPLE, not a normal string key.
     The settings are for pieces of the scrollbar and their associated piece of the GnuChanGUI theme.
 
-    The whole ttk scrollbar feature is based on mapping parts of the scrollbar to parts of the GnuChanGUI theme.
-    That is what the ttk_part_mapping_dict does, maps between the two lists of items.
-    For example, the scrollbar arrow color may map to the theme input text color.
-
     """
+    json = _lazy_import_json()
     global ttk_part_mapping_dict, DEFAULT_TTK_THEME
     for ttk_part in TTK_SCROLLBAR_PART_LIST:
         value = GnuChanGUI_user_settings.get(json.dumps(('-ttk scroll-', ttk_part)), ttk_part_mapping_dict[ttk_part])
@@ -25263,6 +25359,7 @@ def _global_settings_get_watermark_info():
 def main_global_get_screen_snapshot_symcode():
     GnuChanGUI_user_settings = UserSettings(filename=DEFAULT_USER_SETTINGS_GnuChanGUI_FILENAME, path=DEFAULT_USER_SETTINGS_GnuChanGUI_PATH)
 
+    json = _lazy_import_json()
     settings = GnuChanGUI_user_settings.read()
 
     screenshot_keysym = ''
@@ -25299,6 +25396,7 @@ def main_global_GnuChanGUI_settings():
     :return: True if settings were changed
     :rtype:  (bool)
     """
+    json = _lazy_import_json()
     global DEFAULT_WINDOW_SNAPSHOT_KEY_CODE, ttk_part_mapping_dict, DEFAULT_TTK_THEME
 
     key_choices = tuple(sorted(tkinter_keysyms))
@@ -25633,6 +25731,7 @@ def main_sdk_help():
                 window['-DOC LINK-'].update(online_help_link)
                 if not values['-SUMMARY-']:
                     elem = element_names[event]
+                    pydoc = _lazy_import_pydoc()
                     ml.print(pydoc.help(elem))
                     # print the aliases for the class
                     ml.print('\n--- Shortcut Aliases for Class ---')
@@ -25685,6 +25784,7 @@ def main_sdk_help():
                                 if values['-SUMMARY-']:
                                     ml.print(f)
                                 else:
+                                    pydoc = _lazy_import_pydoc()
                                     ml.print('=========== ' + f + '===========', background_color='#FFFF00', text_color='black')
                                     ml.print(pydoc.help(f_entry[1]))
                 ml.set_vscroll_position(0)  # scroll to top of multoline
@@ -26128,6 +26228,7 @@ if tclversion_detailed.startswith('8.5'):
 if running_windows():
     try:
         myappid = 'mycompany.myproduct.subproduct.version'  # arbitrary string
+        ctypes = _lazy_import_ctypes()
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     except Exception as e:
         print('Error using the taskbar icon patch', e)
