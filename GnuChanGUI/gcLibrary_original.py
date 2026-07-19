@@ -1,20 +1,7 @@
 #!/usr/bin/python3
 
-from .version import __version__, __version_full__
-
-version = __version_full__
-# this is lgpl3+ hobby project not for money
-
-_change_log = """
-    
-
-    """
-
-try:
-    ver = __version__
-except Exception:
-    ver = ""
-
+version = "0.0.0"
+ver = "0.0.0"
 port = "GnuChanGUI"
 
 # ============================================================================
@@ -149,6 +136,10 @@ def _lazy_import_urllib_parse():
 
 def _lazy_import_urllib_request():
     return _lazy_import('urllib.request', 'request')
+
+def _import(name):
+    """Look up a name from the module globals (flat-file alternative to lazy module import)."""
+    return globals().get(name)
 
 pil_import_attempted = pil_imported = False
 
@@ -24389,41 +24380,6 @@ def _debugger_window_is_open():
     return False
 
 
-def get_versions():
-    """
-    Returns a human-readable string of version numbers for:
-
-    Python version
-    Platform (Win, Mac, Linux)
-    Platform version (tuple with information from the platform module)
-    GnuChanGUI Port (GnuChanGUI in this case)
-    tkinter version
-    GnuChanGUI version
-    The location of the GnuChanGUI.py file
-
-    The format is a newline between each value and descriptive text for each line
-
-    :return:
-    :rtype:  str
-    """
-    if running_mac():
-        platform_name, platform_ver = 'Mac', platform.mac_ver()
-    elif running_windows():
-        platform_name, platform_ver = 'Windows', platform.win32_ver()
-    elif running_linux():
-        platform_name, platform_ver = 'Linux', platform.libc_ver()
-    else:
-        platform_name, platform_ver = 'Unknown platorm', 'Unknown platform version'
-
-    versions = "Python Interpeter: {}\nPython version: {}.{}.{}\nPlatform: {}\nPlatform version: {}\nPort: {}\ntkinter version: {}\nGnuChanGUI version: {}\nGnuChanGUI filename: {}".format(sys.executable, sys.version_info.major,
-                                                                                                                                   sys.version_info.minor,
-                                                                                                                                   sys.version_info.micro,
-                                                                                                                                    platform_name, platform_ver,
-                                                                                                                                   port,
-                                                                                                                                   tclversion_detailed,
-                                                                                                                                   ver,
-                                                                                                                                   __file__)
-    return versions
 
 
 def scheck_hh():
@@ -25270,22 +25226,6 @@ def _upgrade_gui():
 
 # main_upgrade_from_github = _upgrade_gui
 
-def _upgrade_entry_point():
-    """
-    This function is entered via the psgupgrade.exe file.
-
-    It is needed so that the exe file will exit and thus allow itself to be overwritten which
-        is what the upgrade will do.
-    It simply runs the GnuChanGUI.py file with a command line argument "upgrade" which will
-        actually do the upgrade.
-    """
-    interpreter = sys.executable
-    if 'pythonw' in interpreter:
-        interpreter = interpreter.replace('pythonw', 'python')
-    execute_py_file(__file__, 'upgrade', interpreter_command=interpreter)
-
-
-
 def _main_entry_point():
     # print('Restarting main as a new process...(needed in case you want to GitHub Upgrade)')
     # Relaunch using the same python interpreter that was used to run this function
@@ -25293,28 +25233,6 @@ def _main_entry_point():
     if 'pythonw' in interpreter:
         interpreter = interpreter.replace('pythonw', 'python')
     execute_py_file(__file__, interpreter_command=interpreter)
-
-main_upgrade_from_github = _upgrade_entry_point
-
-# not ready
-def main_get_debug_data(suppress_popup=False):
-    """
-    Collect up and display the data needed to file GitHub issues.
-    This function will place the information on the clipboard.
-    You MUST paste the information from the clipboard prior to existing your application (except on Windows).
-    :param suppress_popup: If True no popup window will be shown. The string will be only returned, not displayed
-    :type suppress_popup:  (bool)
-    :returns:              String containing the information to place into the GitHub Issue
-    :rtype:                (str)
-    """
-    message = get_versions()
-    clipboard_set(message)
-
-    if not suppress_popup:
-        popup_scrolled('*** Version information copied to your clipboard. Paste into your GitHub Issue. ***\n',
-                       message, title='Select and copy this info to your GitHub Issue', keep_on_top=True, size=(100, 10))
-
-    return message
 
 
 
@@ -26117,8 +26035,6 @@ def main():
                 popup_non_blocking('Non-blocking', 'The background window should still be running', keep_on_top=True)
             elif event == 'P AutoClose':
                 popup_auto_close('Will autoclose in 3 seconds', auto_close_duration=3, keep_on_top=True)
-        elif event == 'Versions for GitHub':
-            main_get_debug_data()
         elif event == 'Edit Me':
             execute_editor(__file__)
         elif event == 'Open GitHub Issue':
@@ -26239,19 +26155,3 @@ _read_mac_global_settings()
 if _mac_should_set_alpha_to_99():
     # Applyting Mac OS 12.3+ Alpha Channel fix.  Sets the default Alpha Channel to 0.99
     set_options(alpha_channel=0.99)
-
-
-# -------------------------------- ENTRY POINT IF RUN STANDALONE -------------------------------- #
-if __name__ == '__main__':
-    # To execute the upgrade from command line, type:
-
-    #this func not ginish
-    # python -m GnuChanGUI.GnuChanGUI upgrade
-    if len(sys.argv) > 1 and sys.argv[1] == 'upgrade':
-        _upgrade_gui()
-        exit(0)
-    elif len(sys.argv) > 1 and sys.argv[1] == 'help':
-        main_sdk_help()
-        exit(0)
-    main()
-    exit(0)

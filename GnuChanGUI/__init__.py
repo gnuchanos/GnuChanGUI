@@ -1,8 +1,7 @@
 from tkinter import font
 
-from .gcLibrary import *
-from .gcLibrary import __version__
-from .version import __version_full__
+from .gcLibrary_original import *
+
 
 import os
 import random
@@ -449,124 +448,13 @@ class GnuChanGUI:
         """
 
     def IsWindowReady(self):
-        pass
+        """Returns True if the window has been created and is not destroyed."""
+        if not hasattr(self, 'GetWindow') or self.GetWindow is None:
+            return False
+        return not self.GetWindow.is_closed(quick_check=True)
 
     def IsWindowFullscreen(self):
-        pass
-
-    def IsWindowHidden(self):
-        pass
-
-    def IsWindowMinimized(self):
-        pass
-
-    def IsWindowMaximized(self):
-        pass
-
-    def IsWindowFocused(self):
-        pass
-
-    def IsWindowResized(self):
-        pass
-
-    def IsWindowState(self, flag):
-        pass
-
-    def SetWindowState(self, flags):
-        pass
-
-    def ClearWindowState(self, flags):
-        pass
-
-    def ToggleFullscreen(self):
-        pass
-
-    def ToggleBorderlessWindowed(self):
-        pass
-
-    def MaximizeWindow(self):
-        pass
-
-    def MinimizeWindow(self):
-        pass
-
-    def RestoreWindow(self):
-        pass
-
-    def SetWindowIcon(self, image):
-        pass
-
-    def SetWindowIcons(self, images, count):
-        pass
-
-    def SetWindowTitle(self, title):
-        pass
-
-    def SetWindowPosition(self, x, y):
-        pass
-
-    def SetWindowMonitor(self, monitor):
-        pass
-
-    def SetWindowMinSize(self, width, height):
-        pass
-
-    def SetWindowMaxSize(self, width, height):
-        pass
-
-    def SetWindowSize(self, width, height):
-        pass
-
-    def SetWindowOpacity(self, opacity):
-        pass
-
-    def SetWindowFocused(self):
-        pass
-
-    def GetWindowHandle(self):
-        pass
-
-    def GetScreenWidth(self):
-        pass
-
-    def GetScreenHeight(self):
-        pass
-
-    def GetRenderWidth(self):
-        pass
-
-    def GetRenderHeight(self):
-        pass
-
-    def GetMonitorCount(self):
-        pass
-
-    def GetCurrentMonitor(self):
-        pass
-
-    def GetMonitorPosition(self, monitor):
-        pass
-
-    def GetMonitorWidth(self, monitor):
-        pass
-
-    def GetMonitorHeight(self, monitor):
-        pass
-
-    def GetMonitorPhysicalWidth(self, monitor):
-        pass
-
-    def GetMonitorPhysicalHeight(self, monitor):
-        pass
-
-    def GetMonitorRefreshRate(self, monitor):
-        pass
-
-    def GetWindowPosition(self):
-        pass
-
-    def GetWindowScaleDPI(self):
-        pass
+        """Returns True if the window is in fullscreen mode."""
 
     def WindowONTOP(self, Transparant):
         self.TKroot.overrideredirect(True)
@@ -1890,4 +1778,3 @@ class GGameCanvas(Canvas):
         self.DrawCircle(GVector2(200, 200), 50, GColor_HEX("#00FF00"), 3)
         self.DrawRectangle(GVector2(300, 300), GVector2(100, 50), 0, GColor_HEX("#0000FF"), 4, fill=True, fillColor=GColor_HEX("#0000FF"))
         self.EndDrawing()
-
